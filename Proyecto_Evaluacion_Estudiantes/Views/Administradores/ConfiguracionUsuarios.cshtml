@@ -1,0 +1,243 @@
+@{
+    ViewData["Title"] = "Configuración de Usuarios — EduPath AI";
+    ViewData["ActiveMenu"] = "Administrador";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>
+                    <i data-feather="user-check" style="color:#00b4d8;" class="me-2"></i>
+                    Configuración de Usuarios
+                </h4>
+                <h6>EduPath AI — Gestión de Catedráticos del Sistema</h6>
+            </div>
+        </div>
+
+        <!-- Alerta de éxito -->
+        @if (ViewData["MensajeExito"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 style="border-left:4px solid #00b4d8; background:#f0fbff;">
+                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                @ViewData["MensajeExito"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <!-- Alerta de error -->
+        @if (ViewData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i data-feather="alert-circle" class="me-2"></i>
+                @ViewData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <!-- Tarjeta principal del formulario -->
+        <div class="card">
+            <div class="card-body">
+
+                <!-- Encabezado de sección -->
+                <div class="d-flex align-items-center mb-4 pb-3"
+                     style="border-bottom:2px solid #e2e8f0;">
+                    <div style="width:46px;height:46px;border-radius:12px;
+                                background:linear-gradient(135deg,#0096c7,#48cae4);
+                                display:flex;align-items:center;justify-content:center;
+                                box-shadow:0 4px 12px rgba(0,150,199,.3);" class="me-3">
+                        <i data-feather="user" style="color:#fff;width:20px;height:20px;"></i>
+                    </div>
+                    <div>
+                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">
+                            Datos del Catedrático
+                        </h5>
+                        <small class="text-muted">
+                            Complete el perfil del docente. El Título se asignará desde aquí.
+                        </small>
+                    </div>
+                </div>
+
+                <form asp-controller="Administradores" asp-action="ConfiguracionUsuarios"
+                      method="post">
+                    @Html.AntiForgeryToken()
+
+                    <!-- ── Título Académico (badges) ── -->
+                    <div class="form-group mb-4">
+                        <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                            <i data-feather="award" class="me-1" style="color:#00b4d8;"></i>
+                            Título Académico
+                        </label>
+                        <div class="titulo-cfg-badge" id="tituloBtns">
+
+                            <button type="button" class="btn-cfg-titulo"
+                                    data-valor="Lic."
+                                    onclick="seleccionarTitulo(this)">
+                                <span class="titulo-icon">
+                                    <i class="fa fa-graduation-cap"></i>
+                                </span>
+                                <span class="titulo-label">Licenciado(a)</span>
+                            </button>
+
+                            <button type="button" class="btn-cfg-titulo"
+                                    data-valor="Ing."
+                                    onclick="seleccionarTitulo(this)">
+                                <span class="titulo-icon">
+                                    <i class="fa fa-microchip"></i>
+                                </span>
+                                <span class="titulo-label">Ingeniero(a)</span>
+                            </button>
+
+                            <button type="button" class="btn-cfg-titulo"
+                                    data-valor="Dr."
+                                    onclick="seleccionarTitulo(this)">
+                                <span class="titulo-icon">
+                                    <i class="fa fa-user-tie"></i>
+                                </span>
+                                <span class="titulo-label">Doctor(a)</span>
+                            </button>
+
+                        </div>
+                        <input type="hidden" id="Titulo" name="Titulo"
+                               value="@(ViewData["FormTitulo"] ?? "Lic.")" />
+                    </div>
+
+                    <!-- ── Nombre y Apellido ── -->
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                                <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
+                                Nombre
+                            </label>
+                            <input type="text" class="form-control form-control-edupath"
+                                   name="Nombre" id="Nombre"
+                                   placeholder="Ej: Juan Carlos"
+                                   value="@(ViewData["FormNombre"] ?? "")"
+                                   required maxlength="80" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                                <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
+                                Apellido
+                            </label>
+                            <input type="text" class="form-control form-control-edupath"
+                                   name="Apellido" id="Apellido"
+                                   placeholder="Ej: Pérez López"
+                                   value="@(ViewData["FormApellido"] ?? "")"
+                                   required maxlength="80" />
+                        </div>
+                    </div>
+
+                    <!-- ── Edad e Identidad ── -->
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                                <i data-feather="calendar" class="me-1" style="color:#00b4d8;"></i>
+                                Edad
+                            </label>
+                            <input type="number" class="form-control form-control-edupath"
+                                   name="Edad" id="Edad"
+                                   placeholder="Ej: 35"
+                                   value="@(ViewData["FormEdad"] ?? "")"
+                                   min="21" max="80" required />
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                                <i data-feather="credit-card" class="me-1" style="color:#00b4d8;"></i>
+                                Número de Identidad
+                            </label>
+                            <input type="text" class="form-control form-control-edupath"
+                                   name="Identidad" id="Identidad"
+                                   placeholder="Ej: 0101-1990-12345"
+                                   value="@(ViewData["FormIdentidad"] ?? "")"
+                                   required maxlength="20" />
+                        </div>
+                    </div>
+
+                    <!-- ── Separador credenciales ── -->
+                    <div class="d-flex align-items-center my-4">
+                        <hr class="flex-grow-1" style="border-color:#e2e8f0;">
+                        <span class="px-3 text-muted" style="font-size:12px;white-space:nowrap;">
+                            <i data-feather="lock" class="me-1" style="width:13px;"></i>
+                            Credenciales de Acceso
+                        </span>
+                        <hr class="flex-grow-1" style="border-color:#e2e8f0;">
+                    </div>
+
+                    <!-- ── Usuario y Contraseña ── -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                                <i data-feather="at-sign" class="me-1" style="color:#00b4d8;"></i>
+                                Nombre de Usuario
+                            </label>
+                            <input type="text" class="form-control form-control-edupath"
+                                   name="UsuarioLogin" id="UsuarioLogin"
+                                   placeholder="Ej: juan.perez"
+                                   value="@(ViewData["FormUsuario"] ?? "")"
+                                   required maxlength="80"
+                                   autocomplete="username" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                                <i data-feather="lock" class="me-1" style="color:#00b4d8;"></i>
+                                Contraseña
+                                <small class="text-muted fw-normal">(dejar vacío = sin cambio)</small>
+                            </label>
+                            <input type="password" class="form-control form-control-edupath"
+                                   name="NuevaContrasena" id="NuevaContrasena"
+                                   placeholder="••••••••"
+                                   autocomplete="new-password" />
+                        </div>
+                    </div>
+
+                    <!-- ── Botones ── -->
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a asp-controller="Home" asp-action="Index"
+                           class="btn btn-light px-4"
+                           style="border:1.5px solid #e2e8f0;border-radius:10px;font-weight:600;">
+                            <i data-feather="x" class="me-1" style="width:14px;"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn-cfg-guardar">
+                            <i data-feather="save" class="me-2" style="width:16px;"></i>
+                            Guardar Catedrático
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    // Selección de título
+    function seleccionarTitulo(btn) {
+        document.querySelectorAll('#tituloBtns .btn-cfg-titulo')
+                .forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.getElementById('Titulo').value = btn.getAttribute('data-valor');
+    }
+
+    // Marcar el btn que corresponde al valor actual
+    document.addEventListener('DOMContentLoaded', () => {
+        const valorActual = document.getElementById('Titulo').value;
+        const btns = document.querySelectorAll('#tituloBtns .btn-cfg-titulo');
+        let seleccionado = false;
+        btns.forEach(b => {
+            if (b.getAttribute('data-valor') === valorActual) {
+                b.classList.add('selected');
+                seleccionado = true;
+            }
+        });
+        // Si ninguno coincide, seleccionar el primero
+        if (!seleccionado && btns.length > 0) btns[0].classList.add('selected');
+
+        // Inicializar Feather Icons del contenido dinámico
+        if (window.feather) feather.replace();
+    });
+</script>
+}

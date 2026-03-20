@@ -1,0 +1,97 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "Iniciar Sesión — EduPath AI";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/plugins/fontawesome/css/all.min.css" />
+
+    <link rel="stylesheet" href="~/css/login.css" />
+</head>
+<body class="login-page">
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+        <div class="login-logo">
+            <img src="~/img/logoInstitucional.png" alt="EduPath AI" />
+            <p>Sistema Inteligente de Evaluación y Predicción Estudiantil</p>
+        </div>
+
+        <div class="text-center mb-3">
+            <span class="login-badge">
+                <i class="fa fa-circle"></i>&nbsp; Predicción IA Activa
+            </span>
+        </div>
+
+        @if (ViewData["Error"] != null)
+        {
+            <div class="alert-login" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>
+                @ViewData["Error"]
+            </div>
+        }
+
+        <form asp-controller="Home" asp-action="IniciarSesion" method="post">
+            @Html.AntiForgeryToken()
+
+            <!-- Usuario -->
+            <div class="form-group mb-3">
+                <label for="usuario">Nombre de usuario</label>
+                <div class="input-icon-group">
+                    <i class="fa fa-user input-icon"></i>
+                    <input type="text" class="form-control" id="usuario"
+                           name="Usuario" placeholder="Ej: juan.perez"
+                           required autocomplete="username" />
+                </div>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="form-group mb-4">
+                <label for="contrasena">Contraseña</label>
+                <div class="input-icon-group">
+                    <i class="fa fa-lock input-icon"></i>
+                    <input type="password" class="form-control" id="contrasena"
+                           name="Contrasena" placeholder="••••••••"
+                           required autocomplete="current-password" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login">
+                <i class="fa fa-sign-in-alt me-2"></i> Ingresar al Sistema
+            </button>
+
+        </form>
+    </div>
+    <div class="login-footer">
+        <strong>EduPath AI</strong> — Sistema de Evaluación Estudiantil
+        &copy; @DateTime.Now.Year
+        <br />
+        <a href="mailto:soporte@edupathai.edu">¿Problemas para ingresar? Contacte soporte</a>
+    </div>
+
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function seleccionarTitulo(btn) {
+        document.querySelectorAll('#tituloBtns .btn-titulo')
+                .forEach(function (b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        document.getElementById('titulo').value = btn.getAttribute('data-valor');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var primero = document.querySelector('#tituloBtns .btn-titulo');
+        if (primero) primero.classList.add('selected');
+    });
+</script>
+</body>
+</html>

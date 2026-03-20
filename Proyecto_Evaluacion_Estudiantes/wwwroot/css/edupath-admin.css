@@ -1,0 +1,327 @@
+/* ============================================================
+   EduPath AI — Estilos Administrador
+   ============================================================ */
+
+/* ── Logo EduPath en el header ────────────────────────────── */
+.header-left .logo img,
+.header-left .logo-small img {
+    max-height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ── Perfil en la barra lateral (fondo blanco) ────────────── */
+.sidebar-profile {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a2b4a 100%);
+    margin: 0;
+}
+
+.sidebar-profile .sidebar-user-name {
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.sidebar-profile .sidebar-user-role {
+    color: #48cae4 !important;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .3px;
+}
+
+.sidebar-profile .sidebar-user-info {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    line-height: 2;
+    margin-top: 4px;
+}
+
+.sidebar-profile .sidebar-user-info strong {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 600;
+}
+
+.sidebar-profile .sidebar-user-info .fa {
+    width: 14px;
+    text-align: center;
+}
+
+/* ── Menú lateral: hover interactivo ──────────────────────── */
+.sidebar-menu ul > li > a {
+    border-radius: 8px;
+    margin: 2px 8px;
+    padding: 10px 12px !important;
+    transition: background .2s ease, color .2s ease, transform .15s ease !important;
+    color: #374151 !important;
+    font-weight: 500;
+}
+
+.sidebar-menu ul > li > a:hover {
+    background: linear-gradient(135deg, #0077b6, #00b4d8) !important;
+    color: #fff !important;
+    transform: translateX(3px);
+    box-shadow: 0 3px 10px rgba(0,119,182,.25);
+}
+
+.sidebar-menu ul > li > a:hover span,
+.sidebar-menu ul > li > a:hover img {
+    filter: brightness(10);
+}
+
+.sidebar-menu ul > li.active > a,
+.sidebar-menu ul > li.active > a span {
+    background: linear-gradient(135deg, #0077b6, #00b4d8) !important;
+    color: #fff !important;
+}
+
+/* Submenú ítems */
+.sidebar-menu ul li ul li a {
+    color: #4b5563 !important;
+    font-size: 13px;
+    padding: 8px 12px 8px 16px !important;
+    border-radius: 6px;
+    margin: 1px 6px;
+    transition: background .2s, color .2s, padding-left .15s !important;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-menu ul li ul li a:hover {
+    background: linear-gradient(135deg, #e0f5ff, #b3eaf7) !important;
+    color: #0077b6 !important;
+    padding-left: 20px !important;
+}
+
+.sidebar-menu ul li ul li.active > a {
+    color: #0077b6 !important;
+    background: #e0f5ff !important;
+    font-weight: 600;
+}
+
+/* ── Formularios EduPath ──────────────────────────────────── */
+.form-control-edupath {
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    background: #f8fafc !important;
+    color: #1f2937 !important;
+    transition: border-color .2s, box-shadow .2s !important;
+}
+
+.form-control-edupath:focus {
+    border-color: #00b4d8 !important;
+    box-shadow: 0 0 0 3px rgba(0,180,216,.15) !important;
+    background: #fff !important;
+    outline: none !important;
+}
+
+.form-control-edupath::placeholder { color: #b0bec5; }
+
+/* ── Botón guardar principal ──────────────────────────────── */
+.btn-cfg-guardar,
+.btn-adm-guardar {
+    background: linear-gradient(135deg, #0077b6, #00b4d8, #48cae4);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 28px;
+    cursor: pointer;
+    transition: opacity .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 4px 14px rgba(0,119,182,.35);
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-cfg-guardar:hover,
+.btn-adm-guardar:hover {
+    opacity: .93;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0,119,182,.45);
+    color: #fff;
+}
+
+.btn-cfg-guardar:active,
+.btn-adm-guardar:active { transform: translateY(0); }
+
+/* ── Badges de título académico ───────────────────────────── */
+.titulo-cfg-badge {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.btn-cfg-titulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 120px;
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: all .2s ease;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.btn-cfg-titulo .titulo-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    color: #64748b;
+    transition: all .2s ease;
+}
+
+.btn-cfg-titulo:hover {
+    border-color: #48cae4;
+    background: #f0fbff;
+    color: #0096c7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,180,216,.2);
+}
+
+.btn-cfg-titulo:hover .titulo-icon {
+    background: #e0f5ff;
+    color: #00b4d8;
+}
+
+.btn-cfg-titulo.selected {
+    border-color: #0096c7;
+    background: linear-gradient(135deg, #f0fbff, #e0f5ff);
+    color: #0077b6;
+    box-shadow: 0 4px 14px rgba(0,150,199,.2);
+}
+
+.btn-cfg-titulo.selected .titulo-icon {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(0,150,199,.35);
+}
+
+.titulo-label { font-size: 12px; }
+
+/* ── Panel admin: tarjetas de resumen ─────────────────────── */
+.admin-stat-card {
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,.07);
+    padding: 20px 22px;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,.12);
+}
+
+.admin-stat-icon {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+
+.admin-stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+.admin-stat-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0077b6;
+    margin: 0;
+    line-height: 1;
+}
+
+.admin-stat-value-sm {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+}
+
+/* ── Botón de acceso rápido en panel admin ────────────────── */
+.btn-admin-card {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 12px;
+    padding: 9px 20px;
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 3px 10px rgba(0,119,182,.3);
+}
+
+.btn-admin-card:hover {
+    opacity: .9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,119,182,.4);
+    color: #fff;
+}
+
+/* ── Campo usuario + botón regenerar ─────────────────────── */
+.input-group-adm {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.input-group-adm .form-control-edupath { flex: 1; }
+
+.btn-regenerar {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+    background: #f0fbff;
+    color: #0096c7;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, border-color .2s, transform .15s;
+    flex-shrink: 0;
+}
+
+.btn-regenerar:hover {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    border-color: #0096c7;
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.btn-regenerar:hover svg { stroke: #fff; }
+
+/* ── Badge "Generado automáticamente" ────────────────────── */
+.badge-gen {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+}
+
+/* ── Alerta éxito EduPath ─────────────────────────────────── */
+.alert-edupath-success {
+    border-left: 4px solid #00b4d8;
+    background: #f0fbff;
+}
