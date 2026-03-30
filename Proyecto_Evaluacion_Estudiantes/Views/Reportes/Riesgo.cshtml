@@ -1,0 +1,154 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.ReporteRiesgoViewModel
+@{
+    ViewData["Title"] = "Estudiantes en Riesgo — EduPath AI";
+    ViewData["ActiveMenu"] = "Reportes";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+
+        <div class="page-header">
+            <div class="page-title">
+                <h4>
+                    <i data-feather="alert-triangle" style="color:#e17055;" class="me-2"></i>
+                    Estudiantes en Riesgo
+                </h4>
+                <h6>EduPath AI — Promedio menor a 65 o marcados por IA</h6>
+            </div>
+            <div class="page-btn d-flex gap-2 flex-wrap">
+                <a asp-controller="Reportes" asp-action="General" class="btn-nav-est">
+                    <i data-feather="bar-chart-2"></i> Reporte General
+                </a>
+                <a asp-controller="Estudiantes" asp-action="Prediccion" class="btn-nav-est">
+                    <i data-feather="cpu"></i> Predicción IA
+                </a>
+                <a asp-controller="Estudiantes" asp-action="Index" class="btn-nav-est">
+                    <i data-feather="list"></i> Lista de Estudiantes
+                </a>
+            </div>
+        </div>
+
+        @if (!Model.Estudiantes.Any())
+        {
+            <div class="alert alert-success d-flex align-items-center" style="border-radius:12px;">
+                <i data-feather="check-circle" class="me-3" style="color:#00b894;width:24px;height:24px;flex-shrink:0;"></i>
+                <div>
+                    <strong>¡Sin estudiantes en riesgo!</strong><br>
+                    <small>Todos tus estudiantes tienen un promedio mayor a 65.</small>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning d-flex align-items-center mb-4" style="background:#fff8e1;border:1px solid #fdcb6e;border-radius:12px;">
+                <i data-feather="alert-triangle" class="me-3" style="color:#e17055;width:20px;flex-shrink:0;"></i>
+                <small style="color:#1a2b4a;">
+                    Se encontraron <strong>@Model.Estudiantes.Count estudiante(s)</strong> en riesgo.
+                    Se recomienda intervención académica a la brevedad.
+                </small>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="tablaRiesgo">
+                            <thead style="background:#fff3f3;">
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Estudiante</th>
+                                    <th style="width:80px;">Sección</th>
+                                    <th style="width:80px;">P1</th>
+                                    <th style="width:80px;">P2</th>
+                                    <th style="width:80px;">P3</th>
+                                    <th style="width:80px;">P4</th>
+                                    <th style="width:90px;">Promedio</th>
+                                    <th style="width:110px;">Situación</th>
+                                    <th style="width:90px;">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var est in Model.Estudiantes)
+                                {
+                                    bool critico = est.Promedio.HasValue && est.Promedio.Value < 50;
+                                    <tr style="@(critico ? "background:#fff5f5;" : "")">
+                                        <td><small class="text-muted">@(est.Codigo.Length > 0 ? est.Codigo : $"#{est.Id}")</small></td>
+                                        <td>
+                                            <strong>@est.NombreCompleto</strong>
+                                            <br><small class="text-muted">@est.Correo</small>
+                                        </td>
+                                        <td><small>@(est.Seccion ?? "—")</small></td>
+                                        <td>
+                                            @if (est.Nota1.HasValue)
+                                            { <span class="badge @(est.Nota1 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota1.Value.ToString("F1")</span> }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota2.HasValue)
+                                            { <span class="badge @(est.Nota2 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota2.Value.ToString("F1")</span> }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota3.HasValue)
+                                            { <span class="badge @(est.Nota3 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota3.Value.ToString("F1")</span> }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota4.HasValue)
+                                            { <span class="badge @(est.Nota4 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota4.Value.ToString("F1")</span> }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Promedio.HasValue)
+                                            {
+                                                <strong style="color:#e17055;font-size:15px;">@est.Promedio.Value.ToString("F2")</strong>
+                                            }
+                                            else { <span class="text-muted">Sin datos</span> }
+                                        </td>
+                                        <td>
+                                            @if (critico)
+                                            {
+                                                <span class="badge" style="background:#e17055;color:#fff;font-size:11px;">
+                                                    <i data-feather="alert-circle" style="width:11px;"></i> Crítico
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge" style="background:#fdcb6e;color:#1a2b4a;font-size:11px;">
+                                                    <i data-feather="alert-triangle" style="width:11px;"></i> En riesgo
+                                                </span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Estudiantes" asp-action="Editar"
+                                               asp-route-id="@est.Id"
+                                               class="btn btn-sm"
+                                               style="background:#0096c7;color:#fff;border-radius:7px;font-size:11px;">
+                                                <i data-feather="edit-2" style="width:11px;"></i> Editar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.feather) feather.replace();
+        if ($.fn.DataTable && document.getElementById('tablaRiesgo')) {
+            $('#tablaRiesgo').DataTable({
+                language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+                pageLength: 25,
+                order: [[7, 'asc']]
+            });
+        }
+    });
+</script>
+}

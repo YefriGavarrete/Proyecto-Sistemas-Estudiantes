@@ -1,0 +1,241 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.PrediccionViewModel
+@{
+    ViewData["Title"] = "Predicción IA (Riesgo) — EduPath AI";
+    ViewData["ActiveMenu"] = "Informacion";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+
+        <div class="page-header">
+            <div class="page-title">
+                <h4>
+                    <i data-feather="cpu" style="color:#00b4d8;" class="me-2"></i>
+                    Predicción IA — Estudiantes en Riesgo
+                </h4>
+                <h6>EduPath AI — Detección temprana basada en desempeño académico</h6>
+            </div>
+            <div class="page-btn d-flex gap-2 flex-wrap">
+                <a asp-controller="Estudiantes" asp-action="Registro" class="btn-nav-est">
+                    <i data-feather="user-plus"></i> Registrar Estudiante
+                </a>
+                <a asp-controller="Estudiantes" asp-action="Index" class="btn-nav-est">
+                    <i data-feather="list"></i> Lista de Estudiantes
+                </a>
+            </div>
+        </div>
+
+        <!-- Cabecera informativa -->
+        <div class="alert d-flex align-items-start mb-4 py-3"
+             style="background:linear-gradient(135deg,#e3f6fc,#f0f9ff);border:1px solid #48cae4;border-radius:12px;">
+            <i data-feather="info" class="me-3 mt-1 flex-shrink-0" style="color:#0096c7;width:20px;height:20px;"></i>
+            <div style="font-size:13px;color:#1a2b4a;">
+                <strong>¿Cómo funciona la predicción?</strong><br>
+                EduPath AI analiza el historial de calificaciones de cada estudiante y detecta aquellos con mayor
+                probabilidad de reprobar. Se clasifican en dos grupos:
+                <strong style="color:#e17055;">Riesgo Alto</strong> (promedio &lt; 60 o marcado por IA) y
+                <strong style="color:#fdcb6e;">Zona de Atención</strong> (promedio entre 60–70).
+                <br><small class="text-muted">Total analizado: <strong>@Model.TotalAnalizados estudiantes</strong></small>
+            </div>
+        </div>
+
+        <!-- Riesgo Alto -->
+        <div class="card mb-4" style="border-left:4px solid #e17055;">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#e17055,#fd7979);
+                                display:flex;align-items:center;justify-content:center;margin-right:12px;">
+                        <i data-feather="alert-circle" style="color:#fff;width:18px;height:18px;"></i>
+                    </div>
+                    <div>
+                        <h6 style="margin:0;color:#1a2b4a;font-weight:700;">
+                            Riesgo Alto
+                            <span class="badge ms-2" style="background:#e17055;color:#fff;font-size:12px;">
+                                @Model.EstudiantesRiesgo.Count
+                            </span>
+                        </h6>
+                        <small class="text-muted">Promedio &lt; 60 — Requiere intervención inmediata</small>
+                    </div>
+                </div>
+
+                @if (!Model.EstudiantesRiesgo.Any())
+                {
+                    <div class="text-center py-3 text-muted">
+                        <i data-feather="check-circle" style="color:#00b894;width:32px;height:32px;" class="mb-2 d-block mx-auto"></i>
+                        Ningún estudiante en riesgo alto. ¡Excelente!
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead style="background:#fff5f5;">
+                                <tr>
+                                    <th>Estudiante</th>
+                                    <th style="width:80px;">Sección</th>
+                                    <th style="width:75px;">P1</th>
+                                    <th style="width:75px;">P2</th>
+                                    <th style="width:75px;">P3</th>
+                                    <th style="width:75px;">P4</th>
+                                    <th style="width:90px;">Promedio</th>
+                                    <th style="width:90px;">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var est in Model.EstudiantesRiesgo)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@est.NombreCompleto</strong>
+                                            <br><small class="text-muted">@est.Correo</small>
+                                        </td>
+                                        <td><small>@(est.Seccion ?? "—")</small></td>
+                                        <td>
+                                            @if (est.Nota1.HasValue)
+                                            { <span class="badge @(est.Nota1 >= 60 ? "bg-success" : "bg-danger")" style="font-size:11px;">@est.Nota1.Value.ToString("F0")</span> }
+                                            else { <span class="text-muted" style="font-size:12px;">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota2.HasValue)
+                                            { <span class="badge @(est.Nota2 >= 60 ? "bg-success" : "bg-danger")" style="font-size:11px;">@est.Nota2.Value.ToString("F0")</span> }
+                                            else { <span class="text-muted" style="font-size:12px;">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota3.HasValue)
+                                            { <span class="badge @(est.Nota3 >= 60 ? "bg-success" : "bg-danger")" style="font-size:11px;">@est.Nota3.Value.ToString("F0")</span> }
+                                            else { <span class="text-muted" style="font-size:12px;">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota4.HasValue)
+                                            { <span class="badge @(est.Nota4 >= 60 ? "bg-success" : "bg-danger")" style="font-size:11px;">@est.Nota4.Value.ToString("F0")</span> }
+                                            else { <span class="text-muted" style="font-size:12px;">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Promedio.HasValue)
+                                            {
+                                                <strong style="color:#e17055;font-size:15px;">@est.Promedio.Value.ToString("F1")</strong>
+                                            }
+                                            else { <span class="text-muted">Sin datos</span> }
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Estudiantes" asp-action="Editar"
+                                               asp-route-id="@est.Id"
+                                               class="btn btn-sm"
+                                               style="background:#0096c7;color:#fff;border-radius:7px;font-size:11px;">
+                                                <i data-feather="edit-2" style="width:11px;"></i> Editar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Zona de Atención -->
+        <div class="card" style="border-left:4px solid #fdcb6e;">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#fdcb6e,#ffeaa7);
+                                display:flex;align-items:center;justify-content:center;margin-right:12px;">
+                        <i data-feather="alert-triangle" style="color:#1a2b4a;width:18px;height:18px;"></i>
+                    </div>
+                    <div>
+                        <h6 style="margin:0;color:#1a2b4a;font-weight:700;">
+                            Zona de Atención
+                            <span class="badge ms-2" style="background:#fdcb6e;color:#1a2b4a;font-size:12px;">
+                                @Model.EstudiantesAtencion.Count
+                            </span>
+                        </h6>
+                        <small class="text-muted">Promedio 60–70 — Seguimiento recomendado</small>
+                    </div>
+                </div>
+
+                @if (!Model.EstudiantesAtencion.Any())
+                {
+                    <div class="text-center py-3 text-muted">
+                        <i data-feather="thumbs-up" style="color:#00b894;width:32px;height:32px;" class="mb-2 d-block mx-auto"></i>
+                        Ningún estudiante en zona límite.
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead style="background:#fffdf0;">
+                                <tr>
+                                    <th>Estudiante</th>
+                                    <th style="width:80px;">Sección</th>
+                                    <th style="width:75px;">P1</th>
+                                    <th style="width:75px;">P2</th>
+                                    <th style="width:75px;">P3</th>
+                                    <th style="width:75px;">P4</th>
+                                    <th style="width:90px;">Promedio</th>
+                                    <th style="width:90px;">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var est in Model.EstudiantesAtencion)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@est.NombreCompleto</strong>
+                                            <br><small class="text-muted">@est.Correo</small>
+                                        </td>
+                                        <td><small>@(est.Seccion ?? "—")</small></td>
+                                        <td>
+                                            @if (est.Nota1.HasValue)
+                                            { <span class="badge @(est.Nota1 >= 60 ? "bg-success" : "bg-danger")" style="font-size:11px;">@est.Nota1.Value.ToString("F0")</span> }
+                                            else { <span class="text-muted" style="font-size:12px;">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota2.HasValue)
+                                            { <span class="badge @(est.Nota2 >= 60 ? "bg-success" : "bg-danger")" style="font-size:11px;">@est.Nota2.Value.ToString("F0")</span> }
+                                            else { <span class="text-muted" style="font-size:12px;">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota3.HasValue)
+                                            { <span class="badge @(est.Nota3 >= 60 ? "bg-success" : "bg-danger")" style="font-size:11px;">@est.Nota3.Value.ToString("F0")</span> }
+                                            else { <span class="text-muted" style="font-size:12px;">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota4.HasValue)
+                                            { <span class="badge @(est.Nota4 >= 60 ? "bg-success" : "bg-danger")" style="font-size:11px;">@est.Nota4.Value.ToString("F0")</span> }
+                                            else { <span class="text-muted" style="font-size:12px;">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Promedio.HasValue)
+                                            {
+                                                <strong style="color:#e6a817;font-size:15px;">@est.Promedio.Value.ToString("F1")</strong>
+                                            }
+                                            else { <span class="text-muted">Sin datos</span> }
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Estudiantes" asp-action="Editar"
+                                               asp-route-id="@est.Id"
+                                               class="btn btn-sm"
+                                               style="background:#0096c7;color:#fff;border-radius:7px;font-size:11px;">
+                                                <i data-feather="edit-2" style="width:11px;"></i> Editar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.feather) feather.replace();
+    });
+</script>
+}

@@ -1,3 +1,4 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.AdminIndexViewModel
 @{
     ViewData["Title"] = "Panel de Administrador — EduPath AI";
     ViewData["ActiveMenu"] = "Administrador";
@@ -24,10 +25,10 @@
                 </div>
                 <div>
                     <h5 style="margin:0;color:#0077b6;font-weight:700;">
-                        Bienvenido, @(ViewData["NombreDocente"] ?? "Administrador")
+                        Bienvenido, @Model.NombreAdmin
                     </h5>
                     <small class="text-muted">
-                        Tienes acceso completo al sistema EduPath AI. Periodo: @(ViewData["Periodo"] ?? "2026-1")
+                        Tienes acceso completo al sistema EduPath AI. Periodo: @Model.Periodo
                     </small>
                 </div>
             </div>
@@ -41,7 +42,7 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <p class="admin-stat-label">Administradores Activos</p>
-                            <h3 class="admin-stat-value">@(ViewData["TotalAdmins"] ?? 0)</h3>
+                            <h3 class="admin-stat-value">@Model.TotalAdmins</h3>
                         </div>
                         <div class="admin-stat-icon" style="background:linear-gradient(135deg,#0096c7,#48cae4);">
                             <i data-feather="shield" style="color:#fff;width:22px;height:22px;"></i>
@@ -55,7 +56,7 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <p class="admin-stat-label">Docentes Registrados</p>
-                            <h3 class="admin-stat-value">@(ViewData["TotalDocentes"] ?? 0)</h3>
+                            <h3 class="admin-stat-value">@Model.TotalDocentes</h3>
                         </div>
                         <div class="admin-stat-icon" style="background:linear-gradient(135deg,#48cae4,#90e0ef);">
                             <i data-feather="users" style="color:#fff;width:22px;height:22px;"></i>
@@ -83,9 +84,7 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <p class="admin-stat-label">Periodo Actual</p>
-                            <h3 class="admin-stat-value-sm" style="color:#e17055;">
-                                @(ViewData["Periodo"] ?? "2026-1")
-                            </h3>
+                            <h3 class="admin-stat-value-sm" style="color:#e17055;">@Model.Periodo</h3>
                         </div>
                         <div class="admin-stat-icon" style="background:linear-gradient(135deg,#fdcb6e,#ffeaa7);">
                             <i data-feather="calendar" style="color:#e17055;width:22px;height:22px;"></i>
@@ -96,6 +95,7 @@
 
         </div>
 
+        <!-- Accesos rápidos -->
         <div class="row g-3">
             <div class="col-md-6">
                 <div class="card h-100">
@@ -108,11 +108,6 @@
                             Registra y administra los perfiles de los catedráticos del sistema, asignando
                             título académico, credenciales de acceso y datos de identidad.
                         </p>
-                        <a asp-controller="Administradores" asp-action="ConfiguracionUsuarios"
-                           class="btn-admin-card">
-                            <i data-feather="arrow-right" class="me-1" style="width:14px;"></i>
-                            Ir a Configuración de Usuarios
-                        </a>
                     </div>
                 </div>
             </div>
@@ -127,12 +122,6 @@
                             Crea nuevas cuentas de administrador para el sistema. El nombre de usuario
                             se genera automáticamente con al menos 2 dígitos incluidos.
                         </p>
-                        <a asp-controller="Administradores" asp-action="ConfiguracionAdministradores"
-                           class="btn-admin-card">
-                            <i data-feather="arrow-right" class="me-1" style="width:14px;"></i>
-                            Ir a Configuración de Administradores
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.DocenteDashboardViewModel
 @{
     ViewData["Title"] = "Dashboard — EduPath AI";
-    ViewData["ActiveMenu"] = "Dashboard";
+    ViewData["ActiveMenu"] = Model.ActiveMenu;
 }
 
 <div class="page-wrapper">
@@ -21,8 +22,8 @@
                         <span><img src="~/img/icons/dash1.svg" alt="img"></span>
                     </div>
                     <div class="dash-widgetcontent">
-                        <h5><span class="counters" data-count="@(ViewData["TotalEstudiantes"] ?? 0)">
-                            @(ViewData["TotalEstudiantes"] ?? 0)
+                        <h5><span class="counters" data-count="@Model.TotalEstudiantes">
+                            @Model.TotalEstudiantes
                         </span></h5>
                         <h6>Total de Estudiantes</h6>
                     </div>
@@ -34,8 +35,8 @@
                         <span><img src="~/img/icons/dash2.svg" alt="img"></span>
                     </div>
                     <div class="dash-widgetcontent">
-                        <h5><span class="counters" data-count="@(ViewData["PromedioGeneral"] ?? "0.00")">
-                            @(ViewData["PromedioGeneral"] ?? "0.00")
+                        <h5><span class="counters" data-count="@Model.PromedioGeneral.ToString("F2")">
+                            @Model.PromedioGeneral.ToString("F2")
                         </span></h5>
                         <h6>Promedio General del Grupo</h6>
                     </div>
@@ -47,8 +48,8 @@
                         <span><img src="~/img/icons/dash3.svg" alt="img"></span>
                     </div>
                     <div class="dash-widgetcontent">
-                        <h5><span class="counters" data-count="@(ViewData["PorcentajeAprobados"] ?? "0")">
-                            @(ViewData["PorcentajeAprobados"] ?? "0")%
+                        <h5><span class="counters" data-count="@Model.PorcentajeAprobados.ToString("F0")">
+                            @Model.PorcentajeAprobados.ToString("F0")%
                         </span></h5>
                         <h6>Porcentaje de Aprobación</h6>
                     </div>
@@ -60,8 +61,8 @@
                         <span><img src="~/img/icons/dash4.svg" alt="img"></span>
                     </div>
                     <div class="dash-widgetcontent">
-                        <h5><span class="counters" data-count="@(ViewData["EstudiantesEnRiesgo"] ?? 0)">
-                            @(ViewData["EstudiantesEnRiesgo"] ?? 0)
+                        <h5><span class="counters" data-count="@Model.EstudiantesEnRiesgo">
+                            @Model.EstudiantesEnRiesgo
                         </span></h5>
                         <h6>Alertas IA — En Riesgo</h6>
                     </div>
@@ -74,7 +75,7 @@
             <div class="col-lg-3 col-sm-6 col-12 d-flex">
                 <div class="dash-count">
                     <div class="dash-counts">
-                        <h4>@(ViewData["TotalInscritos"] ?? 0)</h4>
+                        <h4>@Model.TotalInscritos</h4>
                         <h5>Inscritos</h5>
                     </div>
                     <div class="dash-imgs">
@@ -85,7 +86,7 @@
             <div class="col-lg-3 col-sm-6 col-12 d-flex">
                 <div class="dash-count das1">
                     <div class="dash-counts">
-                        <h4>@(ViewData["TotalAprobados"] ?? 0)</h4>
+                        <h4>@Model.TotalAprobados</h4>
                         <h5>Aprobados</h5>
                     </div>
                     <div class="dash-imgs">
@@ -96,7 +97,7 @@
             <div class="col-lg-3 col-sm-6 col-12 d-flex">
                 <div class="dash-count das2">
                     <div class="dash-counts">
-                        <h4>@(ViewData["TotalReprobados"] ?? 0)</h4>
+                        <h4>@Model.TotalReprobados</h4>
                         <h5>Reprobados</h5>
                     </div>
                     <div class="dash-imgs">
@@ -107,7 +108,7 @@
             <div class="col-lg-3 col-sm-6 col-12 d-flex">
                 <div class="dash-count das3">
                     <div class="dash-counts">
-                        <h4>@(ViewData["TotalEnRiesgoIA"] ?? 0)</h4>
+                        <h4>@Model.TotalEnRiesgoIA</h4>
                         <h5>En Riesgo (IA)</h5>
                     </div>
                     <div class="dash-imgs">
@@ -184,19 +185,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (ViewData["EstudiantesRecientes"] is IEnumerable<dynamic> lista && lista.Any())
+                                    @{
+                                        var listaRecientes = ViewData["EstudiantesRecientes"] as List<dynamic>;
+                                    }
+                                    @if (listaRecientes != null && listaRecientes.Count > 0)
                                     {
                                         int i = 1;
-                                        foreach (var est in lista)
+                                        foreach (dynamic est in listaRecientes)
                                         {
+                                            string estadoRec = (string)est.Estado;
+                                            string badgeRec  = estadoRec == "Aprobado" ? "bg-lightgreen" : "bg-lightred";
                                             <tr>
                                                 <td>@i</td>
                                                 <td>@est.Nombre</td>
-                                                <td>@est.Promedio.ToString("F2")</td>
+                                                <td>@(((decimal)est.Promedio).ToString("F2"))</td>
                                                 <td>
-                                                    <span class="badges @(est.Estado == "Aprobado" ? "bg-lightgreen" : "bg-lightred")">
-                                                        @est.Estado
-                                                    </span>
+                                                    <span class="badges @badgeRec">@estadoRec</span>
                                                 </td>
                                             </tr>
                                             i++;
@@ -204,30 +208,12 @@
                                     }
                                     else
                                     {
-                                        <!-- Datos de ejemplo mientras no hay registros reales -->
                                         <tr>
-                                            <td>1</td>
-                                            <td>María García</td>
-                                            <td>88.50</td>
-                                            <td><span class="badges bg-lightgreen">Aprobado</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Carlos López</td>
-                                            <td>55.00</td>
-                                            <td><span class="badges bg-lightred">Reprobado</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Ana Martínez</td>
-                                            <td>72.75</td>
-                                            <td><span class="badges bg-lightgreen">Aprobado</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Luis Hernández</td>
-                                            <td>45.25</td>
-                                            <td><span class="badges bg-lightred">Reprobado</span></td>
+                                            <td colspan="4" class="text-center text-muted py-3">
+                                                <i data-feather="inbox" class="me-1"></i>
+                                                Sin estudiantes registrados.
+                                                <a asp-controller="Estudiantes" asp-action="Registro">Registrar</a>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -259,10 +245,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (ViewData["EstudiantesRiesgo"] is IEnumerable<dynamic> riesgo && riesgo.Any())
+                            @{
+                                var listaRiesgo = ViewData["EstudiantesRiesgo"] as List<dynamic>;
+                            }
+                            @if (listaRiesgo != null && listaRiesgo.Count > 0)
                             {
                                 int j = 1;
-                                foreach (var est in riesgo)
+                                foreach (dynamic est in listaRiesgo)
                                 {
                                     <tr>
                                         <td>@j</td>
@@ -270,7 +259,7 @@
                                         <td>@est.Correo</td>
                                         <td>@est.Nota1</td>
                                         <td>@est.Nota2</td>
-                                        <td>@est.Promedio.ToString("F2")</td>
+                                        <td>@(((decimal)est.Promedio).ToString("F2"))</td>
                                         <td>
                                             <span class="badges bg-lightred">
                                                 <i data-feather="alert-circle" class="me-1"></i> En Riesgo
@@ -282,24 +271,11 @@
                             }
                             else
                             {
-                                <!-- Datos de ejemplo mientras no hay registros reales -->
                                 <tr>
-                                    <td>1</td>
-                                    <td>Carlos López</td>
-                                    <td>carlos@email.com</td>
-                                    <td>50</td>
-                                    <td>60</td>
-                                    <td>55.00</td>
-                                    <td><span class="badges bg-lightred"><i data-feather="alert-circle" class="me-1"></i> En Riesgo</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Luis Hernández</td>
-                                    <td>luis@email.com</td>
-                                    <td>40</td>
-                                    <td>50</td>
-                                    <td>45.00</td>
-                                    <td><span class="badges bg-lightred"><i data-feather="alert-circle" class="me-1"></i> En Riesgo</span></td>
+                                    <td colspan="7" class="text-center text-muted py-3">
+                                        <i data-feather="check-circle" class="me-1" style="color:#00b894;"></i>
+                                        Sin estudiantes en riesgo actualmente.
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -314,15 +290,16 @@
 @section Scripts {
 <script>
     // Gráfica de rendimiento académico con ApexCharts
+    // Datos reales del grupo del docente (parcial 1-4)
     var options = {
         series: [
             {
                 name: 'Aprobados',
-                data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+                data: [@Model.TotalAprobados, @Model.TotalAprobados, @Model.TotalAprobados, @Model.TotalAprobados]
             },
             {
                 name: 'Reprobados',
-                data: [8, 12, 10, 18, 15, 22, 20, 30, 40]
+                data: [@Model.TotalReprobados, @Model.TotalReprobados, @Model.TotalReprobados, @Model.TotalReprobados]
             }
         ],
         chart: {
@@ -340,15 +317,23 @@
         },
         dataLabels: { enabled: false },
         xaxis: {
-            categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep']
+            categories: ['Parcial 1', 'Parcial 2', 'Parcial 3', 'Parcial 4']
+        },
+        yaxis: {
+            title: { text: 'Estudiantes' }
         },
         legend: {
             position: 'top',
             horizontalAlign: 'left'
+        },
+        tooltip: {
+            y: { formatter: function(val) { return val + ' estudiantes'; } }
         }
     };
 
     var chart = new ApexCharts(document.querySelector("#rendimiento_charts"), options);
     chart.render();
+
+    if (window.feather) feather.replace();
 </script>
 }

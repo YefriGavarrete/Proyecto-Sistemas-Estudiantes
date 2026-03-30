@@ -1,3 +1,4 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.Administrador
 @{
     ViewData["Title"] = "Configuración de Administradores — EduPath AI";
     ViewData["ActiveMenu"] = "Administrador";
@@ -15,21 +16,20 @@
             </div>
         </div>
 
-        @if (ViewData["MensajeExito"] != null)
+        @if (TempData["MensajeExito"] != null)
         {
-            <div class="alert alert-success alert-dismissible fade show" role="alert"
-                 style="border-left:4px solid #00b4d8; background:#f0fbff;">
+            <div class="alert alert-success alert-dismissible fade show alert-edupath-success" role="alert">
                 <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
-                @ViewData["MensajeExito"]
+                @TempData["MensajeExito"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         }
 
-        @if (ViewData["Error"] != null)
+        @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i data-feather="alert-circle" class="me-2"></i>
-                @ViewData["Error"]
+                <i data-feather="alert-circle" class="me-2" style="color:#e17055;"></i>
+                @TempData["ErrorMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         }
@@ -37,101 +37,102 @@
         <div class="card">
             <div class="card-body">
 
-                <!-- Encabezado de sección -->
-                <div class="d-flex align-items-center mb-4 pb-3"
-                     style="border-bottom:2px solid #e2e8f0;">
-                    <div style="width:46px;height:46px;border-radius:12px;
-                                background:linear-gradient(135deg,#0096c7,#48cae4);
-                                display:flex;align-items:center;justify-content:center;
-                                box-shadow:0 4px 12px rgba(0,150,199,.3);" class="me-3">
+                <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom:2px solid #e2e8f0;">
+                    <div class="admin-stat-icon me-3"
+                         style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
                         <i data-feather="shield" style="color:#fff;width:20px;height:20px;"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">
-                            Nuevo Administrador
-                        </h5>
+                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Nuevo Administrador</h5>
                         <small class="text-muted">
                             El nombre de usuario se genera automáticamente. Mínimo 8 caracteres con al menos 2 dígitos.
                         </small>
                     </div>
                 </div>
 
-                <form asp-controller="Administradores" asp-action="ConfiguracionAdministradores"
-                      method="post" id="formAdmin">
+                <form asp-controller="Administradores" asp-action="ConfiguracionAdministradores" method="post">
                     @Html.AntiForgeryToken()
 
-                    <!-- Nombre y Apellido -->
+                    <!-- Nombre y Apellido — campos de Administradores en BD -->
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                            <label asp-for="Nombre" class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
-                                Nombre
+                                @Html.DisplayNameFor(m => m.Nombre)
                             </label>
-                            <input type="text" class="form-control form-control-edupath"
-                                   name="Nombre" id="adm-Nombre"
-                                   placeholder="Ej: María"
-                                   value="@(ViewData["FormNombre"] ?? "")"
-                                   required maxlength="200"
+                            <input asp-for="Nombre" id="adm-Nombre"
+                                   class="form-control form-control-edupath"
+                                   placeholder="Ej: María" maxlength="200"
                                    oninput="generarUsuario()" />
+                            <span asp-validation-for="Nombre" class="text-danger" style="font-size:12px;"></span>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                            <label asp-for="Apellido" class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
-                                Apellido
+                                @Html.DisplayNameFor(m => m.Apellido)
                             </label>
-                            <input type="text" class="form-control form-control-edupath"
-                                   name="Apellido" id="adm-Apellido"
-                                   placeholder="Ej: González"
-                                   value="@(ViewData["FormApellido"] ?? "")"
-                                   required maxlength="200"
+                            <input asp-for="Apellido" id="adm-Apellido"
+                                   class="form-control form-control-edupath"
+                                   placeholder="Ej: González" maxlength="200"
                                    oninput="generarUsuario()" />
+                            <span asp-validation-for="Apellido" class="text-danger" style="font-size:12px;"></span>
                         </div>
                     </div>
 
-                    <!-- Nombre de usuario (auto-generado) -->
+                    <!-- NombreUsuario — campo de Administradores en BD -->
                     <div class="mb-3">
-                        <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                        <label asp-for="NombreUsuario" class="form-label fw-semibold" style="color:#1a2b4a;">
                             <i data-feather="at-sign" class="me-1" style="color:#00b4d8;"></i>
-                            Nombre de Usuario
+                            @Html.DisplayNameFor(m => m.NombreUsuario)
                             <span class="badge-gen ms-2">Generado automáticamente</span>
                         </label>
                         <div class="input-group-adm">
-                            <input type="text" class="form-control form-control-edupath"
-                                   name="NombreUsuario" id="adm-Usuario"
+                            <input asp-for="NombreUsuario" id="adm-Usuario"
+                                   class="form-control form-control-edupath"
                                    placeholder="Se completará con nombre y apellido"
-                                   value="@(ViewData["FormUsuario"] ?? "")"
-                                   required maxlength="200"
-                                   autocomplete="off" />
+                                   maxlength="200" autocomplete="off" />
                             <button type="button" class="btn-regenerar" onclick="regenerarUsuario()"
                                     title="Generar nuevo usuario">
                                 <i data-feather="refresh-cw" style="width:15px;height:15px;"></i>
                             </button>
                         </div>
                         <small id="adm-usuario-info" class="text-muted" style="font-size:11px;"></small>
+                        <span asp-validation-for="NombreUsuario" class="text-danger d-block" style="font-size:12px;"></span>
                     </div>
 
-                    <!-- Contraseña -->
-                    <div class="mb-4">
+                    <!-- Contrasena — campo de Administradores en BD (se recibe por separado) -->
+                    <div class="mb-3">
                         <label class="form-label fw-semibold" style="color:#1a2b4a;">
                             <i data-feather="lock" class="me-1" style="color:#00b4d8;"></i>
                             Contraseña
                         </label>
-                        <input type="password" class="form-control form-control-edupath"
-                               name="Contrasena" id="adm-Contrasena"
+                        <input type="password" name="ContrasenaInput"
+                               class="form-control"
                                placeholder="Mínimo 8 caracteres"
-                               required minlength="8"
                                autocomplete="new-password" />
+                        <span class="text-danger" style="font-size:12px;">
+                            @Html.ValidationMessage("ContrasenaInput")
+                        </span>
+                    </div>
+
+                    <!-- Activo -->
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            <input asp-for="Activo" class="form-check-input" type="checkbox" role="switch" />
+                            <label asp-for="Activo" class="form-check-label fw-semibold" style="color:#1a2b4a;">
+                                Administrador activo en el sistema
+                            </label>
+                        </div>
                     </div>
 
                     <!-- Botones -->
                     <div class="d-flex gap-2 justify-content-end">
                         <a asp-controller="Administradores" asp-action="Index"
-                           class="btn btn-light px-4"
-                           style="border:1.5px solid #e2e8f0;border-radius:10px;font-weight:600;">
-                            <i data-feather="x" class="me-1" style="width:14px;"></i> Cancelar
+                           class="btn-cancelar-form">
+                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar
                         </a>
-                        <button type="submit" class="btn-adm-guardar">
-                            <i data-feather="save" class="me-2" style="width:16px;"></i>
+                        <button type="submit" class="btn-cfg-guardar">
+                            <i data-feather="save" style="width:16px;height:16px;"></i>
                             Guardar Administrador
                         </button>
                     </div>
@@ -144,66 +145,46 @@
 </div>
 
 @section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
-    // Semilla de dígitos para el sufijo (cambia al regenerar)
     let sufijo = generarSufijo();
 
     function generarSufijo() {
-        // Dos dígitos aleatorios entre 10-99
         return String(Math.floor(Math.random() * 90) + 10);
     }
 
     function normalizar(texto) {
-        return texto.trim()
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '') // quitar acentos
-            .replace(/[^a-z0-9]/g, '');      // solo alfanumérico
+        return texto.trim().toLowerCase()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]/g, '');
     }
 
     function construirUsuario(nombre, apellido, suf) {
         const n = normalizar(nombre);
         const a = normalizar(apellido);
-
         if (!n && !a) return '';
-
-        // Base: primera letra del nombre + apellido completo (o viceversa si es muy corto)
-        let base = '';
-        if (n.length > 0) base += n[0];
-        base += a;
-
-        // Asegurar mínimo 6 letras antes del sufijo (sufijo = 2 dígitos)
+        let base = (n.length > 0 ? n[0] : '') + a;
         const needed = Math.max(6, 8 - suf.length);
-        if (base.length < needed) {
-            // Añadir más del nombre
-            base = (n + a).substring(0, needed);
-        }
-
+        if (base.length < needed) base = (n + a).substring(0, needed);
         const candidato = base + suf;
-
-        // Garantizar mínimo 8 caracteres totales
-        if (candidato.length < 8) {
-            return base.padEnd(8 - suf.length, a || n || 'x') + suf;
-        }
-        return candidato;
+        return candidato.length < 8
+            ? base.padEnd(8 - suf.length, a || n || 'x') + suf
+            : candidato;
     }
 
     function generarUsuario() {
         const nombre   = document.getElementById('adm-Nombre').value;
         const apellido = document.getElementById('adm-Apellido').value;
         const usuario  = construirUsuario(nombre, apellido, sufijo);
-
-        const input = document.getElementById('adm-Usuario');
-        const info  = document.getElementById('adm-usuario-info');
-
+        const input    = document.getElementById('adm-Usuario');
+        const info     = document.getElementById('adm-usuario-info');
         input.value = usuario;
-
         if (usuario.length >= 8) {
             const digits = (usuario.match(/\d/g) || []).length;
             info.textContent = `✓ ${usuario.length} caracteres · ${digits} dígito(s)`;
             info.style.color = '#00b894';
         } else if (usuario) {
-            info.textContent = `⚠ Agrega más nombre o apellido (mínimo 8 caracteres)`;
+            info.textContent = '⚠ Agrega más nombre o apellido (mínimo 8 caracteres)';
             info.style.color = '#e17055';
         } else {
             info.textContent = '';
@@ -213,23 +194,13 @@
     function regenerarUsuario() {
         sufijo = generarSufijo();
         generarUsuario();
-
-        // Animación del botón
-        const btn = document.querySelector('.btn-regenerar svg');
-        if (btn) {
-            btn.style.transition = 'transform .3s';
-            btn.style.transform  = 'rotate(360deg)';
-            setTimeout(() => { btn.style.transform = ''; }, 300);
-        }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
         if (window.feather) feather.replace();
-
-        // Si hay valores pre-cargados (error de validación), actualizar info
         const usuario = document.getElementById('adm-Usuario').value;
         if (usuario) {
-            const info  = document.getElementById('adm-usuario-info');
+            const info   = document.getElementById('adm-usuario-info');
             const digits = (usuario.match(/\d/g) || []).length;
             info.textContent = `✓ ${usuario.length} caracteres · ${digits} dígito(s)`;
             info.style.color = '#00b894';

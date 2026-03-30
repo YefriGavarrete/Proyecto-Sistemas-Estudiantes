@@ -1,0 +1,361 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.EstudianteNotasViewModel
+@{
+    ViewData["Title"] = $"Registro de Notas — {Model.NombreParcial} — EduPath AI";
+    ViewData["ActiveMenu"] = Model.ActiveMenu;
+}
+
+<!-- Form oculto para el token anti-forgery (lo necesita el AJAX) -->
+<form id="formToken" style="display:none;">
+    @Html.AntiForgeryToken()
+</form>
+
+<div class="page-wrapper">
+    <div class="content">
+
+        <div class="page-header">
+            <div class="page-title">
+                <h4>
+                    <i data-feather="edit-3" style="color:#00b4d8;" class="me-2"></i>
+                    Registro de Notas — @Model.NombreParcial
+                </h4>
+                <h6>EduPath AI — Doble clic en un estudiante para ingresar o modificar su nota</h6>
+            </div>
+            <div class="page-btn d-flex gap-2 flex-wrap">
+                <a asp-controller="Estudiantes" asp-action="Registro"
+                   class="btn-nav-est">
+                    <i data-feather="user-plus"></i> Registrar Estudiante
+                </a>
+                <a asp-controller="Estudiantes" asp-action="Index"
+                   class="btn-nav-est">
+                    <i data-feather="list"></i> Lista de Estudiantes
+                </a>
+            </div>
+        </div>
+
+        <!-- ── Selector de Parcial ── -->
+        <div class="card mb-3" style="border-left:4px solid #0096c7;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center flex-wrap gap-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <i data-feather="layers" style="color:#0096c7;"></i>
+                        <strong style="color:#1a2b4a;">Selecciona el Parcial:</strong>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        @for (int p = 1; p <= 4; p++)
+                        {
+                            bool activo = Model.ParcialSeleccionado == p;
+                            <a asp-controller="Estudiantes" asp-action="RegistroNotas"
+                               asp-route-parcial="@p"
+                               class="btn-parcial @(activo ? "btn-parcial-activo" : "")">
+                                <i data-feather="bookmark" style="width:13px;"></i>
+                                Parcial @p
+                            </a>
+                        }
+                    </div>
+
+                    <!-- Estadísticas del parcial -->
+                    <div class="ms-auto d-flex gap-3" style="font-size:13px;">
+                        <span style="color:#00b894;font-weight:600;">
+                            <i data-feather="check-circle" style="width:14px;"></i>
+                            @Model.NotasSubidas subidas
+                        </span>
+                        <span style="color:#e17055;font-weight:600;">
+                            <i data-feather="clock" style="width:14px;"></i>
+                            @Model.NotasPendientes pendientes
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instrucción -->
+        <div class="alert alert-info d-flex align-items-center py-2 mb-3"
+             style="background:#e3f6fc;border:1px solid #48cae4;border-radius:10px;">
+            <i data-feather="info" class="me-2" style="color:#0096c7;width:16px;"></i>
+            <small style="color:#1a2b4a;">
+                <strong>¿Cómo ingresar notas?</strong>
+                Haz <strong>doble clic</strong> en cualquier fila para habilitar el campo de nota del
+                <strong>@Model.NombreParcial</strong>.
+                Ingresa la nota (0–100) y presiona <strong>Guardar</strong> o <kbd>Enter</kbd>.
+            </small>
+        </div>
+
+        <!-- Alerta AJAX -->
+        <div id="alertaNotas" class="alert alert-dismissible fade d-none" role="alert">
+            <span id="alertaNotasMsg"></span>
+            <button type="button" class="btn-close"
+                    onclick="this.parentElement.classList.add('d-none')"></button>
+        </div>
+
+        <!-- Tabla de notas -->
+        <div class="card mb-0">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tablaNotas">
+                        <thead style="background:#f0f9ff;">
+                            <tr>
+                                <th style="width:90px;">Código</th>
+                                <th>Estudiante</th>
+                                <th style="width:80px;">Sección</th>
+                                <th style="width:130px;color:#0096c7;">
+                                    <i data-feather="edit" style="width:14px;"></i>
+                                    @Model.NombreParcial
+                                </th>
+                                <th style="width:140px;">Fecha Subida</th>
+                                <th style="width:90px;">Promedio</th>
+                                <th style="width:100px;">Estado</th>
+                                <th style="width:90px;">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!Model.Estudiantes.Any())
+                            {
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted py-4">
+                                        <i data-feather="inbox" class="me-2"></i>
+                                        No hay estudiantes registrados.
+                                        <a asp-controller="Estudiantes" asp-action="Registro">Registrar el primero</a>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var est in Model.Estudiantes)
+                                {
+                                    decimal? notaActual   = est.NotaParcial(Model.ParcialSeleccionado);
+                                    DateTime? fechaActual = est.FechaParcial(Model.ParcialSeleccionado);
+
+                                    <tr class="fila-estudiante"
+                                        data-id="@est.Id"
+                                        data-parcial="@Model.ParcialSeleccionado"
+                                        title="Doble clic para editar nota"
+                                        style="cursor:pointer;">
+
+                                        <!-- Código -->
+                                        <td>
+                                            <small class="text-muted">
+                                                @(est.Codigo.Length > 0 ? est.Codigo : $"#{est.Id}")
+                                            </small>
+                                        </td>
+
+                                        <!-- Nombre + correo -->
+                                        <td>
+                                            <strong>@est.NombreCompleto</strong>
+                                            <br><small class="text-muted">@est.Correo</small>
+                                        </td>
+
+                                        <!-- Sección -->
+                                        <td><small>@(est.Seccion ?? "—")</small></td>
+
+                                        <!-- Nota del parcial -->
+                                        <td class="celda-nota">
+                                            <span class="nota-display">
+                                                @if (notaActual.HasValue)
+                                                {
+                                                    <span class="badge @(notaActual >= 60 ? "bg-success" : "bg-danger")"
+                                                          style="font-size:13px;">
+                                                        @notaActual.Value.ToString("F1")
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted" style="font-size:12px;">Sin nota</span>
+                                                }
+                                            </span>
+                                            <span class="nota-edit d-none">
+                                                <input type="number" class="form-control form-control-sm input-nota"
+                                                       min="0" max="100" step="0.01"
+                                                       value="@(notaActual?.ToString("F2") ?? "")"
+                                                       placeholder="0–100"
+                                                       style="width:80px;display:inline-block;" />
+                                            </span>
+                                        </td>
+
+                                        <!-- Fecha de subida -->
+                                        <td class="celda-fecha">
+                                            <small class="text-muted fecha-display">
+                                                @(fechaActual.HasValue
+                                                    ? fechaActual.Value.ToString("dd/MM/yyyy HH:mm")
+                                                    : "—")
+                                            </small>
+                                        </td>
+
+                                        <!-- Promedio -->
+                                        <td class="celda-promedio">
+                                            @if (est.Promedio.HasValue)
+                                            {
+                                                <strong style="color:@(est.Promedio >= 60 ? "#00b894" : "#e17055")">
+                                                    @est.Promedio.Value.ToString("F2")
+                                                </strong>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+
+                                        <!-- Estado -->
+                                        <td class="celda-estado">
+                                            <span class="badges @est.EstadoBadge estado-display">
+                                                @(est.Estado ?? "Sin Notas")
+                                            </span>
+                                        </td>
+
+                                        <!-- Botones de acción (visibles solo en modo edición) -->
+                                        <td>
+                                            <span class="btns-accion d-none">
+                                                <button type="button"
+                                                        class="btn btn-sm btn-success btn-guardar-nota"
+                                                        style="border-radius:8px;font-size:11px;"
+                                                        title="Guardar nota">
+                                                    <i data-feather="save" style="width:12px;"></i> Guardar
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-sm btn-light btn-cancelar-nota ms-1"
+                                                        style="border-radius:8px;font-size:11px;"
+                                                        title="Cancelar">
+                                                    <i data-feather="x" style="width:12px;"></i>
+                                                </button>
+                                            </span>
+                                            <span class="btns-normal">
+                                                @if (notaActual.HasValue)
+                                                {
+                                                    <small class="text-muted" style="font-size:10px;">
+                                                        <i data-feather="edit-2" style="width:11px;"></i> Modificar
+                                                    </small>
+                                                }
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    // ── Token anti-forgery (extraído del form oculto al cargar) ──
+    let afToken = '';
+    document.addEventListener('DOMContentLoaded', function () {
+        const tokenInput = document.querySelector('#formToken input[name="__RequestVerificationToken"]');
+        if (tokenInput) afToken = tokenInput.value;
+
+        if (window.feather) feather.replace();
+        inicializarTabla();
+    });
+
+    function mostrarAlerta(msg, tipo) {
+        const alerta = document.getElementById('alertaNotas');
+        alerta.className = `alert alert-${tipo} alert-dismissible fade show`;
+        document.getElementById('alertaNotasMsg').textContent = msg;
+        alerta.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setTimeout(() => alerta.classList.add('d-none'), 4000);
+    }
+
+    function activarEdicion(fila) {
+        fila.querySelector('.nota-display').classList.add('d-none');
+        fila.querySelector('.nota-edit').classList.remove('d-none');
+        fila.querySelector('.btns-accion').classList.remove('d-none');
+        fila.querySelector('.btns-normal').classList.add('d-none');
+        fila.style.background = '#fffbea';
+        fila.querySelector('.input-nota').focus();
+        fila.querySelector('.input-nota').select();
+    }
+
+    function cancelarEdicion(fila) {
+        fila.querySelector('.nota-display').classList.remove('d-none');
+        fila.querySelector('.nota-edit').classList.add('d-none');
+        fila.querySelector('.btns-accion').classList.add('d-none');
+        fila.querySelector('.btns-normal').classList.remove('d-none');
+        fila.style.background = '';
+    }
+
+    async function guardarNota(fila) {
+        const estudianteId = fila.dataset.id;
+        const parcial      = fila.dataset.parcial;
+        const inputNota    = fila.querySelector('.input-nota');
+        const nota         = parseFloat(inputNota.value);
+
+        if (isNaN(nota) || nota < 0 || nota > 100) {
+            mostrarAlerta('La nota debe ser un número entre 0 y 100.', 'danger');
+            inputNota.focus();
+            return;
+        }
+
+        try {
+            const resp = await fetch('/Estudiantes/GuardarNota', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'RequestVerificationToken': afToken
+                },
+                body: `estudianteId=${estudianteId}&parcial=${parcial}&nota=${nota}&__RequestVerificationToken=${encodeURIComponent(afToken)}`
+            });
+
+            const data = await resp.json();
+
+            if (data.ok) {
+                // Actualizar badge de nota
+                const badgeClass = nota >= 60 ? 'bg-success' : 'bg-danger';
+                fila.querySelector('.nota-display').innerHTML =
+                    `<span class="badge ${badgeClass}" style="font-size:13px;">${nota.toFixed(1)}</span>`;
+
+                // Actualizar fecha
+                fila.querySelector('.fecha-display').textContent = data.fecha;
+
+                // Actualizar promedio
+                const colorProm = parseFloat(data.promedio) >= 60 ? '#00b894' : '#e17055';
+                fila.querySelector('.celda-promedio').innerHTML =
+                    `<strong style="color:${colorProm}">${data.promedio}</strong>`;
+
+                // Actualizar estado
+                const estadoClass = data.estado === 'Aprobado' ? 'bg-lightgreen'
+                                  : data.estado === 'Reprobado' ? 'bg-lightred' : 'bg-secondary';
+                const estadoSpan = fila.querySelector('.estado-display');
+                estadoSpan.className  = `badges ${estadoClass} estado-display`;
+                estadoSpan.textContent = data.estado;
+
+                // Mostrar icono "Modificar" en btns-normal
+                fila.querySelector('.btns-normal').innerHTML =
+                    `<small class="text-muted" style="font-size:10px;">
+                        <i data-feather="edit-2" style="width:11px;"></i> Modificar
+                     </small>`;
+
+                cancelarEdicion(fila);
+                mostrarAlerta(data.msg, 'success');
+                if (window.feather) feather.replace();
+            } else {
+                mostrarAlerta(data.msg, 'danger');
+            }
+        } catch {
+            mostrarAlerta('Error de conexión. Intenta de nuevo.', 'danger');
+        }
+    }
+
+    function inicializarTabla() {
+        document.querySelectorAll('.fila-estudiante').forEach(fila => {
+            // Doble clic → activar edición
+            fila.addEventListener('dblclick', function () {
+                document.querySelectorAll('.fila-estudiante').forEach(f => {
+                    if (f !== fila) cancelarEdicion(f);
+                });
+                activarEdicion(fila);
+            });
+
+            fila.querySelector('.btn-guardar-nota')
+                .addEventListener('click', () => guardarNota(fila));
+
+            fila.querySelector('.btn-cancelar-nota')
+                .addEventListener('click', () => cancelarEdicion(fila));
+
+            fila.querySelector('.input-nota').addEventListener('keydown', function (e) {
+                if (e.key === 'Enter')  { e.preventDefault(); guardarNota(fila); }
+                if (e.key === 'Escape') cancelarEdicion(fila);
+            });
+        });
+    }
+</script>
+}

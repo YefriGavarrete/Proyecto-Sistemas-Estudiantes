@@ -325,3 +325,253 @@
     border-left: 4px solid #00b4d8;
     background: #f0fbff;
 }
+
+/* ── Botones de selección de Parcial (Notas view) ─────────── */
+.btn-parcial {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 2px solid #0096c7;
+    background: #fff;
+    color: #0096c7;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .2s;
+}
+.btn-parcial:hover {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(0,150,199,.3);
+}
+.btn-parcial-activo {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    color: #fff !important;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(0,150,199,.3);
+}
+
+/* ── Fila de tabla en modo edición ───────────────────────── */
+.fila-estudiante:hover {
+    background: #f0f9ff !important;
+}
+.fila-estudiante[style*="background:#fffbea"] {
+    outline: 2px solid #fdcb6e;
+}
+
+/* ── Botón Subir Notas (page-btn) ────────────────────────── */
+.page-btn .btn-cfg-guardar {
+    padding: 8px 18px;
+    font-size: 13px;
+}
+
+/* ── Botones de navegación entre páginas de Estudiantes ─────
+   Fondo blanco, borde celeste, texto celeste.
+   Hover: fondo celeste, texto blanco.
+   Se usan en page-header de Registro, Index, RegistroNotas, Editar.
+   ─────────────────────────────────────────────────────────── */
+.btn-nav-est {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1.5px solid #0096c7;
+    background: #ffffff;
+    color: #0096c7 !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease, box-shadow .18s ease;
+    white-space: nowrap;
+}
+.btn-nav-est:hover,
+.btn-nav-est:focus {
+    background: #0096c7;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0,150,199,.25);
+    text-decoration: none !important;
+}
+.btn-nav-est i[data-feather] {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* ================================================================
+   ESTILOS GLOBALES — aplicados a TODO el proyecto
+   (formularios de docentes, administradores y estudiantes)
+   ================================================================ */
+
+/* ── Toggle Switch — color celeste del tema (reemplaza el azul Bootstrap) */
+.form-switch .form-check-input {
+    width: 2.6em;
+    height: 1.4em;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease;
+}
+.form-switch .form-check-input:checked {
+    background-color: #0096c7 !important;
+    border-color:     #0096c7 !important;
+}
+.form-switch .form-check-input:focus {
+    border-color: #48cae4;
+    box-shadow:   0 0 0 0.2rem rgba(0,150,199,.25);
+    outline: none;
+}
+.form-switch .form-check-label {
+    font-weight: 600;
+    color: #1a2b4a;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ── Inputs y Selects — borde celeste al enfocar (consistente en todo el proyecto) */
+.form-control:focus,
+.form-select:focus {
+    border-color: #48cae4 !important;
+    box-shadow:   0 0 0 0.2rem rgba(0,150,199,.18) !important;
+    outline: none;
+}
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 1.5px solid #e2e8f0;
+    font-size: 14px;
+    color: #1a2b4a;
+    transition: border-color .18s, box-shadow .18s;
+}
+.form-control::placeholder {
+    color: #a0aec0;
+    font-size: 13px;
+}
+
+/* ── Etiquetas de campo — estilo uniforme */
+.form-label,
+label.form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 5px;
+}
+
+/* ── Campos con errores de validación — borde rojo celeste */
+.field-validation-error {
+    color: #e53e3e;
+    font-size: 12px;
+    margin-top: 3px;
+    display: block;
+}
+.input-validation-error {
+    border-color: #fc8181 !important;
+    background-color: #fff5f5 !important;
+}
+
+/* ── Tarjeta de formulario — sombra y radio consistente */
+.card {
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
+    border: 1px solid #e8edf3 !important;
+}
+.card-header {
+    border-radius: 12px 12px 0 0 !important;
+}
+
+/* ── Page Header — altura y espaciado uniforme */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.page-header .page-title h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a2b4a;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+.page-header .page-title h6 {
+    font-size: 12px;
+    color: #718096;
+    margin: 3px 0 0 0;
+}
+
+/* ── Botón principal guardar/registrar (celeste sólido) */
+.btn-cfg-guardar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    color: #fff !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: opacity .18s, box-shadow .18s;
+    box-shadow: 0 4px 12px rgba(0,150,199,.25);
+}
+.btn-cfg-guardar:hover,
+.btn-cfg-guardar:focus {
+    opacity: .9;
+    box-shadow: 0 6px 18px rgba(0,150,199,.35);
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+/* ── Botón cancelar — gris neutro */
+.btn-cancelar-form {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1.5px solid #cbd5e0;
+    background: #fff;
+    color: #4a5568 !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: background .18s, border-color .18s;
+}
+.btn-cancelar-form:hover {
+    background: #f7fafc;
+    border-color: #a0aec0;
+    color: #1a2b4a !important;
+}
+
+/* ── Alertas de éxito / error — tamaño compacto */
+.alert {
+    border-radius: 10px;
+    font-size: 13.5px;
+}
+
+/* ── Tabla de datos — estilo uniforme */
+.table thead th {
+    font-size: 12px;
+    font-weight: 700;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    background: #f7fafc;
+    border-bottom: 2px solid #e2e8f0;
+}
+.table tbody td {
+    font-size: 13.5px;
+    color: #2d3748;
+    vertical-align: middle;
+}
+.table-hover tbody tr:hover {
+    background: #f0f9ff !important;
+}

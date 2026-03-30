@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] — EduPath AI</title>
 
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-    <!-- Animate -->
     <link rel="stylesheet" href="~/css/animate.css" />
     <!-- Feather Icons -->
     <link rel="stylesheet" href="~/plugins/icons/feather/feather.css" />
@@ -20,6 +19,20 @@
     <link rel="stylesheet" href="~/css/edupath-admin.css" />
 </head>
 <body>
+@{
+    // Si la vista pasa un ViewModel que hereda de LayoutViewModel,
+    // los datos del perfil se leen desde el modelo (patrón MVC fuerte).
+    // Cuando la vista usa un modelo de entidad (Docente, Administrador),
+    // el layout recae en el ViewData que el controlador ya establece.
+    var perfil     = Model as Proyecto_Evaluacion_Estudiantes.Models.LayoutViewModel;
+    bool esAdmin   = perfil?.EsAdmin   ?? (ViewData["EsAdmin"] is bool b && b);
+    string nombre  = perfil?.NombreUsuario ?? ViewData["NombreDocente"]?.ToString() ?? "Usuario";
+    string titulo  = perfil?.TituloUsuario ?? ViewData["TituloDocente"]?.ToString() ?? "Docente";
+    string codigo  = perfil?.CodigoUsuario ?? ViewData["CodigoDocente"]?.ToString() ?? "---";
+    string sistema = perfil?.Sistema       ?? ViewData["CursoActual"]?.ToString()   ?? "EduPath AI";
+    string periodo = perfil?.Periodo       ?? ViewData["Periodo"]?.ToString()       ?? "2026-1";
+    string menu    = perfil?.ActiveMenu    ?? ViewData["ActiveMenu"]?.ToString()    ?? "";
+}
     <div class="main-wrapper">
 
         <!-- Header -->
@@ -159,8 +172,8 @@
                                     <span class="status online"></span>
                                 </span>
                                 <div class="profilesets">
-                                    <h6>@(ViewData["NombreDocente"] ?? "Docente")</h6>
-                                    <h5>@(ViewData["TituloDocente"] ?? "Docente")</h5>
+                                    <h6>@nombre</h6>
+                                    <h5>@titulo</h5>
                                 </div>
                             </div>
                             <hr class="m-0">
@@ -187,7 +200,7 @@
                 <div class="sidebar-profile" style="padding:18px 16px 14px;border-bottom:2px solid rgba(0,180,216,0.25);background:linear-gradient(135deg,#0d1b2a 0%,#1a3a5c 100%);">
                     <div class="d-flex align-items-center mb-2">
                         <span class="user-img me-2" style="position:relative;">
-                            <img src="~/img/profiles/avator1.jpg" alt="Usuario"
+                            <img src="~/img/logoInstitucional.png" alt="Usuario"
                                  style="width:44px;height:44px;border-radius:50%;border:2px solid #00b4d8;object-fit:cover;">
                             <span style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;
                                          background:#00b894;border-radius:50%;border:2px solid #0d1b2a;"></span>
@@ -195,10 +208,10 @@
                         <div style="overflow:hidden;">
                             <h6 style="color:#fff;font-size:13px;font-weight:700;margin:0;
                                        line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                                @(ViewData["NombreDocente"] ?? "Usuario")
+                                @nombre
                             </h6>
                             <span style="color:#48cae4;font-size:11px;font-weight:600;letter-spacing:.3px;">
-                                @(ViewData["TituloDocente"] ?? "Docente")
+                                @titulo
                             </span>
                         </div>
                     </div>
@@ -206,44 +219,46 @@
                         <div>
                             <i class="fa fa-id-badge" style="color:#48cae4;width:14px;text-align:center;"></i>
                             <strong style="color:rgba(255,255,255,0.9);"> Cód:</strong>
-                            <span style="color:#fff;">@(ViewData["CodigoDocente"] ?? "---")</span>
+                            <span style="color:#fff;">@codigo</span>
                         </div>
                         <div>
                             <i class="fa fa-graduation-cap" style="color:#48cae4;width:14px;text-align:center;"></i>
                             <strong style="color:rgba(255,255,255,0.9);"> Sistema:</strong>
-                            <span style="color:#fff;">@(ViewData["CursoActual"] ?? "EduPath AI")</span>
+                            <span style="color:#fff;">@sistema</span>
                         </div>
                         <div>
                             <i class="fa fa-calendar" style="color:#48cae4;width:14px;text-align:center;"></i>
                             <strong style="color:rgba(255,255,255,0.9);"> Periodo:</strong>
-                            <span style="color:#fff;">@(ViewData["Periodo"] ?? "2026-1")</span>
+                            <span style="color:#fff;">@periodo</span>
                         </div>
                     </div>
                 </div>
 
+
+
+
+
+                <!-- Menú lateral -->
+
+
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
 
-                        @{
-                            bool esAdminLayout = ViewData["EsAdmin"] is bool eaVal && eaVal;
-                        }
-
-                        @if (!esAdminLayout)
+                        @if (!esAdmin)
                         {
                             <!-- Dashboard (solo docentes) -->
-                            <li class="@(ViewData["ActiveMenu"]?.ToString() == "Dashboard" ? "active" : "")">
+                            <li class="@(menu == "Dashboard" ? "active" : "")">
                                 <a asp-controller="Home" asp-action="Index">
                                     <img src="~/img/icons/dashboard.svg" alt="img">
                                     <span> Dashboard</span>
                                 </a>
                             </li>
 
-                            <!-- Información / Gestión de Estudiantes -->
-                            <li class="submenu @(ViewData["ActiveMenu"]?.ToString() == "Informacion" ? "active" : "")">
+                            <li class="submenu @(menu == "Informacion" ? "active" : "")">
                                 <a href="javascript:void(0);">
                                     <img src="~/img/icons/users1.svg" alt="img">
                                     <span> Información</span>
-                                    /<span class="menu-arrow"></span>
+                                    <span class="menu-arrow"></span>
                                 </a>
                                 <ul>
                                     <li>
@@ -265,7 +280,7 @@
                             </li>
 
                             <!-- Reportes -->
-                            <li class="submenu @(ViewData["ActiveMenu"]?.ToString() == "Reportes" ? "active" : "")">
+                            <li class="submenu @(menu == "Reportes" ? "active" : "")"  >
                                 <a href="javascript:void(0);">
                                     <img src="~/img/icons/time.svg" alt="img">
                                     <span> Reportes</span>
@@ -286,24 +301,34 @@
                             </li>
                         }
 
-                        @if (esAdminLayout)
+
+
+
+
+                        <!-- Codigo modificado por el diseño-->
+                        @if (esAdmin)
                         {
                             <!-- Administrador (solo para rol Admin) -->
-                            <li class="submenu @(ViewData["ActiveMenu"]?.ToString() == "Administrador" ? "active" : "")">
+                            <li class="submenu @(menu == "Administrador" ? "active" : "")">
                                 <a href="javascript:void(0);">
                                     <img src="~/img/icons/users1.svg" alt="img">
                                     <span> Administrador</span>
-                                    <span class="menu-arrow"></span>
+                                    <span class="menu-arrow"></span>  
                                 </a>
                                 <ul>
                                     <li>
                                         <a asp-controller="Administradores" asp-action="ConfiguracionUsuarios">
-                                            <i data-feather="user-check" class="me-1"></i> Configuración de Usuarios
+                                            <i data-feather="shield"></i> Configuración de Usuarios
                                         </a>
                                     </li>
                                     <li>
                                         <a asp-controller="Administradores" asp-action="ConfiguracionAdministradores">
-                                            <i data-feather="shield" class="me-1"></i> Configuración de Administradores
+                                            <i data-feather="shield"></i> Configuración de Administradores
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Administradores" asp-action="ConfiguracionCursos">
+                                            <i data-feather="book-open"></i> Configuración de Cursos
                                         </a>
                                     </li>
                                 </ul>
@@ -311,14 +336,14 @@
                         }
 
                         <!-- Configuración (visible para todos) -->
-                        <li class="submenu @(ViewData["ActiveMenu"]?.ToString() == "Configuracion" ? "active" : "")">
+                        <li class="submenu @(menu == "Configuracion" ? "active" : "")">
                             <a href="javascript:void(0);">
                                 <img src="~/img/icons/settings.svg" alt="img">
                                 <span> Configuración</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul>
-                                @if (!esAdminLayout)
+                                @if (!esAdmin)
                                 {
                                     <li>
                                         <a asp-controller="Home" asp-action="Perfil">
@@ -356,6 +381,54 @@
     <script src="~/plugins/apexchart/apexcharts.min.js"></script>
     <script src="~/plugins/apexchart/chart-data.js"></script>
     <script src="~/js/script.js"></script>
+
+    <script>
+    var _esAdmin = @(esAdmin.ToString().ToLower());   // true | false
+    var _menuActivo = '@menu';                        // "Dashboard" | "Informacion" | "Administrador" ...
+
+    $(document).ready(function () {
+
+        // 1. Iconos Feather
+        //if (window.feather) feather.replace();
+
+        // 2. Abrir el submenú que corresponda según rol y página actual
+        //    Este bloque corre DESPUÉS del script.js del template, por lo que
+        //    sobreescribe cualquier colapso automático que haga el template.
+        abrirSubmenuActivo();
+
+        // 3. Feather en contenido dinámico (AJAX)
+       // $(document).on('DOMNodeInserted', function () {
+        //    if (window.feather) feather.replace();
+       // });
+    });
+
+    function abrirSubmenuActivo() {
+        // a) Abrir submenú marcado como "active" (cualquier rol, cualquier página)
+        var $active = $('li.submenu.active');
+        if ($active.length) {
+            $active.addClass('subdrop').children('ul').css('display', 'block');
+        }
+
+        // b) Para DOCENTES: el submenú "Información" debe estar siempre abierto,
+        //    independientemente de si estamos en Dashboard u otra página.
+        //    Buscamos el li.submenu que contiene links a "/Estudiantes/".
+        if (!_esAdmin) {
+            $('li.submenu').each(function () {
+                var $li = $(this);
+                // Si algún <a> hijo apunta a Estudiantes, abrimos este submenú
+                if ($li.find('a[href*="Estudiantes"]').length > 0) {
+                    $li.addClass('subdrop').children('ul').css('display', 'block');
+                }
+            });
+        }
+
+        // c) Para ADMINS: abrir submenú "Administrador" cuando corresponda
+        if (_esAdmin && ($('#sidebar-menu li.submenu.active').length === 0)) {
+            $('li.submenu').first().addClass('subdrop').children('ul').css('display', 'block');
+        }
+    }
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

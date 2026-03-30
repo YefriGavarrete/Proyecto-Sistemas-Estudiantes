@@ -24,12 +24,36 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXENvbmZpZ3VyYWNpb25BZG1pbmlzdHJhZG9yZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/ConfiguracionCursos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXENvbmZpZ3VyYWNpb25DdXJzb3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/ConfiguracionUsuarios.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXENvbmZpZ3VyYWNpb25Vc3Vhcmlvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Estudiantes/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZXNcRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Estudiantes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Estudiantes/Prediccion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZXNcUHJlZGljY2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Estudiantes/Registro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZXNcUmVnaXN0cm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Estudiantes/RegistroNotas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZXNcUmVnaXN0cm9Ob3Rhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Home/Index.cshtml]
@@ -42,6 +66,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Reportes/General.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZXNcR2VuZXJhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Reportes/Riesgo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZXNcUmllc2dvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Shared/Error.cshtml]

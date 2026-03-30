@@ -36,14 +36,32 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             if (!VerificarAdmin())
                 return RedirectToAction("IniciarSesion", "Home");
 
-            CargarViewData("Administrador");
+            var vm = new AdminIndexViewModel
+            {
+                NombreAdmin   = HttpContext.Session.GetString("NombreDocente") ?? "Administrador",
+                TituloUsuario = "Administrador",
+                CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---",
+                Sistema       = "EduPath AI",
+                Periodo       = "2026-1",
+                EsAdmin       = true,
+                ActiveMenu    = "Administrador",
 
-            ViewData["TotalAdmins"]   = await _context.Administradores.CountAsync(a => a.Activo);
-            ViewData["TotalDocentes"] = await _context.Docentes.CountAsync(d => d.Activo);
+                // ── Estadísticas del panel ──
+                TotalAdmins   = await _context.Administradores.CountAsync(a => a.Activo),
+                TotalDocentes = await _context.Docentes.CountAsync(d => d.Activo)
+            };
 
-            return View();
+            // ViewData como respaldo para el layout en vistas que no usan LayoutViewModel
+            ViewData["NombreDocente"] = vm.NombreUsuario;
+            ViewData["TituloDocente"] = vm.TituloUsuario;
+            ViewData["CodigoDocente"] = vm.CodigoUsuario;
+            ViewData["CursoActual"]   = vm.Sistema;
+            ViewData["Periodo"]       = vm.Periodo;
+            ViewData["EsAdmin"]       = true;
+            ViewData["ActiveMenu"]    = "Administrador";
+
+            return View(vm);
         }
-
 
         [HttpGet]
         public IActionResult ConfiguracionUsuarios()
@@ -53,72 +71,68 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             CargarViewData("Administrador");
 
-            if (TempData["MensajeExito"] != null)
-                ViewData["MensajeExito"] = TempData["MensajeExito"]!.ToString();
+            var modelo = new Docente { Titulo = "Lic.", Activo = true };
 
-            return View();
+            if (TempData["MensajeExito"] is string msg)
+                TempData["MensajeExito"] = msg; // Re-pass para la vista via TempData
+
+            return View(modelo);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfiguracionUsuarios(
-            string  Titulo,
-            string  Nombre,
-            string  Apellido,
-            int     Edad,
-            string  Identidad,
-            string  UsuarioLogin,
-            string? NuevaContrasena)
+            [Bind("NombreCompleto,Titulo,Usuario,Correo,Activo")] Docente modelo,
+            string? ContrasenaInput)
         {
             if (!VerificarAdmin())
                 return RedirectToAction("IniciarSesion", "Home");
 
-            if (string.IsNullOrWhiteSpace(Nombre)    ||
-                string.IsNullOrWhiteSpace(Apellido)  ||
-                string.IsNullOrWhiteSpace(Identidad) ||
-                string.IsNullOrWhiteSpace(UsuarioLogin))
-            {
-                CargarViewData("Administrador");
-                ViewData["Error"]        = "Todos los campos son obligatorios.";
-                ViewData["FormTitulo"]   = Titulo;
-                ViewData["FormNombre"]   = Nombre;
-                ViewData["FormApellido"] = Apellido;
-                ViewData["FormEdad"]     = Edad;
-                ViewData["FormIdentidad"]= Identidad;
-                ViewData["FormUsuario"]  = UsuarioLogin;
-                return View();
-            }
+            CargarViewData("Administrador");
 
-            // Buscar o crear el docente por usuario
+            ModelState.Remove("Contrasena");
+            ModelState.Remove("FechaCreacion");
+            ModelState.Remove("Cursos");
+
+            if (!ModelState.IsValid)
+                return View(modelo);
+
+            // Buscar docente existente o crear uno nuevo
             var docente = await _context.Docentes
-                .FirstOrDefaultAsync(d => d.Usuario == UsuarioLogin);
+                .FirstOrDefaultAsync(d => d.Usuario == modelo.Usuario);
 
             if (docente == null)
             {
-                docente = new Docente { Usuario = UsuarioLogin };
+                docente = new Docente
+                {
+                    Usuario       = modelo.Usuario,
+                    FechaCreacion = DateTime.Now
+                };
                 _context.Docentes.Add(docente);
             }
 
-            docente.Titulo         = Titulo;
-            docente.NombreCompleto = $"{Nombre} {Apellido}";
+            docente.NombreCompleto = modelo.NombreCompleto.Trim();
+            docente.Titulo         = modelo.Titulo.Trim();
+            docente.Correo         = modelo.Correo.Trim();
+            docente.Activo         = modelo.Activo;
 
-            if (!string.IsNullOrWhiteSpace(NuevaContrasena))
-                docente.Contrasena = BCrypt.Net.BCrypt.HashPassword(NuevaContrasena, 11);
+            if (!string.IsNullOrWhiteSpace(ContrasenaInput))
+                docente.Contrasena = BCrypt.Net.BCrypt.HashPassword(ContrasenaInput, 11);
             else if (string.IsNullOrEmpty(docente.Contrasena))
                 docente.Contrasena = BCrypt.Net.BCrypt.HashPassword("Cambiar123!", 11);
 
             await _context.SaveChangesAsync();
 
             _logger.LogInformation(
-                "Catedrático guardado: {Titulo} {Nombre} {Apellido}",
-                Titulo, Nombre, Apellido);
+                "Catedrático guardado: {Titulo} {Nombre}", modelo.Titulo, modelo.NombreCompleto);
 
             TempData["MensajeExito"] =
-                $"Catedrático {Titulo} {Nombre} {Apellido} guardado correctamente.";
+                $"Catedrático {modelo.Titulo} {modelo.NombreCompleto} guardado correctamente.";
+
             return RedirectToAction(nameof(ConfiguracionUsuarios));
         }
 
-        // ── Configuración de Administradores ─────────────────────
+        // ── GET: /Administradores/ConfiguracionAdministradores ────
         [HttpGet]
         public IActionResult ConfiguracionAdministradores()
         {
@@ -127,79 +141,267 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             CargarViewData("Administrador");
 
-            if (TempData["MensajeExito"] != null)
-                ViewData["MensajeExito"] = TempData["MensajeExito"]!.ToString();
+            var modelo = new Administrador { Activo = true };
 
-            return View();
+            if (TempData["MensajeExito"] is string msg)
+                TempData["MensajeExito"] = msg;
+
+            return View(modelo);
         }
 
+        // ── POST: /Administradores/ConfiguracionAdministradores ───
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfiguracionAdministradores(
-            string  Nombre,
-            string  Apellido,
-            string  NombreUsuario,
-            string  Contrasena)
+            [Bind("Nombre,Apellido,NombreUsuario,Activo")] Administrador modelo,
+            string? ContrasenaInput)
         {
             if (!VerificarAdmin())
                 return RedirectToAction("IniciarSesion", "Home");
 
-            if (string.IsNullOrWhiteSpace(Nombre)        ||
-                string.IsNullOrWhiteSpace(Apellido)      ||
-                string.IsNullOrWhiteSpace(NombreUsuario) ||
-                string.IsNullOrWhiteSpace(Contrasena))
+            CargarViewData("Administrador");
+
+            // Contrasena no viene del form — se recibe como ContrasenaInput por separado
+            ModelState.Remove("Contrasena");
+
+            // Validaciones de negocio que el modelo no puede expresar con atributos
+            if (string.IsNullOrWhiteSpace(ContrasenaInput) || ContrasenaInput.Length < 8)
+                ModelState.AddModelError("ContrasenaInput", "La contraseña debe tener mínimo 8 caracteres.");
+
+            if (!string.IsNullOrWhiteSpace(modelo.NombreUsuario))
             {
-                CargarViewData("Administrador");
-                ViewData["Error"]         = "Todos los campos son obligatorios.";
-                ViewData["FormNombre"]    = Nombre;
-                ViewData["FormApellido"]  = Apellido;
-                ViewData["FormUsuario"]   = NombreUsuario;
-                return View();
+                int digitos = modelo.NombreUsuario.Count(char.IsDigit);
+                if (digitos < 2)
+                    ModelState.AddModelError("NombreUsuario", "El usuario debe incluir al menos 2 dígitos.");
             }
 
-            // Verificar que el nombre de usuario tenga mínimo 8 caracteres y 2 dígitos
-            int digitCount = NombreUsuario.Count(char.IsDigit);
-            if (NombreUsuario.Length < 8 || digitCount < 2)
-            {
-                CargarViewData("Administrador");
-                ViewData["Error"]        = "El nombre de usuario debe tener mínimo 8 caracteres e incluir al menos 2 dígitos.";
-                ViewData["FormNombre"]   = Nombre;
-                ViewData["FormApellido"] = Apellido;
-                ViewData["FormUsuario"]  = NombreUsuario;
-                return View();
-            }
+            if (!ModelState.IsValid)
+                return View(modelo);
 
             // Verificar unicidad del usuario
             bool existe = await _context.Administradores
-                .AnyAsync(a => a.NombreUsuario == NombreUsuario);
+                .AnyAsync(a => a.NombreUsuario == modelo.NombreUsuario.Trim());
+
             if (existe)
             {
-                CargarViewData("Administrador");
-                ViewData["Error"]        = $"El usuario «{NombreUsuario}» ya está en uso.";
-                ViewData["FormNombre"]   = Nombre;
-                ViewData["FormApellido"] = Apellido;
-                ViewData["FormUsuario"]  = NombreUsuario;
-                return View();
+                TempData["ErrorMessage"] =
+                    $"El usuario «{modelo.NombreUsuario}» ya está en uso. Genera otro diferente.";
+                return View(modelo);
             }
 
             var admin = new Administrador
             {
-                Nombre        = Nombre.Trim(),
-                Apellido      = Apellido.Trim(),
-                NombreUsuario = NombreUsuario.Trim(),
-                Contrasena    = BCrypt.Net.BCrypt.HashPassword(Contrasena, 11),
+                Nombre        = modelo.Nombre.Trim(),
+                Apellido      = modelo.Apellido.Trim(),
+                NombreUsuario = modelo.NombreUsuario.Trim(),
+                Contrasena    = BCrypt.Net.BCrypt.HashPassword(ContrasenaInput!, 11),
                 Activo        = true
             };
 
             _context.Administradores.Add(admin);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation(
-                "Nuevo administrador creado: {NombreUsuario}", NombreUsuario);
+            _logger.LogInformation("Admin creado: {Usuario}", modelo.NombreUsuario);
 
             TempData["MensajeExito"] =
-                $"Administrador {Nombre} {Apellido} creado correctamente.";
+                $"Administrador {modelo.Nombre} {modelo.Apellido} creado correctamente.";
+
             return RedirectToAction(nameof(ConfiguracionAdministradores));
+        }
+
+        // ═══════════════════════════════════════════════════════
+        //  CONFIGURACIÓN DE CURSOS
+        // ═══════════════════════════════════════════════════════
+
+        private async Task<ConfiguracionCursosViewModel> CrearVmCursos()
+        {
+            return new ConfiguracionCursosViewModel
+            {
+                NombreUsuario = HttpContext.Session.GetString("NombreDocente") ?? "Administrador",
+                TituloUsuario = "Administrador",
+                CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---",
+                Sistema       = "EduPath AI",
+                Periodo       = "2026-1",
+                EsAdmin       = true,
+                ActiveMenu    = "Administrador",
+                Cursos        = await _context.Cursos
+                                    .Include(c => c.Docente)
+                                    .OrderBy(c => c.Nombre)
+                                    .ToListAsync(),
+                Docentes      = await _context.Docentes
+                                    .Where(d => d.Activo)
+                                    .OrderBy(d => d.NombreCompleto)
+                                    .ToListAsync(),
+                FormActivo    = true
+            };
+        }
+
+        private void LimpiarModelStateCursos()
+        {
+            foreach (var key in new[] {
+                "Cursos", "Docentes",
+                "NombreUsuario", "TituloUsuario", "CodigoUsuario",
+                "Sistema", "Periodo", "ActiveMenu", "EsAdmin"
+            })
+                ModelState.Remove(key);
+        }
+
+        // ── GET: /Administradores/ConfiguracionCursos ──────────
+        [HttpGet]
+        public async Task<IActionResult> ConfiguracionCursos(int? editarId)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            CargarViewData("Administrador");
+
+            var vm = await CrearVmCursos();
+
+            if (editarId.HasValue)
+            {
+                var curso = vm.Cursos.FirstOrDefault(c => c.Id == editarId.Value);
+                if (curso != null)
+                {
+                    vm.EditandoId    = curso.Id;
+                    vm.FormNombre    = curso.Nombre;
+                    vm.FormCodigo    = curso.Codigo;
+                    vm.FormPeriodo   = curso.Periodo;
+                    vm.FormDocenteId = curso.DocenteId;
+                    vm.FormActivo    = curso.Activo;
+                }
+            }
+
+            return View(vm);
+        }
+
+        // ── POST: /Administradores/ConfiguracionCursos (Crear) ─
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfiguracionCursos(ConfiguracionCursosViewModel vm)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            CargarViewData("Administrador");
+            LimpiarModelStateCursos();
+
+            // Recargar listas para devolver la vista si hay error
+            vm.Cursos   = await _context.Cursos.Include(c => c.Docente).OrderBy(c => c.Nombre).ToListAsync();
+            vm.Docentes = await _context.Docentes.Where(d => d.Activo).OrderBy(d => d.NombreCompleto).ToListAsync();
+            vm.EsAdmin  = true;
+            vm.ActiveMenu = "Administrador";
+
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            // Código único
+            bool codigoExiste = await _context.Cursos
+                .AnyAsync(c => c.Codigo == vm.FormCodigo.Trim().ToUpper());
+            if (codigoExiste)
+            {
+                ModelState.AddModelError("FormCodigo", "Ya existe un curso con ese código.");
+                return View(vm);
+            }
+
+            var nuevo = new Curso
+            {
+                Nombre    = vm.FormNombre.Trim(),
+                Codigo    = vm.FormCodigo.Trim().ToUpper(),
+                Periodo   = vm.FormPeriodo.Trim(),
+                DocenteId = vm.FormDocenteId,
+                Activo    = vm.FormActivo
+            };
+
+            _context.Cursos.Add(nuevo);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Curso creado: {Nombre}", nuevo.Nombre);
+            TempData["MensajeExito"] = $"Curso '{nuevo.Nombre}' creado correctamente.";
+            return RedirectToAction(nameof(ConfiguracionCursos));
+        }
+
+        // ── POST: /Administradores/EditarCurso ─────────────────
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditarCurso(ConfiguracionCursosViewModel vm)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            CargarViewData("Administrador");
+            LimpiarModelStateCursos();
+
+            if (!vm.EditandoId.HasValue)
+                return RedirectToAction(nameof(ConfiguracionCursos));
+
+            var curso = await _context.Cursos.FindAsync(vm.EditandoId.Value);
+            if (curso == null)
+            {
+                TempData["ErrorMessage"] = "Curso no encontrado.";
+                return RedirectToAction(nameof(ConfiguracionCursos));
+            }
+
+            vm.Cursos   = await _context.Cursos.Include(c => c.Docente).OrderBy(c => c.Nombre).ToListAsync();
+            vm.Docentes = await _context.Docentes.Where(d => d.Activo).OrderBy(d => d.NombreCompleto).ToListAsync();
+            vm.EsAdmin  = true;
+            vm.ActiveMenu = "Administrador";
+
+            if (!ModelState.IsValid)
+                return View("ConfiguracionCursos", vm);
+
+            // Código único (excluyendo el propio registro)
+            bool codigoExiste = await _context.Cursos
+                .AnyAsync(c => c.Codigo == vm.FormCodigo.Trim().ToUpper() && c.Id != vm.EditandoId.Value);
+            if (codigoExiste)
+            {
+                ModelState.AddModelError("FormCodigo", "Ya existe un curso con ese código.");
+                return View("ConfiguracionCursos", vm);
+            }
+
+            curso.Nombre    = vm.FormNombre.Trim();
+            curso.Codigo    = vm.FormCodigo.Trim().ToUpper();
+            curso.Periodo   = vm.FormPeriodo.Trim();
+            curso.DocenteId = vm.FormDocenteId;
+            curso.Activo    = vm.FormActivo;
+
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Curso actualizado: {Nombre}", curso.Nombre);
+            TempData["MensajeExito"] = $"Curso '{curso.Nombre}' actualizado correctamente.";
+            return RedirectToAction(nameof(ConfiguracionCursos));
+        }
+
+        // ── POST: /Administradores/EliminarCurso ───────────────
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EliminarCurso(int id)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            var curso = await _context.Cursos
+                .Include(c => c.Estudiantes)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (curso == null)
+            {
+                TempData["ErrorMessage"] = "Curso no encontrado.";
+                return RedirectToAction(nameof(ConfiguracionCursos));
+            }
+
+            if (curso.Estudiantes.Any())
+            {
+                TempData["ErrorMessage"] =
+                    $"No se puede eliminar '{curso.Nombre}' porque tiene {curso.Estudiantes.Count} estudiante(s) registrado(s).";
+                return RedirectToAction(nameof(ConfiguracionCursos));
+            }
+
+            _context.Cursos.Remove(curso);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Curso eliminado: {Nombre}", curso.Nombre);
+            TempData["MensajeExito"] = $"Curso '{curso.Nombre}' eliminado correctamente.";
+            return RedirectToAction(nameof(ConfiguracionCursos));
         }
     }
 }

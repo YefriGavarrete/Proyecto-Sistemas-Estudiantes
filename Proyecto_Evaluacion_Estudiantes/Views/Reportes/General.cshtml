@@ -1,0 +1,255 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.ReporteGeneralViewModel
+@{
+    ViewData["Title"] = "Reporte Académico General — EduPath AI";
+    ViewData["ActiveMenu"] = "Reportes";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+
+        <div class="page-header">
+            <div class="page-title">
+                <h4>
+                    <i data-feather="bar-chart-2" style="color:#00b4d8;" class="me-2"></i>
+                    Reporte Académico General
+                </h4>
+                <h6>EduPath AI — Resumen del desempeño del grupo</h6>
+            </div>
+            <div class="page-btn d-flex gap-2 flex-wrap">
+                <a asp-controller="Reportes" asp-action="Riesgo" class="btn-nav-est">
+                    <i data-feather="alert-triangle"></i> Estudiantes en Riesgo
+                </a>
+                <a asp-controller="Estudiantes" asp-action="Index" class="btn-nav-est">
+                    <i data-feather="list"></i> Lista de Estudiantes
+                </a>
+            </div>
+        </div>
+
+        <!-- Tarjetas de resumen -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div class="card text-center py-3">
+                    <div class="card-body py-2">
+                        <div style="font-size:28px;font-weight:700;color:#0096c7;">@Model.TotalEstudiantes</div>
+                        <div style="font-size:12px;color:#718096;font-weight:600;">Total Estudiantes</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card text-center py-3">
+                    <div class="card-body py-2">
+                        <div style="font-size:28px;font-weight:700;color:#00b894;">@Model.Aprobados</div>
+                        <div style="font-size:12px;color:#718096;font-weight:600;">Aprobados</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card text-center py-3">
+                    <div class="card-body py-2">
+                        <div style="font-size:28px;font-weight:700;color:#e17055;">@Model.Reprobados</div>
+                        <div style="font-size:12px;color:#718096;font-weight:600;">Reprobados</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card text-center py-3">
+                    <div class="card-body py-2">
+                        <div style="font-size:28px;font-weight:700;color:#1a2b4a;">@Model.PromedioGeneral.ToString("F1")</div>
+                        <div style="font-size:12px;color:#718096;font-weight:600;">Promedio General</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+            <!-- Promedios por parcial -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 style="color:#1a2b4a;font-weight:700;margin-bottom:16px;">
+                            <i data-feather="trending-up" style="color:#0096c7;width:16px;" class="me-1"></i>
+                            Promedio por Parcial
+                        </h6>
+                        @{
+                            var parciales = new[]
+                            {
+                                ("Parcial 1", Model.PromedioParcial1),
+                                ("Parcial 2", Model.PromedioParcial2),
+                                ("Parcial 3", Model.PromedioParcial3),
+                                ("Parcial 4", Model.PromedioParcial4),
+                            };
+                        }
+                        @foreach (var (nombre, prom) in parciales)
+                        {
+                            decimal pct = prom > 0 ? prom : 0;
+                            string color = pct >= 60 ? "#00b894" : (pct > 0 ? "#e17055" : "#cbd5e0");
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span style="font-size:13px;font-weight:600;color:#1a2b4a;">@nombre</span>
+                                    <span style="font-size:13px;font-weight:700;color:@color;">
+                                        @(pct > 0 ? pct.ToString("F1") : "Sin datos")
+                                    </span>
+                                </div>
+                                <div style="height:8px;background:#f0f4f8;border-radius:4px;overflow:hidden;">
+                                    <div style="height:100%;width:@(pct)%;background:@color;border-radius:4px;transition:width .4s;"></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distribución de notas -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 style="color:#1a2b4a;font-weight:700;margin-bottom:16px;">
+                            <i data-feather="pie-chart" style="color:#0096c7;width:16px;" class="me-1"></i>
+                            Distribución de Promedios
+                        </h6>
+                        @{
+                            var rangos = new[]
+                            {
+                                ("0 – 59 (Reprobado)", Model.Rango0_59,   "#e17055"),
+                                ("60 – 69",            Model.Rango60_69,  "#fdcb6e"),
+                                ("70 – 79",            Model.Rango70_79,  "#74b9ff"),
+                                ("80 – 89",            Model.Rango80_89,  "#00b894"),
+                                ("90 – 100",           Model.Rango90_100, "#0096c7"),
+                            };
+                            int conProm = Model.TotalEstudiantes - Model.SinNotas;
+                        }
+                        @foreach (var (label, count, color) in rangos)
+                        {
+                            decimal pct = conProm > 0 ? Math.Round(count * 100m / conProm, 1) : 0;
+                            <div class="mb-2 d-flex align-items-center gap-2">
+                                <div style="width:12px;height:12px;border-radius:3px;background:@color;flex-shrink:0;"></div>
+                                <span style="font-size:12px;color:#4a5568;flex:1;">@label</span>
+                                <span style="font-size:12px;font-weight:700;color:@color;min-width:32px;text-align:right;">@count</span>
+                                <div style="width:80px;height:7px;background:#f0f4f8;border-radius:4px;overflow:hidden;">
+                                    <div style="height:100%;width:@(pct)%;background:@color;border-radius:4px;"></div>
+                                </div>
+                                <span style="font-size:11px;color:#a0aec0;min-width:36px;">@pct%</span>
+                            </div>
+                        }
+                        @if (Model.SinNotas > 0)
+                        {
+                            <div class="mt-2 d-flex align-items-center gap-2">
+                                <div style="width:12px;height:12px;border-radius:3px;background:#cbd5e0;flex-shrink:0;"></div>
+                                <span style="font-size:12px;color:#a0aec0;flex:1;">Sin notas</span>
+                                <span style="font-size:12px;font-weight:700;color:#a0aec0;">@Model.SinNotas</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla completa de estudiantes -->
+        <div class="card">
+            <div class="card-body">
+                <h6 style="color:#1a2b4a;font-weight:700;margin-bottom:16px;">
+                    <i data-feather="users" style="color:#0096c7;width:16px;" class="me-1"></i>
+                    Detalle de Estudiantes
+                </h6>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tablaReporte">
+                        <thead style="background:#f0f9ff;">
+                            <tr>
+                                <th>Código</th>
+                                <th>Estudiante</th>
+                                <th style="width:80px;">Sección</th>
+                                <th style="width:80px;">P1</th>
+                                <th style="width:80px;">P2</th>
+                                <th style="width:80px;">P3</th>
+                                <th style="width:80px;">P4</th>
+                                <th style="width:90px;">Promedio</th>
+                                <th style="width:100px;">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!Model.Estudiantes.Any())
+                            {
+                                <tr>
+                                    <td colspan="9" class="text-center text-muted py-4">
+                                        <i data-feather="inbox" class="me-2"></i>
+                                        No hay estudiantes registrados.
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var est in Model.Estudiantes)
+                                {
+                                    <tr>
+                                        <td><small class="text-muted">@(est.Codigo.Length > 0 ? est.Codigo : $"#{est.Id}")</small></td>
+                                        <td>
+                                            <strong>@est.NombreCompleto</strong>
+                                            <br><small class="text-muted">@est.Correo</small>
+                                        </td>
+                                        <td><small>@(est.Seccion ?? "—")</small></td>
+                                        <td>
+                                            @if (est.Nota1.HasValue)
+                                            {
+                                                <span class="badge @(est.Nota1 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota1.Value.ToString("F1")</span>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota2.HasValue)
+                                            {
+                                                <span class="badge @(est.Nota2 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota2.Value.ToString("F1")</span>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota3.HasValue)
+                                            {
+                                                <span class="badge @(est.Nota3 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota3.Value.ToString("F1")</span>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota4.HasValue)
+                                            {
+                                                <span class="badge @(est.Nota4 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota4.Value.ToString("F1")</span>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Promedio.HasValue)
+                                            {
+                                                <strong style="color:@(est.Promedio >= 60 ? "#00b894" : "#e17055")">
+                                                    @est.Promedio.Value.ToString("F2")
+                                                </strong>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            <span class="badges @est.EstadoBadge">@(est.Estado ?? "Sin Notas")</span>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.feather) feather.replace();
+        if ($.fn.DataTable) {
+            $('#tablaReporte').DataTable({
+                language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+                pageLength: 25,
+                order: [[7, 'asc']]
+            });
+        }
+    });
+</script>
+}

@@ -10,23 +10,26 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Column("Id_Administradores")]
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(200)]
+        [Required(ErrorMessage = "El nombre es obligatorio.")]
+        [StringLength(200, ErrorMessage = "Máximo 200 caracteres.")]
+        [Display(Name = "Nombre")]
         public string Nombre { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(200)]
+        [Required(ErrorMessage = "El apellido es obligatorio.")]
+        [StringLength(200, ErrorMessage = "Máximo 200 caracteres.")]
+        [Display(Name = "Apellido")]
         public string Apellido { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(200)]
+        [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
+        [StringLength(200, ErrorMessage = "Máximo 200 caracteres.")]
+        [Display(Name = "Nombre de Usuario")]
         public string NombreUsuario { get; set; } = string.Empty;
 
-        /// <summary>Hash BCrypt de la contraseña.</summary>
-        [Required]
+        /// <summary>Hash BCrypt de la contraseña. No se enlaza desde el formulario.</summary>
         [StringLength(256)]
         public string Contrasena { get; set; } = string.Empty;
 
+        [Display(Name = "Activo")]
         public bool Activo { get; set; } = true;
 
         [NotMapped]

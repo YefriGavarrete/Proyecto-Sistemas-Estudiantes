@@ -1,0 +1,204 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.EstudianteIndexViewModel
+@{
+    ViewData["Title"] = "Lista de Estudiantes — EduPath AI";
+    ViewData["ActiveMenu"] = Model.ActiveMenu;
+}
+
+<div class="page-wrapper">
+    <div class="content">
+
+        <div class="page-header">
+            <div class="page-title">
+                <h4>
+                    <i data-feather="users" style="color:#00b4d8;" class="me-2"></i>
+                    Lista de Estudiantes
+                </h4>
+                <h6>EduPath AI — Periodo @Model.Periodo</h6>
+            </div>
+            <div class="page-btn d-flex gap-2 flex-wrap">
+                <a asp-controller="Estudiantes" asp-action="Registro"
+                   class="btn-nav-est">
+                    <i data-feather="user-plus"></i> Registrar Estudiante
+                </a>
+                <a asp-controller="Estudiantes" asp-action="RegistroNotas"
+                   class="btn-nav-est">
+                    <i data-feather="edit-3"></i> Subir Notas
+                </a>
+            </div>
+        </div>
+
+        @if (TempData["MensajeExito"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                @TempData["MensajeExito"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i data-feather="alert-circle" class="me-2"></i>
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <!-- Resumen rápido -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div class="dash-count">
+                    <div class="dash-counts">
+                        <h4>@Model.TotalEstudiantes</h4>
+                        <h5>Total</h5>
+                    </div>
+                    <div class="dash-imgs"><i data-feather="users"></i></div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="dash-count das1">
+                    <div class="dash-counts">
+                        <h4>@Model.TotalAprobados</h4>
+                        <h5>Aprobados</h5>
+                    </div>
+                    <div class="dash-imgs"><i data-feather="check-circle"></i></div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="dash-count das2">
+                    <div class="dash-counts">
+                        <h4>@Model.TotalReprobados</h4>
+                        <h5>Reprobados</h5>
+                    </div>
+                    <div class="dash-imgs"><i data-feather="x-circle"></i></div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="dash-count das3">
+                    <div class="dash-counts">
+                        <h4>@Model.TotalSinNotas</h4>
+                        <h5>Sin Notas</h5>
+                    </div>
+                    <div class="dash-imgs"><i data-feather="clock"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de estudiantes -->
+        <div class="card mb-0">
+            <div class="card-body">
+                <div class="table-responsive dataview">
+                    <table class="table datatable" id="tablaEstudiantes">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre Completo</th>
+                                <th>Identidad</th>
+                                <th>Correo</th>
+                                <th>Sección</th>
+                                <th>P1</th>
+                                <th>P2</th>
+                                <th>P3</th>
+                                <th>P4</th>
+                                <th>Promedio</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!Model.Estudiantes.Any())
+                            {
+                                <tr>
+                                    <td colspan="12" class="text-center text-muted py-4">
+                                        <i data-feather="inbox" class="me-2"></i>
+                                        No hay estudiantes registrados. <a asp-controller="Estudiantes" asp-action="Registro">Registrar el primero</a>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var est in Model.Estudiantes)
+                                {
+                                    <tr>
+                                        <td><small class="text-muted">@(est.Codigo.Length > 0 ? est.Codigo : "—")</small></td>
+                                        <td>
+                                            <strong>@est.NombreCompleto</strong>
+                                            <br><small class="text-muted">@est.Edad años</small>
+                                        </td>
+                                        <td><small>@(est.Identidad ?? "—")</small></td>
+                                        <td><small>@est.Correo</small></td>
+                                        <td><small>@(est.Seccion ?? "—")</small></td>
+                                        <td>
+                                            @if (est.Nota1.HasValue)
+                                            {
+                                                <span class="badge @(est.Nota1 >= 60 ? "bg-success" : "bg-danger")">@est.Nota1.Value.ToString("F1")</span>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota2.HasValue)
+                                            {
+                                                <span class="badge @(est.Nota2 >= 60 ? "bg-success" : "bg-danger")">@est.Nota2.Value.ToString("F1")</span>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota3.HasValue)
+                                            {
+                                                <span class="badge @(est.Nota3 >= 60 ? "bg-success" : "bg-danger")">@est.Nota3.Value.ToString("F1")</span>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Nota4.HasValue)
+                                            {
+                                                <span class="badge @(est.Nota4 >= 60 ? "bg-success" : "bg-danger")">@est.Nota4.Value.ToString("F1")</span>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            @if (est.Promedio.HasValue)
+                                            {
+                                                <strong style="color:@(est.Promedio >= 60 ? "#00b894" : "#e17055")">
+                                                    @est.Promedio.Value.ToString("F2")
+                                                </strong>
+                                            }
+                                            else { <span class="text-muted">—</span> }
+                                        </td>
+                                        <td>
+                                            <span class="badges @est.EstadoBadge">@(est.Estado ?? "Sin Notas")</span>
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Estudiantes" asp-action="Editar"
+                                               asp-route-id="@est.Id"
+                                               class="btn btn-sm"
+                                               style="background:#e3f6fc;color:#0096c7;border-radius:8px;"
+                                               title="Editar datos">
+                                                <i data-feather="edit-2" style="width:14px;"></i>
+                                            </a>
+                                            <a asp-controller="Estudiantes" asp-action="RegistroNotas"
+                                               class="btn btn-sm ms-1"
+                                               style="background:#e8f5e9;color:#00b894;border-radius:8px;"
+                                               title="Subir / editar notas">
+                                                <i data-feather="edit-3" style="width:14px;"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.feather) feather.replace();
+    });
+</script>
+}

@@ -60,43 +60,46 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
             // ── Estudiante ───────────────────────────────────────
             modelBuilder.Entity<Estudiante>(entity =>
             {
-                // Índice compuesto: un correo no puede repetirse en el mismo curso
+                // Índice: correo único por curso
                 entity.HasIndex(e => new { e.Correo, e.CursoId })
                       .IsUnique()
                       .HasDatabaseName("UQ_Estudiante_Correo_Curso");
 
-                // Columnas calculadas en SQL Server (no las maneja EF)
+                entity.Property(e => e.Activo).HasDefaultValue(true);
+                entity.Property(e => e.FechaRegistro).HasDefaultValueSql("GETDATE()");
+
+                // ── Promedio calculado (4 parciales) ────────────
                 entity.Property(e => e.Promedio)
                       .HasComputedColumnSql(
                           "CASE " +
+                          "WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL AND Nota3 IS NOT NULL AND Nota4 IS NOT NULL " +
+                              "THEN ROUND((Nota1+Nota2+Nota3+Nota4)/4.0, 2) " +
                           "WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL AND Nota3 IS NOT NULL " +
-                              "THEN ROUND((Nota1 + Nota2 + Nota3) / 3.0, 2) " +
+                              "THEN ROUND((Nota1+Nota2+Nota3)/3.0, 2) " +
                           "WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL " +
-                              "THEN ROUND((Nota1 + Nota2) / 2.0, 2) " +
+                              "THEN ROUND((Nota1+Nota2)/2.0, 2) " +
                           "WHEN Nota1 IS NOT NULL THEN Nota1 " +
                           "ELSE NULL END",
                           stored: true);
 
+                // ── Estado calculado ─────────────────────────────
+                const string prom =
+                    "(CASE " +
+                    "WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL AND Nota3 IS NOT NULL AND Nota4 IS NOT NULL " +
+                        "THEN (Nota1+Nota2+Nota3+Nota4)/4.0 " +
+                    "WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL AND Nota3 IS NOT NULL " +
+                        "THEN (Nota1+Nota2+Nota3)/3.0 " +
+                    "WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL " +
+                        "THEN (Nota1+Nota2)/2.0 " +
+                    "WHEN Nota1 IS NOT NULL THEN Nota1 " +
+                    "ELSE NULL END)";
+
                 entity.Property(e => e.Estado)
                       .HasComputedColumnSql(
-                          "CASE " +
-                          "WHEN (CASE WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL AND Nota3 IS NOT NULL " +
-                                     "THEN (Nota1+Nota2+Nota3)/3.0 " +
-                                     "WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL " +
-                                     "THEN (Nota1+Nota2)/2.0 " +
-                                     "WHEN Nota1 IS NOT NULL THEN Nota1 " +
-                                     "ELSE NULL END) >= 60 THEN N'Aprobado' " +
-                          "WHEN (CASE WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL AND Nota3 IS NOT NULL " +
-                                     "THEN (Nota1+Nota2+Nota3)/3.0 " +
-                                     "WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL " +
-                                     "THEN (Nota1+Nota2)/2.0 " +
-                                     "WHEN Nota1 IS NOT NULL THEN Nota1 " +
-                                     "ELSE NULL END) < 60 THEN N'Reprobado' " +
+                          $"CASE WHEN {prom} >= 60 THEN N'Aprobado' " +
+                          $"WHEN {prom} < 60 THEN N'Reprobado' " +
                           "ELSE N'Sin Notas' END",
                           stored: true);
-
-                entity.Property(e => e.FechaRegistro)
-                      .HasDefaultValueSql("GETDATE()");
 
                 entity.HasOne(e => e.Curso)
                       .WithMany(c => c.Estudiantes)
