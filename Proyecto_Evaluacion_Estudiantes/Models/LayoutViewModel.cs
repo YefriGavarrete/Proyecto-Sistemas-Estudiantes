@@ -7,23 +7,17 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
     public class LayoutViewModel
     {
         public string NombreUsuario { get; set; } = string.Empty;
-
-        /// <summary>Título o rol visible en el sidebar ("Lic.", "Ing.", "Administrador", etc.).</summary>
         public string TituloUsuario { get; set; } = string.Empty;
 
-        /// <summary>Código de identificación del usuario (ej. DOC-001, ADM-001).</summary>
         public string CodigoUsuario { get; set; } = string.Empty;
 
-        /// <summary>Nombre del sistema mostrado en el sidebar.</summary>
         public string Sistema { get; set; } = "EduPath AI";
-
-        /// <summary>Periodo académico activo.</summary>
         public string Periodo { get; set; } = "2026-1";
 
-        /// <summary>Indica si el usuario autenticado es administrador.</summary>
+        /// Indica si el usuario autenticado es administrador.
         public bool EsAdmin { get; set; } = false;
 
-        /// <summary>Identificador del ítem activo del menú lateral.</summary>
+        /// Identificador del ítem activo del menú lateral.
         public string ActiveMenu { get; set; } = string.Empty;
     }
 }
