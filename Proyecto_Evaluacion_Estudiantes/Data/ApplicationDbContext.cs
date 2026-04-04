@@ -19,6 +19,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
         public DbSet<Docente>       Docentes        { get; set; }
         public DbSet<Curso>         Cursos          { get; set; }
         public DbSet<Estudiante>    Estudiantes     { get; set; }
+        public DbSet<Grado>         Grados          { get; set; }
+        public DbSet<Asignatura>    Asignaturas     { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,6 +57,21 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
                       .WithMany(d => d.Cursos)
                       .HasForeignKey(c => c.DocenteId)
                       .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // ── Grado ────────────────────────────────────────────
+            modelBuilder.Entity<Grado>(entity =>
+            {
+                entity.Property(g => g.Activo).HasDefaultValue(true);
+                entity.Property(g => g.Nivel).HasDefaultValue("Primaria");
+            });
+
+            // ── Asignatura ────────────────────────────────────────
+            modelBuilder.Entity<Asignatura>(entity =>
+            {
+                entity.HasIndex(a => a.Codigo).IsUnique();
+                entity.Property(a => a.Activo).HasDefaultValue(true);
+                entity.Property(a => a.NivelAplicacion).HasDefaultValue("Todos");
             });
 
             // ── Estudiante ───────────────────────────────────────

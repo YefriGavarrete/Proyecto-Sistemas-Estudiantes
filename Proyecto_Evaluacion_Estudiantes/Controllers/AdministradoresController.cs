@@ -209,10 +209,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionAdministradores));
         }
 
-        // ═══════════════════════════════════════════════════════
-        //  CONFIGURACIÓN DE CURSOS
-        // ═══════════════════════════════════════════════════════
-
+        //  CONFIGURACIÓN DE CURSOs
         private async Task<ConfiguracionCursosViewModel> CrearVmCursos()
         {
             return new ConfiguracionCursosViewModel
@@ -402,6 +399,273 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             _logger.LogInformation("Curso eliminado: {Nombre}", curso.Nombre);
             TempData["MensajeExito"] = $"Curso '{curso.Nombre}' eliminado correctamente.";
             return RedirectToAction(nameof(ConfiguracionCursos));
+        }
+
+        //  CONFIGURACIÓN ACADÉMICA — GRADOS
+
+        private async Task<ConfiguracionGradosViewModel> CrearVmGrados()
+        {
+            return new ConfiguracionGradosViewModel
+            {
+                NombreUsuario = HttpContext.Session.GetString("NombreDocente") ?? "Administrador",
+                TituloUsuario = "Administrador",
+                CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---",
+                Sistema       = "EduPath AI",
+                Periodo       = "2026-1",
+                EsAdmin       = true,
+                ActiveMenu    = "Academica",
+                Grados        = await _context.Grados.OrderBy(g => g.Orden).ToListAsync()
+            };
+        }
+
+        private void LimpiarModelStateGrados()
+        {
+            foreach (var key in new[] {
+                "Grados", "NombreUsuario", "TituloUsuario",
+                "CodigoUsuario", "Sistema", "Periodo", "ActiveMenu", "EsAdmin"
+            })
+                ModelState.Remove(key);
+        }
+
+        // ── GET: /Administradores/ConfiguracionGrados ──────────
+        [HttpGet]
+        public async Task<IActionResult> ConfiguracionGrados(int? editarId)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            CargarViewData("Academica");
+            var vm = await CrearVmGrados();
+
+            if (editarId.HasValue)
+            {
+                var grado = vm.Grados.FirstOrDefault(g => g.Id == editarId.Value);
+                if (grado != null)
+                {
+                    vm.EditandoId      = grado.Id;
+                    vm.FormNombre      = grado.Nombre;
+                    vm.FormCodigo      = grado.Codigo;
+                    vm.FormNivel       = grado.Nivel;
+                    vm.FormDescripcion = grado.Descripcion;
+                    vm.FormActivo      = grado.Activo;
+                }
+            }
+
+            return View(vm);
+        }
+
+        // ── POST: /Administradores/EditarGrado ─────────────────
+        // Los grados son fijos (1°-9°), solo se permite editar, no crear ni eliminar.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditarGrado(ConfiguracionGradosViewModel vm)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            CargarViewData("Academica");
+            LimpiarModelStateGrados();
+
+            if (!vm.EditandoId.HasValue)
+                return RedirectToAction(nameof(ConfiguracionGrados));
+
+            var grado = await _context.Grados.FindAsync(vm.EditandoId.Value);
+            if (grado == null)
+            {
+                TempData["ErrorMessage"] = "Grado no encontrado.";
+                return RedirectToAction(nameof(ConfiguracionGrados));
+            }
+
+            vm.Grados = await _context.Grados.OrderBy(g => g.Orden).ToListAsync();
+            vm.EsAdmin  = true;
+            vm.ActiveMenu = "Academica";
+
+            if (!ModelState.IsValid)
+                return View("ConfiguracionGrados", vm);
+
+            grado.Nombre      = vm.FormNombre.Trim();
+            grado.Codigo      = vm.FormCodigo.Trim();
+            grado.Nivel       = vm.FormNivel;
+            grado.Descripcion = vm.FormDescripcion?.Trim();
+            grado.Activo      = vm.FormActivo;
+
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Grado actualizado: {Nombre}", grado.Nombre);
+            TempData["MensajeExito"] = $"Grado '{grado.Nombre}' actualizado correctamente.";
+            return RedirectToAction(nameof(ConfiguracionGrados));
+        }
+
+
+        //  CONFIGURACIÓN ACADÉMICA — ASIGNATURAS
+        private async Task<ConfiguracionAsignaturasViewModel> CrearVmAsignaturas()
+        {
+            return new ConfiguracionAsignaturasViewModel
+            {
+                NombreUsuario = HttpContext.Session.GetString("NombreDocente") ?? "Administrador",
+                TituloUsuario = "Administrador",
+                CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---",
+                Sistema       = "EduPath AI",
+                Periodo       = "2026-1",
+                EsAdmin       = true,
+                ActiveMenu    = "Academica",
+                Asignaturas   = await _context.Asignaturas
+                                    .OrderBy(a => a.NivelAplicacion)
+                                    .ThenBy(a => a.Nombre)
+                                    .ToListAsync()
+            };
+        }
+
+        private void LimpiarModelStateAsignaturas()
+        {
+            foreach (var key in new[] {
+                "Asignaturas", "NombreUsuario", "TituloUsuario",
+                "CodigoUsuario", "Sistema", "Periodo", "ActiveMenu", "EsAdmin"
+            })
+                ModelState.Remove(key);
+        }
+
+        // ── GET: /Administradores/ConfiguracionAsignaturas ─────
+        [HttpGet]
+        public async Task<IActionResult> ConfiguracionAsignaturas(int? editarId)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            CargarViewData("Academica");
+            var vm = await CrearVmAsignaturas();
+
+            if (editarId.HasValue)
+            {
+                var a = vm.Asignaturas.FirstOrDefault(x => x.Id == editarId.Value);
+                if (a != null)
+                {
+                    vm.EditandoId          = a.Id;
+                    vm.FormNombre          = a.Nombre;
+                    vm.FormCodigo          = a.Codigo;
+                    vm.FormNivelAplicacion = a.NivelAplicacion;
+                    vm.FormActivo          = a.Activo;
+                }
+            }
+
+            return View(vm);
+        }
+
+        // ── POST: /Administradores/ConfiguracionAsignaturas (Crear) ──
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfiguracionAsignaturas(ConfiguracionAsignaturasViewModel vm)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            CargarViewData("Academica");
+            LimpiarModelStateAsignaturas();
+
+            vm.Asignaturas = await _context.Asignaturas
+                .OrderBy(a => a.NivelAplicacion).ThenBy(a => a.Nombre).ToListAsync();
+            vm.EsAdmin    = true;
+            vm.ActiveMenu = "Academica";
+
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            // Código único
+            bool codigoExiste = await _context.Asignaturas
+                .AnyAsync(a => a.Codigo == vm.FormCodigo.Trim().ToUpper());
+            if (codigoExiste)
+            {
+                ModelState.AddModelError("FormCodigo", "Ya existe una asignatura con ese código.");
+                return View(vm);
+            }
+
+            var nueva = new Asignatura
+            {
+                Nombre          = vm.FormNombre.Trim(),
+                Codigo          = vm.FormCodigo.Trim().ToUpper(),
+                NivelAplicacion = vm.FormNivelAplicacion,
+                Activo          = vm.FormActivo
+            };
+
+            _context.Asignaturas.Add(nueva);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Asignatura creada: {Nombre}", nueva.Nombre);
+            TempData["MensajeExito"] = $"Asignatura '{nueva.Nombre}' registrada correctamente.";
+            return RedirectToAction(nameof(ConfiguracionAsignaturas));
+        }
+
+        // ── POST: /Administradores/EditarAsignatura ────────────
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditarAsignatura(ConfiguracionAsignaturasViewModel vm)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            CargarViewData("Academica");
+            LimpiarModelStateAsignaturas();
+
+            if (!vm.EditandoId.HasValue)
+                return RedirectToAction(nameof(ConfiguracionAsignaturas));
+
+            var asignatura = await _context.Asignaturas.FindAsync(vm.EditandoId.Value);
+            if (asignatura == null)
+            {
+                TempData["ErrorMessage"] = "Asignatura no encontrada.";
+                return RedirectToAction(nameof(ConfiguracionAsignaturas));
+            }
+
+            vm.Asignaturas = await _context.Asignaturas
+                .OrderBy(a => a.NivelAplicacion).ThenBy(a => a.Nombre).ToListAsync();
+            vm.EsAdmin    = true;
+            vm.ActiveMenu = "Academica";
+
+            if (!ModelState.IsValid)
+                return View("ConfiguracionAsignaturas", vm);
+
+            // Código único (excluyendo el propio)
+            bool codigoExiste = await _context.Asignaturas
+                .AnyAsync(a => a.Codigo == vm.FormCodigo.Trim().ToUpper() && a.Id != vm.EditandoId.Value);
+            if (codigoExiste)
+            {
+                ModelState.AddModelError("FormCodigo", "Ya existe una asignatura con ese código.");
+                return View("ConfiguracionAsignaturas", vm);
+            }
+
+            asignatura.Nombre          = vm.FormNombre.Trim();
+            asignatura.Codigo          = vm.FormCodigo.Trim().ToUpper();
+            asignatura.NivelAplicacion = vm.FormNivelAplicacion;
+            asignatura.Activo          = vm.FormActivo;
+
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Asignatura actualizada: {Nombre}", asignatura.Nombre);
+            TempData["MensajeExito"] = $"Asignatura '{asignatura.Nombre}' actualizada correctamente.";
+            return RedirectToAction(nameof(ConfiguracionAsignaturas));
+        }
+
+        // ── POST: /Administradores/EliminarAsignatura ──────────
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EliminarAsignatura(int id)
+        {
+            if (!VerificarAdmin())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            var asignatura = await _context.Asignaturas.FindAsync(id);
+            if (asignatura == null)
+            {
+                TempData["ErrorMessage"] = "Asignatura no encontrada.";
+                return RedirectToAction(nameof(ConfiguracionAsignaturas));
+            }
+
+            _context.Asignaturas.Remove(asignatura);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Asignatura eliminada: {Nombre}", asignatura.Nombre);
+            TempData["MensajeExito"] = $"Asignatura '{asignatura.Nombre}' eliminada correctamente.";
+            return RedirectToAction(nameof(ConfiguracionAsignaturas));
         }
     }
 }

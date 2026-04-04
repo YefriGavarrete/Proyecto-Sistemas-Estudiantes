@@ -2,6 +2,7 @@ wwwroot\css\animate.css
 wwwroot\css\bootstrap-datetimepicker.min.css
 wwwroot\css\bootstrap.min.css
 wwwroot\css\dataTables.bootstrap4.min.css
+wwwroot\css\edupath-admin.css
 wwwroot\css\login.css
 wwwroot\css\site.css
 wwwroot\css\style.css
@@ -568,4 +569,3 @@ wwwroot\plugins\twitter-bootstrap-wizard\form-wizard.css
 wwwroot\plugins\twitter-bootstrap-wizard\form-wizard.js
 wwwroot\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js
 wwwroot\plugins\twitter-bootstrap-wizard\prettify.js
-wwwroot\css\edupath-admin.css
