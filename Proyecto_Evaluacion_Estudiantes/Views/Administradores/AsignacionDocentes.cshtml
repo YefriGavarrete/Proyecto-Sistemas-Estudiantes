@@ -1,0 +1,199 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.AsignacionDocentesViewModel
+@{
+    ViewData["Title"] = "Asignacion de Docentes - EduPath AI";
+    ViewData["ActiveMenu"] = "Cursos";
+    bool tieneCurso = Model.CursoId > 0;
+}
+
+<div class="page-wrapper">
+    <div class="content">
+
+        <div class="page-header">
+            <div class="page-title">
+                <h4>
+                    <i data-feather="user-check" style="color:#00b4d8;" class="me-2"></i>
+                    Asignacion de Docentes
+                </h4>
+                <h6>EduPath AI - Asignacion de Catedraticos por Asignatura</h6>
+            </div>
+            <div class="page-btn d-flex gap-2">
+                <a asp-controller="Administradores" asp-action="GestionCursos"
+                   class="btn-nav-est">
+                    <i data-feather="grid"></i> Gestion de Cursos
+                </a>
+            </div>
+        </div>
+
+        @if (TempData["MensajeExito"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show alert-edupath-success" role="alert">
+                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                @TempData["MensajeExito"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i data-feather="alert-circle" class="me-2" style="color:#e17055;"></i>
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <!-- Selector de Curso -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3 pb-3" style="border-bottom:2px solid #e2e8f0;">
+                    <div class="admin-stat-icon me-3"
+                         style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
+                        <i data-feather="search" style="color:#fff;width:20px;height:20px;"></i>
+                    </div>
+                    <div>
+                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Seleccionar Curso</h5>
+                        <small class="text-muted">Elija el curso para gestionar sus docentes por asignatura.</small>
+                    </div>
+                </div>
+
+                <form method="get" asp-controller="Administradores" asp-action="AsignacionDocentes"
+                      class="row g-3 align-items-end">
+                    <div class="col-md-8">
+                        <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                            <i data-feather="grid" class="me-1" style="color:#00b4d8;"></i>
+                            Curso
+                        </label>
+                        <select name="cursoId" class="form-select" id="selectCurso">
+                            <option value="">-- Seleccionar curso --</option>
+                            @foreach (var item in Model.CursosItems)
+                            {
+                                <option value="@item.Value"
+                                        selected="@(item.Selected ? "selected" : null)">
+                                    @item.Text
+                                </option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn-cfg-guardar w-100">
+                            <i data-feather="eye" style="width:16px;height:16px;"></i>
+                            Ver Asignaturas
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabla de Asignacion (solo si hay curso seleccionado) -->
+        @if (tieneCurso)
+        {
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom:2px solid #e2e8f0;">
+                        <div class="admin-stat-icon me-3"
+                             style="background:linear-gradient(135deg,#6c5ce7,#a29bfe);box-shadow:0 4px 12px rgba(108,92,231,.3);">
+                            <i data-feather="book-open" style="color:#fff;width:20px;height:20px;"></i>
+                        </div>
+                        <div>
+                            <h5 style="margin:0;color:#1a2b4a;font-weight:700;">@Model.CursoNombre</h5>
+                            <small class="text-muted">
+                                @Model.Filas.Count asignatura(s) — Asigne un docente a cada materia.
+                            </small>
+                        </div>
+                    </div>
+
+                    @if (!Model.Filas.Any())
+                    {
+                        <div class="text-center py-5 text-muted">
+                            <i data-feather="inbox" style="width:48px;height:48px;opacity:.3;" class="mb-3 d-block mx-auto"></i>
+                            <p>No hay asignaturas disponibles para este nivel.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <form asp-controller="Administradores" asp-action="GuardarAsignaciones" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="cursoId" value="@Model.CursoId" />
+
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="tbl-asignacion">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:90px;">Codigo</th>
+                                            <th>Asignatura</th>
+                                            <th>Docente Asignado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var fila in Model.Filas)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" name="asignaturaIds" value="@fila.AsignaturaId" />
+                                                    <span class="badge"
+                                                          style="background:linear-gradient(135deg,#0096c7,#48cae4);color:#fff;
+                                                                 font-size:11px;padding:4px 8px;border-radius:6px;">
+                                                        @fila.AsignaturaCodigo
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <strong style="color:#1a2b4a;">@fila.AsignaturaNombre</strong>
+                                                </td>
+                                                <td>
+                                                    <select name="docenteIds" class="form-select form-select-sm">
+                                                        <option value="0">-- Sin asignar --</option>
+                                                        @foreach (var d in Model.DocentesItems)
+                                                        {
+                                                            <option value="@d.Value"
+                                                                    selected="@(d.Value == fila.DocenteId.ToString() ? "selected" : null)">
+                                                                @d.Text
+                                                            </option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="d-flex gap-2 justify-content-end mt-3">
+                                <a asp-controller="Administradores" asp-action="GestionCursos"
+                                   class="btn-cancelar-form">
+                                    <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar
+                                </a>
+                                <button type="submit" class="btn-cfg-guardar">
+                                    <i data-feather="save" style="width:16px;height:16px;"></i>
+                                    Guardar Asignaciones
+                                </button>
+                            </div>
+                        </form>
+                    }
+
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.feather) feather.replace();
+
+        var tbl = document.getElementById('tbl-asignacion');
+        if (tbl && typeof $.fn.DataTable !== 'undefined' && !$.fn.DataTable.isDataTable('#tbl-asignacion')) {
+            $('#tbl-asignacion').DataTable({
+                paging: false,
+                info: false,
+                language: {
+                    search: "Buscar asignatura:",
+                    zeroRecords: "No se encontraron asignaturas."
+                },
+                order: [[1, 'asc']]
+            });
+        }
+    });
+    </script>
+}

@@ -17,7 +17,6 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         /// Indica si el usuario autenticado es administrador.
         public bool EsAdmin { get; set; } = false;
 
-        /// Identificador del ítem activo del menú lateral.
         public string ActiveMenu { get; set; } = string.Empty;
     }
 }

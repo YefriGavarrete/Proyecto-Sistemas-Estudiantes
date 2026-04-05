@@ -38,19 +38,21 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             if (HttpContext.Session.GetString("Rol") == "Admin")
                 return RedirectToAction("Index", "Administradores");
 
-            // ── Obtener DocenteId de sesión ───────────────────────
+            // Tengo que traer el nuevo docentTutorid 
             int.TryParse(HttpContext.Session.GetString("DocenteId"), out int docenteId);
 
-            // ── Cargar todos los estudiantes activos del docente ──
+            // ── Traigo los estudiantes activos del docente
             var estudiantes = docenteId > 0
                 ? await _context.Estudiantes
                     .Include(e => e.Curso)
-                    .Where(e => e.Curso!.DocenteId == docenteId && e.Activo)
+                    .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
                     .OrderByDescending(e => e.FechaRegistro)
                     .ToListAsync()
                 : new List<Estudiante>();
 
-            // ── Calcular métricas ─────────────────────────────────
+
+
+
             int total      = estudiantes.Count;
             int aprobados  = estudiantes.Count(e => e.Estado == "Aprobado");
             int reprobados = estudiantes.Count(e => e.Estado == "Reprobado");
@@ -60,7 +62,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             int enRiesgo   = estudiantes.Count(e =>
                 e.EnRiesgoIA == true ||
                 (e.Promedio.HasValue && e.Promedio.Value > 0 && e.Promedio.Value < 65));
-
+            
             decimal promedioGeneral = total > 0 && estudiantes.Any(e => e.Promedio.HasValue)
                 ? Math.Round(estudiantes.Where(e => e.Promedio.HasValue)
                                         .Average(e => e.Promedio!.Value), 2)

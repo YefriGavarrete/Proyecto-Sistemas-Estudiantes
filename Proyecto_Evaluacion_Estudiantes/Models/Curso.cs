@@ -9,30 +9,51 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "El nombre del curso es obligatorio.")]
-        [StringLength(200, ErrorMessage = "Máximo 200 caracteres.")]
+        // ── Nombre: se mantiene para compatibilidad con el flujo anterior ──
+        [StringLength(200)]
         [Display(Name = "Nombre del Curso")]
         public string Nombre { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "El código del curso es obligatorio.")]
+        [Required(ErrorMessage = "El codigo del curso es obligatorio.")]
         [StringLength(30)]
-        [Display(Name = "Código")]
+        [Display(Name = "Codigo")]
         public string Codigo { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "El período es obligatorio.")]
+        [Required(ErrorMessage = "El periodo es obligatorio.")]
         [StringLength(20)]
-        [Display(Name = "Período")]
+        [Display(Name = "Periodo")]
         public string Periodo { get; set; } = string.Empty;
 
-        [Required]
-        public int DocenteId { get; set; }
+        // ── Campos del nuevo flujo de Gestion de Cursos ──────────────────
 
-        [ForeignKey(nameof(DocenteId))]
-        public Docente? Docente { get; set; }
+        [Display(Name = "Grado")]
+        public int? GradoId { get; set; }
+
+        [ForeignKey(nameof(GradoId))]
+        public Grado? Grado { get; set; }
+
+        [StringLength(5)]
+        [Display(Name = "Seccion")]
+        public string? Seccion { get; set; }
+
+        // Docente tutor / maestro guia del curso
+        [Display(Name = "Docente Tutor")]
+        public int? DocenteTutorId { get; set; }
+
+        [ForeignKey(nameof(DocenteTutorId))]
+        public Docente? DocenteTutor { get; set; }
 
         public bool Activo { get; set; } = true;
 
-        // Relación 1:N con Estudiantes
-        public ICollection<Estudiante> Estudiantes { get; set; } = new List<Estudiante>();
+        // ── Navegacion ───────────────────────────────────────────────────
+        public ICollection<Estudiante>        Estudiantes        { get; set; } = new List<Estudiante>();
+        public ICollection<AsignacionDocente> AsignacionDocentes { get; set; } = new List<AsignacionDocente>();
+
+        // ── Nombre para mostrar en UI ────────────────────────────────────
+        [NotMapped]
+        public string NombreCompleto =>
+            Grado != null
+                ? $"{Grado.Nombre} — Sec. {Seccion ?? "?"} ({Periodo})"
+                : (!string.IsNullOrEmpty(Nombre) ? Nombre : $"Curso #{Id}");
     }
 }

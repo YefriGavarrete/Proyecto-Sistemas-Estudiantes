@@ -18,11 +18,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             _context = context;
         }
 
-        // ── Helpers ──────────────────────────────────────────────
-        private bool VerificarDocente() =>
+        bool VerificarDocente() =>
             !string.IsNullOrEmpty(HttpContext.Session.GetString("NombreDocente"));
 
-        private int ObtenerDocenteId()
+        int ObtenerDocenteId()
         {
             int.TryParse(HttpContext.Session.GetString("DocenteId"), out int id);
             return id;
@@ -57,7 +56,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             if (docenteId == 0) return null;
 
             var curso = await _context.Cursos
-                .Where(c => c.DocenteId == docenteId && c.Activo)
+                .Where(c => c.DocenteTutorId == docenteId && c.Activo)
                 .FirstOrDefaultAsync();
 
             return curso?.Id;
@@ -73,7 +72,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             var estudiantes = await _context.Estudiantes
                 .Include(e => e.Curso)
-                .Where(e => e.Curso!.DocenteId == docenteId && e.Activo)
+                .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
                 .OrderBy(e => e.Apellido)
                 .ThenBy(e => e.Nombre)
                 .ToListAsync();
@@ -181,7 +180,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             var estudiantes = await _context.Estudiantes
                 .Include(e => e.Curso)
-                .Where(e => e.Curso!.DocenteId == docenteId && e.Activo)
+                .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
                 .OrderBy(e => e.Apellido)
                 .ThenBy(e => e.Nombre)
                 .ToListAsync();
@@ -220,7 +219,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             // Verificar que el estudiante pertenece al docente logueado
             int docenteId = ObtenerDocenteId();
-            if (estudiante.Curso?.DocenteId != docenteId)
+            if (estudiante.Curso?.DocenteTutorId != docenteId)
                 return Json(new { ok = false, msg = "Sin permiso para este estudiante." });
 
             // Asignar la nota al parcial correspondiente
@@ -271,7 +270,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             }
 
             int docenteId = ObtenerDocenteId();
-            if (estudiante.Curso?.DocenteId != docenteId)
+            if (estudiante.Curso?.DocenteTutorId != docenteId)
             {
                 TempData["ErrorMessage"] = "No tienes permiso para editar este estudiante.";
                 return RedirectToAction(nameof(Index));
@@ -311,7 +310,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             }
 
             int docenteId = ObtenerDocenteId();
-            if (estudiante.Curso?.DocenteId != docenteId)
+            if (estudiante.Curso?.DocenteTutorId != docenteId)
             {
                 TempData["ErrorMessage"] = "Sin permiso.";
                 return RedirectToAction(nameof(Index));
@@ -346,7 +345,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             var todos = docenteId > 0
                 ? await _context.Estudiantes
                     .Include(e => e.Curso)
-                    .Where(e => e.Curso!.DocenteId == docenteId && e.Activo)
+                    .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
                     .OrderBy(e => e.Promedio)
                     .ToListAsync()
                 : new List<Estudiante>();
