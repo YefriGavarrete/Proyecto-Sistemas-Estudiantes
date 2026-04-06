@@ -47,7 +47,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             var estudiantes = docenteId > 0
                 ? await _context.Estudiantes
                     .Include(e => e.Curso)
-                    .Where(e => e.Curso!.DocenteId == docenteId && e.Activo)
+                    .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
                     .OrderBy(e => e.Apellido).ThenBy(e => e.Nombre)
                     .ToListAsync()
                 : new List<Estudiante>();
@@ -110,7 +110,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             var enRiesgo = docenteId > 0
                 ? await _context.Estudiantes
                     .Include(e => e.Curso)
-                    .Where(e => e.Curso!.DocenteId == docenteId && e.Activo
+                    .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo
                              && (e.Promedio < 65 || e.EnRiesgoIA == true))
                     .OrderBy(e => e.Promedio)
                     .ToListAsync()

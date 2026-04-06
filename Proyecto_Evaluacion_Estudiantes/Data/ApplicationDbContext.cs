@@ -19,6 +19,9 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
         public DbSet<Docente>       Docentes        { get; set; }
         public DbSet<Curso>         Cursos          { get; set; }
         public DbSet<Estudiante>    Estudiantes     { get; set; }
+        public DbSet<Grado>              Grados              { get; set; }
+        public DbSet<Asignatura>         Asignaturas         { get; set; }
+        public DbSet<AsignacionDocente>  AsignacionDocentes  { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,10 +53,61 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
             modelBuilder.Entity<Curso>(entity =>
             {
                 entity.HasIndex(c => c.Codigo).IsUnique();
+            });
 
-                entity.HasOne(c => c.Docente)
+            // ── Grado ────────────────────────────────────────────
+            modelBuilder.Entity<Grado>(entity =>
+            {
+                entity.Property(g => g.Activo).HasDefaultValue(true);
+                entity.Property(g => g.Nivel).HasDefaultValue("Primaria");
+            });
+
+            // ── Asignatura ────────────────────────────────────────
+            modelBuilder.Entity<Asignatura>(entity =>
+            {
+                entity.HasIndex(a => a.Codigo).IsUnique();
+                entity.Property(a => a.Activo).HasDefaultValue(true);
+                entity.Property(a => a.NivelAplicacion).HasDefaultValue("Todos");
+            });
+
+            // ── Curso (relaciones nuevas) ────────────────────────
+            modelBuilder.Entity<Curso>(entity =>
+            {
+                entity.HasOne(c => c.Grado)
+                      .WithMany()
+                      .HasForeignKey(c => c.GradoId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                // DocenteTutorId es la FK principal: el docente "dueño" del curso
+                entity.HasOne(c => c.DocenteTutor)
                       .WithMany(d => d.Cursos)
-                      .HasForeignKey(c => c.DocenteId)
+                      .HasForeignKey(c => c.DocenteTutorId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // ── AsignacionDocente ─────────────────────────────────
+            modelBuilder.Entity<AsignacionDocente>(entity =>
+            {
+                // Un curso no puede tener la misma asignatura asignada dos veces
+                entity.HasIndex(a => new { a.CursoId, a.AsignaturaId })
+                      .IsUnique()
+                      .HasDatabaseName("UQ_AsignacionDocente_Curso_Asignatura");
+
+                entity.Property(a => a.Activo).HasDefaultValue(true);
+
+                entity.HasOne(a => a.Curso)
+                      .WithMany(c => c.AsignacionDocentes)
+                      .HasForeignKey(a => a.CursoId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(a => a.Asignatura)
+                      .WithMany()
+                      .HasForeignKey(a => a.AsignaturaId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(a => a.Docente)
+                      .WithMany()
+                      .HasForeignKey(a => a.DocenteId)
                       .OnDelete(DeleteBehavior.Restrict);
             });
 

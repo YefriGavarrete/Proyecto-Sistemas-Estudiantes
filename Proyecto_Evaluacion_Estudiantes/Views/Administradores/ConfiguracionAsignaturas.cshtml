@@ -1,23 +1,28 @@
-@model Proyecto_Evaluacion_Estudiantes.Models.ConfiguracionCursosViewModel
+@model Proyecto_Evaluacion_Estudiantes.Models.ConfiguracionAsignaturasViewModel
 @{
-    ViewData["Title"] = "Configuración de Cursos — EduPath AI";
-    ViewData["ActiveMenu"] = "Administrador";
+    ViewData["Title"] = "Configuracion de Asignaturas - EduPath AI";
+    ViewData["ActiveMenu"] = "Academica";
     bool editando = Model.EditandoId.HasValue;
 }
 
 <div class="page-wrapper">
     <div class="content">
+
         <div class="page-header">
             <div class="page-title">
                 <h4>
                     <i data-feather="book-open" style="color:#00b4d8;" class="me-2"></i>
-                    Configuración de Cursos
+                    Configuracion de Asignaturas
                 </h4>
-                <h6>EduPath AI — Gestión de Cursos del Sistema</h6>
+                <h6>EduPath AI - Gestion de Materias del Sistema</h6>
+            </div>
+            <div class="page-btn d-flex gap-2">
+                <a asp-controller="Administradores" asp-action="ConfiguracionGrados"
+                   class="btn-nav-est">
+                    <i data-feather="layers"></i> Grados
+                </a>
             </div>
         </div>
-
-
 
         @if (TempData["MensajeExito"] != null)
         {
@@ -36,120 +41,118 @@
             </div>
         }
 
-        <!-- ── Formulario Agregar / Editar ──────────────────────── -->
+        <!-- Formulario Crear / Editar -->
         <div class="card mb-4">
             <div class="card-body">
 
                 <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom:2px solid #e2e8f0;">
                     <div class="admin-stat-icon me-3"
                          style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                        <i data-feather="@(editando ? "edit-2" : "plus-circle")" style="color:#fff;width:20px;height:20px;"></i>
+                        <i data-feather="@(editando ? "edit-2" : "plus-circle")"
+                           style="color:#fff;width:20px;height:20px;"></i>
                     </div>
                     <div>
                         <h5 style="margin:0;color:#1a2b4a;font-weight:700;">
-                            @(editando ? "Editar Curso" : "Nuevo Curso")
+                            @(editando ? "Editar Asignatura" : "Nueva Asignatura")
                         </h5>
                         <small class="text-muted">
-                            @(editando ? $"Modificando el curso con ID {Model.EditandoId}" : "Complete los datos para registrar un nuevo curso.")
+                            @(editando ? $"Modificando: {Model.FormNombre}" : "Complete los datos para registrar una nueva asignatura.")
                         </small>
                     </div>
                     @if (editando)
                     {
-                        <a asp-controller="Administradores" asp-action="ConfiguracionCursos"
+                        <a asp-controller="Administradores" asp-action="ConfiguracionAsignaturas"
                            class="btn-cancelar-form ms-auto">
-                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar edición
+                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar edicion
                         </a>
                     }
                 </div>
 
                 <form asp-controller="Administradores"
-                      asp-action="@(editando ? "EditarCurso" : "ConfiguracionCursos")"
+                      asp-action="@(editando ? "EditarAsignatura" : "ConfiguracionAsignaturas")"
                       method="post">
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="EditandoId" value="@Model.EditandoId" />
 
                     <div class="row g-3 mb-3">
+
+                        <!-- Nombre -->
                         <div class="col-md-5">
                             <label class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="book" class="me-1" style="color:#00b4d8;"></i>
-                                Nombre del Curso
+                                Nombre de la Asignatura
                             </label>
                             <input name="FormNombre" value="@Model.FormNombre"
-                                   class="form-control form-control-edupath"
-                                   placeholder="Ej: Matemáticas – 1° Primaria A"
-                                   maxlength="200" required />
+                                   class="form-control"
+                                   placeholder="Ej: Matematicas"
+                                   maxlength="150" required />
                             <span class="text-danger" style="font-size:12px;">
                                 @Html.ValidationMessage("FormNombre")
                             </span>
                         </div>
 
+                        <!-- Codigo -->
                         <div class="col-md-2">
                             <label class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="hash" class="me-1" style="color:#00b4d8;"></i>
-                                Código
+                                Codigo
                             </label>
                             <input name="FormCodigo" value="@Model.FormCodigo"
-                                   class="form-control form-control-edupath"
-                                   placeholder="Ej: MAT-1A"
-                                   maxlength="30" required style="text-transform:uppercase;" />
+                                   class="form-control"
+                                   placeholder="Ej: MAT"
+                                   maxlength="20" required
+                                   id="inputCodAsig"
+                                   style="text-transform:uppercase;" />
                             <span class="text-danger" style="font-size:12px;">
                                 @Html.ValidationMessage("FormCodigo")
                             </span>
                         </div>
 
-                        <div class="col-md-2">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="calendar" class="me-1" style="color:#00b4d8;"></i>
-                                Período
-                            </label>
-                            <input name="FormPeriodo" value="@Model.FormPeriodo"
-                                   class="form-control form-control-edupath"
-                                   placeholder="Ej: 2026-1"
-                                   maxlength="20" required />
-                            <span class="text-danger" style="font-size:12px;">
-                                @Html.ValidationMessage("FormPeriodo")
-                            </span>
-                        </div>
+                        <!-- Nivel de Aplicacion -->
                         <div class="col-md-3">
                             <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="user-check" class="me-1" style="color:#00b4d8;"></i>
-                                Docente Asignado
+                                <i data-feather="tag" class="me-1" style="color:#00b4d8;"></i>
+                                Nivel de Aplicacion
                             </label>
-                            <select name="FormDocenteId" class="form-control form-control-edupath" required>
-                                <option value="0">— Seleccionar docente —</option>
-                                @foreach (var d in Model.Docentes)
-                                {
-                                    <option value="@d.Id" selected="@(Model.FormDocenteId == d.Id)">
-                                        @d.Titulo @d.NombreCompleto
-                                    </option>
-                                }
+                            <select name="FormNivelAplicacion" class="form-select" required>
+                                <option value="Todos"
+                                        selected="@(Model.FormNivelAplicacion == "Todos" ? "selected" : null)">
+                                    Todos los grados (1 al 9)
+                                </option>
+                                <option value="TercerCiclo"
+                                        selected="@(Model.FormNivelAplicacion == "TercerCiclo" ? "selected" : null)">
+                                    Solo Tercer Ciclo (7 al 9)
+                                </option>
                             </select>
                             <span class="text-danger" style="font-size:12px;">
-                                @Html.ValidationMessage("FormDocenteId")
+                                @Html.ValidationMessage("FormNivelAplicacion")
                             </span>
                         </div>
-                    </div>
 
-                    <div class="mb-4">
-                        <div class="form-check form-switch">
-                            <input type="checkbox" name="FormActivo" value="true"
-                                   class="form-check-input" role="switch"
-                                   id="chkActivo" @(Model.FormActivo ? "checked" : "") />
-                            <input type="hidden" name="FormActivo" value="false" />
-                            <label class="form-check-label fw-semibold" for="chkActivo" style="color:#1a2b4a;">
-                                Curso activo en el sistema
-                            </label>
+                        <!-- Activo: checkbox PRIMERO, hidden DESPUES -->
+                        <div class="col-md-2 d-flex align-items-end pb-1">
+                            <div class="form-check form-switch">
+                                <input type="checkbox" name="FormActivo" value="true"
+                                       class="form-check-input" role="switch"
+                                       id="chkAsigActivo" @(Model.FormActivo ? "checked" : "") />
+                                <input type="hidden" name="FormActivo" value="false" />
+                                <label class="form-check-label fw-semibold" for="chkAsigActivo"
+                                       style="color:#1a2b4a;">
+                                    Activo
+                                </label>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Botones -->
                     <div class="d-flex gap-2 justify-content-end">
-                        <a asp-controller="Administradores" asp-action="Index" class="btn-cancelar-form">
+                        <a asp-controller="Administradores" asp-action="Index"
+                           class="btn-cancelar-form">
                             <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar
                         </a>
                         <button type="submit" class="btn-cfg-guardar">
                             <i data-feather="save" style="width:16px;height:16px;"></i>
-                            @(editando ? "Actualizar Curso" : "Guardar Curso")
+                            @(editando ? "Actualizar Asignatura" : "Guardar Asignatura")
                         </button>
                     </div>
 
@@ -157,6 +160,7 @@
             </div>
         </div>
 
+        <!-- Tabla de Asignaturas -->
         <div class="card">
             <div class="card-body">
 
@@ -166,61 +170,71 @@
                         <i data-feather="list" style="color:#fff;width:20px;height:20px;"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Cursos Registrados</h5>
-                        <small class="text-muted">Total: @Model.Cursos.Count curso(s)</small>
+                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Asignaturas Registradas</h5>
+                        <small class="text-muted">Total: @Model.Asignaturas.Count asignatura(s)</small>
                     </div>
                 </div>
 
-                @if (!Model.Cursos.Any())
+                @if (!Model.Asignaturas.Any())
                 {
                     <div class="text-center py-5 text-muted">
                         <i data-feather="inbox" style="width:48px;height:48px;opacity:.3;" class="mb-3 d-block mx-auto"></i>
-                        <p>No hay cursos registrados aún.</p>
+                        <p>No hay asignaturas registradas aun.</p>
                     </div>
                 }
                 else
                 {
                     <div class="table-responsive">
-                        <table class="table table-hover" id="tbl-cursos">
+
+
+                        <!-- SIN clase "datatable" para evitar doble inicializacion con script.js del template -->
+                        <table class="table table-hover" id="tbl-asignaturas">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Código</th>
-                                    <th>Período</th>
-                                    <th>Docente</th>
-                                    <th class="text-center">Estado</th>
-                                    <th class="text-center">Acciones</th>
+                                    <th>Asignatura</th>
+                                    <th style="width:90px;">Codigo</th>
+                                    <th style="width:180px;">Nivel de Aplicacion</th>
+                                    <th class="text-center" style="width:90px;">Estado</th>
+                                    <th class="text-center" style="width:110px;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var c in Model.Cursos)
+                                @foreach (var a in Model.Asignaturas)
                                 {
-                                    <tr>
+                                    <tr class="@(a.Id == Model.EditandoId ? "table-info" : "")">
                                         <td>
-                                            <strong style="color:#1a2b4a;">@c.Nombre</strong>
+                                            <strong style="color:#1a2b4a;">@a.Nombre</strong>
                                         </td>
                                         <td>
                                             <span class="badge"
                                                   style="background:linear-gradient(135deg,#0096c7,#48cae4);color:#fff;
                                                          font-size:11px;padding:4px 8px;border-radius:6px;">
-                                                @c.Codigo
+                                                @a.Codigo
                                             </span>
                                         </td>
-                                        <td>@c.Periodo</td>
                                         <td>
-                                            @if (c.DocenteTutor != null)
+                                            @if (a.NivelAplicacion == "TercerCiclo")
                                             {
-                                                <span>@c.DocenteTutor.Titulo @c.DocenteTutor.NombreCompleto</span>
+                                                <span class="badge"
+                                                      style="background:#6c5ce7;color:#fff;font-size:11px;
+                                                             border-radius:6px;padding:4px 8px;">
+                                                    <i data-feather="star" style="width:10px;height:10px;"></i>
+                                                    Solo Tercer Ciclo
+                                                </span>
                                             }
                                             else
                                             {
-                                                <span class="text-muted fst-italic">Sin asignar</span>
+                                                <span class="badge"
+                                                      style="background:#00b894;color:#fff;font-size:11px;
+                                                             border-radius:6px;padding:4px 8px;">
+                                                    Todos los Grados
+                                                </span>
                                             }
                                         </td>
                                         <td class="text-center">
-                                            @if (c.Activo)
+                                            @if (a.Activo)
                                             {
-                                                <span class="badge text-bg-success" style="font-size:11px;">Activo</span>
+                                                <span class="badge text-bg-success" style="color:#1a2b4a;font-size:11px;">Activo</span>
                                             }
                                             else
                                             {
@@ -229,25 +243,21 @@
                                         </td>
                                         <td class="text-center">
                                             <div class="d-flex gap-2 justify-content-center">
-
-                                                <!-- Editar -->
                                                 <a asp-controller="Administradores"
-                                                   asp-action="ConfiguracionCursos"
-                                                   asp-route-editarId="@c.Id"
+                                                   asp-action="ConfiguracionAsignaturas"
+                                                   asp-route-editarId="@a.Id"
                                                    class="btn btn-sm"
                                                    style="background:linear-gradient(135deg,#0096c7,#48cae4);color:#fff;
                                                           border:none;border-radius:6px;padding:4px 10px;"
                                                    title="Editar">
                                                     <i data-feather="edit-2" style="width:14px;height:14px;"></i>
                                                 </a>
-
-                                                <!-- Eliminar -->
                                                 <form asp-controller="Administradores"
-                                                      asp-action="EliminarCurso"
+                                                      asp-action="EliminarAsignatura"
                                                       method="post"
-                                                      onsubmit="return confirmarEliminar('@c.Nombre.Replace("'","\\'")')">
+                                                      onsubmit="return confirm('Eliminar asignatura @a.Nombre?')">
                                                     @Html.AntiForgeryToken()
-                                                    <input type="hidden" name="id" value="@c.Id" />
+                                                    <input type="hidden" name="id" value="@a.Id" />
                                                     <button type="submit"
                                                             class="btn btn-sm"
                                                             style="background:linear-gradient(135deg,#e17055,#ff7675);color:#fff;
@@ -256,7 +266,6 @@
                                                         <i data-feather="trash-2" style="width:14px;height:14px;"></i>
                                                     </button>
                                                 </form>
-
                                             </div>
                                         </td>
                                     </tr>
@@ -273,38 +282,35 @@
 </div>
 
 @section Scripts {
-<script>
+    <script>
     document.addEventListener('DOMContentLoaded', function () {
         if (window.feather) feather.replace();
 
-        // Inicializar DataTable solo si el template no lo hizo ya
-        var tblCursos = document.getElementById('tbl-cursos');
-        if (tblCursos && typeof $.fn.DataTable !== 'undefined' && !$.fn.DataTable.isDataTable('#tbl-cursos')) {
-            $('#tbl-cursos').DataTable({
+        // Inicializar DataTable solo si no fue inicializado por el template
+        var tbl = document.getElementById('tbl-asignaturas');
+        if (tbl && typeof $.fn.DataTable !== 'undefined' && !$.fn.DataTable.isDataTable('#tbl-asignaturas')) {
+            $('#tbl-asignaturas').DataTable({
                 language: {
                     search: "Buscar:",
                     lengthMenu: "Mostrar _MENU_ registros",
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ cursos",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ asignaturas",
                     paginate: { previous: "Anterior", next: "Siguiente" },
-                    zeroRecords: "No se encontraron cursos."
+                    zeroRecords: "No se encontraron asignaturas."
                 },
-                order: [[0, 'asc']]
+                order: [[2, 'asc'], [0, 'asc']]
             });
         }
 
-        // Convertir código a mayúsculas al escribir
-        var inputCodigo = document.querySelector('input[name="FormCodigo"]');
+        // Codigo en mayusculas
+        var inputCodigo = document.getElementById('inputCodAsig');
         if (inputCodigo) {
             inputCodigo.addEventListener('input', function () {
                 var pos = this.selectionStart;
                 this.value = this.value.toUpperCase();
                 this.setSelectionRange(pos, pos);
             });
-        }
-    });
 
-    function confirmarEliminar(nombre) {
-        return confirm('¿Está seguro de que desea eliminar el curso "' + nombre + '"?\n\nEsta acción no se puede deshacer.');
-    }
-</script>
-}
+        </script>
+        }
+
+   

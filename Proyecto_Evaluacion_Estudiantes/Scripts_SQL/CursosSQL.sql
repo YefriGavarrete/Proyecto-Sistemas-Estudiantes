@@ -33,8 +33,8 @@ BEGIN
     CREATE TABLE [dbo].[Asignaturas] (
         [Id]          INT IDENTITY(1,1) NOT NULL,
         [Nombre]      NVARCHAR(150)     NOT NULL,
-        [Codigo]      NVARCHAR(20)      NOT NULL,  -- "ESP", "MAT", etc.
-        [NivelAplicacion] NVARCHAR(20) NOT NULL DEFAULT 'Todos',       -- útil para horarios futuros
+        [Codigo]      NVARCHAR(20)      NOT NULL, 
+        [NivelAplicacion] NVARCHAR(20) NOT NULL DEFAULT 'Todos',
         [Activo]      BIT               NOT NULL DEFAULT 1,
         CONSTRAINT [PK_Asignaturas] PRIMARY KEY CLUSTERED ([Id] ASC)
     );
@@ -43,11 +43,46 @@ END
 GO
 
 
+IF NOT EXISTS (
+    SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Cursos' AND COLUMN_NAME = 'DocenteTutorId'
+)
+BEGIN
+    ALTER TABLE [dbo].[Cursos]
+        ADD [DocenteTutorId] INT NULL
+        CONSTRAINT [FK_Cursos_DocenteTutor]
+        FOREIGN KEY REFERENCES [dbo].[Docentes]([Id]);
+    PRINT 'Columna DocenteTutorId agregada a Cursos.';
+END
+GO
+
+IF NOT EXISTS (
+    SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Cursos' AND COLUMN_NAME = 'Seccion'
+)
+BEGIN
+    ALTER TABLE [dbo].[Cursos] ADD [Seccion] NVARCHAR(5) NULL;
+    PRINT 'Columna Seccion agregada a Cursos.';
+END
+GO
+
+
+
+
+
+
+
+
+
+
+
+USE EvaluacionEstudiantes
 SELECT * FROM Cursos
 
 SELECT * FROM Asignaturas
 SELECT * FROM dbo.Grados
 
+SELECT * from Docentes
 
 
 
@@ -68,33 +103,13 @@ VALUES
 GO
 
 
-IF NOT EXISTS (
-    SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_NAME = 'Cursos' AND COLUMN_NAME = 'Seccion'
-)
-BEGIN
-    ALTER TABLE [dbo].[Cursos] ADD [Seccion] NVARCHAR(5) NULL;
-    PRINT 'Columna Seccion agregada a Cursos.';
-END
-GO
 
 SELECT * FROM CURSOS
 
 
---Eliminar la relacion de docentes con cursos ya que ahora tendra relacion con otra, pero ahora dependiendo segun la asiganaturas
-IF EXISTS (
-    SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_Cursos_Docentes'
-)
-    ALTER TABLE [dbo].[Cursos] DROP CONSTRAINT [FK_Cursos_Docentes];
-
-IF EXISTS (
-    SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_NAME = 'Cursos' AND COLUMN_NAME = 'DocenteId'
-)
-    ALTER TABLE [dbo].[Cursos] DROP COLUMN [DocenteId];
-GO
 
 
+SELECT * FROM AsignacionDocente
 
 
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='AsignacionDocente' AND xtype='U')
@@ -119,5 +134,7 @@ BEGIN
         CONSTRAINT [UQ_AsignDoc_Curso_Asignatura]
             UNIQUE ([CursoId], [AsignaturaId])
     );
+    PRINT 'Tabla AsignacionDocente creada.';
 END
 GO
+

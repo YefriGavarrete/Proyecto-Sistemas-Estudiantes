@@ -20,16 +20,32 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/AsignacionDocentes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXEFzaWduYWNpb25Eb2NlbnRlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/ConfiguracionAdministradores.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXENvbmZpZ3VyYWNpb25BZG1pbmlzdHJhZG9yZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/ConfiguracionAsignaturas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXENvbmZpZ3VyYWNpb25Bc2lnbmF0dXJhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/ConfiguracionCursos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXENvbmZpZ3VyYWNpb25DdXJzb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/ConfiguracionGrados.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXENvbmZpZ3VyYWNpb25HcmFkb3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/ConfiguracionUsuarios.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXENvbmZpZ3VyYWNpb25Vc3Vhcmlvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/GestionCursos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvcmVzXEdlc3Rpb25DdXJzb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/OneDrive/Escritorio/UCENM/X Period/Programming for Internet II/Proyecto_Evaluacion_Estudiantes/Proyecto_Evaluacion_Estudiantes/Views/Administradores/Index.cshtml]

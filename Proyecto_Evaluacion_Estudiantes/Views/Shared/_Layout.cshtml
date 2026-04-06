@@ -304,27 +304,74 @@
                         <!-- Codigo modificado por el diseño-->
                         @if (esAdmin)
                         {
+
+
                             <!-- Administrador (solo para rol Admin) -->
                             <li class="submenu @(menu == "Administrador" ? "active" : "")">
                                 <a href="javascript:void(0);">
                                     <img src="~/img/icons/users1.svg" alt="img">
                                     <span> Administrador</span>
-                                    <span class="menu-arrow"></span>  
+                                    <span class="menu-arrow"></span>
                                 </a>
                                 <ul>
                                     <li>
                                         <a asp-controller="Administradores" asp-action="ConfiguracionUsuarios">
-                                            <i data-feather="shield"></i> Configuración de Usuarios
+                                            <i data-feather="user-check" class="me-1"></i> Configuración de Usuarios
                                         </a>
                                     </li>
                                     <li>
                                         <a asp-controller="Administradores" asp-action="ConfiguracionAdministradores">
-                                            <i data-feather="shield"></i> Configuración de Administradores
+                                            <i data-feather="shield" class="me-1"></i> Configuración de Administradores
                                         </a>
                                     </li>
                                     <li>
                                         <a asp-controller="Administradores" asp-action="ConfiguracionCursos">
-                                            <i data-feather="book-open"></i> Configuración de Cursos
+                                            <i data-feather="book" class="me-1"></i> Configuración de Cursos
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+
+                            <!-- Configuración Académica (solo Admin) -->
+                            <li class="submenu @(menu == "Academica" ? "active" : "")"
+                                data-menu-id="Academica">
+                                <a href="javascript:void(0);">
+                                    <img src="~/img/icons/time.svg" alt="img">
+                                    <span> Config. Académica</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Administradores" asp-action="ConfiguracionGrados">
+                                            <i data-feather="layers" class="me-1"></i> Grados
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Administradores" asp-action="ConfiguracionAsignaturas">
+                                            <i data-feather="book-open" class="me-1"></i> Asignaturas
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- Gestión de Cursos (solo Admin) -->
+                            <li class="submenu @(menu == "Cursos" ? "active" : "")"
+                                data-menu-id="Cursos">
+                                <a href="javascript:void(0);">
+                                    <img src="~/img/icons/product.svg" alt="img">
+                                    <span> Gestión de Cursos</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Administradores" asp-action="GestionCursos">
+                                            <i data-feather="grid" class="me-1"></i> Cursos
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Administradores" asp-action="AsignacionDocentes">
+                                            <i data-feather="user-check" class="me-1"></i> Asignacion de Docentes
                                         </a>
                                     </li>
                                 </ul>
