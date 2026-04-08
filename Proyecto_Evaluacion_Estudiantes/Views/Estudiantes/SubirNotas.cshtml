@@ -1,0 +1,200 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.SubirNotasSeleccionViewModel
+@{
+    ViewData["Title"]      = "Subir Notas — EduPath AI";
+    ViewData["ActiveMenu"] = "Notas";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+
+        <div class="page-header">
+            <div class="page-title">
+                <h4>
+                    <i data-feather="upload" style="color:#00b4d8;" class="me-2"></i>
+                    Subir Notas
+                </h4>
+                <h6>EduPath AI — Selecciona el curso y el parcial para ingresar calificaciones</h6>
+            </div>
+            <div class="page-btn d-flex gap-2 flex-wrap">
+                <a asp-controller="Estudiantes" asp-action="Index" class="btn-nav-est">
+                    <i data-feather="list"></i> Lista de Estudiantes
+                </a>
+                <a asp-controller="Estudiantes" asp-action="Registro" class="btn-nav-est">
+                    <i data-feather="user-plus"></i> Registrar Estudiante
+                </a>
+            </div>
+        </div>
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i data-feather="alert-circle" class="me-2"></i>
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <!-- ── Tarjeta de selección ── -->
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8 col-md-10">
+                <div class="card" style="border-top:4px solid #0096c7;">
+                    <div class="card-body p-4">
+
+                        <!-- Ícono + título interior -->
+                        <div class="d-flex align-items-center mb-4 pb-3"
+                             style="border-bottom:2px solid #e2e8f0;">
+                            <div class="admin-stat-icon me-3"
+                                 style="background:linear-gradient(135deg,#0096c7,#48cae4);
+                                        box-shadow:0 4px 12px rgba(0,150,199,.3);">
+                                <i data-feather="layers" style="color:#fff;width:20px;height:20px;"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0" style="color:#1a2b4a;font-weight:700;">
+                                    Seleccionar Curso y Parcial
+                                </h5>
+                                <small class="text-muted">
+                                    Solo se muestran los cursos donde tienes asignación activa.
+                                </small>
+                            </div>
+                        </div>
+
+                        <form asp-action="SubirNotas" asp-controller="Estudiantes"
+                              method="post" novalidate>
+                            @Html.AntiForgeryToken()
+
+                            <!-- Curso -->
+                            <div class="mb-4">
+                                <label asp-for="CursoId" class="form-label fw-semibold"
+                                       style="color:#1a2b4a;">
+                                    <i data-feather="book-open" style="width:15px;color:#0096c7;"></i>
+                                    Curso
+                                </label>
+                                <select asp-for="CursoId"
+                                        class="form-select form-control-edupath"
+                                        id="selectCurso">
+                                    <option value="">— Selecciona el grado y sección —</option>
+                                    @foreach (var item in Model.CursosDisponibles)
+                                    {
+                                        <option value="@item.Value"
+                                                selected="@(item.Selected ? "selected" : null)">
+                                            @item.Text
+                                        </option>
+                                    }
+                                </select>
+                                <span asp-validation-for="CursoId"
+                                      class="text-danger small"></span>
+                            </div>
+
+                            <!-- Parcial -->
+                            <div class="mb-4">
+                                <label asp-for="Parcial" class="form-label fw-semibold"
+                                       style="color:#1a2b4a;">
+                                    <i data-feather="bookmark" style="width:15px;color:#0096c7;"></i>
+                                    Parcial
+                                </label>
+
+                                <!-- Opciones de parcial como tarjetas clicables -->
+                                <div class="d-flex gap-2 flex-wrap mt-1" id="parcialesGroup">
+                                    @foreach (var item in Model.ParcialesItems)
+                                    {
+                                        bool seleccionado = Model.Parcial.HasValue
+                                                         && Model.Parcial.Value.ToString() == item.Value;
+                                        <label class="parcial-card @(seleccionado ? "parcial-card-activa" : "")"
+                                               for="parcial_@item.Value">
+                                            <input type="radio"
+                                                   id="parcial_@item.Value"
+                                                   name="Parcial"
+                                                   value="@item.Value"
+                                                   class="d-none parcial-radio"
+                                                   @(seleccionado ? "checked" : "") />
+                                            <i data-feather="edit-3" style="width:14px;"></i>
+                                            @item.Text
+                                        </label>
+                                    }
+                                </div>
+                                <span asp-validation-for="Parcial"
+                                      class="text-danger small d-block mt-1"></span>
+                            </div>
+
+                            <!-- Botón -->
+                            <div class="d-grid">
+                                <button type="submit"
+                                        class="btn btn-primary"
+                                        style="background:#0096c7;border:none;border-radius:10px;
+                                               padding:12px;font-size:15px;font-weight:600;">
+                                    <i data-feather="arrow-right" class="me-2"
+                                       style="width:16px;"></i>
+                                    Ver Grilla de Calificaciones
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Ayuda -->
+                <div class="alert alert-info d-flex align-items-start py-3 mt-2"
+                     style="background:#e3f6fc;border:1px solid #48cae4;border-radius:10px;">
+                    <i data-feather="info" class="me-3 mt-1 flex-shrink-0"
+                       style="color:#0096c7;width:16px;"></i>
+                    <div style="font-size:13px;color:#1a2b4a;">
+                        <strong>¿Cómo funciona Subir Notas?</strong><br>
+                        Al seleccionar el curso y parcial verás una grilla con una fila por
+                        estudiante y una columna por cada asignatura que tienes asignada en ese curso.
+                        Ingresa las notas (0–100) y guarda todo de una sola vez.
+                        El sistema calculará automáticamente el promedio del parcial y actualizará
+                        el promedio general y el estado de cada estudiante.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.feather) feather.replace();
+
+    // Efecto visual en tarjetas de parcial
+    document.querySelectorAll('.parcial-radio').forEach(function(radio) {
+        radio.addEventListener('change', function () {
+            document.querySelectorAll('.parcial-card').forEach(function(lbl) {
+                lbl.classList.remove('parcial-card-activa');
+            });
+            if (this.checked) {
+                this.parentElement.classList.add('parcial-card-activa');
+            }
+        });
+    });
+});
+</script>
+
+<style>
+.parcial-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6c757d;
+    background: #fff;
+    transition: all .2s;
+    user-select: none;
+}
+.parcial-card:hover {
+    border-color: #0096c7;
+    color: #0096c7;
+    background: #f0f9ff;
+}
+.parcial-card-activa {
+    border-color: #0096c7 !important;
+    background: #e3f6fc !important;
+    color: #0096c7 !important;
+}
+</style>
+}

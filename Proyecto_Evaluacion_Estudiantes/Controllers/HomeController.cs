@@ -41,11 +41,19 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             // Tengo que traer el nuevo docentTutorid 
             int.TryParse(HttpContext.Session.GetString("DocenteId"), out int docenteId);
 
+            // ── Traigo los cursos asignados al docente via AsignacionDocente
+
+            var cursoIdsDash = docenteId > 0
+                ? await _context.AsignacionDocentes
+                    .Where(a => a.DocenteId == docenteId && a.Activo)
+                    .Select(a => a.CursoId).Distinct().ToListAsync()
+                : new List<int>();
+
             // ── Traigo los estudiantes activos del docente
-            var estudiantes = docenteId > 0
+            var estudiantes = cursoIdsDash.Any()
                 ? await _context.Estudiantes
                     .Include(e => e.Curso)
-                    .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
+                    .Where(e => cursoIdsDash.Contains(e.CursoId) && e.Activo)
                     .OrderByDescending(e => e.FechaRegistro)
                     .ToListAsync()
                 : new List<Estudiante>();

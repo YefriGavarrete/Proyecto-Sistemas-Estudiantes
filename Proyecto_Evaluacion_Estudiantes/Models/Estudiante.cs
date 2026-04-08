@@ -29,7 +29,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         public DateTime FechaNacimiento { get; set; }
 
         [StringLength(20)]
-        [Display(Name = "Identidad / DUI")]
+        [Display(Name = "Identidad")]
         public string? Identidad { get; set; }
 
         [Required(ErrorMessage = "El correo es obligatorio.")]
@@ -59,6 +59,12 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         public bool Activo { get; set; } = true;
 
         // ── Notas por Parcial ────────────────────────────────────
+
+
+
+
+
+
         [Range(0, 100, ErrorMessage = "La nota debe estar entre 0 y 100.")]
         [Display(Name = "Parcial 1")]
         [Column(TypeName = "decimal(5,2)")]
@@ -95,7 +101,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
 
 
 
-        // ── Columnas calculadas por SQL Server ───────────────────
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Column(TypeName = "decimal(5,2)")]
         [Display(Name = "Promedio")]
@@ -106,7 +112,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Estado")]
         public string? Estado { get; set; }
 
-        // ── Predicción IA ────────────────────────────────────────
+
         [Display(Name = "En Riesgo (IA)")]
         public bool? EnRiesgoIA { get; set; }
 
@@ -121,6 +127,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
 
         [ForeignKey(nameof(CursoId))]
         public Curso? Curso { get; set; }
+
+        // ── Notas por asignatura y parcial ───────────────────────
+        public ICollection<NotaParcial> NotasParciales { get; set; }
+            = new List<NotaParcial>();
 
         [Display(Name = "Fecha de Registro")]
         public DateTime FechaRegistro { get; set; } = DateTime.Now;

@@ -1,0 +1,344 @@
+@model Proyecto_Evaluacion_Estudiantes.Models.SubirNotasGrillaViewModel
+@{
+    ViewData["Title"]      = $"Notas — {Model.ParcialNombre} — {Model.CursoNombre} — EduPath AI";
+    ViewData["ActiveMenu"] = "Notas";
+    int idx = 0;  // índice global para el binding de la lista de entradas
+}
+
+<div class="page-wrapper">
+    <div class="content">
+
+        <!-- ── Cabecera ── -->
+        <div class="page-header">
+            <div class="page-title">
+                <h4>
+                    <i data-feather="grid" style="color:#00b4d8;" class="me-2"></i>
+                    Calificaciones — @Model.ParcialNombre
+                </h4>
+                <h6>@Model.CursoNombre</h6>
+            </div>
+            <div class="page-btn d-flex gap-2 flex-wrap">
+                <a asp-controller="Estudiantes" asp-action="SubirNotas" class="btn-nav-est">
+                    <i data-feather="arrow-left"></i> Cambiar selección
+                </a>
+                <a asp-controller="Estudiantes" asp-action="Index" class="btn-nav-est">
+                    <i data-feather="list"></i> Lista de Estudiantes
+                </a>
+            </div>
+        </div>
+
+        @if (TempData["MensajeExito"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i data-feather="check-circle" class="me-2"></i>
+                @TempData["MensajeExito"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i data-feather="alert-circle" class="me-2"></i>
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <!-- ── Tarjeta de estado ── -->
+        <div class="card mb-3" style="border-left:4px solid #0096c7;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center flex-wrap gap-4">
+
+                    <!-- Selector de parcial (GET links) -->
+                    <div class="d-flex align-items-center gap-2">
+                        <i data-feather="bookmark" style="color:#0096c7;width:16px;"></i>
+                        <strong style="color:#1a2b4a;">Parcial:</strong>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        @for (int p = 1; p <= 4; p++)
+                        {
+                            bool activo = Model.Parcial == p;
+                            <a asp-controller="Estudiantes" asp-action="SubirNotasGrilla"
+                               asp-route-cursoId="@Model.CursoId"
+                               asp-route-parcial="@p"
+                               class="btn-parcial @(activo ? "btn-parcial-activo" : "")">
+                                <i data-feather="edit-3" style="width:13px;"></i>
+                                Parcial @p
+                            </a>
+                        }
+                    </div>
+
+                    <!-- Estadísticas -->
+                    <div class="ms-auto d-flex gap-4" style="font-size:13px;">
+                        <span>
+                            <i data-feather="users" style="width:14px;color:#0096c7;"></i>
+                            <strong>@Model.Filas.Count</strong>
+                            <span class="text-muted">estudiantes</span>
+                        </span>
+                        <span>
+                            <i data-feather="book" style="width:14px;color:#6c757d;"></i>
+                            <strong>@Model.Asignaturas.Count</strong>
+                            <span class="text-muted">asignaturas</span>
+                        </span>
+                        <span style="color:#00b894;font-weight:600;">
+                            <i data-feather="check-circle" style="width:14px;"></i>
+                            @Model.CeldasConNota subidas
+                        </span>
+                        <span style="color:#e17055;font-weight:600;">
+                            <i data-feather="clock" style="width:14px;"></i>
+                            @Model.CeldasSinNota pendientes
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Instrucción ── -->
+        <div class="alert alert-info d-flex align-items-center py-2 mb-3"
+             style="background:#e3f6fc;border:1px solid #48cae4;border-radius:10px;">
+            <i data-feather="info" class="me-2" style="color:#0096c7;width:16px;"></i>
+            <small style="color:#1a2b4a;">
+                Ingresa las notas (0–100) en las celdas. Deja vacías las que no correspondan.
+                Presiona <strong>Guardar Todas las Notas</strong> al terminar — el sistema
+                calculará el promedio del parcial y actualizará el estado de cada estudiante.
+            </small>
+        </div>
+
+        <!-- ── Grilla de calificaciones ── -->
+        @if (!Model.Filas.Any())
+        {
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <i data-feather="inbox" style="width:40px;height:40px;color:#dee2e6;" class="mb-3"></i>
+                    <p class="text-muted mb-1">No hay estudiantes activos en este curso.</p>
+                    <a asp-controller="Estudiantes" asp-action="Registro" class="btn btn-sm btn-outline-primary">
+                        Registrar estudiante
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <form asp-action="GuardarGrilla" asp-controller="Estudiantes"
+                  method="post" id="formGrilla">
+                @Html.AntiForgeryToken()
+
+                <!-- Parámetros de contexto -->
+                <input type="hidden" name="cursoId" value="@Model.CursoId" />
+                <input type="hidden" name="parcial"  value="@Model.Parcial"  />
+
+                <div class="card mb-3">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover mb-0" id="tablaGrilla"
+                                   style="min-width:@(200 + Model.Asignaturas.Count * 130)px;">
+                                <thead style="background:#f0f9ff;position:sticky;top:0;z-index:10;">
+                                    <tr>
+                                        <!-- Columna fija: estudiante -->
+                                        <th style="min-width:200px;background:#f0f9ff;
+                                                   border-right:2px solid #dee2e6;">
+                                            <i data-feather="user" style="width:14px;color:#0096c7;"></i>
+                                            Estudiante
+                                        </th>
+
+                                        <!-- Una columna por asignatura -->
+                                        @foreach (var asig in Model.Asignaturas)
+                                        {
+                                            <th class="text-center"
+                                                style="min-width:130px;font-size:12px;"
+                                                title="@asig.Nombre">
+                                                <div style="color:#0096c7;font-weight:700;">
+                                                    @asig.Codigo
+                                                </div>
+                                                <div style="color:#495057;font-weight:500;
+                                                            white-space:nowrap;overflow:hidden;
+                                                            text-overflow:ellipsis;max-width:120px;">
+                                                    @asig.Nombre
+                                                </div>
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var fila in Model.Filas)
+                                    {
+                                        <tr class="fila-grilla">
+                                            <!-- Nombre del estudiante -->
+                                            <td style="border-right:2px solid #dee2e6;">
+                                                <div style="font-weight:600;color:#1a2b4a;font-size:13px;">
+                                                    @fila.NombreCompleto
+                                                </div>
+                                                <small class="text-muted" style="font-size:11px;">
+                                                    @(string.IsNullOrEmpty(fila.Codigo) ? $"#{fila.EstudianteId}" : fila.Codigo)
+                                                </small>
+                                            </td>
+
+                                            <!-- Una celda por asignatura -->
+                                            @foreach (var asig in Model.Asignaturas)
+                                            {
+                                                decimal? notaActual = fila.NotasPorAsignatura.TryGetValue(asig.Id, out var n) ? n : null;
+                                                bool tieneNota = notaActual.HasValue;
+                                                string colorBorde = tieneNota
+                                                    ? (notaActual >= 60 ? "2px solid #c3f5e4" : "2px solid #fde8e6")
+                                                    : "1px solid #dee2e6";
+                                                string colorFondo = tieneNota
+                                                    ? (notaActual >= 60 ? "#f6fffe" : "#fff8f7")
+                                                    : "transparent";
+
+                                                <td class="celda-nota text-center p-1"
+                                                    style="border:@colorBorde;background:@colorFondo;">
+                                                    <!-- Hidden fields para model binding -->
+                                                    <input type="hidden"
+                                                           name="entradas[@idx].EstudianteId"
+                                                           value="@fila.EstudianteId" />
+                                                    <input type="hidden"
+                                                           name="entradas[@idx].AsignaturaId"
+                                                           value="@asig.Id" />
+
+                                                    <!-- Input de nota -->
+                                                    <input type="number"
+                                                           name="entradas[@idx].Nota"
+                                                           class="form-control form-control-sm input-nota-grilla text-center"
+                                                           min="0" max="100" step="0.01"
+                                                           value="@(tieneNota ? notaActual!.Value.ToString("F2") : "")"
+                                                           placeholder="—"
+                                                           style="border-radius:6px;font-size:13px;
+                                                                  font-weight:@(tieneNota ? "600" : "400");
+                                                                  color:@(tieneNota ? (notaActual >= 60 ? "#00b894" : "#e17055") : "#495057");" />
+                                                </td>
+                                                idx++;
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Botonera de guardado ── -->
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                    <div>
+                        <small class="text-muted">
+                            <i data-feather="alert-circle" style="width:13px;"></i>
+                            Las celdas vacías no se modificarán. Las notas existentes se actualizarán
+                            con el nuevo valor.
+                        </small>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a asp-controller="Estudiantes" asp-action="SubirNotas"
+                           class="btn btn-outline-secondary"
+                           style="border-radius:10px;">
+                            <i data-feather="x" class="me-1" style="width:14px;"></i>
+                            Cancelar
+                        </a>
+                        <button type="submit"
+                                class="btn btn-primary btn-guardar-grilla"
+                                style="background:#0096c7;border:none;border-radius:10px;
+                                       padding:10px 28px;font-weight:600;">
+                            <i data-feather="save" class="me-1" style="width:14px;"></i>
+                            Guardar Todas las Notas
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.feather) feather.replace();
+
+    const inputs = document.querySelectorAll('.input-nota-grilla');
+
+    // Navegación con Tab y flechas dentro de la grilla
+    inputs.forEach(function (input, idx) {
+        // Colorear en tiempo real según el valor
+        input.addEventListener('input', function () {
+            actualizarColorInput(this);
+        });
+
+        // Enter avanza al siguiente campo de la misma columna (siguiente fila)
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const total   = inputs.length;
+                const cols    = @Model.Asignaturas.Count;
+                const nextIdx = idx + cols < total ? idx + cols : idx + 1;
+                if (nextIdx < total) inputs[nextIdx].focus();
+            }
+        });
+
+        // Seleccionar todo al hacer foco
+        input.addEventListener('focus', function () {
+            this.select();
+            this.style.outline = '2px solid #0096c7';
+        });
+
+        input.addEventListener('blur', function () {
+            this.style.outline = '';
+            actualizarColorInput(this);
+        });
+    });
+
+    function actualizarColorInput(input) {
+        const val = parseFloat(input.value);
+        if (isNaN(val) || input.value.trim() === '') {
+            input.style.color      = '#495057';
+            input.style.fontWeight = '400';
+            input.closest('td').style.background = 'transparent';
+            input.closest('td').style.border     = '1px solid #dee2e6';
+        } else if (val >= 60) {
+            input.style.color      = '#00b894';
+            input.style.fontWeight = '600';
+            input.closest('td').style.background = '#f6fffe';
+            input.closest('td').style.border     = '2px solid #c3f5e4';
+        } else {
+            input.style.color      = '#e17055';
+            input.style.fontWeight = '600';
+            input.closest('td').style.background = '#fff8f7';
+            input.closest('td').style.border     = '2px solid #fde8e6';
+        }
+    }
+
+    // Confirmación antes de guardar si hay muchas notas
+    document.querySelector('.btn-guardar-grilla')?.addEventListener('click', function (e) {
+        const totalCeldas = @Model.TotalCeldas;
+        if (totalCeldas > 30) {
+            if (!confirm('¿Confirmas guardar las calificaciones del @Model.ParcialNombre para @Model.Filas.Count estudiantes?')) {
+                e.preventDefault();
+            }
+        }
+    });
+});
+</script>
+
+<style>
+.input-nota-grilla {
+    width: 90px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    transition: border-color .15s, background .15s;
+}
+.input-nota-grilla:focus {
+    border-color: #0096c7;
+    box-shadow: 0 0 0 2px rgba(0,150,199,.2);
+}
+/* Sticky primera columna en scroll horizontal */
+#tablaGrilla tbody td:first-child,
+#tablaGrilla thead th:first-child {
+    position: sticky;
+    left: 0;
+    background: #fff;
+    z-index: 5;
+}
+#tablaGrilla thead th:first-child {
+    background: #f0f9ff;
+    z-index: 11;
+}
+</style>
+}

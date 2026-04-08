@@ -1,4 +1,4 @@
-@model Proyecto_Evaluacion_Estudiantes.Models.Estudiante
+@model Proyecto_Evaluacion_Estudiantes.Models.RegistroEstudianteViewModel
 @{
     ViewData["Title"] = "Registrar Estudiante — EduPath AI";
     ViewData["ActiveMenu"] = "Informacion";
@@ -11,18 +11,14 @@
             <div class="page-title">
                 <h4>
                     <i data-feather="user-plus" style="color:#00b4d8;" class="me-2"></i>
-                    Registro de Estudiante
+                    Registro de Estudiantes
                 </h4>
                 <h6>EduPath AI — Ingresa los datos del nuevo estudiante</h6>
             </div>
             <div class="page-btn d-flex gap-2 flex-wrap">
-                <a asp-controller="Estudiantes" asp-action="Index"
+                <a asp-controller="Estudiantes" asp-action="SubirNotas"
                    class="btn-nav-est">
-                    <i data-feather="list"></i> Lista de Estudiantes
-                </a>
-                <a asp-controller="Estudiantes" asp-action="RegistroNotas"
-                   class="btn-nav-est">
-                    <i data-feather="edit-3"></i> Subir Notas
+                    <i data-feather="upload"></i> Subir Notas
                 </a>
             </div>
         </div>
@@ -60,9 +56,33 @@
 
                 <form asp-controller="Estudiantes" asp-action="Registro" method="post">
                     @Html.AntiForgeryToken()
-                    <input asp-for="CursoId" type="hidden" value="@(ViewData["CursoId"] ?? 0)" />
 
-                    <!-- ── Fila 1: Nombre + Apellido ── -->
+                    <!-- ── Curso / Grado ── -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-12">
+                            <label asp-for="CursoId" class="form-label fw-semibold" style="color:#1a2b4a;">
+                                <i data-feather="layers" class="me-1" style="color:#00b4d8;"></i>
+                                Curso / Grado <span class="text-danger">*</span>
+                            </label>
+                            <select asp-for="CursoId"
+                                    class="form-select form-control-edupath"
+                                    style="max-width:520px;">
+                                <option value="">— Selecciona el grado y sección —</option>
+                                @foreach (var item in Model.CursosDisponibles)
+                                {
+                                    <option value="@item.Value"
+                                            selected="@(item.Selected ? "selected" : null)">
+                                        @item.Text
+                                    </option>
+                                }
+                            </select>
+                            <span asp-validation-for="CursoId" class="text-danger" style="font-size:12px;"></span>
+                            <small class="text-muted">
+                                Solo se muestran los cursos en los que tienes asignación.
+                            </small>
+                        </div>
+                    </div>
+
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label asp-for="Nombre" class="form-label fw-semibold" style="color:#1a2b4a;">
@@ -100,7 +120,7 @@
                         <div class="col-md-3">
                             <label class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="clock" class="me-1" style="color:#00b4d8;"></i>
-                                Edad calculada
+                                Edad
                             </label>
                             <div class="form-control form-control-edupath d-flex align-items-center"
                                  style="background:#f8fafc;cursor:default;">
@@ -117,12 +137,12 @@
                                 <option value="">— Seleccionar —</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Femenino">Femenino</option>
-                                <option value="Otro">Otro</option>
+
                             </select>
                         </div>
                     </div>
 
-                    <!-- ── Fila 3: Identidad + Teléfono ── -->
+                    <!-- ── Fila 3: Identidad -->
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label asp-for="Identidad" class="form-label fw-semibold" style="color:#1a2b4a;">
@@ -130,7 +150,7 @@
                                 @Html.DisplayNameFor(m => m.Identidad)
                             </label>
                             <input asp-for="Identidad" class="form-control form-control-edupath"
-                                   placeholder="Ej: 0000-000000-000-0" maxlength="20" />
+                                   placeholder="Ej: 0000-0000-0000" maxlength="20" />
                             <span asp-validation-for="Identidad" class="text-danger" style="font-size:12px;"></span>
                         </div>
                         <div class="col-md-6">
@@ -185,8 +205,12 @@
                     <!-- ── Activo ── -->
                     <div class="mb-4">
                         <div class="form-check form-switch">
-                            <input asp-for="Activo" class="form-check-input" type="checkbox" role="switch" />
-                            <label asp-for="Activo" class="form-check-label fw-semibold" style="color:#1a2b4a;">
+                            <input type="checkbox" name="Activo" value="true"
+                                   class="form-check-input" role="switch"
+                                   id="chkEstActivo" @(Model.Activo ? "checked" : "") />
+                            <input type="hidden" name="Activo" value="false" />
+                            <label class="form-check-label fw-semibold" for="chkEstActivo"
+                                   style="color:#1a2b4a;">
                                 Estudiante activo en el sistema
                             </label>
                         </div>
