@@ -3,10 +3,10 @@ using Proyecto_Evaluacion_Estudiantes.Models;
 
 namespace Proyecto_Evaluacion_Estudiantes.Data
 {
-    /// <summary>
+
     /// Contexto principal de Entity Framework Core.
     /// Gestiona las tablas: Administradores, Docentes, Cursos, Estudiantes.
-    /// </summary>
+    
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -14,7 +14,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
         {
         }
 
-        // ── DbSets (tablas) ─────────────────────────────────────
+
         public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Docente>       Docentes        { get; set; }
         public DbSet<Curso>         Cursos          { get; set; }
@@ -22,19 +22,20 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
         public DbSet<Grado>              Grados              { get; set; }
         public DbSet<Asignatura>         Asignaturas         { get; set; }
         public DbSet<AsignacionDocente>  AsignacionDocentes  { get; set; }
+        public DbSet<NotaParcial>        NotasParciales      { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // ── Administrador ────────────────────────────────────
+
             modelBuilder.Entity<Administrador>(entity =>
             {
                 entity.HasIndex(a => a.NombreUsuario).IsUnique();
                 entity.Property(a => a.Activo).HasDefaultValue(true);
             });
 
-            // ── Docente ─────────────────────────────────────────
+
             modelBuilder.Entity<Docente>(entity =>
             {
                 entity.HasIndex(d => d.Usuario).IsUnique();
@@ -49,20 +50,20 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
                       .HasDefaultValueSql("GETDATE()");
             });
 
-            // ── Curso ────────────────────────────────────────────
+
             modelBuilder.Entity<Curso>(entity =>
             {
                 entity.HasIndex(c => c.Codigo).IsUnique();
             });
 
-            // ── Grado ────────────────────────────────────────────
+
             modelBuilder.Entity<Grado>(entity =>
             {
                 entity.Property(g => g.Activo).HasDefaultValue(true);
                 entity.Property(g => g.Nivel).HasDefaultValue("Primaria");
             });
 
-            // ── Asignatura ────────────────────────────────────────
+
             modelBuilder.Entity<Asignatura>(entity =>
             {
                 entity.HasIndex(a => a.Codigo).IsUnique();
@@ -70,7 +71,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
                 entity.Property(a => a.NivelAplicacion).HasDefaultValue("Todos");
             });
 
-            // ── Curso (relaciones nuevas) ────────────────────────
+
             modelBuilder.Entity<Curso>(entity =>
             {
                 entity.HasOne(c => c.Grado)
@@ -85,10 +86,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
                       .OnDelete(DeleteBehavior.Restrict);
             });
 
-            // ── AsignacionDocente ─────────────────────────────────
+
             modelBuilder.Entity<AsignacionDocente>(entity =>
             {
-                // Un curso no puede tener la misma asignatura asignada dos veces
+
                 entity.HasIndex(a => new { a.CursoId, a.AsignaturaId })
                       .IsUnique()
                       .HasDatabaseName("UQ_AsignacionDocente_Curso_Asignatura");
@@ -108,6 +109,34 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
                 entity.HasOne(a => a.Docente)
                       .WithMany()
                       .HasForeignKey(a => a.DocenteId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+
+
+            modelBuilder.Entity<NotaParcial>(entity =>
+            {
+                // Unique: un estudiante no puede tener dos notas para la misma asignatura y el mismo parcial
+                entity.HasIndex(n => new { n.EstudianteId, n.AsignaturaId, n.Parcial })
+                      .IsUnique()
+                      .HasDatabaseName("UQ_NotasParciales_Est_Asig_Parcial");
+
+                entity.Property(n => n.FechaRegistro)
+                      .HasDefaultValueSql("SYSUTCDATETIME()");
+
+                entity.Property(n => n.Nota)
+                      .HasColumnType("decimal(5,2)");
+
+                
+                entity.HasOne(n => n.Estudiante)
+                      .WithMany(e => e.NotasParciales)
+                      .HasForeignKey(n => n.EstudianteId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                // Restrict desde Asignatura: no se puede borrar una asignatura
+                // que tenga notas registradas
+                entity.HasOne(n => n.Asignatura)
+                      .WithMany()
+                      .HasForeignKey(n => n.AsignaturaId)
                       .OnDelete(DeleteBehavior.Restrict);
             });
 
@@ -136,7 +165,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
                           "ELSE NULL END",
                           stored: true);
 
-                // ── Estado calculado ─────────────────────────────
+
                 const string prom =
                     "(CASE " +
                     "WHEN Nota1 IS NOT NULL AND Nota2 IS NOT NULL AND Nota3 IS NOT NULL AND Nota4 IS NOT NULL " +

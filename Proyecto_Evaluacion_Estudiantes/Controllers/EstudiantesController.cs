@@ -38,7 +38,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             ViewData["EsAdmin"]       = HttpContext.Session.GetString("Rol") == "Admin";
         }
 
-        private void LlenarLayoutVm(LayoutViewModel vm, string activeMenu = "Informacion")
+        void LlenarLayoutVm(LayoutViewModel vm, string activeMenu = "Informacion")
         {
             vm.NombreUsuario = HttpContext.Session.GetString("NombreDocente") ?? "Docente";
             vm.TituloUsuario = HttpContext.Session.GetString("TituloDocente") ?? "Docente";
@@ -49,20 +49,41 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             vm.ActiveMenu    = activeMenu;
         }
 
-        /// <summary>Obtiene el primer CursoId activo del docente logueado.</summary>
-        private async Task<int?> ObtenerCursoActivoAsync()
+
+
+        /// Devuelve todos los Cursos donde el docente logueado tiene
+        /// al menos una AsignacionDocente activa.
+        private async Task<List<Curso>> ObtenerCursosAsignadosAsync()
         {
             int docenteId = ObtenerDocenteId();
-            if (docenteId == 0) return null;
+            if (docenteId == 0) return new List<Curso>();
 
-            var curso = await _context.Cursos
-                .Where(c => c.DocenteTutorId == docenteId && c.Activo)
-                .FirstOrDefaultAsync();
+            // Cursos distintos donde el docente aparece en AsignacionDocente
+            var cursoIds = await _context.AsignacionDocentes
+                .Where(a => a.DocenteId == docenteId && a.Activo)
+                .Select(a => a.CursoId)
+                .Distinct()
+                .ToListAsync();
 
-            return curso?.Id;
+            return await _context.Cursos
+                .Include(c => c.Grado)
+                .Where(c => cursoIds.Contains(c.Id) && c.Activo)
+                .OrderBy(c => c.GradoId)
+                .ThenBy(c => c.Seccion)
+                .ToListAsync();
         }
 
-        // ── GET: /Estudiantes/Index ───────────────────────────────
+        /// Verifica que el docente logueado tenga al menos una AsignacionDocente
+        /// para el CursoId dado. Usado como gate de seguridad en todas las acciones.
+        private async Task<bool> DocenteTieneAccesoACursoAsync(int docenteId, int cursoId)
+        {
+            return await _context.AsignacionDocentes
+                .AnyAsync(a => a.DocenteId == docenteId
+                            && a.CursoId   == cursoId
+                            && a.Activo);
+        }
+
+        // ── GET: /Estudiantes/Index 
         public async Task<IActionResult> Index()
         {
             if (!VerificarDocente())
@@ -70,10 +91,19 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             int docenteId = ObtenerDocenteId();
 
+            // Cursos del docente vía AsignacionDocente
+            var cursoIds = await _context.AsignacionDocentes
+                .Where(a => a.DocenteId == docenteId && a.Activo)
+                .Select(a => a.CursoId)
+                .Distinct()
+                .ToListAsync();
+
             var estudiantes = await _context.Estudiantes
                 .Include(e => e.Curso)
-                .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
-                .OrderBy(e => e.Apellido)
+                    .ThenInclude(c => c!.Grado)
+                .Where(e => cursoIds.Contains(e.CursoId) && e.Activo)
+                .OrderBy(e => e.Curso!.GradoId)
+                .ThenBy(e => e.Apellido)
                 .ThenBy(e => e.Nombre)
                 .ToListAsync();
 
@@ -83,6 +113,29 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
+        // ── Helper: construye RegistroEstudianteViewModel con dropdown de cursos ──
+        private async Task<RegistroEstudianteViewModel> CrearVmRegistroAsync(
+            RegistroEstudianteViewModel? desde = null)
+        {
+            var cursos = await ObtenerCursosAsignadosAsync();
+
+            var vm = desde ?? new RegistroEstudianteViewModel
+            {
+                FechaNacimiento = new DateTime(2000, 1, 1),
+                Activo          = true
+            };
+
+            vm.CursosDisponibles = cursos.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+            {
+                Value    = c.Id.ToString(),
+                Text     = c.NombreCompleto,   // "Primer Grado — Sec. A (2026)"
+                Selected = c.Id == vm.CursoId
+            }).ToList();
+
+            LlenarLayoutVm(vm, "Informacion");
+            return vm;
+        }
+
         // ── GET: /Estudiantes/Registro ────────────────────────────
         [HttpGet]
         public async Task<IActionResult> Registro()
@@ -90,79 +143,87 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             if (!VerificarDocente())
                 return RedirectToAction("IniciarSesion", "Home");
 
-            CargarViewData("Informacion");
+            var vm = await CrearVmRegistroAsync();
 
-            // Pasar el CursoId por defecto para el campo hidden
-            int? cursoId = await ObtenerCursoActivoAsync();
-            ViewData["CursoId"] = cursoId;
-
-            return View(new Estudiante
+            if (!vm.CursosDisponibles.Any())
             {
-                CursoId          = cursoId ?? 0,
-                FechaNacimiento  = new DateTime(2000, 1, 1),
-                Activo           = true
-            });
+                TempData["ErrorMessage"] =
+                    "No tienes cursos asignados. Pide al administrador que te asigne a un curso en Gestión de Cursos.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(vm);
         }
 
         // ── POST: /Estudiantes/Registro ───────────────────────────
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registro(
-            [Bind("Nombre,Apellido,FechaNacimiento,Identidad,Correo,Telefono,Genero,Seccion,Observaciones,Activo,CursoId")]
-            Estudiante modelo)
+        public async Task<IActionResult> Registro(RegistroEstudianteViewModel vm)
         {
             if (!VerificarDocente())
                 return RedirectToAction("IniciarSesion", "Home");
 
-            CargarViewData("Informacion");
+            // Reconstruir dropdown antes de cualquier retorno
+            var cursos = await ObtenerCursosAsignadosAsync();
+            vm.CursosDisponibles = cursos.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+            {
+                Value    = c.Id.ToString(),
+                Text     = c.NombreCompleto,
+                Selected = c.Id == vm.CursoId
+            }).ToList();
+            LlenarLayoutVm(vm, "Informacion");
 
-            // Excluir campos calculados de la validación del modelo
-            ModelState.Remove("Codigo");
-            ModelState.Remove("Promedio");
-            ModelState.Remove("Estado");
-            ModelState.Remove("Curso");
+            ModelState.Remove("CursosDisponibles");
 
             if (!ModelState.IsValid)
-                return View(modelo);
+                return View(vm);
 
-            // Validar que se tenga un curso asignado
-            if (modelo.CursoId == 0)
+            // ── Validación de seguridad: el docente debe tener AsignacionDocente en ese curso ──
+            int docenteId = ObtenerDocenteId();
+            if (!vm.CursoId.HasValue || !await DocenteTieneAccesoACursoAsync(docenteId, vm.CursoId.Value))
             {
-                int? cursoId = await ObtenerCursoActivoAsync();
-                if (cursoId == null)
-                {
-                    TempData["ErrorMessage"] = "No tienes un curso activo. Crea uno primero en Configuración.";
-                    return View(modelo);
-                }
-                modelo.CursoId = cursoId.Value;
+                ModelState.AddModelError("CursoId",
+                    "No tienes asignación en el curso seleccionado. Contacta al administrador.");
+                return View(vm);
             }
 
             // Verificar correo duplicado en el mismo curso
             bool correoExiste = await _context.Estudiantes
-                .AnyAsync(e => e.Correo == modelo.Correo.Trim() && e.CursoId == modelo.CursoId);
+                .AnyAsync(e => e.Correo == vm.Correo.Trim() && e.CursoId == vm.CursoId.Value);
             if (correoExiste)
             {
-                ModelState.AddModelError("Correo", "Este correo ya está registrado en el curso.");
-                return View(modelo);
+                ModelState.AddModelError("Correo", "Este correo ya está registrado en el curso seleccionado.");
+                return View(vm);
             }
 
-            modelo.Nombre    = modelo.Nombre.Trim();
-            modelo.Apellido  = modelo.Apellido.Trim();
-            modelo.Correo    = modelo.Correo.Trim();
-            modelo.FechaRegistro = DateTime.Now;
+            var nuevo = new Estudiante
+            {
+                Nombre          = vm.Nombre.Trim(),
+                Apellido        = vm.Apellido.Trim(),
+                FechaNacimiento = vm.FechaNacimiento,
+                Identidad       = vm.Identidad?.Trim(),
+                Correo          = vm.Correo.Trim(),
+                Telefono        = vm.Telefono?.Trim(),
+                Genero          = vm.Genero,
+                Seccion         = vm.Seccion?.Trim(),
+                Observaciones   = vm.Observaciones?.Trim(),
+                Activo          = vm.Activo,
+                CursoId         = vm.CursoId.Value,
+                FechaRegistro   = DateTime.Now
+            };
 
-            _context.Estudiantes.Add(modelo);
+            _context.Estudiantes.Add(nuevo);
             await _context.SaveChangesAsync();
 
-            // Generar código auto una vez que ya tenemos el Id
-            modelo.Codigo = $"EST-{DateTime.Now.Year}-{modelo.Id:D4}";
+            // Código automático después de obtener el Id
+            nuevo.Codigo = $"EST-{DateTime.Now.Year}-{nuevo.Id:D4}";
             await _context.SaveChangesAsync();
 
             _logger.LogInformation("Estudiante registrado: {Nombre} {Apellido} (Id={Id})",
-                modelo.Nombre, modelo.Apellido, modelo.Id);
+                nuevo.Nombre, nuevo.Apellido, nuevo.Id);
 
             TempData["MensajeExito"] =
-                $"Estudiante {modelo.Nombre} {modelo.Apellido} registrado correctamente. Código: {modelo.Codigo}";
+                $"Estudiante {nuevo.Nombre} {nuevo.Apellido} registrado correctamente. Código: {nuevo.Codigo}";
 
             return RedirectToAction(nameof(Index));
         }
@@ -178,10 +239,18 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             int docenteId = ObtenerDocenteId();
 
+            var cursoIds = await _context.AsignacionDocentes
+                .Where(a => a.DocenteId == docenteId && a.Activo)
+                .Select(a => a.CursoId)
+                .Distinct()
+                .ToListAsync();
+
             var estudiantes = await _context.Estudiantes
                 .Include(e => e.Curso)
-                .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
-                .OrderBy(e => e.Apellido)
+                    .ThenInclude(c => c!.Grado)
+                .Where(e => cursoIds.Contains(e.CursoId) && e.Activo)
+                .OrderBy(e => e.Curso!.GradoId)
+                .ThenBy(e => e.Apellido)
                 .ThenBy(e => e.Nombre)
                 .ToListAsync();
 
@@ -217,9 +286,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             if (estudiante == null)
                 return Json(new { ok = false, msg = "Estudiante no encontrado." });
 
-            // Verificar que el estudiante pertenece al docente logueado
+            // Verificar que el docente tiene AsignacionDocente en el curso del estudiante
             int docenteId = ObtenerDocenteId();
-            if (estudiante.Curso?.DocenteTutorId != docenteId)
+            bool tieneAcceso = await DocenteTieneAccesoACursoAsync(docenteId, estudiante.CursoId);
+            if (!tieneAcceso)
                 return Json(new { ok = false, msg = "Sin permiso para este estudiante." });
 
             // Asignar la nota al parcial correspondiente
@@ -250,6 +320,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             });
         }
 
+
+
+
+
         // ── GET: /Estudiantes/Editar/{id} ─────────────────────────
         [HttpGet]
         public async Task<IActionResult> Editar(int id)
@@ -270,7 +344,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             }
 
             int docenteId = ObtenerDocenteId();
-            if (estudiante.Curso?.DocenteTutorId != docenteId)
+            bool tieneAccesoGet = await DocenteTieneAccesoACursoAsync(docenteId, estudiante.CursoId);
+            if (!tieneAccesoGet)
             {
                 TempData["ErrorMessage"] = "No tienes permiso para editar este estudiante.";
                 return RedirectToAction(nameof(Index));
@@ -310,7 +385,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             }
 
             int docenteId = ObtenerDocenteId();
-            if (estudiante.Curso?.DocenteTutorId != docenteId)
+            bool tieneAccesoPost = await DocenteTieneAccesoACursoAsync(docenteId, estudiante.CursoId);
+            if (!tieneAccesoPost)
             {
                 TempData["ErrorMessage"] = "Sin permiso.";
                 return RedirectToAction(nameof(Index));
@@ -333,6 +409,299 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        static string NombreParcial(int p) => p switch
+        {
+            1 => "Primer Parcial",
+            2 => "Segundo Parcial",
+            3 => "Tercer Parcial",
+            4 => "Cuarto Parcial",
+            _ => $"Parcial {p}"
+        };
+
+        // ── GET: /Estudiantes/SubirNotas (Paso 1 — selección) ─────
+        [HttpGet]
+        public async Task<IActionResult> SubirNotas()
+        {
+            if (!VerificarDocente())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            var cursos = await ObtenerCursosAsignadosAsync();
+
+            var vm = new SubirNotasSeleccionViewModel
+            {
+                CursosDisponibles = cursos.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text  = c.NombreCompleto
+                }).ToList()
+            };
+            LlenarLayoutVm(vm, "Notas");
+
+            if (!vm.CursosDisponibles.Any())
+            {
+                TempData["ErrorMessage"] =
+                    "No tienes cursos asignados. Pide al administrador que te configure en Gestión de Cursos.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(vm);
+        }
+
+        // ── POST: /Estudiantes/SubirNotas (Paso 1 — valida y redirige) ──
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SubirNotas(SubirNotasSeleccionViewModel vm)
+        {
+            if (!VerificarDocente())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            // Reconstruir dropdown antes de cualquier retorno
+            var cursos = await ObtenerCursosAsignadosAsync();
+            vm.CursosDisponibles = cursos.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+            {
+                Value    = c.Id.ToString(),
+                Text     = c.NombreCompleto,
+                Selected = c.Id == vm.CursoId
+            }).ToList();
+            LlenarLayoutVm(vm, "Notas");
+            ModelState.Remove("CursosDisponibles");
+            ModelState.Remove("ParcialesItems");
+
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            // Validación de seguridad: el docente debe tener AsignacionDocente en ese curso
+            int docenteId = ObtenerDocenteId();
+            if (!vm.CursoId.HasValue || !await DocenteTieneAccesoACursoAsync(docenteId, vm.CursoId.Value))
+            {
+                ModelState.AddModelError("CursoId",
+                    "No tienes asignación en el curso seleccionado.");
+                return View(vm);
+            }
+
+            return RedirectToAction(nameof(SubirNotasGrilla),
+                new { cursoId = vm.CursoId.Value, parcial = vm.Parcial!.Value });
+        }
+
+
+
+        // ── GET: /Estudiantes/SubirNotasGrilla?cursoId=X&parcial=Y (Paso 2) ──
+        [HttpGet]
+        public async Task<IActionResult> SubirNotasGrilla(int cursoId, int parcial)
+        {
+            if (!VerificarDocente())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            if (parcial < 1 || parcial > 4)
+                return RedirectToAction(nameof(SubirNotas));
+
+            int docenteId = ObtenerDocenteId();
+
+            // Seguridad: verificar acceso al curso
+            if (!await DocenteTieneAccesoACursoAsync(docenteId, cursoId))
+            {
+                TempData["ErrorMessage"] = "No tienes asignación en el curso seleccionado.";
+                return RedirectToAction(nameof(SubirNotas));
+            }
+
+            // Columnas: asignaturas del docente en este curso
+            var asignaturas = await _context.AsignacionDocentes
+                .Include(a => a.Asignatura)
+                .Where(a => a.DocenteId == docenteId && a.CursoId == cursoId && a.Activo)
+                .OrderBy(a => a.Asignatura!.Nombre)
+                .Select(a => new AsignaturaColumna
+                {
+                    Id     = a.AsignaturaId,
+                    Nombre = a.Asignatura!.Nombre,
+                    Codigo = a.Asignatura!.Codigo
+                })
+                .ToListAsync();
+
+            if (!asignaturas.Any())
+            {
+                TempData["ErrorMessage"] = "No tienes asignaturas asignadas en ese curso.";
+                return RedirectToAction(nameof(SubirNotas));
+            }
+
+            // Filas: estudiantes activos del curso
+            var estudiantes = await _context.Estudiantes
+                .Where(e => e.CursoId == cursoId && e.Activo)
+                .OrderBy(e => e.Apellido)
+                .ThenBy(e => e.Nombre)
+                .ToListAsync();
+
+            // Notas existentes en NotasParciales para este curso + parcial
+            var estudianteIds = estudiantes.Select(e => e.Id).ToList();
+            var asignaturaIds = asignaturas.Select(a => a.Id).ToList();
+
+            var notasExistentes = await _context.NotasParciales
+                .Where(n => estudianteIds.Contains(n.EstudianteId)
+                         && asignaturaIds.Contains(n.AsignaturaId)
+                         && n.Parcial == (byte)parcial)
+                .ToListAsync();
+
+            // Indexar notas: (EstudianteId, AsignaturaId) → Nota
+            var notasIndex = notasExistentes
+                .ToDictionary(n => (n.EstudianteId, n.AsignaturaId), n => (decimal?)n.Nota);
+
+            // Construir filas de la grilla
+            var filas = estudiantes.Select(e => new FilaEstudianteGrilla
+            {
+                EstudianteId   = e.Id,
+                Codigo         = e.Codigo,
+                NombreCompleto = e.NombreCompleto,
+                NotasPorAsignatura = asignaturas.ToDictionary(
+                    a => a.Id,
+                    a => notasIndex.TryGetValue((e.Id, a.Id), out var n) ? n : (decimal?)null)
+            }).ToList();
+
+            // Nombre del curso
+            var curso = await _context.Cursos
+                .Include(c => c.Grado)
+                .FirstOrDefaultAsync(c => c.Id == cursoId);
+
+            var vm = new SubirNotasGrillaViewModel
+            {
+                CursoId      = cursoId,
+                CursoNombre  = curso?.NombreCompleto ?? $"Curso #{cursoId}",
+                Parcial      = parcial,
+                ParcialNombre = NombreParcial(parcial),
+                Asignaturas  = asignaturas,
+                Filas        = filas
+            };
+            LlenarLayoutVm(vm, "Notas");
+
+            return View(vm);
+        }
+
+        // ── POST: /Estudiantes/GuardarGrilla ─────────────────────
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GuardarGrilla(
+            int cursoId, int parcial, List<NotaEntrada> entradas)
+        {
+            if (!VerificarDocente())
+                return RedirectToAction("IniciarSesion", "Home");
+
+            if (parcial < 1 || parcial > 4)
+                return RedirectToAction(nameof(SubirNotas));
+
+            int docenteId = ObtenerDocenteId();
+
+            // Seguridad: el docente debe tener acceso al curso
+            if (!await DocenteTieneAccesoACursoAsync(docenteId, cursoId))
+            {
+                TempData["ErrorMessage"] = "Sin permiso para este curso.";
+                return RedirectToAction(nameof(SubirNotas));
+            }
+
+            // Asignaturas que el docente realmente tiene en ese curso
+            // (whitelist para validar cada entrada del POST)
+            var asignaturasPermitidas = (await _context.AsignacionDocentes
+                .Where(a => a.DocenteId == docenteId && a.CursoId == cursoId && a.Activo)
+                .Select(a => a.AsignaturaId)
+                .ToListAsync()).ToHashSet();
+
+            // Estudiantes válidos del curso (whitelist)
+            var estudiantesDelCurso = (await _context.Estudiantes
+                .Where(e => e.CursoId == cursoId && e.Activo)
+                .Select(e => e.Id)
+                .ToListAsync()).ToHashSet();
+
+            int guardadas = 0;
+            int omitidas  = 0;
+
+            foreach (var entrada in entradas)
+            {
+                // Ignorar celdas vacías
+                if (!entrada.Nota.HasValue) { omitidas++; continue; }
+
+                // Validación de rango
+                if (entrada.Nota.Value < 0 || entrada.Nota.Value > 100) { omitidas++; continue; }
+
+                // Validación de seguridad: estudiante pertenece al curso
+                if (!estudiantesDelCurso.Contains(entrada.EstudianteId)) { omitidas++; continue; }
+
+                // Validación de seguridad: asignatura asignada al docente en ese curso
+                if (!asignaturasPermitidas.Contains(entrada.AsignaturaId)) { omitidas++; continue; }
+
+                // Buscar registro existente o crear uno nuevo
+                var registro = await _context.NotasParciales
+                    .FirstOrDefaultAsync(n => n.EstudianteId == entrada.EstudianteId
+                                           && n.AsignaturaId == entrada.AsignaturaId
+                                           && n.Parcial == (byte)parcial);
+
+                if (registro == null)
+                {
+                    _context.NotasParciales.Add(new NotaParcial
+                    {
+                        EstudianteId  = entrada.EstudianteId,
+                        AsignaturaId  = entrada.AsignaturaId,
+                        Parcial       = (byte)parcial,
+                        Nota          = entrada.Nota.Value,
+                        FechaRegistro = DateTime.UtcNow
+                    });
+                }
+                else
+                {
+                    registro.Nota          = entrada.Nota.Value;
+                    registro.FechaRegistro = DateTime.UtcNow;
+                }
+
+                guardadas++;
+            }
+
+            await _context.SaveChangesAsync();
+
+            // ── Recalcular Nota{N} del estudiante ─────────────────
+            // Para cada estudiante del curso, promedia todas sus notas
+            // en NotasParciales de este parcial y escribe el resultado
+            // en Estudiante.Nota1/2/3/4 → SQL Server recalcula Promedio y Estado.
+
+            var idsEstudiantesAfectados = entradas
+                .Where(e => e.Nota.HasValue && estudiantesDelCurso.Contains(e.EstudianteId))
+                .Select(e => e.EstudianteId)
+                .Distinct()
+                .ToList();
+
+            foreach (var estId in idsEstudiantesAfectados)
+            {
+                var notasDeParcial = await _context.NotasParciales
+                    .Where(n => n.EstudianteId == estId && n.Parcial == (byte)parcial)
+                    .Select(n => n.Nota)
+                    .ToListAsync();
+
+                if (!notasDeParcial.Any()) continue;
+
+                decimal promedioParcial = Math.Round(notasDeParcial.Average(), 2);
+
+                var estudiante = await _context.Estudiantes
+                    .FirstOrDefaultAsync(e => e.Id == estId);
+
+                if (estudiante == null) continue;
+
+                switch (parcial)
+                {
+                    case 1: estudiante.Nota1 = promedioParcial; estudiante.FechaNota1 = DateTime.Now; break;
+                    case 2: estudiante.Nota2 = promedioParcial; estudiante.FechaNota2 = DateTime.Now; break;
+                    case 3: estudiante.Nota3 = promedioParcial; estudiante.FechaNota3 = DateTime.Now; break;
+                    case 4: estudiante.Nota4 = promedioParcial; estudiante.FechaNota4 = DateTime.Now; break;
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation(
+                "GuardarGrilla — Docente {D}, Curso {C}, Parcial {P}: {G} guardadas, {O} omitidas.",
+                docenteId, cursoId, parcial, guardadas, omitidas);
+
+            TempData["MensajeExito"] =
+                $"{guardadas} nota(s) guardada(s) correctamente para el {NombreParcial(parcial)}.";
+
+            // Regresar a la misma grilla para que el docente vea los cambios
+            return RedirectToAction(nameof(SubirNotasGrilla), new { cursoId, parcial });
+        }
+
         // ── GET: /Estudiantes/Prediccion ──────────────────────────
         [HttpGet]
         public async Task<IActionResult> Prediccion()
@@ -342,10 +711,19 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             int docenteId = ObtenerDocenteId();
 
-            var todos = docenteId > 0
+            var cursoIds = docenteId > 0
+                ? await _context.AsignacionDocentes
+                    .Where(a => a.DocenteId == docenteId && a.Activo)
+                    .Select(a => a.CursoId)
+                    .Distinct()
+                    .ToListAsync()
+                : new List<int>();
+
+            var todos = cursoIds.Any()
                 ? await _context.Estudiantes
                     .Include(e => e.Curso)
-                    .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
+                        .ThenInclude(c => c!.Grado)
+                    .Where(e => cursoIds.Contains(e.CursoId) && e.Activo)
                     .OrderBy(e => e.Promedio)
                     .ToListAsync()
                 : new List<Estudiante>();

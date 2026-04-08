@@ -15,16 +15,16 @@
                 </h4>
                 <h6>EduPath AI — Periodo @Model.Periodo</h6>
             </div>
+
+            <!--  
             <div class="page-btn d-flex gap-2 flex-wrap">
                 <a asp-controller="Estudiantes" asp-action="Registro"
                    class="btn-nav-est">
                     <i data-feather="user-plus"></i> Registrar Estudiante
                 </a>
-                <a asp-controller="Estudiantes" asp-action="RegistroNotas"
-                   class="btn-nav-est">
-                    <i data-feather="edit-3"></i> Subir Notas
-                </a>
+
             </div>
+            -->
         </div>
 
         @if (TempData["MensajeExito"] != null)
@@ -84,7 +84,8 @@
             </div>
         </div>
 
-        <!-- Tabla de estudiantes -->
+
+
         <div class="card mb-0">
             <div class="card-body">
                 <div class="table-responsive dataview">

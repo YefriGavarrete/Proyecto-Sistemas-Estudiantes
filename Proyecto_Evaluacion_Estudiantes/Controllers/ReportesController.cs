@@ -44,10 +44,16 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             int docenteId = ObtenerDocenteId();
 
-            var estudiantes = docenteId > 0
+            var cursoIdsG = docenteId > 0
+                ? await _context.AsignacionDocentes
+                    .Where(a => a.DocenteId == docenteId && a.Activo)
+                    .Select(a => a.CursoId).Distinct().ToListAsync()
+                : new List<int>();
+
+            var estudiantes = cursoIdsG.Any()
                 ? await _context.Estudiantes
                     .Include(e => e.Curso)
-                    .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo)
+                    .Where(e => cursoIdsG.Contains(e.CursoId) && e.Activo)
                     .OrderBy(e => e.Apellido).ThenBy(e => e.Nombre)
                     .ToListAsync()
                 : new List<Estudiante>();
@@ -107,10 +113,16 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             int docenteId = ObtenerDocenteId();
 
-            var enRiesgo = docenteId > 0
+            var cursoIdsR = docenteId > 0
+                ? await _context.AsignacionDocentes
+                    .Where(a => a.DocenteId == docenteId && a.Activo)
+                    .Select(a => a.CursoId).Distinct().ToListAsync()
+                : new List<int>();
+
+            var enRiesgo = cursoIdsR.Any()
                 ? await _context.Estudiantes
                     .Include(e => e.Curso)
-                    .Where(e => e.Curso!.DocenteTutorId == docenteId && e.Activo
+                    .Where(e => cursoIdsR.Contains(e.CursoId) && e.Activo
                              && (e.Promedio < 65 || e.EnRiesgoIA == true))
                     .OrderBy(e => e.Promedio)
                     .ToListAsync()

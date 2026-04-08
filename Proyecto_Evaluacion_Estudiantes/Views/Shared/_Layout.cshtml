@@ -275,6 +275,27 @@
                                 </ul>
                             </li>
 
+                            <!-- Subir Notas -->
+                            <li class="submenu @(menu == "Notas" ? "active" : "")">
+                                <a href="javascript:void(0);">
+                                    <img src="~/img/icons/time.svg" alt="img">
+                                    <span> Subir Notas</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Estudiantes" asp-action="SubirNotas">
+                                            <i data-feather="upload" class="me-1"></i> Ingresar Calificaciones
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Estudiantes" asp-action="RegistroNotas">
+                                            <i data-feather="edit-3" class="me-1"></i> Nota Rápida (por alumno)
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
                             <!-- Reportes -->
                             <li class="submenu @(menu == "Reportes" ? "active" : "")"  >
                                 <a href="javascript:void(0);">
