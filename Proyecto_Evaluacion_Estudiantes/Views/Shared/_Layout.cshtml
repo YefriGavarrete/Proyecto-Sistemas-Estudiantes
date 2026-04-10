@@ -34,12 +34,9 @@
         <div class="header">
             <div class="header-left active">
                 <a asp-controller="Home" asp-action="Index" class="logo">
-                    <img src="~/img/logoInstitucional.png" alt="EduPath AI" style="max-height:42px;width:auto;">
+                    <img src="~/img/Logo-EdupathAI.png" alt="EduPath AI" class="header-logo-full">
                 </a>
-                <a asp-controller="Home" asp-action="Index" class="logo-small">
-                    <img src="~/img/logoInstitucional.png" alt="EduPath AI" style="max-height:36px;width:auto;">
-                </a>
-                <a id="toggle_btn" href="javascript:void(0);"></a>
+
             </div>
 
             <a id="mobile_btn" class="mobile_btn" href="#sidebar">
@@ -68,6 +65,9 @@
                     </div>
                 </li>
 
+
+
+                <!-- Notiificaciones-->
                 <li class="nav-item dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                         <img src="~/img/icons/notification-bing.svg" alt="img"> <span class="badge rounded-pill">4</span>
@@ -152,10 +152,19 @@
                     </div>
                 </li>
 
+
+
+
+
+
+
+
                 <li class="nav-item dropdown has-arrow main-drop">
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                         <span class="user-img">
-                            <img src="~/img/logoInstitucional.png" alt="">
+                            <img src="/Home/Foto"
+                                 alt=""
+                                 onerror="this.src='/img/logoInstitucional.png'">
                             <span class="status online"></span>
                         </span>
                     </a>
@@ -163,7 +172,9 @@
                         <div class="profilename">
                             <div class="profileset">
                                 <span class="user-img">
-                                    <img src="~/img/logoInstitucional.png" alt="">
+                                    <img src="/Home/Foto"
+                                         alt=""
+                                         onerror="this.src='/img/logoInstitucional.png'">
                                     <span class="status online"></span>
                                 </span>
                                 <div class="profilesets">
@@ -178,24 +189,28 @@
                         </div>
                     </div>
                 </li>
-            </ul>
+            </ul>   
+
 
             <div class="dropdown mobile-user-menu">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="generalsettings.html">Settings</a>
-                    <a class="dropdown-item" href="signin.html">Logout</a>
+                    <a class="dropdown-item" href="perfil.cshtml">Mi Perfil</a>
+                    <a class="dropdown-item" href="IniciarSesion.cshtml">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
+
+
 
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div class="sidebar-profile" style="padding:18px 16px 14px;border-bottom:2px solid rgba(0,180,216,0.25);background:linear-gradient(135deg,#0d1b2a 0%,#1a3a5c 100%);">
                     <div class="d-flex align-items-center mb-2">
                         <span class="user-img me-2" style="position:relative;">
-                            <img src="~/img/logoInstitucional.png" alt="Usuario"
+                            <img src="/Home/Foto"
+                                 alt="Usuario"
+                                 onerror="this.src='/img/logoInstitucional.png'"
                                  style="width:44px;height:44px;border-radius:50%;border:2px solid #00b4d8;object-fit:cover;">
                             <span style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;
                                          background:#00b894;border-radius:50%;border:2px solid #0d1b2a;"></span>
@@ -242,7 +257,7 @@
 
                         @if (!esAdmin)
                         {
-                            <!-- Dashboard (solo docentes) -->
+
                             <li class="@(menu == "Dashboard" ? "active" : "")">
                                 <a asp-controller="Home" asp-action="Index">
                                     <img src="~/img/icons/dashboard.svg" alt="img">
@@ -275,7 +290,7 @@
                                 </ul>
                             </li>
 
-                            <!-- Subir Notas -->
+
                             <li class="submenu @(menu == "Notas" ? "active" : "")">
                                 <a href="javascript:void(0);">
                                     <img src="~/img/icons/time.svg" alt="img">
@@ -316,6 +331,45 @@
                                     </li>
                                 </ul>
                             </li>
+
+
+
+                            <!-- Analisis de Reporte-->
+                            <!--
+
+                                   <li class="submenu (menu == "Analisis Reportes" ? "active" : "")"  >
+                                <a href="javascript:void(0);">
+                                    <img src="~/img/icons/time.svg" alt="img">
+                                    <span> Analisis de Reportes </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a asp-controller="" asp-action="">
+                                            <i data-feather="bar-chart-2" class="me-1"></i> Reporte Académico General
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="" asp-action="Riesgo">
+                                            <i data-feather="alert-triangle" class="me-1"></i> Estudiantes en Riesgo
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+
+
+
+
+
+
+
+                            -->
+
+
+
+
                         }
 
 
@@ -427,8 +481,7 @@
                 </div>
             </div>
         </div>
-        <!-- /Sidebar -->
-        <!-- Page Content -->
+
         @RenderBody()
         <!-- /Page Content -->
 
@@ -446,14 +499,12 @@
     <script src="~/js/script.js"></script>
 
     <script>
-    var _esAdmin    = @(esAdmin.ToString().ToLower());
-    var _menuActivo = '@menu';
+        var _esAdmin    = @(esAdmin.ToString().ToLower());
+        var _menuActivo = '@System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(menu)';
 
     $(document).ready(function () {
 
-        // ── Reemplazar el handler de script.js por uno propio y limpio ──────────
-        // script.js adjunta su propio clic a '#sidebar-menu a', lo que entra en
-        // conflicto con nuestro menú. Lo removemos y ponemos el nuestro.
+
         $('#sidebar-menu a').off('click');
 
         // Toggle: clic en el <a> cabecera de cada li.submenu
@@ -468,29 +519,27 @@
                 $ul.slideUp(250);
             } else {
                 // Cerrar cualquier otro submenú que esté abierto
-                $('#sidebar-menu li.submenu > a.subdrop')
-                    .removeClass('subdrop')
+                $('#sidebar-menu li.submenu > a.subdrop').not($a).removeClass('subdrop')
                     .next('ul').slideUp(250);
-                // Abrir éste
+                // Abrir este
                 $a.addClass('subdrop');
-                $ul.slideDown(350);
+                $ul.slideDown(250);
             }
         });
 
-        // ── Abrir automáticamente el submenú de la página actual ─────────────
-        var $active = $('li.submenu.active');
-        if ($active.length) {
-            $active.children('a:first').addClass('subdrop');
-            $active.children('ul').show();
-        } else if (_esAdmin) {
-            // Admin en página sin submenú activo: abrir el primero por defecto
-            var $first = $('li.submenu').first();
-            $first.children('a:first').addClass('subdrop');
-            $first.children('ul').show();
+        // Marcar activo el ítem que corresponde al menú actual
+        $('#sidebar-menu li').removeClass('active');
+        if (_menuActivo) {
+            $('#sidebar-menu li[data-menu="' + _menuActivo + '"]').addClass('active');
         }
+
+        // Feather icons
+        if (window.feather) feather.replace();
+
     });
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

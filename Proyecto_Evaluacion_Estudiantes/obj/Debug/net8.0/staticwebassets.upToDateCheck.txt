@@ -2,7 +2,6 @@ wwwroot\css\animate.css
 wwwroot\css\bootstrap-datetimepicker.min.css
 wwwroot\css\bootstrap.min.css
 wwwroot\css\dataTables.bootstrap4.min.css
-wwwroot\css\edupath-admin.css
 wwwroot\css\login.css
 wwwroot\css\site.css
 wwwroot\css\style.css
@@ -23,7 +22,6 @@ wwwroot\img\customer\profile2.jpg
 wwwroot\img\customer\profile3.jpg
 wwwroot\img\customer\profile4.jpg
 wwwroot\img\customer\profile5.jpg
-wwwroot\img\favicon.png
 wwwroot\img\flags\de.png
 wwwroot\img\flags\es.png
 wwwroot\img\flags\fr.png
@@ -99,11 +97,11 @@ wwwroot\img\img-03.jpg
 wwwroot\img\img-04.jpg
 wwwroot\img\img-05.jpg
 wwwroot\img\login.jpg
+wwwroot\img\Logo-EdupathAI.png
 wwwroot\img\logo-small.png
 wwwroot\img\logo.png
 wwwroot\img\logo3.png
 wwwroot\img\logoInstitucional.png
-wwwroot\img\logso.png
 wwwroot\img\product\noimage.png
 wwwroot\img\product\product1.jpg
 wwwroot\img\product\product10.jpg
@@ -569,3 +567,4 @@ wwwroot\plugins\twitter-bootstrap-wizard\form-wizard.css
 wwwroot\plugins\twitter-bootstrap-wizard\form-wizard.js
 wwwroot\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js
 wwwroot\plugins\twitter-bootstrap-wizard\prettify.js
+wwwroot\css\edupath-admin.css

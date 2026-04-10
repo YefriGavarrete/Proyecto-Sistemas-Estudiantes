@@ -18,8 +18,12 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             _context = context;
         }
 
-        bool VerificarDocente() =>
-            !string.IsNullOrEmpty(HttpContext.Session.GetString("NombreDocente"));
+        bool VerificarDocente()
+        {
+            var nombre = HttpContext.Session.GetString("NombreDocente");
+            var rol    = HttpContext.Session.GetString("Rol");
+            return !string.IsNullOrEmpty(nombre) && rol == "Docente";
+        }
 
         int ObtenerDocenteId()
         {
@@ -653,10 +657,9 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             await _context.SaveChangesAsync();
 
-            // ── Recalcular Nota{N} del estudiante ─────────────────
-            // Para cada estudiante del curso, promedia todas sus notas
-            // en NotasParciales de este parcial y escribe el resultado
-            // en Estudiante.Nota1/2/3/4 → SQL Server recalcula Promedio y Estado.
+            // ── Recalcular Nota{N} de cada estudiante afectado ───────
+            // Una sola query agrupa todos los promedios por estudiante,
+            // evitando el N+1 del bucle original.
 
             var idsEstudiantesAfectados = entradas
                 .Where(e => e.Nota.HasValue && estudiantesDelCurso.Contains(e.EstudianteId))
@@ -664,32 +667,40 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 .Distinct()
                 .ToList();
 
-            foreach (var estId in idsEstudiantesAfectados)
+            if (idsEstudiantesAfectados.Any())
             {
-                var notasDeParcial = await _context.NotasParciales
-                    .Where(n => n.EstudianteId == estId && n.Parcial == (byte)parcial)
-                    .Select(n => n.Nota)
+                // Query única: promedio por estudiante para este parcial
+                var promediosPorEstudiante = await _context.NotasParciales
+                    .Where(n => idsEstudiantesAfectados.Contains(n.EstudianteId)
+                             && n.Parcial == (byte)parcial)
+                    .GroupBy(n => n.EstudianteId)
+                    .Select(g => new { EstudianteId = g.Key, Promedio = g.Average(n => n.Nota) })
                     .ToListAsync();
 
-                if (!notasDeParcial.Any()) continue;
+                // Query única: todos los estudiantes afectados
+                var estudiantesAfectados = await _context.Estudiantes
+                    .Where(e => idsEstudiantesAfectados.Contains(e.Id))
+                    .ToListAsync();
 
-                decimal promedioParcial = Math.Round(notasDeParcial.Average(), 2);
+                var promedioIndex = promediosPorEstudiante
+                    .ToDictionary(p => p.EstudianteId, p => Math.Round((decimal)p.Promedio, 2));
 
-                var estudiante = await _context.Estudiantes
-                    .FirstOrDefaultAsync(e => e.Id == estId);
+                var ahora = DateTime.UtcNow;
 
-                if (estudiante == null) continue;
-
-                switch (parcial)
+                foreach (var estudiante in estudiantesAfectados)
                 {
-                    case 1: estudiante.Nota1 = promedioParcial; estudiante.FechaNota1 = DateTime.Now; break;
-                    case 2: estudiante.Nota2 = promedioParcial; estudiante.FechaNota2 = DateTime.Now; break;
-                    case 3: estudiante.Nota3 = promedioParcial; estudiante.FechaNota3 = DateTime.Now; break;
-                    case 4: estudiante.Nota4 = promedioParcial; estudiante.FechaNota4 = DateTime.Now; break;
+                    if (!promedioIndex.TryGetValue(estudiante.Id, out decimal prom)) continue;
+                    switch (parcial)
+                    {
+                        case 1: estudiante.Nota1 = prom; estudiante.FechaNota1 = ahora; break;
+                        case 2: estudiante.Nota2 = prom; estudiante.FechaNota2 = ahora; break;
+                        case 3: estudiante.Nota3 = prom; estudiante.FechaNota3 = ahora; break;
+                        case 4: estudiante.Nota4 = prom; estudiante.FechaNota4 = ahora; break;
+                    }
                 }
-            }
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+            }
 
             _logger.LogInformation(
                 "GuardarGrilla — Docente {D}, Curso {C}, Parcial {P}: {G} guardadas, {O} omitidas.",

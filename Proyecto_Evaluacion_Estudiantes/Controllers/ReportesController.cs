@@ -14,9 +14,12 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             _context = context;
         }
 
-        // ── Helpers ──────────────────────────────────────────────
-        private bool VerificarDocente() =>
-            !string.IsNullOrEmpty(HttpContext.Session.GetString("NombreDocente"));
+        private bool VerificarDocente()
+        {
+            var nombre = HttpContext.Session.GetString("NombreDocente");
+            var rol = HttpContext.Session.GetString("Rol");
+            return !string.IsNullOrEmpty(nombre) && rol == "Docente";
+        }
 
         private int ObtenerDocenteId()
         {
@@ -29,10 +32,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             vm.NombreUsuario = HttpContext.Session.GetString("NombreDocente") ?? "Docente";
             vm.TituloUsuario = HttpContext.Session.GetString("TituloDocente") ?? "Docente";
             vm.CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---";
-            vm.Sistema       = "EduPath AI";
-            vm.Periodo       = "2026-1";
-            vm.EsAdmin       = HttpContext.Session.GetString("Rol") == "Admin";
-            vm.ActiveMenu    = activeMenu;
+            vm.Sistema = "EduPath AI";
+            vm.Periodo = "2026-1";
+            vm.EsAdmin = HttpContext.Session.GetString("Rol") == "Admin";
+            vm.ActiveMenu = activeMenu;
         }
 
         // ── GET: /Reportes/General ───────────────────────────────
@@ -55,23 +58,25 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                     .Include(e => e.Curso)
                     .Where(e => cursoIdsG.Contains(e.CursoId) && e.Activo)
                     .OrderBy(e => e.Apellido).ThenBy(e => e.Nombre)
+                    .AsNoTracking()
                     .ToListAsync()
                 : new List<Estudiante>();
 
-            int total      = estudiantes.Count;
-            int aprobados  = estudiantes.Count(e => e.Estado == "Aprobado");
+            int total = estudiantes.Count;
+            int aprobados = estudiantes.Count(e => e.Estado == "Aprobado");
             int reprobados = estudiantes.Count(e => e.Estado == "Reprobado");
-            int sinNotas   = estudiantes.Count(e => e.Promedio == null);
+            int sinNotas = estudiantes.Count(e => e.Promedio == null);
             decimal promedio = total > 0 && estudiantes.Any(e => e.Promedio.HasValue)
+
                 ? Math.Round(estudiantes.Where(e => e.Promedio.HasValue).Average(e => e.Promedio!.Value), 2)
                 : 0;
 
             // Distribución de notas (rangos)
             var conPromedio = estudiantes.Where(e => e.Promedio.HasValue).ToList();
-            int rango0_59   = conPromedio.Count(e => e.Promedio!.Value < 60);
-            int rango60_69  = conPromedio.Count(e => e.Promedio!.Value >= 60 && e.Promedio.Value < 70);
-            int rango70_79  = conPromedio.Count(e => e.Promedio!.Value >= 70 && e.Promedio.Value < 80);
-            int rango80_89  = conPromedio.Count(e => e.Promedio!.Value >= 80 && e.Promedio.Value < 90);
+            int rango0_59 = conPromedio.Count(e => e.Promedio!.Value < 60);
+            int rango60_69 = conPromedio.Count(e => e.Promedio!.Value >= 60 && e.Promedio.Value < 70);
+            int rango70_79 = conPromedio.Count(e => e.Promedio!.Value >= 70 && e.Promedio.Value < 80);
+            int rango80_89 = conPromedio.Count(e => e.Promedio!.Value >= 80 && e.Promedio.Value < 90);
             int rango90_100 = conPromedio.Count(e => e.Promedio!.Value >= 90);
 
             // Promedios por parcial
@@ -82,22 +87,22 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             var vm = new ReporteGeneralViewModel
             {
-                TotalEstudiantes   = total,
-                Aprobados          = aprobados,
-                Reprobados         = reprobados,
-                SinNotas           = sinNotas,
-                PromedioGeneral    = promedio,
-                PctAprobados       = total > 0 ? Math.Round(aprobados * 100m / total, 1) : 0,
-                Rango0_59          = rango0_59,
-                Rango60_69         = rango60_69,
-                Rango70_79         = rango70_79,
-                Rango80_89         = rango80_89,
-                Rango90_100        = rango90_100,
-                PromedioParcial1   = prom1,
-                PromedioParcial2   = prom2,
-                PromedioParcial3   = prom3,
-                PromedioParcial4   = prom4,
-                Estudiantes        = estudiantes
+                TotalEstudiantes = total,
+                Aprobados = aprobados,
+                Reprobados = reprobados,
+                SinNotas = sinNotas,
+                PromedioGeneral = promedio,
+                PctAprobados = total > 0 ? Math.Round(aprobados * 100m / total, 1) : 0,
+                Rango0_59 = rango0_59,
+                Rango60_69 = rango60_69,
+                Rango70_79 = rango70_79,
+                Rango80_89 = rango80_89,
+                Rango90_100 = rango90_100,
+                PromedioParcial1 = prom1,
+                PromedioParcial2 = prom2,
+                PromedioParcial3 = prom3,
+                PromedioParcial4 = prom4,
+                Estudiantes = estudiantes
             };
             LlenarLayoutVm(vm, "Reportes");
 
@@ -125,6 +130,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                     .Where(e => cursoIdsR.Contains(e.CursoId) && e.Activo
                              && (e.Promedio < 65 || e.EnRiesgoIA == true))
                     .OrderBy(e => e.Promedio)
+                    .AsNoTracking()
                     .ToListAsync()
                 : new List<Estudiante>();
 
@@ -133,8 +139,9 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 Estudiantes = enRiesgo
             };
             LlenarLayoutVm(vm, "Reportes");
-
             return View(vm);
         }
     }
 }
+
+            
