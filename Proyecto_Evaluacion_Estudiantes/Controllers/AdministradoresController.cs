@@ -131,7 +131,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionUsuarios));
         }
 
-        // ── GET: /Administradores/ConfiguracionAdministradores ────
+        // ── GET: /Administradores/ConfiguracionAdministradores
         [HttpGet]
         public IActionResult ConfiguracionAdministradores()
         {
@@ -148,7 +148,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(modelo);
         }
 
-        // ── POST: /Administradores/ConfiguracionAdministradores ───
+        // ── POST: /Administradores/ConfiguracionAdministradores
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfiguracionAdministradores(
@@ -208,7 +208,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionAdministradores));
         }
 
-        //  CONFIGURACIÓN DE CURSOs
+
         private async Task<ConfiguracionCursosViewModel> CrearVmCursos()
         {
             return new ConfiguracionCursosViewModel
@@ -400,7 +400,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionCursos));
         }
 
-        //  CONFIGURACIÓN ACADÉMICA — GRADOS
+
+
 
         private async Task<ConfiguracionGradosViewModel> CrearVmGrados()
         {

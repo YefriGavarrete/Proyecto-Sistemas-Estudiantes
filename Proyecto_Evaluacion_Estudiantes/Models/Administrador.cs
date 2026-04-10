@@ -32,6 +32,15 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Activo")]
         public bool Activo { get; set; } = true;
 
+        /// Ruta relativa al archivo de imagen en wwwroot.
+        /// Ejemplo: "/uploads/fotos/ADM-001.jpg"
+        /// Null = sin foto (mostrar avatar genérico con iniciales).
+        [StringLength(300)]
+        public string? FotoUrl { get; set; }
+
+        [NotMapped]
+        public bool TieneFoto => !string.IsNullOrEmpty(FotoUrl);
+
         [NotMapped]
         public string NombreCompleto => $"{Nombre} {Apellido}";
     }

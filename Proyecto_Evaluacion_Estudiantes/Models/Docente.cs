@@ -50,6 +50,18 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         // Relación 1:N con Cursos
         public ICollection<Curso> Cursos { get; set; } = new List<Curso>();
 
+        // ── Foto de perfil (ruta relativa guardada en BD) ────────
+        /// <summary>
+        /// Ruta relativa al archivo de imagen en wwwroot.
+        /// Ejemplo: "/uploads/fotos/DOC-001.jpg"
+        /// Null = sin foto (mostrar avatar genérico con iniciales).
+        /// </summary>
+        [StringLength(300)]
+        public string? FotoUrl { get; set; }
+
+        [NotMapped]
+        public bool TieneFoto => !string.IsNullOrEmpty(FotoUrl);
+
         [NotMapped]
         public string NombreConTitulo => $"{Titulo} {NombreCompleto}";
     }

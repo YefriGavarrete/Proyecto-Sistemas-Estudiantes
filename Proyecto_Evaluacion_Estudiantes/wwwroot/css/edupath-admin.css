@@ -1,13 +1,30 @@
-/* ============================================================
-   EduPath AI — Estilos Administrador
-   ============================================================ */
+
 
 /* ── Logo EduPath en el header ────────────────────────────── */
-.header-left .logo img,
-.header-left .logo-small img {
-    max-height: 40px;
-    width: auto;
+/* El .header-left del tema tiene height:60px y padding:0 20px  */
+.header-left .logo,
+.header-left .logo-small {
+    display: flex !important;
+    align-items: center;
+    height: 100%;
+    line-height: 0;
+    justify-content: center;
+}
+
+.header-logo-full {
+    height: 50px !important;
+    width: auto !important;
+    max-width: 220px;
     object-fit: contain;
+    display: block;
+}
+
+.header-logo-small {
+    height: 42px !important;
+    width: auto !important;
+    max-width: 200px;
+    object-fit: contain;
+    display: block;
 }
 
 /* ── Sidebar estático — ancho fijo sin importar submenús o contenido ── */
@@ -89,6 +106,20 @@
     color: #fff !important;
     transform: translateX(3px);
     box-shadow: 0 3px 10px rgba(0,150,199,.28);
+}
+
+
+/* Ítem padre activo (con submenú abierto) — mismo celeste medio que el hover el cual modifique*/
+.sidebar-menu ul > li > a.subdrop {
+background: linear-gradient(135deg, #0096c7, #48cae4) !important;
+color: #fff !important;
+box-shadow: 0 3px 10px rgba(0,150,199,.28);
+ }
+
+.sidebar-menu ul > li > a.subdrop span,
+.sidebar-menu ul > li > a.subdrop img {
+filter: brightness(10);
+color: #fff !important;
 }
 
 .sidebar-menu ul > li > a:hover span,
@@ -610,3 +641,204 @@ label.form-label {
 .table-hover tbody tr:hover {
     background: #f0f9ff !important;
 }
+
+/* ── Página Mi Perfil ─────────────────────────────────────── */
+
+/* Avatar circular con iniciales */
+.perfil-avatar-wrapper {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 16px;
+}
+
+.perfil-avatar-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #0096c7, #48cae4) !important;
+    display: flex;        /* sin !important para que JS pueda ocultarlo */
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+.perfil-avatar-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50% !important;
+    object-fit: cover;
+    display: block;       /* sin !important para que JS pueda ocultarlo */
+}
+
+.perfil-avatar-online {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 16px;
+    height: 16px;
+    background: #00b894;
+    border-radius: 50%;
+    border: 3px solid #fff;
+}
+
+/* Nombre y badge de rol */
+.perfil-nombre {
+    color: #1a2b4a !important;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.perfil-rol-badge {
+    border-radius: 20px !important;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    color: #fff !important;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.perfil-codigo {
+    color: #6c757d;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+/* Botón elegir foto */
+.perfil-btn-elegir {
+    border: 2px dashed #0096c7 !important;
+    border-radius: 10px !important;
+    color: #0096c7 !important;
+    background: #f0f9ff !important;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    transition: background .18s, color .18s;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.perfil-btn-elegir:hover {
+    background: #e0f5ff !important;
+    color: #0077b6 !important;
+}
+
+/* Botón guardar foto */
+.perfil-btn-guardar {
+    border-radius: 10px !important;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px;
+    width: 100%;
+    border: none !important;
+    color: #fff !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* Sección interior de la tarjeta de datos */
+.perfil-seccion-titulo {
+    color: #0096c7 !important;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Campo de solo lectura */
+.perfil-campo {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    font-size: 14px;
+    color: #1a2b4a !important;
+    font-weight: 500;
+    min-height: 42px;
+}
+
+/* Nota de seguridad inferior */
+.perfil-nota-seguridad {
+    background: #f0f9ff !important;
+    border: 1px solid #48cae4 !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    margin-top: 8px;
+}
+.perfil-nota-seguridad small {
+    color: #1a2b4a;
+    font-size: 12px;
+}
+
+/* Variantes de color por rol */
+.perfil-card-rol-admin  { border-top: 4px solid #7c3aed !important; }
+.perfil-card-rol-docente { border-top: 4px solid #0096c7 !important; }
+
+.perfil-badge-bg-admin   { background: #7c3aed; }
+.perfil-badge-bg-docente { background: #0096c7; }
+
+.perfil-avatar-borde-admin   { border: 3px solid #7c3aed; }
+.perfil-avatar-borde-docente { border: 3px solid #0096c7; }
+
+/* Etiqueta pequeña de campo (solo lectura) */
+.perfil-label-small {
+    font-size: 11px;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+/* Encabezado de sección informativa */
+.perfil-info-header {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    box-shadow: 0 4px 12px rgba(0,150,199,.3);
+}
+
+.perfil-info-title {
+    color: #1a2b4a;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+/* Badge compacto dentro de campos */
+.perfil-badge-sm {
+    margin: 0;
+    font-size: 11px;
+    padding: 3px 10px;
+}
+
+/* Texto auxiliar pequeño */
+.perfil-hint {
+    font-size: 11px;
+    min-height: 16px;
+}
+
+/* ── Utilidades para íconos Feather ───────────────────────── */
+.ico-13 { width: 13px !important; height: 13px !important; }
+.ico-14 { width: 14px !important; height: 14px !important; }
+.ico-15 { width: 15px !important; height: 15px !important; }
+.ico-20 { width: 20px !important; height: 20px !important; }
+
+.ico-celeste { color: #0096c7 !important; }
+.ico-verde   { color: #00b894 !important; }
+.ico-blanco  { color: #fff    !important; }
+.ico-azul    { color: #00b4d8 !important; }

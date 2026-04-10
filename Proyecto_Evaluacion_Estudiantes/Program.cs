@@ -3,6 +3,11 @@ using Proyecto_Evaluacion_Estudiantes.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Limitar tamaño de request a 2 MB globalmente (evita BadHttpRequestException en Kestrel)
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = 2 * 1024 * 1024; // 2 MB
+});
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
@@ -11,36 +16,40 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddControllersWithViews();
 
+// ── Caché en memoria (usado por throttling de login) ──────────
+builder.Services.AddMemoryCache();
 
+// ── Sesión
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(60); // Sesión expira tras 60 min de inactividad
-    options.Cookie.HttpOnly = true;
+    options.IdleTimeout        = TimeSpan.FromMinutes(60);
+    options.Cookie.HttpOnly    = true;
     options.Cookie.IsEssential = true;
+    options.Cookie.SameSite    = SameSiteMode.Strict;
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+// ── Pipeline ──────────────────────────────────────────────────
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
-                    https://aka.ms/aspnetcore-hsts.            
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
-app.UseSession(); // Debe ir antes de UseAuthorization y MapControllerRoute
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=IniciarSesion}/{id?}");
 
 app.Run();
