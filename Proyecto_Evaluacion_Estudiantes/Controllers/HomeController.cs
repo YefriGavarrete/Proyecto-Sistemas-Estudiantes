@@ -24,7 +24,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             _cache   = cache;
         }
 
-        // ── GET: /Home/Index ──────────────────────────────────────
+
         public async Task<IActionResult> Index()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("NombreDocente")))
@@ -118,7 +118,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── GET: /Home/IniciarSesion ──────────────────────────────
+
         [HttpGet]
         public IActionResult IniciarSesion()
         {
@@ -159,7 +159,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             _cache.Set(cacheKey, attempts + 1, TimeSpan.FromMinutes(1));
 
-            // ── 1. Buscar en Administradores ──────────────────────
+            // Busco en los Administradores 
             var admin = await _context.Administradores
                 .FirstOrDefaultAsync(a => a.NombreUsuario == Usuario.Trim() && a.Activo);
 
@@ -176,7 +176,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 return RedirectToAction("Index", "Administradores");
             }
 
-            // ── 2. Buscar en Docentes ─────────────────────────────
+
             var docente = await _context.Docentes
                 .FirstOrDefaultAsync(d => d.Usuario == Usuario.Trim() && d.Activo);
 
@@ -206,8 +206,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction(nameof(IniciarSesion));
         }
+        
 
-        // ── GET: /Home/Perfil
         [HttpGet]
         public async Task<IActionResult> Perfil()
         {

@@ -4,10 +4,13 @@ using Proyecto_Evaluacion_Estudiantes.Models;
 
 namespace Proyecto_Evaluacion_Estudiantes.ML
 {
-    /// <summary>
+
     /// Servicio Singleton que entrena el modelo FastForest una vez al arrancar
     /// y expone Predecir() para estimar el riesgo académico de un estudiante.
-    /// </summary>
+
+    //Esto fue lo implemente por la falta de información sobre el dataset , por lo cual decidi generar datos sintéticos con diferentes patrones de notas y riesgos.
+    //Para que al momento de hacer la predicción, el modelo pueda reconocer tendencias como riesgo alto con notas bajas,
+    //tendencia descendente, incertidumbre por falta de datos, tendencia ascendente y asi sucesivamente hasta encontrar malas notas con bajo riesgo, para que no solo se base en el promedio anual
     public class PrediccionService
     {
         private readonly MLContext _mlContext;
@@ -21,7 +24,6 @@ namespace Proyecto_Evaluacion_Estudiantes.ML
         }
 
         /// Devuelve la probabilidad de riesgo en [0.0, 1.0].
-        /// 0.0 = sin riesgo, 1.0 = riesgo máximo de reprobar.
         public float Predecir(RiesgoModelInput input)
         {
             var resultado = _engine.Predict(input);
@@ -53,16 +55,14 @@ namespace Proyecto_Evaluacion_Estudiantes.ML
             return pipeline.Fit(datos);
         }
 
-        /// Datos sintéticos de entrenamiento.
-        /// SN = -1f → sin nota registrada en ese parcial.
-        /// Label: 0.0 = sin riesgo … 1.0 = riesgo máximo.
-
+        // Datos sintéticos de entrenamiento.
+        // SN = -1f → sin nota registrada en ese parcial.
         private static List<RiesgoModelInput> GenerarDatosSinteticos()
         {
             const float SN = -1f;
             return new List<RiesgoModelInput>
             {
-                // ── RIESGO MUY ALTO — todas las notas bajas ────────────────────
+                // Riesgo muy alto nutriniendo el model de con las notas bajas
                 new() { Nota1=20,  Nota2=15,  Nota3=25,  Nota4=18,  PromedioActual=19.5f,  NotasRegistradas=4, Label=1.00f },
                 new() { Nota1=35,  Nota2=40,  Nota3=30,  Nota4=38,  PromedioActual=35.75f, NotasRegistradas=4, Label=0.95f },
                 new() { Nota1=45,  Nota2=42,  Nota3=48,  Nota4=40,  PromedioActual=43.75f, NotasRegistradas=4, Label=0.92f },
@@ -78,16 +78,16 @@ namespace Proyecto_Evaluacion_Estudiantes.ML
                 new() { Nota1=55,  Nota2=SN,  Nota3=SN,  Nota4=SN,  PromedioActual=55.0f,  NotasRegistradas=1, Label=0.72f },
                 new() { Nota1=45,  Nota2=SN,  Nota3=SN,  Nota4=SN,  PromedioActual=45.0f,  NotasRegistradas=1, Label=0.87f },
 
-                // ── TENDENCIA DESCENDENTE ──────────────────────────────────────
+                // Tendencia descendente pero no medio
                 new() { Nota1=80,  Nota2=60,  Nota3=45,  Nota4=30,  PromedioActual=53.75f, NotasRegistradas=4, Label=0.85f },
                 new() { Nota1=70,  Nota2=55,  Nota3=42,  Nota4=35,  PromedioActual=50.5f,  NotasRegistradas=4, Label=0.88f },
-                new() { Nota1=75,  Nota2=60,  Nota3=50,  Nota4=SN,  PromedioActual=61.67f, NotasRegistradas=3, Label=0.75f },
+                new() { Nota1=75,  Nota2=60,  Nota3=50,  Nota4=SN,  PromedioActual=61.67fss, NotasRegistradas=3, Label=0.75f },
                 new() { Nota1=65,  Nota2=55,  Nota3=45,  Nota4=SN,  PromedioActual=55.0f,  NotasRegistradas=3, Label=0.82f },
                 new() { Nota1=60,  Nota2=55,  Nota3=48,  Nota4=42,  PromedioActual=51.25f, NotasRegistradas=4, Label=0.87f },
                 new() { Nota1=90,  Nota2=75,  Nota3=55,  Nota4=40,  PromedioActual=65.0f,  NotasRegistradas=4, Label=0.68f },
                 new() { Nota1=85,  Nota2=70,  Nota3=52,  Nota4=SN,  PromedioActual=69.0f,  NotasRegistradas=3, Label=0.60f },
 
-                // ── RIESGO MEDIO — promedio 55-65 ─────────────────────────────
+                // riesgo medio
                 new() { Nota1=62,  Nota2=58,  Nota3=65,  Nota4=60,  PromedioActual=61.25f, NotasRegistradas=4, Label=0.55f },
                 new() { Nota1=60,  Nota2=60,  Nota3=60,  Nota4=60,  PromedioActual=60.0f,  NotasRegistradas=4, Label=0.52f },
                 new() { Nota1=65,  Nota2=62,  Nota3=58,  Nota4=63,  PromedioActual=62.0f,  NotasRegistradas=4, Label=0.47f },
@@ -101,19 +101,19 @@ namespace Proyecto_Evaluacion_Estudiantes.ML
                 new() { Nota1=59,  Nota2=59,  Nota3=59,  Nota4=59,  PromedioActual=59.0f,  NotasRegistradas=4, Label=0.60f },
                 new() { Nota1=61,  Nota2=61,  Nota3=61,  Nota4=61,  PromedioActual=61.0f,  NotasRegistradas=4, Label=0.47f },
 
-                // ── SIN NOTAS — incertidumbre media ───────────────────────────
+                // incertidumbre media 
                 new() { Nota1=SN,  Nota2=SN,  Nota3=SN,  Nota4=SN,  PromedioActual=0f,     NotasRegistradas=0, Label=0.50f },
                 new() { Nota1=SN,  Nota2=SN,  Nota3=SN,  Nota4=SN,  PromedioActual=0f,     NotasRegistradas=0, Label=0.55f },
                 new() { Nota1=SN,  Nota2=SN,  Nota3=SN,  Nota4=SN,  PromedioActual=0f,     NotasRegistradas=0, Label=0.48f },
 
-                // ── TENDENCIA ASCENDENTE desde riesgo ────────────────────────
+                // TENDENCIA ASCENDENTE desde riesgo 
                 new() { Nota1=45,  Nota2=55,  Nota3=62,  Nota4=SN,  PromedioActual=54.0f,  NotasRegistradas=3, Label=0.55f },
                 new() { Nota1=50,  Nota2=58,  Nota3=63,  Nota4=68,  PromedioActual=59.75f, NotasRegistradas=4, Label=0.40f },
                 new() { Nota1=40,  Nota2=50,  Nota3=60,  Nota4=70,  PromedioActual=55.0f,  NotasRegistradas=4, Label=0.45f },
                 new() { Nota1=30,  Nota2=45,  Nota3=60,  Nota4=75,  PromedioActual=52.5f,  NotasRegistradas=4, Label=0.48f },
                 new() { Nota1=20,  Nota2=40,  Nota3=65,  Nota4=80,  PromedioActual=51.25f, NotasRegistradas=4, Label=0.46f },
 
-                // ── BAJO RIESGO — promedio 65-79 ──────────────────────────────
+                // ── BAJO RIESGO 
                 new() { Nota1=70,  Nota2=72,  Nota3=68,  Nota4=71,  PromedioActual=70.25f, NotasRegistradas=4, Label=0.15f },
                 new() { Nota1=65,  Nota2=68,  Nota3=70,  Nota4=67,  PromedioActual=67.5f,  NotasRegistradas=4, Label=0.22f },
                 new() { Nota1=75,  Nota2=78,  Nota3=72,  Nota4=76,  PromedioActual=75.25f, NotasRegistradas=4, Label=0.10f },
@@ -125,7 +125,7 @@ namespace Proyecto_Evaluacion_Estudiantes.ML
                 new() { Nota1=65,  Nota2=65,  Nota3=65,  Nota4=65,  PromedioActual=65.0f,  NotasRegistradas=4, Label=0.35f },
                 new() { Nota1=75,  Nota2=SN,  Nota3=SN,  Nota4=SN,  PromedioActual=75.0f,  NotasRegistradas=1, Label=0.15f },
 
-                // ── TENDENCIA ASCENDENTE buena ────────────────────────────────
+
                 new() { Nota1=50,  Nota2=65,  Nota3=75,  Nota4=82,  PromedioActual=68.0f,  NotasRegistradas=4, Label=0.20f },
                 new() { Nota1=55,  Nota2=65,  Nota3=72,  Nota4=SN,  PromedioActual=64.0f,  NotasRegistradas=3, Label=0.30f },
                 new() { Nota1=60,  Nota2=68,  Nota3=75,  Nota4=80,  PromedioActual=70.75f, NotasRegistradas=4, Label=0.15f },
@@ -136,7 +136,7 @@ namespace Proyecto_Evaluacion_Estudiantes.ML
                 new() { Nota1=90,  Nota2=80,  Nota3=70,  Nota4=55,  PromedioActual=73.75f, NotasRegistradas=4, Label=0.38f },
                 new() { Nota1=58,  Nota2=60,  Nota3=55,  Nota4=62,  PromedioActual=58.75f, NotasRegistradas=4, Label=0.60f },
 
-                // ── MUY BAJO RIESGO — promedio >= 80 ─────────────────────────
+                // MUY BAJO RIESGO — promedio >= 80 
                 new() { Nota1=85,  Nota2=88,  Nota3=90,  Nota4=87,  PromedioActual=87.5f,  NotasRegistradas=4, Label=0.02f },
                 new() { Nota1=90,  Nota2=92,  Nota3=88,  Nota4=91,  PromedioActual=90.25f, NotasRegistradas=4, Label=0.01f },
                 new() { Nota1=95,  Nota2=98,  Nota3=97,  Nota4=96,  PromedioActual=96.5f,  NotasRegistradas=4, Label=0.00f },

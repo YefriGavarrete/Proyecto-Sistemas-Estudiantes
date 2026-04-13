@@ -24,7 +24,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Activo")]
         public bool Activo { get; set; } = true;
 
-        // ── Propiedad calculada en memoria (EF la ignora) ───────
+        // Es calculada en memoria (EF la ignora) 
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public bool SoloTercerCiclo => NivelAplicacion == "TercerCiclo";
     }

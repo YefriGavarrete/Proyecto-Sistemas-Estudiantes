@@ -34,23 +34,20 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         public bool FormActivo { get; set; } = true;
     }
 
-    // Fila de asignatura con el docente asignado para la pantalla de Asignacion
+    // Fila de asignatura con el docente asignado para la asignacion correspondiente
     public class FilaAsignacionDocente
     {
         public int      AsignaturaId    { get; set; }
         public string   AsignaturaNombre { get; set; } = string.Empty;
         public string   AsignaturaCodigo { get; set; } = string.Empty;
 
-        // Id de la AsignacionDocente existente (null si no hay asignacion aun)
         public int?     AsignacionId    { get; set; }
-
-        // Docente actualmente asignado (0 = sin asignar)
         public int      DocenteId       { get; set; }
 
         public bool     Activo          { get; set; } = true;
     }
 
-    // ViewModel para la pantalla de Asignacion de Docentes
+
     public class AsignacionDocentesViewModel : LayoutViewModel
     {
         public int      CursoId         { get; set; }

@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <!-- ── Selector de Parcial ── -->
+   
         <div class="card mb-3" style="border-left:4px solid #0096c7;">
             <div class="card-body py-3">
                 <div class="d-flex align-items-center flex-wrap gap-3">
@@ -53,7 +53,7 @@
                         }
                     </div>
 
-                    <!-- Estadísticas del parcial -->
+
                     <div class="ms-auto d-flex gap-3" style="font-size:13px;">
                         <span style="color:#00b894;font-weight:600;">
                             <i data-feather="check-circle" style="width:14px;"></i>
@@ -68,7 +68,7 @@
             </div>
         </div>
 
-        <!-- Instrucción -->
+
         <div class="alert alert-info d-flex align-items-center py-2 mb-3"
              style="background:#e3f6fc;border:1px solid #48cae4;border-radius:10px;">
             <i data-feather="info" class="me-2" style="color:#0096c7;width:16px;"></i>
@@ -87,7 +87,7 @@
                     onclick="this.parentElement.classList.add('d-none')"></button>
         </div>
 
-        <!-- Tabla de notas -->
+
         <div class="card mb-0">
             <div class="card-body">
                 <div class="table-responsive">
@@ -237,7 +237,7 @@
 
 @section Scripts {
 <script>
-    // ── Token anti-forgery (extraído del form oculto al cargar) ──
+    // Token anti-forgery (extraído del form oculto al cargar) 
     let afToken = '';
     document.addEventListener('DOMContentLoaded', function () {
         const tokenInput = document.querySelector('#formToken input[name="__RequestVerificationToken"]');
@@ -302,23 +302,19 @@
                 const badgeClass = nota >= 60 ? 'bg-success' : 'bg-danger';
                 fila.querySelector('.nota-display').innerHTML =
                     `<span class="badge ${badgeClass}" style="font-size:13px;">${nota.toFixed(1)}</span>`;
-
-                // Actualizar fecha
                 fila.querySelector('.fecha-display').textContent = data.fecha;
 
-                // Actualizar promedio
+
                 const colorProm = parseFloat(data.promedio) >= 60 ? '#00b894' : '#e17055';
                 fila.querySelector('.celda-promedio').innerHTML =
                     `<strong style="color:${colorProm}">${data.promedio}</strong>`;
 
-                // Actualizar estado
                 const estadoClass = data.estado === 'Aprobado' ? 'bg-lightgreen'
                                   : data.estado === 'Reprobado' ? 'bg-lightred' : 'bg-secondary';
                 const estadoSpan = fila.querySelector('.estado-display');
                 estadoSpan.className  = `badges ${estadoClass} estado-display`;
                 estadoSpan.textContent = data.estado;
 
-                // Mostrar icono "Modificar" en btns-normal
                 fila.querySelector('.btns-normal').innerHTML =
                     `<small class="text-muted" style="font-size:10px;">
                         <i data-feather="edit-2" style="width:11px;"></i> Modificar

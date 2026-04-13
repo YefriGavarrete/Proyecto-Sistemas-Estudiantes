@@ -138,7 +138,6 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionUsuarios));
         }
 
-        // GET: ConfiguracionAdministradores
         [HttpGet]
         public IActionResult ConfiguracionAdministradores()
         {
@@ -249,7 +248,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 ModelState.Remove(key);
         }
 
-        // GET: ConfiguracionCursos
+
         [HttpGet]
         public async Task<IActionResult> ConfiguracionCursos(int? editarId)
         {
@@ -323,7 +322,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionCursos));
         }
 
-        // ── POST: /Administradores/EditarCurso ─────────────────
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditarCurso(ConfiguracionCursosViewModel vm)
@@ -352,7 +351,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             if (!ModelState.IsValid)
                 return View("ConfiguracionCursos", vm);
 
-            // Código único (excluyendo el propio registro)
+
             bool codigoExiste = await _context.Cursos
                 .AnyAsync(c => c.Codigo == vm.FormCodigo.Trim().ToUpper() && c.Id != vm.EditandoId.Value);
             if (codigoExiste)
@@ -374,7 +373,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionCursos));
         }
 
-        // ── POST: /Administradores/EliminarCurso ───────────────
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarCurso(int id)
@@ -434,7 +434,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 ModelState.Remove(key);
         }
 
-        // ── GET: /Administradores/ConfiguracionGrados ──────────
+
         [HttpGet]
         public async Task<IActionResult> ConfiguracionGrados(int? editarId)
         {
@@ -461,8 +461,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST: /Administradores/EditarGrado ─────────────────
-        // Los grados son fijos (1°-9°), solo se permite editar, no crear ni eliminar.
+
+        // Los grados son fijos (1°-9°)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditarGrado(ConfiguracionGradosViewModel vm)
@@ -504,7 +504,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
         }
 
 
-        //  CONFIGURACIÓN ACADÉMICA — ASIGNATURAS
+
         private async Task<ConfiguracionAsignaturasViewModel> CrearVmAsignaturas()
         {
             return new ConfiguracionAsignaturasViewModel
@@ -532,7 +532,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 ModelState.Remove(key);
         }
 
-        // ── GET: /Administradores/ConfiguracionAsignaturas ─────
+
         [HttpGet]
         public async Task<IActionResult> ConfiguracionAsignaturas(int? editarId)
         {
@@ -558,7 +558,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST: /Administradores/ConfiguracionAsignaturas (Crear) ──
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfiguracionAsignaturas(ConfiguracionAsignaturasViewModel vm)
@@ -602,7 +603,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionAsignaturas));
         }
 
-        // ── POST: /Administradores/EditarAsignatura ────────────
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditarAsignatura(ConfiguracionAsignaturasViewModel vm)
@@ -652,7 +654,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionAsignaturas));
         }
 
-        // ── POST: /Administradores/EliminarAsignatura ──────────
+        // POST:
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarAsignatura(int id)
@@ -675,9 +677,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionAsignaturas));
         }
 
-        // ════════════════════════════════════════════════════════════
-        //  GESTIÓN DE CURSOS
-        // ════════════════════════════════════════════════════════════
+
+
+
+        //Gestion de los Cursos que tendrá el sistema
 
         private async Task<GestionCursosViewModel> CrearVmGestionCursos()
         {
@@ -731,7 +734,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 ModelState.Remove(key);
         }
 
-        // ── GET: /Administradores/GestionCursos ────────────────
+
         [HttpGet]
         public async Task<IActionResult> GestionCursos(int? editarId)
         {
@@ -758,7 +761,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST: /Administradores/GestionCursos (Crear) ───────
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GestionCursos(GestionCursosViewModel vm)
@@ -831,7 +834,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(GestionCursos));
         }
 
-        // ── POST: /Administradores/EditarGestionCurso ──────────
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditarGestionCurso(GestionCursosViewModel vm)
@@ -846,6 +849,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 return RedirectToAction(nameof(GestionCursos));
 
             var curso = await _context.Cursos.FindAsync(vm.EditandoId.Value);
+
             if (curso == null)
             {
                 TempData["ErrorMessage"] = "Curso no encontrado.";
@@ -900,7 +904,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(GestionCursos));
         }
 
-        // ── POST: /Administradores/EliminarGestionCurso ────────
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarGestionCurso(int id)
@@ -1022,7 +1026,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST: /Administradores/GuardarAsignaciones ─────────
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GuardarAsignaciones(int cursoId,

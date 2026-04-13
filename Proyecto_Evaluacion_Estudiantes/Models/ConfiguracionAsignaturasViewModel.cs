@@ -6,7 +6,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
     {
         public List<Asignatura> Asignaturas { get; set; } = new();
 
-        // Id de la asignatura que se está editando (null = modo crear)
+        // Id de la asignatura que se está editando
         public int? EditandoId { get; set; }
         [Required(ErrorMessage = "El nombre de la asignatura es obligatorio.")]
         [StringLength(150, ErrorMessage = "Máximo 150 caracteres.")]

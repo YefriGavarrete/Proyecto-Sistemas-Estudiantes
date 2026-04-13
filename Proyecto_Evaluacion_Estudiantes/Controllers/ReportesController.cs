@@ -39,7 +39,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             vm.ActiveMenu = activeMenu;
         }
 
-        // ── GET: /Reportes/General ───────────────────────────────
+
         [HttpGet]
         public async Task<IActionResult> General()
         {
@@ -72,7 +72,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 ? Math.Round(estudiantes.Where(e => e.Promedio.HasValue).Average(e => e.Promedio!.Value), 2)
                 : 0;
 
-            // Distribución de notas (rangos)
+            // Distribución de notas 
             var conPromedio = estudiantes.Where(e => e.Promedio.HasValue).ToList();
             int rango0_59 = conPromedio.Count(e => e.Promedio!.Value < 60);
             int rango60_69 = conPromedio.Count(e => e.Promedio!.Value >= 60 && e.Promedio.Value < 70);
@@ -110,7 +110,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── GET: /Reportes/Riesgo ────────────────────────────────
+
         [HttpGet]
         public async Task<IActionResult> Riesgo()
         {

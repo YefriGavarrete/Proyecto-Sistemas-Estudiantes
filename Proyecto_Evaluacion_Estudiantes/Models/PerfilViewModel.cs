@@ -1,28 +1,22 @@
 namespace Proyecto_Evaluacion_Estudiantes.Models
 {
-    /// <summary>
-    /// ViewModel de la vista /Home/Perfil.
-    /// Muestra los datos del usuario autenticado en modo solo lectura.
-    /// </summary>
+
+    //Muestra solo los datos del usuario autenticado en modo solo lectura.
+
     public class PerfilViewModel : LayoutViewModel
     {
-        // ── Datos comunes a ambos roles ───────────────────────────
+
         public string NombreCompleto { get; set; } = string.Empty;
         public string Usuario        { get; set; } = string.Empty;
-        public string Rol            { get; set; } = string.Empty;   // "Docente" | "Administrador"
-        public string Codigo         { get; set; } = string.Empty;   // "DOC-001" | "ADM-001"
+        public string Rol            { get; set; } = string.Empty;   
+        public string Codigo         { get; set; } = string.Empty;   
 
-        // ── Datos exclusivos de Docente (null para admins) ────────
-        /// <summary>Título académico: "Lic.", "Ing.", "Dr.", etc. Solo docentes.</summary>
+
         public string? Titulo        { get; set; }
-
-        /// <summary>Correo electrónico del docente.</summary>
         public string? Correo        { get; set; }
-
-        /// <summary>Fecha en que fue creada la cuenta.</summary>
         public DateTime? FechaCreacion { get; set; }
 
-        /// <summary>Última vez que el usuario inició sesión.</summary>
+        //Última vez que el usuario inició sesión.
         public DateTime? UltimoAcceso  { get; set; }
 
         public string Iniciales

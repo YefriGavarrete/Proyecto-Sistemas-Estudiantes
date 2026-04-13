@@ -3,16 +3,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Proyecto_Evaluacion_Estudiantes.Models
 {
-    // ─────────────────────────────────────────────────────────────
-    // PASO 1 — Pantalla de selección (Curso + Parcial)
-    // ─────────────────────────────────────────────────────────────
+
 
     public class SubirNotasSeleccionViewModel : LayoutViewModel
     {
-        /// <summary>Cursos donde el docente tiene AsignacionDocente activa.</summary>
+        //Me muestra los Cursos donde el docente tiene AsignacionDocente activa.
         public List<SelectListItem> CursosDisponibles { get; set; } = new();
 
-        /// <summary>Parciales 1–4 (opciones fijas).</summary>
+
         public List<SelectListItem> ParcialesItems { get; set; } = new()
         {
             new SelectListItem { Value = "1", Text = "Primer Parcial"   },
@@ -29,11 +27,6 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         public int? Parcial { get; set; }
     }
 
-    // ─────────────────────────────────────────────────────────────
-    // PASO 2 — Grilla de calificaciones
-    // ─────────────────────────────────────────────────────────────
-
-    /// <summary>Describe una columna de la grilla (una asignatura del docente en ese curso).</summary>
     public class AsignaturaColumna
     {
         public int    Id     { get; set; }
@@ -41,37 +34,27 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         public string Codigo { get; set; } = string.Empty;
     }
 
-    /// <summary>Una fila de la grilla: un estudiante con sus notas actuales por asignatura.</summary>
+    // Una fila de la grilla: un estudiante con sus notas actuales por asignatura
     public class FilaEstudianteGrilla
     {
         public int    EstudianteId   { get; set; }
         public string Codigo         { get; set; } = string.Empty;
         public string NombreCompleto { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Mapa AsignaturaId → nota existente en NotasParciales para el parcial seleccionado.
-        /// Null significa que todavía no hay nota para esa celda.
-        /// </summary>
         public Dictionary<int, decimal?> NotasPorAsignatura { get; set; } = new();
     }
 
-    /// <summary>
-    /// Una entrada de nota enviada desde el form de la grilla.
-    /// Cada celda (Estudiante × Asignatura) genera un ítem de esta clase en el POST.
-    /// </summary>
+
+
+    // Cada celda (Estudiante × Asignatura) genera un ítem de esta clase en el POST.
     public class NotaEntrada
     {
         public int      EstudianteId { get; set; }
         public int      AsignaturaId { get; set; }
-
-        /// <summary>
-        /// Null o cadena vacía = celda sin nota; se ignora en el guardado.
-        /// Valor numérico válido = insertar o actualizar en NotasParciales.
-        /// </summary>
+        // Null o cadena vacía = celda sin nota; se ignora en el guardado.
         public decimal? Nota         { get; set; }
     }
 
-    /// <summary>ViewModel principal del Paso 2.</summary>
+    // Siempre heredo la ViewModel principal del layout para que tenga acceso a los datos comunes (nombre del docente, etc).
     public class SubirNotasGrillaViewModel : LayoutViewModel
     {
         public int    CursoId      { get; set; }
@@ -79,13 +62,11 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         public int    Parcial      { get; set; }
         public string ParcialNombre { get; set; } = string.Empty;
 
-        /// <summary>Columnas = asignaturas que el docente tiene en este curso.</summary>
+
         public List<AsignaturaColumna>    Asignaturas { get; set; } = new();
 
-        /// <summary>Filas = estudiantes activos del curso.</summary>
-        public List<FilaEstudianteGrilla> Filas       { get; set; } = new();
 
-        // ── Helpers ──────────────────────────────────────────────
+        public List<FilaEstudianteGrilla> Filas       { get; set; } = new();
 
         public static string NombreParcial(int p) => p switch
         {

@@ -4,8 +4,8 @@ using Proyecto_Evaluacion_Estudiantes.Models;
 namespace Proyecto_Evaluacion_Estudiantes.Data
 {
 
-    /// Contexto principal de Entity Framework Core.
-    /// Gestiona las tablas: Administradores, Docentes, Cursos, Estudiantes.
+    //Entity Framework Core.
+    //Gestiona las tablas: Administradores, Docentes, Cursos, Estudiantes.
     
     public class ApplicationDbContext : DbContext
     {
@@ -140,7 +140,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
                       .OnDelete(DeleteBehavior.Restrict);
             });
 
-            // ── Estudiante ───────────────────────────────────────
+            // Estudiante
             modelBuilder.Entity<Estudiante>(entity =>
             {
                 // Índice: correo único por curso
@@ -151,7 +151,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Data
                 entity.Property(e => e.Activo).HasDefaultValue(true);
                 entity.Property(e => e.FechaRegistro).HasDefaultValueSql("GETDATE()");
 
-                // ── Promedio calculado (4 parciales) ────────────
+                // Aqui Promedio calculado (4 parciales) 
                 entity.Property(e => e.Promedio)
                       .HasComputedColumnSql(
                           "CASE " +

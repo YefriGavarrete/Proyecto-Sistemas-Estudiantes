@@ -21,34 +21,31 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Key]
         public int Id { get; set; }
 
-        // ── Relación con Estudiante ──────────────────────────────
+
         [Required]
         public int EstudianteId { get; set; }
 
         [ForeignKey(nameof(EstudianteId))]
         public Estudiante? Estudiante { get; set; }
 
-        // ── Relación con Asignatura ──────────────────────────────
+        // Relación con Asignatura 
         [Required]
         public int AsignaturaId { get; set; }
 
         [ForeignKey(nameof(AsignaturaId))]
         public Asignatura? Asignatura { get; set; }
 
-        // ── Datos de la nota ─────────────────────────────────────
-
-        /// <summary>Número de parcial: 1, 2, 3 o 4.</summary>
         [Required]
         [Range(1, 4, ErrorMessage = "El parcial debe ser 1, 2, 3 o 4.")]
         public byte Parcial { get; set; }
 
-        /// <summary>Nota del estudiante en esta asignatura para este parcial (0–100).</summary>
+
         [Required]
         [Range(0, 100, ErrorMessage = "La nota debe estar entre 0 y 100.")]
         [Column(TypeName = "decimal(5,2)")]
         public decimal Nota { get; set; }
 
-        /// <summary>Fecha/hora UTC en que se registró o actualizó la nota.</summary>
+        // La fecha-Hora UTC en que se registró o actualizó la nota.
         public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
     }
 }
