@@ -257,12 +257,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Navegación con Tab y flechas dentro de la grilla
     inputs.forEach(function (input, idx) {
-        // Colorear en tiempo real según el valor
+
         input.addEventListener('input', function () {
             actualizarColorInput(this);
         });
 
-        // Enter avanza al siguiente campo de la misma columna (siguiente fila)
+        // Enter avanza al siguiente campo de la misma columna
         input.addEventListener('keydown', function (e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Seleccionar todo al hacer foco
+
         input.addEventListener('focus', function () {
             this.select();
             this.style.outline = '2px solid #0096c7';
@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function () {
     border-color: #0096c7;
     box-shadow: 0 0 0 2px rgba(0,150,199,.2);
 }
-/* Sticky primera columna en scroll horizontal */
+
 #tablaGrilla tbody td:first-child,
 #tablaGrilla thead th:first-child {
     position: sticky;

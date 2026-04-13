@@ -1,6 +1,6 @@
 namespace Proyecto_Evaluacion_Estudiantes.Models
 {
-    /// ViewModel para el formulario de carga/edición de notas (Estudiantes/Notas).
+    /// ViewModel que me carga/edición de notas
     /// El docente selecciona el parcial activo y ve la lista de sus estudiantes.
     public class EstudianteNotasViewModel : LayoutViewModel
     {
@@ -9,7 +9,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
 
         public List<Estudiante> Estudiantes { get; set; } = new();
 
-        // Resumen del parcial actual
+
         public int NotasSubidas   => Estudiantes.Count(e => e.NotaParcial(ParcialSeleccionado) != null);
         public int NotasPendientes => Estudiantes.Count(e => e.NotaParcial(ParcialSeleccionado) == null);
 

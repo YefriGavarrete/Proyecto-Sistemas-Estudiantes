@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Proyecto_Evaluacion_Estudiantes.Models
 {
-    /// Representa a un docente (usuario autenticado) del sistema.
+
     /// La contraseña siempre se almacena como hash BCrypt, NUNCA en texto plano.
     [Table("Docentes")]
     public class Docente
@@ -27,7 +27,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Usuario")]
         public string Usuario { get; set; } = string.Empty;
 
-        /// Hash BCrypt de la contraseña. No se expone en formularios.
+        // Hash BCrypt de la contraseña.
         [Required]
         [StringLength(256)]
         public string Contrasena { get; set; } = string.Empty;
@@ -50,7 +50,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Último Acceso")]
         public DateTime? UltimoAcceso { get; set; }
 
-        // Relación 1:N con Cursos
+
         public ICollection<Curso> Cursos { get; set; } = new List<Curso>();
 
         [NotMapped]

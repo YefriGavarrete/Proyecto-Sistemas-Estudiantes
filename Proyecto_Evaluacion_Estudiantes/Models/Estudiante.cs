@@ -1,12 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 
 namespace Proyecto_Evaluacion_Estudiantes.Models
 {
     [Table("Estudiantes")]
     public class Estudiante
     {
-        [Key]
+            
         public int Id { get; set; }
 
         [StringLength(20)]
@@ -58,12 +59,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Activo")]
         public bool Activo { get; set; } = true;
 
-        // ── Notas por Parcial ────────────────────────────────────
-
-
-
-
-
+        // Notas de Parcales estan separadas para permitir fechas individuales y manejo de valores nulos
 
         [Range(0, 100, ErrorMessage = "La nota debe estar entre 0 y 100.")]
         [Display(Name = "Parcial 1")]
@@ -118,9 +114,6 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
 
 
 
-
-
-        // ── Relación con Curso ───────────────────────────────────
         [Required(ErrorMessage = "Debe seleccionar un curso.")]
         [Display(Name = "Curso")]
         public int CursoId { get; set; }
@@ -128,7 +121,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [ForeignKey(nameof(CursoId))]
         public Curso? Curso { get; set; }
 
-        // ── Notas por asignatura y parcial ───────────────────────
+
         public ICollection<NotaParcial> NotasParciales { get; set; }
             = new List<NotaParcial>();
 
@@ -138,11 +131,11 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
 
 
 
-        // ── Propiedades calculadas (solo en memoria) ─────────────
+
         [NotMapped]
         public string NombreCompleto => $"{Nombre} {Apellido}";
 
-        /// <summary>Edad calculada en tiempo real desde FechaNacimiento.</summary>
+
         [NotMapped]
         public int Edad
         {
@@ -156,6 +149,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         }
 
         [NotMapped]
+        // Devuelve un determinado CSS para el badge según el estado del estudiante
         public string EstadoBadge => Estado switch
         {
             "Aprobado"  => "bg-lightgreen",
@@ -163,8 +157,9 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
             _           => "bg-secondary"
         };
 
-        /// <summary>Promedio calculado en memoria (antes de SaveChanges).</summary>
         [NotMapped]
+
+        //Por eso utilizo NotMapped, para que no se intente mapear a la base de datos
         public decimal PromedioCalculado
         {
             get

@@ -41,7 +41,6 @@
         <form asp-controller="Home" asp-action="IniciarSesion" method="post">
             @Html.AntiForgeryToken()
 
-            <!-- Usuario -->
             <div class="form-group mb-3">
                 <label for="usuario">Nombre de usuario</label>
                 <div class="input-icon-group">
@@ -52,7 +51,6 @@
                 </div>
             </div>
 
-            <!-- Contraseña -->
             <div class="form-group mb-4">
                 <label for="contrasena">Contraseña</label>
                 <div class="input-icon-group">

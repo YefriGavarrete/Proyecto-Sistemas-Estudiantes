@@ -11,7 +11,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         public decimal PorcentajeAprobados { get; set; }
         public int     EstudiantesEnRiesgo { get; set; }
 
-        // ── Contadores de estado ──────────────────────────────────
+
         public int TotalInscritos  { get; set; }
         public int TotalAprobados  { get; set; }
         public int TotalReprobados { get; set; }

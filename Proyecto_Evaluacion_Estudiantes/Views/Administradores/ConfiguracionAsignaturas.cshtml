@@ -76,7 +76,7 @@
 
                     <div class="row g-3 mb-3">
 
-                        <!-- Nombre -->
+  
                         <div class="col-md-5">
                             <label class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="book" class="me-1" style="color:#00b4d8;"></i>
@@ -91,7 +91,7 @@
                             </span>
                         </div>
 
-                        <!-- Codigo -->
+
                         <div class="col-md-2">
                             <label class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="hash" class="me-1" style="color:#00b4d8;"></i>
@@ -108,7 +108,7 @@
                             </span>
                         </div>
 
-                        <!-- Nivel de Aplicacion -->
+  
                         <div class="col-md-3">
                             <label class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="tag" class="me-1" style="color:#00b4d8;"></i>
@@ -129,7 +129,7 @@
                             </span>
                         </div>
 
-                        <!-- Activo: checkbox PRIMERO, hidden DESPUES -->
+    
                         <div class="col-md-2 d-flex align-items-end pb-1">
                             <div class="form-check form-switch">
                                 <input type="checkbox" name="FormActivo" value="true"
@@ -144,7 +144,7 @@
                         </div>
                     </div>
 
-                    <!-- Botones -->
+
                     <div class="d-flex gap-2 justify-content-end">
                         <a asp-controller="Administradores" asp-action="Index"
                            class="btn-cancelar-form">
@@ -160,7 +160,7 @@
             </div>
         </div>
 
-        <!-- Tabla de Asignaturas -->
+
         <div class="card">
             <div class="card-body">
 
@@ -286,6 +286,8 @@
     document.addEventListener('DOMContentLoaded', function () {
         if (window.feather) feather.replace();
 
+
+
         // Inicializar DataTable solo si no fue inicializado por el template
         var tbl = document.getElementById('tbl-asignaturas');
         if (tbl && typeof $.fn.DataTable !== 'undefined' && !$.fn.DataTable.isDataTable('#tbl-asignaturas')) {
@@ -301,7 +303,7 @@
             });
         }
 
-        // Codigo en mayusculas
+
         var inputCodigo = document.getElementById('inputCodAsig');
         if (inputCodigo) {
             inputCodigo.addEventListener('input', function () {

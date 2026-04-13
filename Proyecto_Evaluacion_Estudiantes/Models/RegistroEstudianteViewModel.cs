@@ -3,16 +3,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Proyecto_Evaluacion_Estudiantes.Models
 {
-    /// <summary>
-    /// ViewModel para el formulario de Registro de Estudiantes.
+
     /// Incluye el dropdown de Cursos filtrado por AsignacionDocente del docente en sesion.
-    /// </summary>
     public class RegistroEstudianteViewModel : LayoutViewModel
     {
-        // ── Dropdown de cursos disponibles (filtrado por AsignacionDocente) ──
-        public List<SelectListItem> CursosDisponibles { get; set; } = new();
 
-        // ── Campos del estudiante ────────────────────────────────────────────
+        public List<SelectListItem> CursosDisponibles { get; set; } = new();
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(100, ErrorMessage = "Maximo 100 caracteres.")]
@@ -58,7 +54,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Activo")]
         public bool Activo { get; set; } = true;
 
-        // ── CursoId seleccionado (viene del dropdown) ────────────────────────
+
+
         [Required(ErrorMessage = "Debe seleccionar un curso.")]
         [Display(Name = "Curso / Grado")]
         public int? CursoId { get; set; }

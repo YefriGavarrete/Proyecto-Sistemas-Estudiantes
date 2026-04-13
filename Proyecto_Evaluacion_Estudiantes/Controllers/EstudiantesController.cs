@@ -56,9 +56,9 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
 
 
-        /// Devuelve todos los Cursos donde el docente logueado tiene
-        /// al menos una AsignacionDocente activa.
-        private async Task<List<Curso>> ObtenerCursosAsignadosAsync()
+        /* Devuelve todos los Cursos donde el docente logueado tiene
+         al menos una AsignacionDocente activa.*/
+        async Task<List<Curso>> ObtenerCursosAsignadosAsync()
         {
             int docenteId = ObtenerDocenteId();
             if (docenteId == 0) return new List<Curso>();
@@ -78,9 +78,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 .ToListAsync();
         }
 
-        /// Verifica que el docente logueado tenga al menos una AsignacionDocente
-        /// para el CursoId dado. Usado como gate de seguridad en todas las acciones.
-        private async Task<bool> DocenteTieneAccesoACursoAsync(int docenteId, int cursoId)
+
+
+        // Verifica que el docente logueado tenga al menos una AsignacionDocente para el CursoId dado. Usado como gate de seguridad en todas las acciones.
+        async Task<bool> DocenteTieneAccesoACursoAsync(int docenteId, int cursoId)
         {
             return await _context.AsignacionDocentes
                 .AnyAsync(a => a.DocenteId == docenteId
@@ -88,7 +89,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                             && a.Activo);
         }
 
-        // ── GET: /Estudiantes/Index 
+
+
         public async Task<IActionResult> Index()
         {
             if (!VerificarDocente())
@@ -96,7 +98,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             int docenteId = ObtenerDocenteId();
 
-            // Cursos del docente vía AsignacionDocente
+
             var cursoIds = await _context.AsignacionDocentes
                 .Where(a => a.DocenteId == docenteId && a.Activo)
                 .Select(a => a.CursoId)
@@ -118,7 +120,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── Helper: construye RegistroEstudianteViewModel con dropdown de cursos ──
+        //Construye un RegistroEstudianteViewModel con un combobox desplejable para elegir los cursos
         private async Task<RegistroEstudianteViewModel> CrearVmRegistroAsync(
             RegistroEstudianteViewModel? desde = null)
         {
@@ -133,7 +135,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             vm.CursosDisponibles = cursos.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
             {
                 Value    = c.Id.ToString(),
-                Text     = c.NombreCompleto,   // "Primer Grado — Sec. A (2026)"
+                Text     = c.NombreCompleto,   
                 Selected = c.Id == vm.CursoId
             }).ToList();
 
@@ -141,7 +143,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return vm;
         }
 
-        // ── GET: /Estudiantes/Registro ────────────────────────────
+
         [HttpGet]
         public async Task<IActionResult> Registro()
         {
@@ -160,7 +162,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST: /Estudiantes/Registro ───────────────────────────
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registro(RegistroEstudianteViewModel vm)
@@ -183,7 +185,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             if (!ModelState.IsValid)
                 return View(vm);
 
-            // ── Validación de seguridad: el docente debe tener AsignacionDocente en ese curso ──
+            // Valida que el docente debe tener Asignacion en ese curso
             int docenteId = ObtenerDocenteId();
             if (!vm.CursoId.HasValue || !await DocenteTieneAccesoACursoAsync(docenteId, vm.CursoId.Value))
             {
@@ -191,6 +193,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                     "No tienes asignación en el curso seleccionado. Contacta al administrador.");
                 return View(vm);
             }
+
+
 
             // Verificar correo duplicado en el mismo curso
             bool correoExiste = await _context.Estudiantes
@@ -220,7 +224,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             _context.Estudiantes.Add(nuevo);
             await _context.SaveChangesAsync();
 
-            // Código automático después de obtener el Id
+            // Me crea un Código automático
             nuevo.Codigo = $"EST-{DateTime.Now.Year}-{nuevo.Id:D4}";
             await _context.SaveChangesAsync();
 
@@ -233,7 +237,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // ── GET: /Estudiantes/RegistroNotas?parcial=1 ────────────
+
         [HttpGet]
         public async Task<IActionResult> RegistroNotas(int parcial = 1)
         {
@@ -269,8 +273,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST AJAX: /Estudiantes/GuardarNota ───────────────────
-        // Guarda o modifica la nota de un parcial específico para un estudiante.
+
+        // Guarda o modifica la nota de un parcial el cual le especifico de un estudiante.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GuardarNota(int estudianteId, int parcial, decimal nota)
@@ -308,7 +312,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             await _context.SaveChangesAsync();
 
-            // Recargar para obtener el Promedio y Estado calculados por SQL
+            // Me ayuda obteniendo el Promedio y Estado calculados por SQL
             await _context.Entry(estudiante).ReloadAsync();
 
             _logger.LogInformation(
@@ -329,7 +333,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
 
 
-        // ── GET: /Estudiantes/Editar/{id} ─────────────────────────
+       // Edito en base al ID
         [HttpGet]
         public async Task<IActionResult> Editar(int id)
         {
@@ -359,7 +363,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(estudiante);
         }
 
-        // ── POST: /Estudiantes/Editar ─────────────────────────────
+        // Estudiantes/Editar
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Editar(
@@ -423,7 +427,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             _ => $"Parcial {p}"
         };
 
-        // ── GET: /Estudiantes/SubirNotas (Paso 1 — selección) ─────
+
+
+
+
         [HttpGet]
         public async Task<IActionResult> SubirNotas()
         {
@@ -452,7 +459,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST: /Estudiantes/SubirNotas (Paso 1 — valida y redirige) ──
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubirNotas(SubirNotasSeleccionViewModel vm)
@@ -475,7 +482,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             if (!ModelState.IsValid)
                 return View(vm);
 
-            // Validación de seguridad: el docente debe tener AsignacionDocente en ese curso
+            // Validar que el Docente debe tener AsignacionDocente en ese curso
             int docenteId = ObtenerDocenteId();
             if (!vm.CursoId.HasValue || !await DocenteTieneAccesoACursoAsync(docenteId, vm.CursoId.Value))
             {
@@ -490,7 +497,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
 
 
-        // ── GET: /Estudiantes/SubirNotasGrilla?cursoId=X&parcial=Y (Paso 2) ──
+
         [HttpGet]
         public async Task<IActionResult> SubirNotasGrilla(int cursoId, int parcial)
         {
@@ -545,7 +552,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                          && n.Parcial == (byte)parcial)
                 .ToListAsync();
 
-            // Indexar notas: (EstudianteId, AsignaturaId) → Nota
+
             var notasIndex = notasExistentes
                 .ToDictionary(n => (n.EstudianteId, n.AsignaturaId), n => (decimal?)n.Nota);
 
@@ -560,7 +567,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                     a => notasIndex.TryGetValue((e.Id, a.Id), out var n) ? n : (decimal?)null)
             }).ToList();
 
-            // Nombre del curso
+
             var curso = await _context.Cursos
                 .Include(c => c.Grado)
                 .FirstOrDefaultAsync(c => c.Id == cursoId);
@@ -579,7 +586,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST: /Estudiantes/GuardarGrilla ─────────────────────
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GuardarGrilla(
@@ -593,15 +600,16 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             int docenteId = ObtenerDocenteId();
 
-            // Seguridad: el docente debe tener acceso al curso
+            // El docente debe tener acceso al curso
             if (!await DocenteTieneAccesoACursoAsync(docenteId, cursoId))
             {
                 TempData["ErrorMessage"] = "Sin permiso para este curso.";
                 return RedirectToAction(nameof(SubirNotas));
             }
 
+
+
             // Asignaturas que el docente realmente tiene en ese curso
-            // (whitelist para validar cada entrada del POST)
             var asignaturasPermitidas = (await _context.AsignacionDocentes
                 .Where(a => a.DocenteId == docenteId && a.CursoId == cursoId && a.Activo)
                 .Select(a => a.AsignaturaId)
@@ -618,16 +626,12 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             foreach (var entrada in entradas)
             {
-                // Ignorar celdas vacías
-                if (!entrada.Nota.HasValue) { omitidas++; continue; }
 
-                // Validación de rango
+                if (!entrada.Nota.HasValue) { omitidas++; continue; }
                 if (entrada.Nota.Value < 0 || entrada.Nota.Value > 100) { omitidas++; continue; }
 
-                // Validación de seguridad: estudiante pertenece al curso
+                // Evaluo si el studiante pertenece al curso
                 if (!estudiantesDelCurso.Contains(entrada.EstudianteId)) { omitidas++; continue; }
-
-                // Validación de seguridad: asignatura asignada al docente en ese curso
                 if (!asignaturasPermitidas.Contains(entrada.AsignaturaId)) { omitidas++; continue; }
 
                 // Buscar registro existente o crear uno nuevo
@@ -658,9 +662,9 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             await _context.SaveChangesAsync();
 
-            // ── Recalcular Nota{N} de cada estudiante afectado ───────
-            // Una sola query agrupa todos los promedios por estudiante,
-            // evitando el N+1 del bucle original.
+            // recalcular Nota{N} de cada estudiante afectado
+            // En una sola query agrupar todos los promedios por estudiante,
+
 
             var idsEstudiantesAfectados = entradas
                 .Where(e => e.Nota.HasValue && estudiantesDelCurso.Contains(e.EstudianteId))
@@ -670,7 +674,6 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             if (idsEstudiantesAfectados.Any())
             {
-                // Query única: promedio por estudiante para este parcial
                 var promediosPorEstudiante = await _context.NotasParciales
                     .Where(n => idsEstudiantesAfectados.Contains(n.EstudianteId)
                              && n.Parcial == (byte)parcial)
@@ -678,7 +681,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                     .Select(g => new { EstudianteId = g.Key, Promedio = g.Average(n => n.Nota) })
                     .ToListAsync();
 
-                // Query única: todos los estudiantes afectados
+
                 var estudiantesAfectados = await _context.Estudiantes
                     .Where(e => idsEstudiantesAfectados.Contains(e.Id))
                     .ToListAsync();
@@ -714,7 +717,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(SubirNotasGrilla), new { cursoId, parcial });
         }
 
-        // ── GET: /Estudiantes/Prediccion ──────────────────────────
+
         [HttpGet]
         public async Task<IActionResult> Prediccion()
         {
@@ -746,7 +749,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                          || e.EnRiesgoIA == true)
                 .ToList();
 
-            // Atención: promedio entre 60 y 70 (zona límite)
+            // Atención: promedio entre 60 y 70 
             var atencion = todos
                 .Where(e => e.Promedio.HasValue
                          && e.Promedio.Value >= 60
