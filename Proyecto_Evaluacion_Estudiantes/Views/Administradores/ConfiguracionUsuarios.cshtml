@@ -43,15 +43,17 @@
                         <i data-feather="user" style="color:#fff;width:20px;height:20px;"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Datos del Catedrático</h5>
-                        <small class="text-muted">Campos basados en la tabla <strong>Docentes</strong> de la base de datos.</small>
+                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Nuevo Catedrático</h5>
+                        <small class="text-muted">
+                            El nombre de usuario se genera automáticamente. Mínimo 8 caracteres con al menos 2 dígitos.
+                        </small>
                     </div>
                 </div>
 
                 <form asp-controller="Administradores" asp-action="ConfiguracionUsuarios" method="post">
                     @Html.AntiForgeryToken()
 
-                    <!-- Titulo — campo Docentes (NVARCHAR 20) -->
+
                     <div class="form-group mb-4">
                         <label class="form-label fw-semibold" style="color:#1a2b4a;">
                             <i data-feather="award" class="me-1" style="color:#00b4d8;"></i>
@@ -75,20 +77,36 @@
                         <span asp-validation-for="Titulo" class="text-danger" style="font-size:12px;"></span>
                     </div>
 
-                    <!-- NombreCompleto — campo Docentes (NVARCHAR 150) -->
-                    <div class="mb-3">
-                        <label asp-for="NombreCompleto" class="form-label fw-semibold" style="color:#1a2b4a;">
-                            <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
-                            @Html.DisplayNameFor(m => m.NombreCompleto)
-                        </label>
-                        <input asp-for="NombreCompleto"
-                               class="form-control form-control-edupath"
-                               placeholder="Ej: Juan Carlos Pérez López"
-                               maxlength="150" />
-                        <span asp-validation-for="NombreCompleto" class="text-danger" style="font-size:12px;"></span>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                                <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
+                                Nombre
+                            </label>
+                            <input type="text" id="doc-Nombre"
+                                   class="form-control form-control-edupath"
+                                   placeholder="Ej: Juan Carlos" maxlength="100"
+                                   oninput="generarUsuario(); actualizarNombreCompleto()" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
+                                <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
+                                Apellido
+                            </label>
+                            <input type="text" id="doc-Apellido"
+                                   class="form-control form-control-edupath"
+                                   placeholder="Ej: Pérez López" maxlength="100"
+                                   oninput="generarUsuario(); actualizarNombreCompleto()" />
+                        </div>
                     </div>
 
-                    <!-- Correo — campo Docentes (NVARCHAR 150) -->
+
+                    <input asp-for="NombreCompleto" type="hidden" id="doc-NombreCompleto" />
+                    <span asp-validation-for="NombreCompleto" class="text-danger d-block mb-2" style="font-size:12px;"></span>
+
+
+
                     <div class="mb-3">
                         <label asp-for="Correo" class="form-label fw-semibold" style="color:#1a2b4a;">
                             <i data-feather="mail" class="me-1" style="color:#00b4d8;"></i>
@@ -101,7 +119,7 @@
                         <span asp-validation-for="Correo" class="text-danger" style="font-size:12px;"></span>
                     </div>
 
-                    <!-- Separador Credenciales -->
+      
                     <div class="d-flex align-items-center my-4">
                         <hr class="flex-grow-1" style="border-color:#e2e8f0;">
                         <span class="px-3 text-muted" style="font-size:12px;white-space:nowrap;">
@@ -111,35 +129,46 @@
                         <hr class="flex-grow-1" style="border-color:#e2e8f0;">
                     </div>
 
-                    <!-- Usuario — campo Docentes (NVARCHAR 80) -->
+                    <!-- Usuario — generado automáticamente -->
                     <div class="row g-3 mb-4">
                         <div class="col-md-6">
                             <label asp-for="Usuario" class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="at-sign" class="me-1" style="color:#00b4d8;"></i>
                                 @Html.DisplayNameFor(m => m.Usuario)
+                                <span class="badge-gen ms-2">Generado automáticamente</span>
                             </label>
-                            <input asp-for="Usuario"
-                                   class="form-control form-control-edupath"
-                                   placeholder="Ej: juan.perez"
-                                   maxlength="80" autocomplete="username" />
-                            <span asp-validation-for="Usuario" class="text-danger" style="font-size:12px;"></span>
+                            <div class="input-group-adm">
+                                <input asp-for="Usuario" id="doc-Usuario"
+                                       class="form-control form-control-edupath"
+                                       placeholder="Se completará con nombre y apellido"
+                                       maxlength="80" autocomplete="off" />
+                                <button type="button" class="btn-regenerar" onclick="regenerarUsuario()"
+                                        title="Generar nuevo usuario">
+                                    <i data-feather="refresh-cw" style="width:15px;height:15px;"></i>
+                                </button>
+                            </div>
+                            <small id="doc-usuario-info" class="text-muted" style="font-size:11px;"></small>
+                            <span asp-validation-for="Usuario" class="text-danger d-block" style="font-size:12px;"></span>
                         </div>
 
-                        <!-- Contraseña — campo Docentes, recibida por separado para manejo opcional -->
+
                         <div class="col-md-6">
                             <label class="form-label fw-semibold" style="color:#1a2b4a;">
                                 <i data-feather="lock" class="me-1" style="color:#00b4d8;"></i>
-                                Contraseña
-                                <small class="text-muted fw-normal">(dejar vacío = sin cambio)</small>
+                                Contraseña <span class="text-danger">*</span>
                             </label>
-                            <input type="password" name="ContrasenaInput"
+                            <input type="password" name="ContrasenaInput" id="ContrasenaInput"
                                    class="form-control form-control-edupath"
                                    placeholder="••••••••"
-                                   autocomplete="new-password" />
+                                   autocomplete="new-password"
+                                   required minlength="6" />
+                            <span class="text-danger" style="font-size:12px;" id="contrasena-error">
+                                @Html.ValidationMessage("ContrasenaInput")
+                            </span>
                         </div>
                     </div>
 
-                    <!-- Activo — campo Docentes (BIT) -->
+
                     <div class="mb-4">
                         <div class="form-check form-switch">
                             <input asp-for="Activo" class="form-check-input" type="checkbox" role="switch" />
@@ -149,7 +178,7 @@
                         </div>
                     </div>
 
-                    <!-- Botones -->
+
                     <div class="d-flex gap-2 justify-content-end">
                         <a asp-controller="Administradores" asp-action="Index"
                            class="btn-cancelar-form">
@@ -171,6 +200,63 @@
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
+    let sufijo = generarSufijo();
+
+    function generarSufijo() {
+        return String(Math.floor(Math.random() * 90) + 10);
+    }
+
+    function normalizar(texto) {
+        return texto.trim().toLowerCase()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]/g, '');
+    }
+
+    function construirUsuario(nombre, apellido, suf) {
+        const n = normalizar(nombre);
+        const a = normalizar(apellido);
+        if (!n && !a) return '';
+        let base = (n.length > 0 ? n[0] : '') + a;
+        const needed = Math.max(6, 8 - suf.length);
+
+        if (base.length < needed) base = (n + a).substring(0, needed);
+        const candidato = base + suf;
+        return candidato.length < 8
+            ? base.padEnd(8 - suf.length, a || n || 'x') + suf
+            : candidato;
+    }
+
+    function generarUsuario() {
+        const nombre   = document.getElementById('doc-Nombre').value;
+        const apellido = document.getElementById('doc-Apellido').value;
+        const usuario  = construirUsuario(nombre, apellido, sufijo);
+        const input    = document.getElementById('doc-Usuario');
+        const info     = document.getElementById('doc-usuario-info');
+        input.value = usuario;
+        if (usuario.length >= 8) {
+            const digits = (usuario.match(/\d/g) || []).length;
+            info.textContent = `✓ ${usuario.length} caracteres · ${digits} dígito(s)`;
+            info.style.color = '#00b894';
+        } else if (usuario) {
+            info.textContent = '⚠ Agrega más nombre o apellido (mínimo 8 caracteres)';
+            info.style.color = '#e17055';
+        } else {
+            info.textContent = '';
+        }
+    }
+
+    function regenerarUsuario() {
+        sufijo = generarSufijo();
+        generarUsuario();
+    }
+
+    function actualizarNombreCompleto() {
+        const nombre   = document.getElementById('doc-Nombre').value.trim();
+        const apellido = document.getElementById('doc-Apellido').value.trim();
+        document.getElementById('doc-NombreCompleto').value =
+            [nombre, apellido].filter(Boolean).join(' ');
+    }
+
     function seleccionarTitulo(btn) {
         document.querySelectorAll('#tituloBtns .btn-cfg-titulo')
                 .forEach(b => b.classList.remove('selected'));
@@ -178,7 +264,24 @@
         document.getElementById('Titulo').value = btn.getAttribute('data-valor');
     }
 
+
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const contrasena = document.getElementById('ContrasenaInput');
+        const errorSpan  = document.getElementById('contrasena-error');
+        if (!contrasena.value.trim()) {
+            e.preventDefault();
+            errorSpan.textContent = 'La contraseña es obligatoria.';
+            contrasena.classList.add('is-invalid');
+            contrasena.focus();
+        } else {
+            errorSpan.textContent = '';
+            contrasena.classList.remove('is-invalid');
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
+        // Restaurar selección de título
         const valorActual = document.getElementById('Titulo').value;
         const btns = document.querySelectorAll('#tituloBtns .btn-cfg-titulo');
         let seleccionado = false;
@@ -189,6 +292,16 @@
             }
         });
         if (!seleccionado && btns.length > 0) btns[0].classList.add('selected');
+
+        // Mostrar info si ya hay usuario (e.g. al volver con error de validación)
+        const usuario = document.getElementById('doc-Usuario').value;
+        if (usuario) {
+            const info   = document.getElementById('doc-usuario-info');
+            const digits = (usuario.match(/\d/g) || []).length;
+            info.textContent = `✓ ${usuario.length} caracteres · ${digits} dígito(s)`;
+            info.style.color = '#00b894';
+        }
+
         if (window.feather) feather.replace();
     });
 </script>

@@ -9,7 +9,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Key]
         public int Id { get; set; }
 
-        // ── Nombre: se mantiene para compatibilidad con el flujo anterior ──
+
         [StringLength(200)]
         [Display(Name = "Nombre del Curso")]
         public string Nombre { get; set; } = string.Empty;
@@ -24,7 +24,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Periodo")]
         public string Periodo { get; set; } = string.Empty;
 
-        // ── Campos del nuevo flujo de Gestion de Cursos ──────────────────
+
+
 
         [Display(Name = "Grado")]
         public int? GradoId { get; set; }
@@ -36,7 +37,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Seccion")]
         public string? Seccion { get; set; }
 
-        // Docente tutor / maestro guia del curso
+        // maestro guia del curso
         [Display(Name = "Docente Tutor")]
         public int? DocenteTutorId { get; set; }
 
@@ -45,11 +46,11 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
 
         public bool Activo { get; set; } = true;
 
-        // ── Navegacion ───────────────────────────────────────────────────
+
         public ICollection<Estudiante>        Estudiantes        { get; set; } = new List<Estudiante>();
         public ICollection<AsignacionDocente> AsignacionDocentes { get; set; } = new List<AsignacionDocente>();
 
-        // ── Nombre para mostrar en UI ────────────────────────────────────
+
         [NotMapped]
         public string NombreCompleto =>
             Grado != null

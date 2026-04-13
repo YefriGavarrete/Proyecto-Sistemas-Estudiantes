@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Proyecto_Evaluacion_Estudiantes.Data;
+using Proyecto_Evaluacion_Estudiantes.Helpers;
 using Proyecto_Evaluacion_Estudiantes.Models;
 
 namespace Proyecto_Evaluacion_Estudiantes.Controllers
@@ -11,18 +12,15 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _env;
         private readonly IMemoryCache _cache;
 
         public HomeController(
             ILogger<HomeController> logger,
             ApplicationDbContext context,
-            IWebHostEnvironment env,
             IMemoryCache cache)
         {
             _logger  = logger;
             _context = context;
-            _env     = env;
             _cache   = cache;
         }
 
@@ -101,7 +99,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 TituloUsuario       = HttpContext.Session.GetString("TituloDocente") ?? "Docente",
                 CodigoUsuario       = HttpContext.Session.GetString("CodigoDocente") ?? "---",
                 Sistema             = "EduPath AI",
-                Periodo             = "2026-1",
+                Periodo             = PeriodoAcademico.ObtenerPeriodoDescriptivo(),
                 EsAdmin             = false,
                 ActiveMenu          = "Dashboard",
                 TotalEstudiantes    = total,
@@ -229,8 +227,6 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 vm.Usuario        = admin.NombreUsuario;
                 vm.Rol            = "Administrador";
                 vm.Codigo         = $"ADM-{admin.Id:D3}";
-                vm.TieneFoto      = admin.TieneFoto;
-                vm.FotoUrl        = admin.FotoUrl;
             }
             else
             {
@@ -246,8 +242,6 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 vm.Correo         = docente.Correo;
                 vm.FechaCreacion  = docente.FechaCreacion;
                 vm.UltimoAcceso   = docente.UltimoAcceso;
-                vm.TieneFoto      = docente.TieneFoto;
-                vm.FotoUrl        = docente.FotoUrl;
             }
 
 
@@ -261,123 +255,6 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST: /Home/Perfil (subida de foto)
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [RequestSizeLimit(2_097_152)]
-        [RequestFormLimits(MultipartBodyLengthLimit = 2_097_152)]
-        public async Task<IActionResult> Perfil(PerfilViewModel vm)
-        {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("NombreDocente")))
-                return RedirectToAction(nameof(IniciarSesion));
-
-            string rol = HttpContext.Session.GetString("Rol") ?? "Docente";
-
-            if (vm.FotoFile == null || vm.FotoFile.Length == 0)
-            {
-                TempData["ErrorMessage"] = "Selecciona una imagen antes de guardar.";
-                return RedirectToAction(nameof(Perfil));
-            }
-
-            var extensionesPermitidas = new[] { ".jpg", ".jpeg", ".png", ".webp" };
-            var extension = Path.GetExtension(vm.FotoFile.FileName).ToLowerInvariant();
-
-            if (!extensionesPermitidas.Contains(extension))
-            {
-                TempData["ErrorMessage"] = "Formato no permitido. Usa JPG, PNG o WEBP.";
-                return RedirectToAction(nameof(Perfil));
-            }
-
-            if (vm.FotoFile.Length > 2 * 1024 * 1024)
-            {
-                TempData["ErrorMessage"] = "La imagen no puede superar los 2 MB.";
-                return RedirectToAction(nameof(Perfil));
-            }
-
-            // _env.WebRootPath apunta a wwwroot correctamente en Linux y Windows
-            string carpeta = Path.Combine(_env.WebRootPath, "uploads", "fotos");
-            Directory.CreateDirectory(carpeta);
-
-            if (rol == "Admin")
-            {
-                int.TryParse(HttpContext.Session.GetString("AdminId"), out int adminId);
-                var admin = await _context.Administradores.FirstOrDefaultAsync(a => a.Id == adminId);
-                if (admin == null) return RedirectToAction(nameof(IniciarSesion));
-
-                EliminarFotoAnterior(admin.FotoUrl);
-
-                string nombreArchivo = $"ADM-{adminId:D3}{extension}";
-                await GuardarArchivoAsync(vm.FotoFile, Path.Combine(carpeta, nombreArchivo));
-                admin.FotoUrl = $"/uploads/fotos/{nombreArchivo}";
-            }
-            else
-            {
-                int.TryParse(HttpContext.Session.GetString("DocenteId"), out int docenteId);
-                var docente = await _context.Docentes.FirstOrDefaultAsync(d => d.Id == docenteId);
-                if (docente == null) return RedirectToAction(nameof(IniciarSesion));
-
-                EliminarFotoAnterior(docente.FotoUrl);
-
-                string nombreArchivo = $"DOC-{docenteId:D3}{extension}";
-                await GuardarArchivoAsync(vm.FotoFile, Path.Combine(carpeta, nombreArchivo));
-                docente.FotoUrl = $"/uploads/fotos/{nombreArchivo}";
-            }
-
-            await _context.SaveChangesAsync();
-            _logger.LogInformation("Foto de perfil actualizada — Rol: {Rol}", rol);
-            TempData["MensajeExito"] = "Foto de perfil actualizada correctamente.";
-            return RedirectToAction(nameof(Perfil));
-        }
-
-
-
-        // ── GET: /Home/Foto ───────────────────────────────────────
-        // Redirige a la URL estática. El <img onerror> del layout hace fallback al logo.
-        [HttpGet]
-        public async Task<IActionResult> Foto()
-        {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("NombreDocente")))
-                return NotFound();
-
-            string rol      = HttpContext.Session.GetString("Rol") ?? "Docente";
-            string? fotoUrl = null;
-
-            if (rol == "Admin")
-            {
-                int.TryParse(HttpContext.Session.GetString("AdminId"), out int adminId);
-                fotoUrl = await _context.Administradores
-                    .Where(a => a.Id == adminId)
-                    .Select(a => a.FotoUrl)
-                    .FirstOrDefaultAsync();
-            }
-            else
-            {
-                int.TryParse(HttpContext.Session.GetString("DocenteId"), out int docenteId);
-                fotoUrl = await _context.Docentes
-                    .Where(d => d.Id == docenteId)
-                    .Select(d => d.FotoUrl)
-                    .FirstOrDefaultAsync();
-            }
-
-            if (string.IsNullOrEmpty(fotoUrl))
-                return NotFound();
-
-            return Redirect(fotoUrl);
-        }
-        private void EliminarFotoAnterior(string? fotoUrl)
-        {
-            if (string.IsNullOrEmpty(fotoUrl)) return;
-            var rutaFisica = Path.Combine(_env.WebRootPath,
-                fotoUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
-            if (System.IO.File.Exists(rutaFisica))
-                System.IO.File.Delete(rutaFisica);
-        }
-
-        private static async Task GuardarArchivoAsync(IFormFile archivo, string rutaDestino)
-        {
-            using var stream = new FileStream(rutaDestino, FileMode.Create);
-            await archivo.CopyToAsync(stream);
-        }
 
 
 

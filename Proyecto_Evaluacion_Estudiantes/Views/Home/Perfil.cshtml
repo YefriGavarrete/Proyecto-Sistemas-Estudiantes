@@ -18,55 +18,17 @@
             </div>
         </div>
 
-        @if (TempData["MensajeExito"] != null)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i data-feather="check-circle" class="me-2 ico-azul"></i>
-                @TempData["MensajeExito"]
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        }
-        @if (TempData["ErrorMessage"] != null)
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i data-feather="alert-circle" class="me-2"></i>
-                @TempData["ErrorMessage"]
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        }
-
         <div class="row">
 
-            <!-- Columna izquierda: avatar + subida de foto -->
+            <!-- Columna izquierda: avatar con iniciales -->
             <div class="col-xl-4 col-lg-4 col-md-5 mb-4">
                 <div class="card h-100 perfil-card-rol-@rolSlug">
                     <div class="card-body d-flex flex-column align-items-center text-center p-4">
 
-                        <div class="perfil-avatar-wrapper">
-                            @if (Model.TieneFoto)
-                            {
-                                <img id="avatarImg"
-                                     src="@Model.FotoUrl"
-                                     alt="Foto de perfil"
-                                     class="perfil-avatar-img perfil-avatar-borde-@rolSlug"
-                                     onerror="this.style.display='none';document.getElementById('avatarIcono').style.display='flex';" />
-
-
-
-                                <div id="avatarIcono"
-                                     class="perfil-avatar-circle perfil-avatar-borde-@rolSlug d-none">
-                                    @Model.Iniciales
-                                </div>
-                            }
-                            else
-                            {
-                                <div id="avatarImg"
-                                     class="perfil-avatar-circle perfil-avatar-borde-@rolSlug">
-                                    @Model.Iniciales
-                                </div>
-                                <img id="avatarPreview" src="#" alt=""
-                                     class="perfil-avatar-img perfil-avatar-borde-@rolSlug d-none" />
-                            }
+                        <div class="perfil-avatar-wrapper mb-3">
+                            <div class="perfil-avatar-circle perfil-avatar-borde-@rolSlug">
+                                @Model.Iniciales
+                            </div>
                             <span class="perfil-avatar-online"></span>
                         </div>
 
@@ -80,49 +42,14 @@
                             @Model.Rol
                         </span>
 
-                        <p class="perfil-codigo">
+                        <p class="perfil-codigo mt-2">
                             <i data-feather="hash" class="ico-13"></i>
                             @Model.Codigo
                         </p>
 
-                        <hr class="w-100" />
-
-                        <form asp-action="Perfil" asp-controller="Home"
-                              method="post" enctype="multipart/form-data"
-                              id="formFoto" class="w-100">
-                            @Html.AntiForgeryToken()
-
-                            <input type="file" id="inputFoto" name="FotoFile"
-                                   accept="image/jpeg,image/png,image/webp"
-                                   class="d-none" />
-
-                            <small class="text-muted d-block mb-3 perfil-hint">
-                                JPG, PNG o WEBP · Máximo 2 MB
-                            </small>
-
-                            <button type="button" id="btnElegir"
-                                    onclick="document.getElementById('inputFoto').click()"
-                                    class="perfil-btn-elegir mb-2">
-                                <i data-feather="image" class="ico-15"></i>
-                                Elegir foto
-                            </button>
-
-                            <small id="nombreArchivo" class="text-muted d-block mb-3 perfil-hint"></small>
-
-                            <button type="submit" id="btnGuardar"
-                                    class="perfil-btn-guardar perfil-badge-bg-@rolSlug"
-                                    style="display:none">
-                                <i data-feather="save" class="ico-15 ico-blanco"></i>
-                                Guardar foto
-                            </button>
-                        </form>
-
                     </div>
                 </div>
             </div>
-
-
-
 
             <!-- Columna derecha: datos de cuenta -->
             <div class="col-xl-8 col-lg-8 col-md-7 mb-4">
@@ -252,40 +179,6 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     if (window.feather) feather.replace();
-
-    const inputFoto     = document.getElementById('inputFoto');
-    const btnGuardar    = document.getElementById('btnGuardar');
-    const nombreArchivo = document.getElementById('nombreArchivo');
-    const avatarImg     = document.getElementById('avatarImg');     
-    const avatarIcono   = document.getElementById('avatarIcono');   // fallback de iniciales (solo cuando TieneFoto=true)
-    const avatarPreview = document.getElementById('avatarPreview'); // img de previsualización (solo cuando TieneFoto=false)
-
-    inputFoto?.addEventListener('change', function () {
-
-
-        const file = this.files[0];
-        if (!file) return;
-
-        nombreArchivo.textContent = file.name;
-
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            if (avatarPreview) {
-                // Caso: sin foto guardada — ocultar círculo de iniciales, mostrar preview
-                avatarImg.style.display = 'none';
-                avatarPreview.src = e.target.result;
-                avatarPreview.classList.remove('d-none'); // d-none usa !important; style inline no lo sobrescribe
-            } else if (avatarImg && avatarImg.tagName === 'IMG') {
-                // Caso: foto ya guardada — reemplazar la imagen directamente
-                avatarImg.src = e.target.result;
-                if (avatarIcono) avatarIcono.style.display = 'none';
-            }
-        };
-        reader.readAsDataURL(file);
-
-        if (btnGuardar) btnGuardar.style.display = 'flex';
-        if (window.feather) feather.replace();
-    });
 });
 </script>
 }

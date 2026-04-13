@@ -33,7 +33,10 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         public string Contrasena { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El correo es obligatorio.")]
-        [EmailAddress(ErrorMessage = "Formato de correo inválido.")]
+
+
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,10}$",
+            ErrorMessage = "Ingrese un correo electrónico válido (ej: usuario@dominio.com).")]
         [StringLength(150)]
         [Display(Name = "Correo Electrónico")]
         public string Correo { get; set; } = string.Empty;
@@ -49,18 +52,6 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
 
         // Relación 1:N con Cursos
         public ICollection<Curso> Cursos { get; set; } = new List<Curso>();
-
-        // ── Foto de perfil (ruta relativa guardada en BD) ────────
-        /// <summary>
-        /// Ruta relativa al archivo de imagen en wwwroot.
-        /// Ejemplo: "/uploads/fotos/DOC-001.jpg"
-        /// Null = sin foto (mostrar avatar genérico con iniciales).
-        /// </summary>
-        [StringLength(300)]
-        public string? FotoUrl { get; set; }
-
-        [NotMapped]
-        public bool TieneFoto => !string.IsNullOrEmpty(FotoUrl);
 
         [NotMapped]
         public string NombreConTitulo => $"{Titulo} {NombreCompleto}";
