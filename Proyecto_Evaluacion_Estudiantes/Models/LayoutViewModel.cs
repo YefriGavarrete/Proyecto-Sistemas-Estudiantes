@@ -1,3 +1,5 @@
+using Proyecto_Evaluacion_Estudiantes.Helpers;
+
 namespace Proyecto_Evaluacion_Estudiantes.Models
 {
     /*
@@ -12,7 +14,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         public string CodigoUsuario { get; set; } = string.Empty;
 
         public string Sistema { get; set; } = "EduPath AI";
-        public string Periodo { get; set; } = "2026-1";
+        public string Periodo { get; set; } = PeriodoAcademico.ObtenerPeriodoDescriptivo();
 
         /// Indica si el usuario autenticado es administrador.
         public bool EsAdmin { get; set; } = false;

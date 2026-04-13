@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Evaluacion_Estudiantes.Data;
+using Proyecto_Evaluacion_Estudiantes.Helpers;
 using Proyecto_Evaluacion_Estudiantes.Models;
 
 namespace Proyecto_Evaluacion_Estudiantes.Controllers
@@ -26,7 +27,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             ViewData["TituloDocente"] = HttpContext.Session.GetString("TituloDocente") ?? "Administrador";
             ViewData["CodigoDocente"] = HttpContext.Session.GetString("CodigoDocente") ?? "---";
             ViewData["CursoActual"]   = "EduPath AI";
-            ViewData["Periodo"]       = "2026-1";
+            ViewData["Periodo"]       = PeriodoAcademico.ObtenerPeriodoDescriptivo();
             ViewData["ActiveMenu"]    = activeMenu;
             ViewData["EsAdmin"]       = true;
         }
@@ -42,7 +43,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 TituloUsuario = "Administrador",
                 CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---",
                 Sistema       = "EduPath AI",
-                Periodo       = "2026-1",
+                Periodo       = PeriodoAcademico.ObtenerPeriodoDescriptivo(),
                 EsAdmin       = true,
                 ActiveMenu    = "Administrador",
 
@@ -61,6 +62,8 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
 
             return View(vm);
         }
+
+
 
         [HttpGet]
         public IActionResult ConfiguracionUsuarios()
@@ -93,14 +96,20 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             ModelState.Remove("FechaCreacion");
             ModelState.Remove("Cursos");
 
-            if (!ModelState.IsValid)
-                return View(modelo);
-
-            // Buscar docente existente o crear uno nuevo
+            // Buscar docente existente o crear uno nuevo (antes de validar contraseña)
             var docente = await _context.Docentes
                 .FirstOrDefaultAsync(d => d.Usuario == modelo.Usuario);
 
-            if (docente == null)
+            bool esNuevo = docente == null;
+
+            // Para docentes nuevos la contraseña es obligatoria
+            if (esNuevo && string.IsNullOrWhiteSpace(ContrasenaInput))
+                ModelState.AddModelError("ContrasenaInput", "La contraseña es obligatoria para un nuevo catedrático.");
+
+            if (!ModelState.IsValid)
+                return View(modelo);
+
+            if (esNuevo)
             {
                 docente = new Docente
                 {
@@ -110,15 +119,13 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 _context.Docentes.Add(docente);
             }
 
-            docente.NombreCompleto = modelo.NombreCompleto.Trim();
-            docente.Titulo         = modelo.Titulo.Trim();
-            docente.Correo         = modelo.Correo.Trim();
-            docente.Activo         = modelo.Activo;
+            docente!.NombreCompleto = modelo.NombreCompleto.Trim();
+            docente.Titulo          = modelo.Titulo.Trim();
+            docente.Correo          = modelo.Correo.Trim();
+            docente.Activo          = modelo.Activo;
 
             if (!string.IsNullOrWhiteSpace(ContrasenaInput))
                 docente.Contrasena = BCrypt.Net.BCrypt.HashPassword(ContrasenaInput, 11);
-            else if (string.IsNullOrEmpty(docente.Contrasena))
-                docente.Contrasena = BCrypt.Net.BCrypt.HashPassword("Cambiar123!", 11);
 
             await _context.SaveChangesAsync();
 
@@ -131,7 +138,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return RedirectToAction(nameof(ConfiguracionUsuarios));
         }
 
-        // ── GET: /Administradores/ConfiguracionAdministradores
+        // GET: ConfiguracionAdministradores
         [HttpGet]
         public IActionResult ConfiguracionAdministradores()
         {
@@ -148,7 +155,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(modelo);
         }
 
-        // ── POST: /Administradores/ConfiguracionAdministradores
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfiguracionAdministradores(
@@ -163,7 +170,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             // Contrasena no viene del form — se recibe como ContrasenaInput por separado
             ModelState.Remove("Contrasena");
 
-            // Validaciones de negocio que el modelo no puede expresar con atributos
+
             if (string.IsNullOrWhiteSpace(ContrasenaInput) || ContrasenaInput.Length < 8)
                 ModelState.AddModelError("ContrasenaInput", "La contraseña debe tener mínimo 8 caracteres.");
 
@@ -209,7 +216,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
         }
 
 
-        private async Task<ConfiguracionCursosViewModel> CrearVmCursos()
+        async Task<ConfiguracionCursosViewModel> CrearVmCursos()
         {
             return new ConfiguracionCursosViewModel
             {
@@ -217,7 +224,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 TituloUsuario = "Administrador",
                 CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---",
                 Sistema       = "EduPath AI",
-                Periodo       = "2026-1",
+                Periodo       = PeriodoAcademico.ObtenerPeriodoDescriptivo(),
                 EsAdmin       = true,
                 ActiveMenu    = "Administrador",
                 Cursos        = await _context.Cursos
@@ -242,7 +249,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 ModelState.Remove(key);
         }
 
-        // ── GET: /Administradores/ConfiguracionCursos ──────────
+        // GET: ConfiguracionCursos
         [HttpGet]
         public async Task<IActionResult> ConfiguracionCursos(int? editarId)
         {
@@ -270,7 +277,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             return View(vm);
         }
 
-        // ── POST: /Administradores/ConfiguracionCursos (Crear) ─
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfiguracionCursos(ConfiguracionCursosViewModel vm)
@@ -411,7 +418,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 TituloUsuario = "Administrador",
                 CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---",
                 Sistema       = "EduPath AI",
-                Periodo       = "2026-1",
+                Periodo       = PeriodoAcademico.ObtenerPeriodoDescriptivo(),
                 EsAdmin       = true,
                 ActiveMenu    = "Academica",
                 Grados        = await _context.Grados.OrderBy(g => g.Orden).ToListAsync()
@@ -506,7 +513,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 TituloUsuario = "Administrador",
                 CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---",
                 Sistema       = "EduPath AI",
-                Periodo       = "2026-1",
+                Periodo       = PeriodoAcademico.ObtenerPeriodoDescriptivo(),
                 EsAdmin       = true,
                 ActiveMenu    = "Academica",
                 Asignaturas   = await _context.Asignaturas
@@ -954,7 +961,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
                 TituloUsuario = "Administrador",
                 CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---",
                 Sistema       = "EduPath AI",
-                Periodo       = "2026-1",
+                Periodo       = PeriodoAcademico.ObtenerPeriodoDescriptivo(),
                 EsAdmin       = true,
                 ActiveMenu    = "Cursos",
                 CursosItems   = cursos.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Evaluacion_Estudiantes.Data;
+using Proyecto_Evaluacion_Estudiantes.ML;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 );
 
 builder.Services.AddControllersWithViews();
+
+// ── Servicio ML.NET — se entrena una sola vez al arrancar ────────────
+builder.Services.AddSingleton<PrediccionService>();
 
 // ── Caché en memoria (usado por throttling de login) ──────────
 builder.Services.AddMemoryCache();

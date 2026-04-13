@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Evaluacion_Estudiantes.Data;
+using Proyecto_Evaluacion_Estudiantes.Helpers;
 using Proyecto_Evaluacion_Estudiantes.Models;
 
 namespace Proyecto_Evaluacion_Estudiantes.Controllers
@@ -33,7 +34,7 @@ namespace Proyecto_Evaluacion_Estudiantes.Controllers
             vm.TituloUsuario = HttpContext.Session.GetString("TituloDocente") ?? "Docente";
             vm.CodigoUsuario = HttpContext.Session.GetString("CodigoDocente") ?? "---";
             vm.Sistema = "EduPath AI";
-            vm.Periodo = "2026-1";
+            vm.Periodo = PeriodoAcademico.ObtenerPeriodoDescriptivo();
             vm.EsAdmin = HttpContext.Session.GetString("Rol") == "Admin";
             vm.ActiveMenu = activeMenu;
         }

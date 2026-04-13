@@ -25,21 +25,17 @@ namespace Proyecto_Evaluacion_Estudiantes.Models
         [Display(Name = "Nombre de Usuario")]
         public string NombreUsuario { get; set; } = string.Empty;
 
-        /// <summary>Hash BCrypt de la contraseña. No se enlaza desde el formulario.</summary>
+        //Hash BCrypt de la contraseña. No se enlaza desde el formulario.
         [StringLength(256)]
         public string Contrasena { get; set; } = string.Empty;
 
         [Display(Name = "Activo")]
         public bool Activo { get; set; } = true;
 
-        /// Ruta relativa al archivo de imagen en wwwroot.
-        /// Ejemplo: "/uploads/fotos/ADM-001.jpg"
-        /// Null = sin foto (mostrar avatar genérico con iniciales).
-        [StringLength(300)]
-        public string? FotoUrl { get; set; }
 
-        [NotMapped]
-        public bool TieneFoto => !string.IsNullOrEmpty(FotoUrl);
+
+
+
 
         [NotMapped]
         public string NombreCompleto => $"{Nombre} {Apellido}";

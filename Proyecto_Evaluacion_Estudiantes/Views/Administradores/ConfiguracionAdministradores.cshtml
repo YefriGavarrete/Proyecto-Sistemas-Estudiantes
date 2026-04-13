@@ -53,7 +53,7 @@
                 <form asp-controller="Administradores" asp-action="ConfiguracionAdministradores" method="post">
                     @Html.AntiForgeryToken()
 
-                    <!-- Nombre y Apellido — campos de Administradores en BD -->
+
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label asp-for="Nombre" class="form-label fw-semibold" style="color:#1a2b4a;">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
 
-                    <!-- NombreUsuario — campo de Administradores en BD -->
+
                     <div class="mb-3">
                         <label asp-for="NombreUsuario" class="form-label fw-semibold" style="color:#1a2b4a;">
                             <i data-feather="at-sign" class="me-1" style="color:#00b4d8;"></i>
@@ -100,7 +100,7 @@
                         <span asp-validation-for="NombreUsuario" class="text-danger d-block" style="font-size:12px;"></span>
                     </div>
 
-                    <!-- Contrasena — campo de Administradores en BD (se recibe por separado) -->
+
                     <div class="mb-3">
                         <label class="form-label fw-semibold" style="color:#1a2b4a;">
                             <i data-feather="lock" class="me-1" style="color:#00b4d8;"></i>
@@ -115,7 +115,7 @@
                         </span>
                     </div>
 
-                    <!-- Activo -->
+
                     <div class="mb-4">
                         <div class="form-check form-switch">
                             <input asp-for="Activo" class="form-check-input" type="checkbox" role="switch" />
@@ -125,7 +125,7 @@
                         </div>
                     </div>
 
-                    <!-- Botones -->
+
                     <div class="d-flex gap-2 justify-content-end">
                         <a asp-controller="Administradores" asp-action="Index"
                            class="btn-cancelar-form">
@@ -189,7 +189,7 @@
         } else {
             info.textContent = '';
         }
-    }
+    } 
 
     function regenerarUsuario() {
         sufijo = generarSufijo();

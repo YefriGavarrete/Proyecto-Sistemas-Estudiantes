@@ -25,8 +25,15 @@
     string titulo  = perfil?.TituloUsuario ?? ViewData["TituloDocente"]?.ToString() ?? "Docente";
     string codigo  = perfil?.CodigoUsuario ?? ViewData["CodigoDocente"]?.ToString() ?? "---";
     string sistema = perfil?.Sistema       ?? ViewData["CursoActual"]?.ToString()   ?? "EduPath AI";
-    string periodo = perfil?.Periodo       ?? ViewData["Periodo"]?.ToString()       ?? "2026-1";
+    string periodo = perfil?.Periodo       ?? ViewData["Periodo"]?.ToString()       ?? Proyecto_Evaluacion_Estudiantes.Helpers.PeriodoAcademico.ObtenerPeriodoDescriptivo();
     string menu    = perfil?.ActiveMenu    ?? ViewData["ActiveMenu"]?.ToString()    ?? "";
+
+    // Iniciales para avatar (máximo 2 caracteres)
+    var partes     = nombre.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    string iniciales = partes.Length >= 2
+        ? $"{partes[0][0]}{partes[1][0]}".ToUpper()
+        : nombre.Length >= 2 ? nombre[..2].ToUpper() : nombre.ToUpper();
+    string avatarColor = esAdmin ? "#7c3aed" : "#0096c7";
 }
     <div class="main-wrapper">
 
@@ -67,87 +74,41 @@
 
 
 
-                <!-- Notiificaciones-->
-                <li class="nav-item dropdown">
-                    <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                        <img src="~/img/icons/notification-bing.svg" alt="img"> <span class="badge rounded-pill">4</span>
+                <!-- Notificaciones -->
+                <li class="nav-item dropdown" id="noti-dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown" id="noti-toggle">
+                        <i class="fa fa-bell" style="font-size:20px;color:#0d6efd;"></i>
+                        <span class="badge rounded-pill bg-primary" id="noti-badge" style="display:none;">1</span>
                     </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
-                            <span class="notification-title">Notifications</span>
-                            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                            <span class="notification-title">Notificaciones</span>
+                            <a href="javascript:void(0)" class="clear-noti" id="noti-clear"> Limpiar Todo </a>
                         </div>
                         <div class="noti-content">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="activities.html">
+                            <ul class="notification-list" id="noti-list">
+                                <li class="notification-message" id="noti-welcome">
+                                    <a href="javascript:void(0);">
                                         <div class="media d-flex">
-                                            <span class="avatar flex-shrink-0">
-                                                <img alt="" src="~/img/profiles/avatar-02.jpg">
+                                            <span class="avatar flex-shrink-0"
+                                                  style="width:40px;height:40px;border-radius:50%;background:#0d6efd;
+                                                         display:flex;align-items:center;justify-content:center;">
+                                                <i class="fa fa-user" style="color:#fff;font-size:18px;"></i>
                                             </span>
                                             <div class="media-body flex-grow-1">
-                                                <p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-                                                <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+                                                <p class="noti-details">
+                                                    ¡Bienvenido de vuelta, <span class="noti-title">@nombre</span>!
+                                                    Tu sesión está activa en EduPath AI.
+                                                </p>
+                                                <p class="noti-time"><span class="notification-time" id="noti-time-label">Ahora</span></p>
                                             </div>
                                         </div>
                                     </a>
                                 </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media d-flex">
-                                            <span class="avatar flex-shrink-0">
-                                                <img alt="" src="~/img/profiles/avatar-03.jpg">
-                                            </span>
-                                            <div class="media-body flex-grow-1">
-                                                <p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-                                                <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media d-flex">
-                                            <span class="avatar flex-shrink-0">
-                                                <img alt="" src="~/img/profiles/avatar-06.jpg">
-                                            </span>
-                                            <div class="media-body flex-grow-1">
-                                                <p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-                                                <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media d-flex">
-                                            <span class="avatar flex-shrink-0">
-                                                <img alt="" src="~/img/profiles/avatar-17.jpg">
-                                            </span>
-                                            <div class="media-body flex-grow-1">
-                                                <p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-                                                <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media d-flex">
-                                            <span class="avatar flex-shrink-0">
-                                                <img alt="" src="~/img/profiles/avatar-13.jpg">
-                                            </span>
-                                            <div class="media-body flex-grow-1">
-                                                <p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-                                                <p class="noti-time"><span class="notification-time">2 days ago</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
+                                <li class="notification-message text-center text-muted py-2" id="noti-empty" style="display:none;">
+                                    <small>No hay notificaciones</small>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="activities.html">View all Notifications</a>
                         </div>
                     </div>
                 </li>
@@ -162,9 +123,12 @@
                 <li class="nav-item dropdown has-arrow main-drop">
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                         <span class="user-img">
-                            <img src="/Home/Foto"
-                                 alt=""
-                                 onerror="this.src='/img/logoInstitucional.png'">
+                            <span style="display:inline-flex;align-items:center;justify-content:center;
+                                         width:36px;height:36px;border-radius:50%;
+                                         background:@avatarColor;color:#fff;
+                                         font-size:13px;font-weight:700;letter-spacing:.5px;">
+                                @iniciales
+                            </span>
                             <span class="status online"></span>
                         </span>
                     </a>
@@ -172,9 +136,12 @@
                         <div class="profilename">
                             <div class="profileset">
                                 <span class="user-img">
-                                    <img src="/Home/Foto"
-                                         alt=""
-                                         onerror="this.src='/img/logoInstitucional.png'">
+                                    <span style="display:inline-flex;align-items:center;justify-content:center;
+                                                 width:36px;height:36px;border-radius:50%;
+                                                 background:@avatarColor;color:#fff;
+                                                 font-size:13px;font-weight:700;letter-spacing:.5px;">
+                                        @iniciales
+                                    </span>
                                     <span class="status online"></span>
                                 </span>
                                 <div class="profilesets">
@@ -208,10 +175,13 @@
                 <div class="sidebar-profile" style="padding:18px 16px 14px;border-bottom:2px solid rgba(0,180,216,0.25);background:linear-gradient(135deg,#0d1b2a 0%,#1a3a5c 100%);">
                     <div class="d-flex align-items-center mb-2">
                         <span class="user-img me-2" style="position:relative;">
-                            <img src="/Home/Foto"
-                                 alt="Usuario"
-                                 onerror="this.src='/img/logoInstitucional.png'"
-                                 style="width:44px;height:44px;border-radius:50%;border:2px solid #00b4d8;object-fit:cover;">
+                            <span style="display:inline-flex;align-items:center;justify-content:center;
+                                         width:44px;height:44px;border-radius:50%;
+                                         border:2px solid #00b4d8;
+                                         background:@avatarColor;color:#fff;
+                                         font-size:15px;font-weight:700;letter-spacing:.5px;">
+                                @iniciales
+                            </span>
                             <span style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;
                                          background:#00b894;border-radius:50%;border:2px solid #0d1b2a;"></span>
                         </span>
@@ -283,7 +253,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Estudiantes" asp-action="Prediccion">
+                                        <a asp-controller="Prediccion" asp-action="Buscar">
                                             <i data-feather="cpu" class="me-1"></i> Predicción IA (Riesgo)
                                         </a>
                                     </li>
@@ -334,24 +304,17 @@
 
 
 
-                            <!-- Analisis de Reporte-->
-                            <!--
-
-                                   <li class="submenu (menu == "Analisis Reportes" ? "active" : "")"  >
+                            <!-- Análisis IA (solo Docentes) -->
+                            <li class="submenu @(menu == "Prediccion" ? "active" : "")">
                                 <a href="javascript:void(0);">
-                                    <img src="~/img/icons/time.svg" alt="img">
-                                    <span> Analisis de Reportes </span>
+                                    <i class="fa fa-brain" style="width:16px;color:#48cae4;"></i>
+                                    <span> Análisis IA</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a asp-controller="" asp-action="">
-                                            <i data-feather="bar-chart-2" class="me-1"></i> Reporte Académico General
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="" asp-action="Riesgo">
-                                            <i data-feather="alert-triangle" class="me-1"></i> Estudiantes en Riesgo
+                                        <a asp-controller="Prediccion" asp-action="Buscar">
+                                            <i data-feather="cpu" class="me-1"></i> Predicción de Riesgo
                                         </a>
                                     </li>
                                 </ul>
@@ -360,21 +323,7 @@
 
 
 
-
-
-
-
-
-                            -->
-
-
-
-
                         }
-
-
-
-
 
                         <!-- Codigo modificado por el diseño-->
                         @if (esAdmin)
@@ -540,6 +489,66 @@
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+    // ── Notificaciones de bienvenida ──────────────────────────────────────────
+    (function () {
+        var SESSION_KEY = 'edupath_noti_cleared_@System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(nombre)';
+        var READ_KEY    = 'edupath_noti_read_@System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(nombre)';
+
+        var $badge   = $('#noti-badge');
+        var $welcome = $('#noti-welcome');
+        var $empty   = $('#noti-empty');
+        var $toggle  = $('#noti-toggle');
+        var $clear   = $('#noti-clear');
+
+        function isCleared() { return sessionStorage.getItem(SESSION_KEY) === '1'; }
+        function isRead()    { return sessionStorage.getItem(READ_KEY)    === '1'; }
+
+        function renderState() {
+            if (isCleared()) {
+                $welcome.hide();
+                $empty.show();
+                $badge.hide();
+            } else {
+                $welcome.show();
+                $empty.hide();
+                $badge.toggle(!isRead());
+            }
+        }
+
+        // Al abrir el dropdown: marcar como leído y ocultar badge
+        $toggle.on('click', function () {
+            if (!isCleared()) {
+                sessionStorage.setItem(READ_KEY, '1');
+                $badge.hide();
+            }
+        });
+
+        // Limpiar Todo: elimina la notificación
+        $clear.on('click', function () {
+            sessionStorage.setItem(SESSION_KEY, '1');
+            renderState();
+            // Cerrar dropdown
+            $toggle.dropdown('hide');
+        });
+
+        // Estado inicial
+        renderState();
+
+        // Tiempo relativo simple
+        if (!isCleared()) {
+            var loginTime = sessionStorage.getItem('edupath_login_time');
+            if (!loginTime) {
+                loginTime = Date.now();
+                sessionStorage.setItem('edupath_login_time', loginTime);
+            }
+            var diff = Math.floor((Date.now() - parseInt(loginTime)) / 60000);
+            var label = diff < 1 ? 'Hace un momento' : 'Hace ' + diff + ' min';
+            $('#noti-time-label').text(label);
+        }
+    })();
+    </script>
 
 </body>
 </html>
