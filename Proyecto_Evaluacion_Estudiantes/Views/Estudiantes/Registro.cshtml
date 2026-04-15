@@ -10,14 +10,13 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="user-plus" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="user-plus" class="icon-page-header me-2"></i>
                     Registro de Estudiantes
                 </h4>
                 <h6>EduPath AI — Ingresa los datos del nuevo estudiante</h6>
             </div>
             <div class="page-btn d-flex gap-2 flex-wrap">
-                <a asp-controller="Estudiantes" asp-action="SubirNotas"
-                   class="btn-nav-est">
+                <a asp-controller="Estudiantes" asp-action="SubirNotas" class="btn-nav-est">
                     <i data-feather="upload"></i> Subir Notas
                 </a>
             </div>
@@ -26,7 +25,7 @@
         @if (TempData["MensajeExito"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                <i data-feather="check-circle" class="icon-primary me-2"></i>
                 @TempData["MensajeExito"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -43,13 +42,12 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom:2px solid #e2e8f0;">
-                    <div class="admin-stat-icon me-3"
-                         style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                        <i data-feather="user-plus" style="color:#fff;width:20px;height:20px;"></i>
+                <div class="d-flex align-items-center mb-4 pb-3 card-section-divider">
+                    <div class="admin-stat-icon stat-icon-blue me-3">
+                        <i data-feather="user-plus" class="icon-stat-20w"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Datos del Estudiante</h5>
+                        <h5 class="card-section-title">Datos del Estudiante</h5>
                         <small class="text-muted">Todos los campos marcados con <span class="text-danger">*</span> son obligatorios.</small>
                     </div>
                 </div>
@@ -57,16 +55,13 @@
                 <form asp-controller="Estudiantes" asp-action="Registro" method="post">
                     @Html.AntiForgeryToken()
 
-                    <!-- ── Curso / Grado ── -->
                     <div class="row g-3 mb-4">
                         <div class="col-12">
-                            <label asp-for="CursoId" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="layers" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="CursoId" class="form-label fw-semibold label-form">
+                                <i data-feather="layers" class="icon-primary me-1"></i>
                                 Curso / Grado <span class="text-danger">*</span>
                             </label>
-                            <select asp-for="CursoId"
-                                    class="form-select form-control-edupath"
-                                    style="max-width:520px;">
+                            <select asp-for="CursoId" class="form-select form-control-edupath select-max-width">
                                 <option value="">— Selecciona el grado y sección —</option>
                                 @foreach (var item in Model.CursosDisponibles)
                                 {
@@ -76,109 +71,101 @@
                                     </option>
                                 }
                             </select>
-                            <span asp-validation-for="CursoId" class="text-danger" style="font-size:12px;"></span>
-                            <small class="text-muted">
-                                Solo se muestran los cursos en los que tienes asignación.
-                            </small>
+                            <span asp-validation-for="CursoId" class="text-danger validation-msg"></span>
+                            <small class="text-muted">Solo se muestran los cursos en los que tienes asignación.</small>
                         </div>
                     </div>
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label asp-for="Nombre" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="Nombre" class="form-label fw-semibold label-form">
+                                <i data-feather="user" class="icon-primary me-1"></i>
                                 @Html.DisplayNameFor(m => m.Nombre) <span class="text-danger">*</span>
                             </label>
                             <input asp-for="Nombre" class="form-control form-control-edupath"
                                    placeholder="Ej: Juan Carlos" maxlength="100" />
-                            <span asp-validation-for="Nombre" class="text-danger" style="font-size:12px;"></span>
+                            <span asp-validation-for="Nombre" class="text-danger validation-msg"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Apellido" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="Apellido" class="form-label fw-semibold label-form">
+                                <i data-feather="user" class="icon-primary me-1"></i>
                                 @Html.DisplayNameFor(m => m.Apellido) <span class="text-danger">*</span>
                             </label>
                             <input asp-for="Apellido" class="form-control form-control-edupath"
                                    placeholder="Ej: Pérez López" maxlength="100" />
-                            <span asp-validation-for="Apellido" class="text-danger" style="font-size:12px;"></span>
+                            <span asp-validation-for="Apellido" class="text-danger validation-msg"></span>
                         </div>
                     </div>
 
-
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label asp-for="FechaNacimiento" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="calendar" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="FechaNacimiento" class="form-label fw-semibold label-form">
+                                <i data-feather="calendar" class="icon-primary me-1"></i>
                                 @Html.DisplayNameFor(m => m.FechaNacimiento) <span class="text-danger">*</span>
                             </label>
                             <input asp-for="FechaNacimiento" type="date"
                                    class="form-control form-control-edupath"
-                                   id="fechaNac"
-                                   oninput="calcularEdad()" />
-                            <span asp-validation-for="FechaNacimiento" class="text-danger" style="font-size:12px;"></span>
+                                   id="fechaNac" oninput="calcularEdad()" />
+                            <span asp-validation-for="FechaNacimiento" class="text-danger validation-msg"></span>
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="clock" class="me-1" style="color:#00b4d8;"></i>
+                            <label class="form-label fw-semibold label-form">
+                                <i data-feather="clock" class="icon-primary me-1"></i>
                                 Edad
                             </label>
-                            <div class="form-control form-control-edupath d-flex align-items-center"
-                                 style="background:#f8fafc;cursor:default;">
-                                <span id="edadCalculada" style="color:#0096c7;font-weight:700;font-size:16px;">—</span>
-                                <span class="ms-1 text-muted" style="font-size:13px;">años</span>
+                            <div class="form-control form-control-edupath d-flex align-items-center edad-display">
+                                <span id="edadCalculada" class="edad-value-lg">—</span>
+                                <span class="ms-1 text-muted edad-years">años</span>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="Genero" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="users" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="Genero" class="form-label fw-semibold label-form">
+                                <i data-feather="users" class="icon-primary me-1"></i>
                                 @Html.DisplayNameFor(m => m.Genero)
                             </label>
                             <select asp-for="Genero" class="form-select form-control-edupath">
                                 <option value="">— Seleccionar —</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Femenino">Femenino</option>
-
                             </select>
                         </div>
                     </div>
 
-
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label asp-for="Identidad" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="credit-card" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="Identidad" class="form-label fw-semibold label-form">
+                                <i data-feather="credit-card" class="icon-primary me-1"></i>
                                 @Html.DisplayNameFor(m => m.Identidad)
                             </label>
                             <input asp-for="Identidad" class="form-control form-control-edupath"
                                    placeholder="Ej: 0000-0000-0000" maxlength="20" />
-                            <span asp-validation-for="Identidad" class="text-danger" style="font-size:12px;"></span>
+                            <span asp-validation-for="Identidad" class="text-danger validation-msg"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Telefono" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="phone" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="Telefono" class="form-label fw-semibold label-form">
+                                <i data-feather="phone" class="icon-primary me-1"></i>
                                 @Html.DisplayNameFor(m => m.Telefono)
                             </label>
                             <input asp-for="Telefono" class="form-control form-control-edupath"
                                    placeholder="Ej: +504 9999-9999" maxlength="20" />
-                            <span asp-validation-for="Telefono" class="text-danger" style="font-size:12px;"></span>
+                            <span asp-validation-for="Telefono" class="text-danger validation-msg"></span>
                         </div>
                     </div>
 
-    
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label asp-for="Correo" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="mail" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="Correo" class="form-label fw-semibold label-form">
+                                <i data-feather="mail" class="icon-primary me-1"></i>
                                 @Html.DisplayNameFor(m => m.Correo) <span class="text-danger">*</span>
                             </label>
                             <input asp-for="Correo" type="email"
                                    class="form-control form-control-edupath"
                                    placeholder="Ej: estudiante@correo.com" maxlength="150" />
-                            <span asp-validation-for="Correo" class="text-danger" style="font-size:12px;"></span>
+                            <span asp-validation-for="Correo" class="text-danger validation-msg"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Seccion" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="grid" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="Seccion" class="form-label fw-semibold label-form">
+                                <i data-feather="grid" class="icon-primary me-1"></i>
                                 @Html.DisplayNameFor(m => m.Seccion)
                             </label>
                             <select asp-for="Seccion" class="form-select form-control-edupath">
@@ -191,10 +178,9 @@
                         </div>
                     </div>
 
-  
                     <div class="mb-3">
-                        <label asp-for="Observaciones" class="form-label fw-semibold" style="color:#1a2b4a;">
-                            <i data-feather="file-text" class="me-1" style="color:#00b4d8;"></i>
+                        <label asp-for="Observaciones" class="form-label fw-semibold label-form">
+                            <i data-feather="file-text" class="icon-primary me-1"></i>
                             @Html.DisplayNameFor(m => m.Observaciones)
                         </label>
                         <textarea asp-for="Observaciones" class="form-control form-control-edupath"
@@ -202,28 +188,24 @@
                                   placeholder="Notas adicionales sobre el estudiante (opcional)"></textarea>
                     </div>
 
-
                     <div class="mb-4">
                         <div class="form-check form-switch">
                             <input type="checkbox" name="Activo" value="true"
                                    class="form-check-input" role="switch"
                                    id="chkEstActivo" @(Model.Activo ? "checked" : "") />
                             <input type="hidden" name="Activo" value="false" />
-                            <label class="form-check-label fw-semibold" for="chkEstActivo"
-                                   style="color:#1a2b4a;">
+                            <label class="form-check-label fw-semibold label-form" for="chkEstActivo">
                                 Estudiante activo en el sistema
                             </label>
                         </div>
                     </div>
 
-      
                     <div class="d-flex gap-2 justify-content-end">
-                        <a asp-controller="Estudiantes" asp-action="Index"
-                           class="btn-cancelar-form">
-                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar
+                        <a asp-controller="Estudiantes" asp-action="Index" class="btn-cancelar-form">
+                            <i data-feather="x" class="icon-14sq"></i> Cancelar
                         </a>
                         <button type="submit" class="btn-cfg-guardar">
-                            <i data-feather="save" class="me-2" style="width:16px;"></i>
+                            <i data-feather="save" class="icon-16sq me-2"></i>
                             Registrar Estudiante
                         </button>
                     </div>

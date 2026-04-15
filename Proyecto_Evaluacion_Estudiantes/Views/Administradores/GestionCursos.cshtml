@@ -11,7 +11,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="grid" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="grid" class="icon-page-header me-2"></i>
                     Gestion de Cursos
                 </h4>
                 <h6>EduPath AI - Registro de Cursos por Grado y Seccion</h6>
@@ -27,7 +27,7 @@
         @if (TempData["MensajeExito"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show alert-edupath-success" role="alert">
-                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                <i data-feather="check-circle" class="me-2 icon-primary"></i>
                 @TempData["MensajeExito"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -35,7 +35,7 @@
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i data-feather="alert-circle" class="me-2" style="color:#e17055;"></i>
+                <i data-feather="alert-circle" class="me-2 icon-danger"></i>
                 @TempData["ErrorMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -45,14 +45,12 @@
         <div class="card mb-4">
             <div class="card-body">
 
-                <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom:2px solid #e2e8f0;">
-                    <div class="admin-stat-icon me-3"
-                         style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                        <i data-feather="@(editando ? "edit-2" : "plus-circle")"
-                           style="color:#fff;width:20px;height:20px;"></i>
+                <div class="d-flex align-items-center mb-4 pb-3 card-section-divider">
+                    <div class="admin-stat-icon me-3 stat-icon-blue">
+                        <i data-feather="@(editando ? "edit-2" : "plus-circle")" class="icon-stat-20w"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">
+                        <h5 class="card-section-title">
                             @(editando ? "Editar Curso" : "Nuevo Curso")
                         </h5>
                         <small class="text-muted">
@@ -63,7 +61,7 @@
                     {
                         <a asp-controller="Administradores" asp-action="GestionCursos"
                            class="btn-cancelar-form ms-auto">
-                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar edicion
+                            <i data-feather="x" class="icon-14sq"></i> Cancelar edicion
                         </a>
                     }
                 </div>
@@ -76,8 +74,8 @@
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-4">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="layers" class="me-1" style="color:#00b4d8;"></i>
+                            <label class="form-label fw-semibold label-form">
+                                <i data-feather="layers" class="me-1 icon-primary"></i>
                                 Grado
                             </label>
                             <select name="FormGradoId" class="form-select" required>
@@ -90,14 +88,14 @@
                                     </option>
                                 }
                             </select>
-                            <span class="text-danger" style="font-size:12px;">
+                            <span class="text-danger validation-msg">
                                 @Html.ValidationMessage("FormGradoId")
                             </span>
                         </div>
 
                         <div class="col-md-2">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="tag" class="me-1" style="color:#00b4d8;"></i>
+                            <label class="form-label fw-semibold label-form">
+                                <i data-feather="tag" class="me-1 icon-primary"></i>
                                 Seccion
                             </label>
                             <select name="FormSeccion" class="form-select" required>
@@ -110,29 +108,29 @@
                                     </option>
                                 }
                             </select>
-                            <span class="text-danger" style="font-size:12px;">
+                            <span class="text-danger validation-msg">
                                 @Html.ValidationMessage("FormSeccion")
                             </span>
                         </div>
 
 
                         <div class="col-md-2">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="calendar" class="me-1" style="color:#00b4d8;"></i>
+                            <label class="form-label fw-semibold label-form">
+                                <i data-feather="calendar" class="me-1 icon-primary"></i>
                                 Periodo
                             </label>
                             <input name="FormPeriodo" value="@Model.FormPeriodo"
                                    class="form-control"
                                    placeholder="Ej: 2026"
                                    maxlength="20" required />
-                            <span class="text-danger" style="font-size:12px;">
+                            <span class="text-danger validation-msg">
                                 @Html.ValidationMessage("FormPeriodo")
                             </span>
                         </div>
 
                         <div class="col-md-4">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="user-check" class="me-1" style="color:#00b4d8;"></i>
+                            <label class="form-label fw-semibold label-form">
+                                <i data-feather="user-check" class="me-1 icon-primary"></i>
                                 Docente Tutor
                             </label>
                             <select name="FormDocenteTutorId" class="form-select">
@@ -145,7 +143,7 @@
                                     </option>
                                 }
                             </select>
-                            <span class="text-danger" style="font-size:12px;">
+                            <span class="text-danger validation-msg">
                                 @Html.ValidationMessage("FormDocenteTutorId")
                             </span>
                         </div>
@@ -157,8 +155,7 @@
                                    class="form-check-input" role="switch"
                                    id="chkCursoActivo" @(Model.FormActivo ? "checked" : "") />
                             <input type="hidden" name="FormActivo" value="false" />
-                            <label class="form-check-label fw-semibold" for="chkCursoActivo"
-                                   style="color:#1a2b4a;">
+                            <label class="form-check-label fw-semibold label-form" for="chkCursoActivo">
                                 Curso activo en el sistema
                             </label>
                         </div>
@@ -167,10 +164,10 @@
                     <div class="d-flex gap-2 justify-content-end">
                         <a asp-controller="Administradores" asp-action="Index"
                            class="btn-cancelar-form">
-                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar
+                            <i data-feather="x" class="icon-14sq"></i> Cancelar
                         </a>
                         <button type="submit" class="btn-cfg-guardar">
-                            <i data-feather="save" style="width:16px;height:16px;"></i>
+                            <i data-feather="save" class="icon-16sq"></i>
                             @(editando ? "Actualizar Curso" : "Guardar Curso")
                         </button>
                     </div>
@@ -183,13 +180,12 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="d-flex align-items-center mb-3 pb-2" style="border-bottom:2px solid #e2e8f0;">
-                    <div class="admin-stat-icon me-3"
-                         style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                        <i data-feather="list" style="color:#fff;width:20px;height:20px;"></i>
+                <div class="d-flex align-items-center mb-3 pb-2 card-section-divider">
+                    <div class="admin-stat-icon me-3 stat-icon-blue">
+                        <i data-feather="list" class="icon-stat-20w"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Cursos Registrados</h5>
+                        <h5 class="card-section-title">Cursos Registrados</h5>
                         <small class="text-muted">Total: @Model.Cursos.Count curso(s)</small>
                     </div>
                 </div>
@@ -197,7 +193,7 @@
                 @if (!Model.Cursos.Any())
                 {
                     <div class="text-center py-5 text-muted">
-                        <i data-feather="inbox" style="width:48px;height:48px;opacity:.3;" class="mb-3 d-block mx-auto"></i>
+                        <i data-feather="inbox" class="icon-inbox-empty mb-3 d-block mx-auto"></i>
                         <p>No hay cursos registrados aun.</p>
                     </div>
                 }
@@ -208,11 +204,11 @@
                             <thead>
                                 <tr>
                                     <th>Curso</th>
-                                    <th style="width:80px;">Seccion</th>
-                                    <th style="width:100px;">Periodo</th>
+                                    <th class="w-col-80">Seccion</th>
+                                    <th class="w-col-100">Periodo</th>
                                     <th>Docente Tutor</th>
-                                    <th class="text-center" style="width:90px;">Estado</th>
-                                    <th class="text-center" style="width:140px;">Acciones</th>
+                                    <th class="text-center w-col-90">Estado</th>
+                                    <th class="text-center w-col-140">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -220,14 +216,12 @@
                                 {
                                     <tr class="@(c.Id == Model.EditandoId ? "table-info" : "")">
                                         <td>
-                                            <strong style="color:#1a2b4a;">
+                                            <strong class="text-dark-navy">
                                                 @(c.Grado?.Nombre ?? $"Grado #{c.GradoId}")
                                             </strong>
                                         </td>
                                         <td>
-                                            <span class="badge"
-                                                  style="background:linear-gradient(135deg,#0096c7,#48cae4);color:#fff;
-                                                         font-size:12px;padding:4px 10px;border-radius:6px;">
+                                            <span class="badge badge-gradient-blue-lg">
                                                 Sec. @(c.Seccion ?? "?")
                                             </span>
                                         </td>
@@ -245,39 +239,32 @@
                                         <td class="text-center">
                                             @if (c.Activo)
                                             {
-                                                <span class="badge text-bg-success" style="font-size:11px;">Activo</span>
+                                                <span class="badge badge-green">Activo</span>
                                             }
                                             else
                                             {
-                                                <span class="badge text-bg-secondary" style="font-size:11px;">Inactivo</span>
+                                                <span class="badge badge-inactive">Inactivo</span>
                                             }
                                         </td>
                                         <td class="text-center">
                                             <div class="d-flex gap-1 justify-content-center">
 
-
                                                 <a asp-controller="Administradores"
                                                    asp-action="AsignacionDocentes"
                                                    asp-route-cursoId="@c.Id"
-                                                   class="btn btn-sm"
-                                                   style="background:linear-gradient(135deg,#6c5ce7,#a29bfe);color:#fff;
-                                                          border:none;border-radius:6px;padding:4px 8px;"
+                                                   class="btn btn-sm btn-action-assign"
                                                    title="Asignar docentes">
-                                                    <i data-feather="user-plus" style="width:14px;height:14px;"></i>
+                                                    <i data-feather="user-plus" class="icon-14sq"></i>
                                                 </a>
-
 
                                                 <a asp-controller="Administradores"
                                                    asp-action="GestionCursos"
                                                    asp-route-editarId="@c.Id"
-                                                   class="btn btn-sm"
-                                                   style="background:linear-gradient(135deg,#0096c7,#48cae4);color:#fff;
-                                                          border:none;border-radius:6px;padding:4px 8px;"
+                                                   class="btn btn-sm btn-action-edit-sm"
                                                    title="Editar">
-                                                    <i data-feather="edit-2" style="width:14px;height:14px;"></i>
+                                                    <i data-feather="edit-2" class="icon-14sq"></i>
                                                 </a>
                                                 <!-- button de eliminar-->
-
 
                                                 <form asp-controller="Administradores"
                                                       asp-action="EliminarGestionCurso"
@@ -286,11 +273,9 @@
                                                     @Html.AntiForgeryToken()
                                                     <input type="hidden" name="id" value="@c.Id" />
                                                     <button type="submit"
-                                                            class="btn btn-sm"
-                                                            style="background:linear-gradient(135deg,#e17055,#ff7675);color:#fff;
-                                                                   border:none;border-radius:6px;padding:4px 8px;"
+                                                            class="btn btn-sm btn-action-delete-sm"
                                                             title="Eliminar">
-                                                        <i data-feather="trash-2" style="width:14px;height:14px;"></i>
+                                                        <i data-feather="trash-2" class="icon-14sq"></i>
                                                     </button>
                                                 </form>
                                             </div>
@@ -318,11 +303,12 @@
             $('#tbl-gestion-cursos').DataTable({
                 language: {
                     search: "Buscar:",
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ cursos",
-                    paginate: { previous: "Anterior", next: "Siguiente" },
                     zeroRecords: "No se encontraron cursos."
                 },
-                order: [[0, 'asc'], [1, 'asc']]
+                order: [[0, 'asc'], [1, 'asc']],
+                paging: false,
+                lengthChange: false,
+                info: false
             });
         }
     });

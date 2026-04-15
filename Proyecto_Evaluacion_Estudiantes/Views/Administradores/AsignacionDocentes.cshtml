@@ -11,7 +11,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="user-check" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="user-check" class="icon-page-header me-2"></i>
                     Asignacion de Docentes
                 </h4>
                 <h6>EduPath AI - Asignacion de Catedraticos por Asignatura</h6>
@@ -27,7 +27,7 @@
         @if (TempData["MensajeExito"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show alert-edupath-success" role="alert">
-                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                <i data-feather="check-circle" class="me-2 icon-primary"></i>
                 @TempData["MensajeExito"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -35,7 +35,7 @@
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i data-feather="alert-circle" class="me-2" style="color:#e17055;"></i>
+                <i data-feather="alert-circle" class="me-2 icon-danger"></i>
                 @TempData["ErrorMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -44,13 +44,12 @@
         <!-- Selector de Curso -->
         <div class="card mb-4">
             <div class="card-body">
-                <div class="d-flex align-items-center mb-3 pb-3" style="border-bottom:2px solid #e2e8f0;">
-                    <div class="admin-stat-icon me-3"
-                         style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                        <i data-feather="search" style="color:#fff;width:20px;height:20px;"></i>
+                <div class="d-flex align-items-center mb-3 pb-3 card-section-divider">
+                    <div class="admin-stat-icon me-3 stat-icon-blue">
+                        <i data-feather="search" class="icon-stat-20w"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Seleccionar Curso</h5>
+                        <h5 class="card-section-title">Seleccionar Curso</h5>
                         <small class="text-muted">Elija el curso para gestionar sus docentes por asignatura.</small>
                     </div>
                 </div>
@@ -58,8 +57,8 @@
                 <form method="get" asp-controller="Administradores" asp-action="AsignacionDocentes"
                       class="row g-3 align-items-end">
                     <div class="col-md-8">
-                        <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                            <i data-feather="grid" class="me-1" style="color:#00b4d8;"></i>
+                        <label class="form-label fw-semibold label-form">
+                            <i data-feather="grid" class="me-1 icon-primary"></i>
                             Curso
                         </label>
                         <select name="cursoId" class="form-select" id="selectCurso">
@@ -75,7 +74,7 @@
                     </div>
                     <div class="col-md-4">
                         <button type="submit" class="btn-cfg-guardar w-100">
-                            <i data-feather="eye" style="width:16px;height:16px;"></i>
+                            <i data-feather="eye" class="icon-16sq"></i>
                             Ver Asignaturas
                         </button>
                     </div>
@@ -89,13 +88,12 @@
             <div class="card">
                 <div class="card-body">
 
-                    <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom:2px solid #e2e8f0;">
-                        <div class="admin-stat-icon me-3"
-                             style="background:linear-gradient(135deg,#6c5ce7,#a29bfe);box-shadow:0 4px 12px rgba(108,92,231,.3);">
-                            <i data-feather="book-open" style="color:#fff;width:20px;height:20px;"></i>
+                    <div class="d-flex align-items-center mb-4 pb-3 card-section-divider">
+                        <div class="admin-stat-icon me-3 stat-icon-purple">
+                            <i data-feather="book-open" class="icon-stat-20w"></i>
                         </div>
                         <div>
-                            <h5 style="margin:0;color:#1a2b4a;font-weight:700;">@Model.CursoNombre</h5>
+                            <h5 class="card-section-title">@Model.CursoNombre</h5>
                             <small class="text-muted">
                                 @Model.Filas.Count asignatura(s) — Asigne un docente a cada materia.
                             </small>
@@ -105,7 +103,7 @@
                     @if (!Model.Filas.Any())
                     {
                         <div class="text-center py-5 text-muted">
-                            <i data-feather="inbox" style="width:48px;height:48px;opacity:.3;" class="mb-3 d-block mx-auto"></i>
+                            <i data-feather="inbox" class="icon-inbox-empty mb-3 d-block mx-auto"></i>
                             <p>No hay asignaturas disponibles para este nivel.</p>
                         </div>
                     }
@@ -119,7 +117,7 @@
                                 <table class="table table-hover" id="tbl-asignacion">
                                     <thead>
                                         <tr>
-                                            <th style="width:90px;">Codigo</th>
+                                            <th class="w-col-90">Codigo</th>
                                             <th>Asignatura</th>
                                             <th>Docente Asignado</th>
                                         </tr>
@@ -130,14 +128,12 @@
                                             <tr>
                                                 <td>
                                                     <input type="hidden" name="asignaturaIds" value="@fila.AsignaturaId" />
-                                                    <span class="badge"
-                                                          style="background:linear-gradient(135deg,#0096c7,#48cae4);color:#fff;
-                                                                 font-size:11px;padding:4px 8px;border-radius:6px;">
+                                                    <span class="badge badge-gradient-blue">
                                                         @fila.AsignaturaCodigo
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <strong style="color:#1a2b4a;">@fila.AsignaturaNombre</strong>
+                                                    <strong class="text-dark-navy">@fila.AsignaturaNombre</strong>
                                                 </td>
                                                 <td>
                                                     <select name="docenteIds" class="form-select form-select-sm">
@@ -160,10 +156,10 @@
                             <div class="d-flex gap-2 justify-content-end mt-3">
                                 <a asp-controller="Administradores" asp-action="GestionCursos"
                                    class="btn-cancelar-form">
-                                    <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar
+                                    <i data-feather="x" class="icon-14sq"></i> Cancelar
                                 </a>
                                 <button type="submit" class="btn-cfg-guardar">
-                                    <i data-feather="save" style="width:16px;height:16px;"></i>
+                                    <i data-feather="save" class="icon-16sq"></i>
                                     Guardar Asignaciones
                                 </button>
                             </div>

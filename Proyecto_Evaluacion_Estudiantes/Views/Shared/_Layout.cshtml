@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="~/plugins/fontawesome/css/all.min.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/edupath-admin.css" />
+    <link rel="stylesheet" href="~/css/edupath-vistas.css" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
 @{
@@ -150,7 +152,7 @@
                             <hr class="m-0">
                             <a class="dropdown-item" asp-controller="Home" asp-action="Perfil"><i class="me-2" data-feather="user"></i> Mi Perfil</a>
                             <hr class="m-0">
-                            <a class="dropdown-item logout pb-0" asp-controller="Home" asp-action="IniciarSesion"><img src="~/img/icons/log-out.svg" class="me-2" alt="img">Cerrar Sesión</a>
+                            <a class="dropdown-item logout pb-0" asp-controller="Home" asp-action="CerrarSesion"><img src="~/img/icons/log-out.svg" class="me-2" alt="img">Cerrar Sesión</a>
                         </div>
                     </div>
                 </li>
@@ -250,11 +252,7 @@
                                             <i data-feather="list" class="me-1"></i> Lista de Estudiantes
                                         </a>
                                     </li>
-                                    <li>
-                                        <a asp-controller="Prediccion" asp-action="Buscar">
-                                            <i data-feather="cpu" class="me-1"></i> Predicción IA (Riesgo)
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </li>
 
@@ -345,11 +343,7 @@
                                             <i data-feather="shield" class="me-1"></i> Configuración de Administradores
                                         </a>
                                     </li>
-                                    <li>
-                                        <a asp-controller="Administradores" asp-action="ConfiguracionCursos">
-                                            <i data-feather="book" class="me-1"></i> Configuración de Cursos
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </li>
 

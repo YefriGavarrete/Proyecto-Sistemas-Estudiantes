@@ -10,27 +10,17 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="users" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="users" class="icon-page-header me-2"></i>
                     Lista de Estudiantes
                 </h4>
                 <h6>EduPath AI — Periodo @Model.Periodo</h6>
             </div>
-
-            <!--  
-            <div class="page-btn d-flex gap-2 flex-wrap">
-                <a asp-controller="Estudiantes" asp-action="Registro"
-                   class="btn-nav-est">
-                    <i data-feather="user-plus"></i> Registrar Estudiante
-                </a>
-
-            </div>
-            -->
         </div>
 
         @if (TempData["MensajeExito"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                <i data-feather="check-circle" class="icon-primary me-2"></i>
                 @TempData["MensajeExito"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -83,8 +73,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <div class="card mb-0">
             <div class="card-body">
@@ -172,16 +160,14 @@
                                         <td>
                                             <a asp-controller="Estudiantes" asp-action="Editar"
                                                asp-route-id="@est.Id"
-                                               class="btn btn-sm"
-                                               style="background:#e3f6fc;color:#0096c7;border-radius:8px;"
+                                               class="btn btn-sm btn-action-edit-blue"
                                                title="Editar datos">
-                                                <i data-feather="edit-2" style="width:14px;"></i>
+                                                <i data-feather="edit-2" class="icon-14"></i>
                                             </a>
                                             <a asp-controller="Estudiantes" asp-action="RegistroNotas"
-                                               class="btn btn-sm ms-1"
-                                               style="background:#e8f5e9;color:#00b894;border-radius:8px;"
+                                               class="btn btn-sm ms-1 btn-action-notes-green"
                                                title="Subir / editar notas">
-                                                <i data-feather="edit-3" style="width:14px;"></i>
+                                                <i data-feather="edit-3" class="icon-14"></i>
                                             </a>
                                         </td>
                                     </tr>

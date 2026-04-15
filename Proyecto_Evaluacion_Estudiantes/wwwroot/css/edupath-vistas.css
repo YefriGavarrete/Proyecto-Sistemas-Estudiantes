@@ -1,0 +1,263 @@
+/* =====================================================
+   edupath-vistas.css
+   Clases compartidas entre todas las vistas del sistema.
+   Se carga globalmente desde _Layout.cshtml.
+   ===================================================== */
+
+/* ── Íconos de cabecera de página ── */
+.icon-page-header { color: #00b4d8; }
+.icon-primary     { color: #00b4d8; }
+.icon-primary-sm  { color: #0096c7; }
+.icon-danger-red  { color: #ff4d4d; }
+
+/* ── Tamaños de ícono ── */
+.icon-11   { width: 11px; height: 11px; }
+.icon-12   { width: 12px; height: 12px; }
+.icon-13   { width: 13px; }
+.icon-14   { width: 14px; }
+.icon-14sq { width: 14px; height: 14px; }
+.icon-15sq { width: 15px; height: 15px; }
+.icon-16sq { width: 16px; height: 16px; }
+.icon-16-primary-sm { color: #0096c7; width: 16px; }
+.icon-18-white { color: #fff; width: 18px; height: 18px; }
+.icon-18-dark  { color: #1a2b4a; width: 18px; height: 18px; }
+.icon-20-danger { color: #e17055; width: 20px; flex-shrink: 0; }
+.icon-24-success { color: #00b894; width: 24px; height: 24px; flex-shrink: 0; }
+.icon-lock-xs  { width: 13px; }
+.icon-inbox-empty { width: 48px; height: 48px; opacity: .3; }
+.icon-check-empty { color: #00b894; width: 32px; height: 32px; }
+.icon-thumb-empty { color: #00b894; width: 32px; height: 32px; }
+
+/* ── Cards con bordes de color ── */
+.card-border-primary { border-left: 4px solid #0096c7; }
+.card-border-top-primary { border-top: 4px solid #0096c7; }
+.card-border-danger  { border-left: 4px solid #e17055; }
+.card-border-warning { border-left: 4px solid #fdcb6e; }
+
+/* ── Divisor interno de tarjeta ── */
+.card-section-divider { border-bottom: 2px solid #e2e8f0; }
+
+/* ── Gradientes para íconos de estadísticas ── */
+.stat-icon-blue   { background: linear-gradient(135deg, #0096c7, #48cae4); box-shadow: 0 4px 12px rgba(0,150,199,.3); }
+.stat-icon-blue-lg { background: linear-gradient(135deg, #0096c7, #48cae4); box-shadow: 0 4px 14px rgba(0,150,199,.3); }
+.stat-icon-lblue  { background: linear-gradient(135deg, #48cae4, #90e0ef); }
+.stat-icon-green  { background: linear-gradient(135deg, #00b894, #55efc4); }
+.stat-icon-yellow { background: linear-gradient(135deg, #fdcb6e, #ffeaa7); }
+.stat-icon-red    { background: linear-gradient(135deg, #e17055, #fd7979); }
+.stat-icon-purple { background: linear-gradient(135deg, #6c5ce7, #a29bfe); box-shadow: 0 4px 12px rgba(108,92,231,.3); }
+
+/* ── Ícono dentro del stat ── */
+.icon-stat-20w { color: #fff; width: 20px; height: 20px; }
+.icon-stat-22w { color: #fff; width: 22px; height: 22px; }
+.icon-stat-24w { color: #fff; width: 24px; height: 24px; }
+.icon-stat-period { color: #e17055; width: 22px; height: 22px; }
+
+/* ── Títulos de sección dentro de tarjeta ── */
+.card-section-title { margin: 0; color: #1a2b4a; font-weight: 700; }
+
+/* ── Bordes de admin-stat-card ── */
+.admin-stat-card-blue   { border-left: 4px solid #0096c7; }
+.admin-stat-card-lblue  { border-left: 4px solid #48cae4; }
+.admin-stat-card-green  { border-left: 4px solid #00b894; }
+.admin-stat-card-yellow { border-left: 4px solid #fdcb6e; }
+
+/* ── Valores de estadísticas ── */
+.stat-value-green  { color: #00b894; }
+.stat-value-period { color: #e17055; }
+.text-admin-welcome { color: #0077b6; font-weight: 700; }
+
+/* ── Texto oscuro marino ── */
+.text-dark-navy  { color: #1a2b4a; }
+.label-form      { color: #1a2b4a; }
+
+/* ── Texto de descripción en tarjetas ── */
+.admin-card-desc { font-size: 13px; }
+
+/* ── Mensajes de validación ── */
+.validation-msg { font-size: 12px; }
+
+/* ── Encabezados de tabla ── */
+.thead-light-blue   { background: #f0f9ff; }
+.thead-light-red    { background: #fff5f5; }
+.thead-light-yellow { background: #fffdf0; }
+.thead-light-rose   { background: #fff3f3; }
+
+/* ── Utilidades de ancho de columna (th/td) ── */
+.w-col-40  { width:  40px; }
+.w-col-60  { width:  60px; }
+.w-col-75  { width:  75px; }
+.w-col-80  { width:  80px; }
+.w-col-90  { width:  90px; }
+.w-col-100 { width: 100px; }
+.w-col-110 { width: 110px; }
+.w-col-130 { width: 130px; }
+.w-col-140 { width: 140px; }
+.w-col-180 { width: 180px; }
+
+/* ── Badges de tabla ── */
+.badge-gradient-blue {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    color: #fff; font-size: 11px; padding: 4px 8px; border-radius: 6px;
+}
+.badge-gradient-blue-lg {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    color: #fff; font-size: 12px; padding: 4px 10px; border-radius: 6px;
+}
+.badge-purple {
+    background: #6c5ce7; color: #fff;
+    font-size: 11px; border-radius: 6px; padding: 4px 8px;
+}
+.badge-green {
+    background: #00b894; color: #fff;
+    font-size: 11px; border-radius: 6px; padding: 4px 8px;
+}
+.badge-inactive {
+    background: #6c757d; color: #fff;
+    font-size: 11px; border-radius: 6px; padding: 4px 8px;
+}
+.badge-critico { background: #e17055; color: #fff; font-size: 11px; }
+.badge-riesgo  { background: #fdcb6e; color: #1a2b4a; font-size: 11px; }
+.badge-riesgo-alto { background: #e17055; color: #fff; font-size: 12px; }
+.badge-atencion    { background: #fdcb6e; color: #1a2b4a; font-size: 12px; }
+.badge-nota    { font-size: 12px; }
+.badge-nota-sm { font-size: 11px; }
+.badge-status-sm { font-size: 11px; }
+
+/* ── Botones de acción en tablas ── */
+.btn-action-edit {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    color: #fff; border: none; border-radius: 6px; padding: 4px 10px;
+}
+.btn-action-delete {
+    background: linear-gradient(135deg, #e17055, #ff7675);
+    color: #fff; border: none; border-radius: 6px; padding: 4px 10px;
+}
+.btn-action-edit-sm {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    color: #fff; border: none; border-radius: 6px; padding: 4px 8px;
+}
+.btn-action-delete-sm {
+    background: linear-gradient(135deg, #e17055, #ff7675);
+    color: #fff; border: none; border-radius: 6px; padding: 4px 8px;
+}
+.btn-action-assign {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: #fff; border: none; border-radius: 6px; padding: 4px 8px;
+}
+.btn-action-mini {
+    background: #0096c7; color: #fff; border-radius: 7px; font-size: 11px;
+}
+.btn-action-edit-blue  { background: #e3f6fc; color: #0096c7; border-radius: 8px; }
+.btn-action-notes-green { background: #e8f5e9; color: #00b894; border-radius: 8px; }
+.btn-action-row-sm { border-radius: 8px; font-size: 11px; }
+
+/* ── Alertas personalizadas ── */
+.alert-info-edupath {
+    background: #e3f6fc; border: 1px solid #48cae4; border-radius: 12px;
+}
+.alert-info-gradient {
+    background: linear-gradient(135deg, #e3f6fc, #f0f9ff);
+    border: 1px solid #48cae4; border-radius: 12px;
+}
+.alert-info-light {
+    background: #f0f9ff; border: 1px solid #48cae4; border-radius: 12px;
+}
+.alert-warning-edupath {
+    background: #fff8e1; border: 1px solid #fdcb6e; border-radius: 12px;
+}
+.alert-rounded { border-radius: 12px; }
+.alert-dark-glass {
+    background: rgba(255,255,255,.1); border: none; color: #fff; font-size: .9rem;
+}
+
+/* ── Texto de alertas ── */
+.info-panel-text { font-size: 13px; color: #1a2b4a; }
+.info-panel-icon { color: #0096c7; width: 20px; height: 20px; }
+.info-icon-inline { color: #0096c7; width: 16px; }
+
+/* ── RegistroNotas ── */
+.cursor-pointer   { cursor: pointer; }
+.input-nota-inline { width: 80px; display: inline-block; }
+.text-sin-nota    { font-size: 12px; }
+.text-xs          { font-size: 10px; }
+.badge-nota-value { font-size: 13px; }
+
+/* ── Promedios con colores estáticos ── */
+.promedio-riesgo   { color: #e17055; font-size: 15px; }
+.promedio-atencion { color: #e6a817; font-size: 15px; }
+
+/* ── Tarjeta oscura (Predicción IA) ── */
+.card-dark-gradient {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 100%); color: #fff;
+}
+.icon-brain-large   { font-size: 28px; color: #48cae4; }
+.text-white-muted   { font-size: .85rem; color: rgba(255,255,255,.7); }
+.progress-dark      { height: 18px; background: rgba(255,255,255,.15); }
+.text-white-subtle  { font-size: .78rem; color: rgba(255,255,255,.6); }
+.text-sm-data       { font-size: .93rem; }
+.text-xs-muted      { font-size: .82rem; }
+
+/* ── Predicción/Buscar ── */
+.opacity-muted     { opacity: .7; }
+.icon-hero-primary { font-size: 64px; color: #0d6efd; }
+.icon-brain-header { color: #0d6efd; }
+
+/* ── Reporte General ── */
+.stat-number-primary { font-size: 28px; font-weight: 700; color: #0096c7; }
+.stat-number-success { font-size: 28px; font-weight: 700; color: #00b894; }
+.stat-number-danger  { font-size: 28px; font-weight: 700; color: #e17055; }
+.stat-number-dark    { font-size: 28px; font-weight: 700; color: #1a2b4a; }
+.stat-label { font-size: 12px; color: #718096; font-weight: 600; }
+.parcial-label-name { font-size: 13px; font-weight: 600; color: #1a2b4a; }
+.progress-bar-bg  { height: 8px; background: #f0f4f8; border-radius: 4px; overflow: hidden; }
+.dist-label { font-size: 12px; color: #4a5568; flex: 1; }
+.dist-bar-bg { width: 80px; height: 7px; background: #f0f4f8; border-radius: 4px; overflow: hidden; }
+.dist-pct   { font-size: 11px; color: #a0aec0; min-width: 36px; }
+
+/* ── Íconos de predicción de riesgo ── */
+.icon-circle-red {
+    width: 36px; height: 36px; border-radius: 10px; margin-right: 12px;
+    background: linear-gradient(135deg, #e17055, #fd7979);
+    display: flex; align-items: center; justify-content: center;
+}
+.icon-circle-yellow {
+    width: 36px; height: 36px; border-radius: 10px; margin-right: 12px;
+    background: linear-gradient(135deg, #fdcb6e, #ffeaa7);
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Configuración de Grados ── */
+.orden-grado { font-size: 13px; font-weight: 700; color: #0096c7; }
+
+/* ── Inputs especiales ── */
+.input-uppercase { text-transform: uppercase; }
+
+/* ── Edad ── */
+.edad-display { background: #f8fafc; }
+.edad-value   { color: #0096c7; font-weight: 700; }
+.edad-value-lg { color: #0096c7; font-weight: 700; font-size: 16px; }
+.edad-years   { font-size: 13px; }
+.select-max-width { max-width: 520px; }
+
+/* ── Divisor de credenciales ── */
+.divider-credentials { border-color: #e2e8f0; }
+.divider-label { font-size: 12px; white-space: nowrap; }
+.user-info-label { font-size: 11px; }
+
+/* ── Dashboard ── */
+.icon-alert-dashboard { color: #ff4d4d; }
+.icon-danger          { color: #e17055; }
+.icon-info-18         { color: #0096c7; width: 18px; }
+
+/* ── Badge con texto oscuro (override Bootstrap text-bg-success) ── */
+.badge-dark-text { color: #1a2b4a !important; font-size: 11px; }
+
+/* ── Estadísticas de notas (RegistroNotas / SubirNotasGrilla) ── */
+.stats-notas      { font-size: 13px; }
+.stats-aprobado   { color: #00b894; font-weight: 600; }
+.stats-pendiente  { color: #e17055; font-weight: 600; }
+.icon-stats-check { color: #00b894; }
+.icon-stats-clock { color: #e17055; }
+
+/* ── Icono marcador de parcial ── */
+.icon-bookmark-parcial { color: #0096c7; }

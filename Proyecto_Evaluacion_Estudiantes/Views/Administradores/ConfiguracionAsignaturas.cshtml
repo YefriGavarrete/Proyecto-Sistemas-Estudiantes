@@ -11,7 +11,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="book-open" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="book-open" class="icon-page-header me-2"></i>
                     Configuracion de Asignaturas
                 </h4>
                 <h6>EduPath AI - Gestion de Materias del Sistema</h6>
@@ -27,7 +27,7 @@
         @if (TempData["MensajeExito"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show alert-edupath-success" role="alert">
-                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                <i data-feather="check-circle" class="me-2 icon-primary"></i>
                 @TempData["MensajeExito"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -35,7 +35,7 @@
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i data-feather="alert-circle" class="me-2" style="color:#e17055;"></i>
+                <i data-feather="alert-circle" class="me-2 icon-danger"></i>
                 @TempData["ErrorMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -45,14 +45,12 @@
         <div class="card mb-4">
             <div class="card-body">
 
-                <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom:2px solid #e2e8f0;">
-                    <div class="admin-stat-icon me-3"
-                         style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                        <i data-feather="@(editando ? "edit-2" : "plus-circle")"
-                           style="color:#fff;width:20px;height:20px;"></i>
+                <div class="d-flex align-items-center mb-4 pb-3 card-section-divider">
+                    <div class="admin-stat-icon me-3 stat-icon-blue">
+                        <i data-feather="@(editando ? "edit-2" : "plus-circle")" class="icon-stat-20w"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">
+                        <h5 class="card-section-title">
                             @(editando ? "Editar Asignatura" : "Nueva Asignatura")
                         </h5>
                         <small class="text-muted">
@@ -63,7 +61,7 @@
                     {
                         <a asp-controller="Administradores" asp-action="ConfiguracionAsignaturas"
                            class="btn-cancelar-form ms-auto">
-                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar edicion
+                            <i data-feather="x" class="icon-14sq"></i> Cancelar edicion
                         </a>
                     }
                 </div>
@@ -76,42 +74,41 @@
 
                     <div class="row g-3 mb-3">
 
-  
+
                         <div class="col-md-5">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="book" class="me-1" style="color:#00b4d8;"></i>
+                            <label class="form-label fw-semibold label-form">
+                                <i data-feather="book" class="me-1 icon-primary"></i>
                                 Nombre de la Asignatura
                             </label>
                             <input name="FormNombre" value="@Model.FormNombre"
                                    class="form-control"
                                    placeholder="Ej: Matematicas"
                                    maxlength="150" required />
-                            <span class="text-danger" style="font-size:12px;">
+                            <span class="text-danger validation-msg">
                                 @Html.ValidationMessage("FormNombre")
                             </span>
                         </div>
 
 
                         <div class="col-md-2">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="hash" class="me-1" style="color:#00b4d8;"></i>
+                            <label class="form-label fw-semibold label-form">
+                                <i data-feather="hash" class="me-1 icon-primary"></i>
                                 Codigo
                             </label>
                             <input name="FormCodigo" value="@Model.FormCodigo"
-                                   class="form-control"
+                                   class="form-control input-uppercase"
                                    placeholder="Ej: MAT"
                                    maxlength="20" required
-                                   id="inputCodAsig"
-                                   style="text-transform:uppercase;" />
-                            <span class="text-danger" style="font-size:12px;">
+                                   id="inputCodAsig" />
+                            <span class="text-danger validation-msg">
                                 @Html.ValidationMessage("FormCodigo")
                             </span>
                         </div>
 
-  
+
                         <div class="col-md-3">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="tag" class="me-1" style="color:#00b4d8;"></i>
+                            <label class="form-label fw-semibold label-form">
+                                <i data-feather="tag" class="me-1 icon-primary"></i>
                                 Nivel de Aplicacion
                             </label>
                             <select name="FormNivelAplicacion" class="form-select" required>
@@ -124,20 +121,19 @@
                                     Solo Tercer Ciclo (7 al 9)
                                 </option>
                             </select>
-                            <span class="text-danger" style="font-size:12px;">
+                            <span class="text-danger validation-msg">
                                 @Html.ValidationMessage("FormNivelAplicacion")
                             </span>
                         </div>
 
-    
+
                         <div class="col-md-2 d-flex align-items-end pb-1">
                             <div class="form-check form-switch">
                                 <input type="checkbox" name="FormActivo" value="true"
                                        class="form-check-input" role="switch"
                                        id="chkAsigActivo" @(Model.FormActivo ? "checked" : "") />
                                 <input type="hidden" name="FormActivo" value="false" />
-                                <label class="form-check-label fw-semibold" for="chkAsigActivo"
-                                       style="color:#1a2b4a;">
+                                <label class="form-check-label fw-semibold label-form" for="chkAsigActivo">
                                     Activo
                                 </label>
                             </div>
@@ -148,10 +144,10 @@
                     <div class="d-flex gap-2 justify-content-end">
                         <a asp-controller="Administradores" asp-action="Index"
                            class="btn-cancelar-form">
-                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar
+                            <i data-feather="x" class="icon-14sq"></i> Cancelar
                         </a>
                         <button type="submit" class="btn-cfg-guardar">
-                            <i data-feather="save" style="width:16px;height:16px;"></i>
+                            <i data-feather="save" class="icon-16sq"></i>
                             @(editando ? "Actualizar Asignatura" : "Guardar Asignatura")
                         </button>
                     </div>
@@ -164,13 +160,12 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="d-flex align-items-center mb-3 pb-2" style="border-bottom:2px solid #e2e8f0;">
-                    <div class="admin-stat-icon me-3"
-                         style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                        <i data-feather="list" style="color:#fff;width:20px;height:20px;"></i>
+                <div class="d-flex align-items-center mb-3 pb-2 card-section-divider">
+                    <div class="admin-stat-icon me-3 stat-icon-blue">
+                        <i data-feather="list" class="icon-stat-20w"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Asignaturas Registradas</h5>
+                        <h5 class="card-section-title">Asignaturas Registradas</h5>
                         <small class="text-muted">Total: @Model.Asignaturas.Count asignatura(s)</small>
                     </div>
                 </div>
@@ -178,7 +173,7 @@
                 @if (!Model.Asignaturas.Any())
                 {
                     <div class="text-center py-5 text-muted">
-                        <i data-feather="inbox" style="width:48px;height:48px;opacity:.3;" class="mb-3 d-block mx-auto"></i>
+                        <i data-feather="inbox" class="icon-inbox-empty mb-3 d-block mx-auto"></i>
                         <p>No hay asignaturas registradas aun.</p>
                     </div>
                 }
@@ -192,10 +187,10 @@
                             <thead>
                                 <tr>
                                     <th>Asignatura</th>
-                                    <th style="width:90px;">Codigo</th>
-                                    <th style="width:180px;">Nivel de Aplicacion</th>
-                                    <th class="text-center" style="width:90px;">Estado</th>
-                                    <th class="text-center" style="width:110px;">Acciones</th>
+                                    <th class="w-col-90">Codigo</th>
+                                    <th class="w-col-180">Nivel de Aplicacion</th>
+                                    <th class="text-center w-col-90">Estado</th>
+                                    <th class="text-center w-col-110">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -203,30 +198,24 @@
                                 {
                                     <tr class="@(a.Id == Model.EditandoId ? "table-info" : "")">
                                         <td>
-                                            <strong style="color:#1a2b4a;">@a.Nombre</strong>
+                                            <strong class="text-dark-navy">@a.Nombre</strong>
                                         </td>
                                         <td>
-                                            <span class="badge"
-                                                  style="background:linear-gradient(135deg,#0096c7,#48cae4);color:#fff;
-                                                         font-size:11px;padding:4px 8px;border-radius:6px;">
+                                            <span class="badge badge-gradient-blue">
                                                 @a.Codigo
                                             </span>
                                         </td>
                                         <td>
                                             @if (a.NivelAplicacion == "TercerCiclo")
                                             {
-                                                <span class="badge"
-                                                      style="background:#6c5ce7;color:#fff;font-size:11px;
-                                                             border-radius:6px;padding:4px 8px;">
-                                                    <i data-feather="star" style="width:10px;height:10px;"></i>
+                                                <span class="badge badge-purple">
+                                                    <i data-feather="star" class="icon-11"></i>
                                                     Solo Tercer Ciclo
                                                 </span>
                                             }
                                             else
                                             {
-                                                <span class="badge"
-                                                      style="background:#00b894;color:#fff;font-size:11px;
-                                                             border-radius:6px;padding:4px 8px;">
+                                                <span class="badge badge-green">
                                                     Todos los Grados
                                                 </span>
                                             }
@@ -234,11 +223,11 @@
                                         <td class="text-center">
                                             @if (a.Activo)
                                             {
-                                                <span class="badge text-bg-success" style="color:#1a2b4a;font-size:11px;">Activo</span>
+                                                <span class="badge text-bg-success badge-dark-text">Activo</span>
                                             }
                                             else
                                             {
-                                                <span class="badge text-bg-secondary" style="font-size:11px;">Inactivo</span>
+                                                <span class="badge text-bg-secondary badge-status-sm">Inactivo</span>
                                             }
                                         </td>
                                         <td class="text-center">
@@ -246,11 +235,9 @@
                                                 <a asp-controller="Administradores"
                                                    asp-action="ConfiguracionAsignaturas"
                                                    asp-route-editarId="@a.Id"
-                                                   class="btn btn-sm"
-                                                   style="background:linear-gradient(135deg,#0096c7,#48cae4);color:#fff;
-                                                          border:none;border-radius:6px;padding:4px 10px;"
+                                                   class="btn btn-sm btn-action-edit"
                                                    title="Editar">
-                                                    <i data-feather="edit-2" style="width:14px;height:14px;"></i>
+                                                    <i data-feather="edit-2" class="icon-14sq"></i>
                                                 </a>
                                                 <form asp-controller="Administradores"
                                                       asp-action="EliminarAsignatura"
@@ -259,11 +246,9 @@
                                                     @Html.AntiForgeryToken()
                                                     <input type="hidden" name="id" value="@a.Id" />
                                                     <button type="submit"
-                                                            class="btn btn-sm"
-                                                            style="background:linear-gradient(135deg,#e17055,#ff7675);color:#fff;
-                                                                   border:none;border-radius:6px;padding:4px 10px;"
+                                                            class="btn btn-sm btn-action-delete"
                                                             title="Eliminar">
-                                                        <i data-feather="trash-2" style="width:14px;height:14px;"></i>
+                                                        <i data-feather="trash-2" class="icon-14sq"></i>
                                                     </button>
                                                 </form>
                                             </div>
@@ -294,12 +279,12 @@
             $('#tbl-asignaturas').DataTable({
                 language: {
                     search: "Buscar:",
-                    lengthMenu: "Mostrar _MENU_ registros",
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ asignaturas",
-                    paginate: { previous: "Anterior", next: "Siguiente" },
                     zeroRecords: "No se encontraron asignaturas."
                 },
-                order: [[2, 'asc'], [0, 'asc']]
+                order: [[2, 'asc'], [0, 'asc']],
+                paging: false,
+                lengthChange: false,
+                info: false
             });
         }
 
@@ -311,8 +296,7 @@
                 this.value = this.value.toUpperCase();
                 this.setSelectionRange(pos, pos);
             });
-
-        </script>
         }
-
-   
+    });
+    </script>
+}

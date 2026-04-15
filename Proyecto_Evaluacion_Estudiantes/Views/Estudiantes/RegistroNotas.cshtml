@@ -5,7 +5,7 @@
 }
 
 <!-- Form oculto para el token anti-forgery (lo necesita el AJAX) -->
-<form id="formToken" style="display:none;">
+<form id="formToken" class="d-none">
     @Html.AntiForgeryToken()
 </form>
 
@@ -15,30 +15,27 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="edit-3" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="edit-3" class="icon-page-header me-2"></i>
                     Registro de Notas — @Model.NombreParcial
                 </h4>
                 <h6>EduPath AI — Doble clic en un estudiante para ingresar o modificar su nota</h6>
             </div>
             <div class="page-btn d-flex gap-2 flex-wrap">
-                <a asp-controller="Estudiantes" asp-action="Registro"
-                   class="btn-nav-est">
+                <a asp-controller="Estudiantes" asp-action="Registro" class="btn-nav-est">
                     <i data-feather="user-plus"></i> Registrar Estudiante
                 </a>
-                <a asp-controller="Estudiantes" asp-action="Index"
-                   class="btn-nav-est">
+                <a asp-controller="Estudiantes" asp-action="Index" class="btn-nav-est">
                     <i data-feather="list"></i> Lista de Estudiantes
                 </a>
             </div>
         </div>
 
-   
-        <div class="card mb-3" style="border-left:4px solid #0096c7;">
+        <div class="card mb-3 card-border-primary">
             <div class="card-body py-3">
                 <div class="d-flex align-items-center flex-wrap gap-3">
                     <div class="d-flex align-items-center gap-2">
-                        <i data-feather="layers" style="color:#0096c7;"></i>
-                        <strong style="color:#1a2b4a;">Selecciona el Parcial:</strong>
+                        <i data-feather="layers" class="icon-primary-sm"></i>
+                        <strong class="text-dark-navy">Selecciona el Parcial:</strong>
                     </div>
                     <div class="d-flex gap-2 flex-wrap">
                         @for (int p = 1; p <= 4; p++)
@@ -47,20 +44,19 @@
                             <a asp-controller="Estudiantes" asp-action="RegistroNotas"
                                asp-route-parcial="@p"
                                class="btn-parcial @(activo ? "btn-parcial-activo" : "")">
-                                <i data-feather="bookmark" style="width:13px;"></i>
+                                <i data-feather="bookmark" class="icon-13"></i>
                                 Parcial @p
                             </a>
                         }
                     </div>
 
-
-                    <div class="ms-auto d-flex gap-3" style="font-size:13px;">
-                        <span style="color:#00b894;font-weight:600;">
-                            <i data-feather="check-circle" style="width:14px;"></i>
+                    <div class="ms-auto d-flex gap-3 stats-notas">
+                        <span class="stats-aprobado">
+                            <i data-feather="check-circle" class="icon-14"></i>
                             @Model.NotasSubidas subidas
                         </span>
-                        <span style="color:#e17055;font-weight:600;">
-                            <i data-feather="clock" style="width:14px;"></i>
+                        <span class="stats-pendiente">
+                            <i data-feather="clock" class="icon-14"></i>
                             @Model.NotasPendientes pendientes
                         </span>
                     </div>
@@ -68,11 +64,9 @@
             </div>
         </div>
 
-
-        <div class="alert alert-info d-flex align-items-center py-2 mb-3"
-             style="background:#e3f6fc;border:1px solid #48cae4;border-radius:10px;">
-            <i data-feather="info" class="me-2" style="color:#0096c7;width:16px;"></i>
-            <small style="color:#1a2b4a;">
+        <div class="alert alert-info d-flex align-items-center py-2 mb-3 alert-info-edupath">
+            <i data-feather="info" class="info-icon-inline me-2"></i>
+            <small class="text-dark-navy">
                 <strong>¿Cómo ingresar notas?</strong>
                 Haz <strong>doble clic</strong> en cualquier fila para habilitar el campo de nota del
                 <strong>@Model.NombreParcial</strong>.
@@ -87,24 +81,23 @@
                     onclick="this.parentElement.classList.add('d-none')"></button>
         </div>
 
-
         <div class="card mb-0">
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover" id="tablaNotas">
-                        <thead style="background:#f0f9ff;">
+                        <thead class="thead-light-blue">
                             <tr>
-                                <th style="width:90px;">Código</th>
+                                <th class="w-col-90">Código</th>
                                 <th>Estudiante</th>
-                                <th style="width:80px;">Sección</th>
-                                <th style="width:130px;color:#0096c7;">
-                                    <i data-feather="edit" style="width:14px;"></i>
+                                <th class="w-col-80">Sección</th>
+                                <th class="w-col-130 text-primary-blue">
+                                    <i data-feather="edit" class="icon-14"></i>
                                     @Model.NombreParcial
                                 </th>
-                                <th style="width:140px;">Fecha Subida</th>
-                                <th style="width:90px;">Promedio</th>
-                                <th style="width:100px;">Estado</th>
-                                <th style="width:90px;">Acción</th>
+                                <th class="w-col-140">Fecha Subida</th>
+                                <th class="w-col-90">Promedio</th>
+                                <th class="w-col-100">Estado</th>
+                                <th class="w-col-90">Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,53 +118,45 @@
                                     decimal? notaActual   = est.NotaParcial(Model.ParcialSeleccionado);
                                     DateTime? fechaActual = est.FechaParcial(Model.ParcialSeleccionado);
 
-                                    <tr class="fila-estudiante"
+                                    <tr class="fila-estudiante cursor-pointer"
                                         data-id="@est.Id"
                                         data-parcial="@Model.ParcialSeleccionado"
-                                        title="Doble clic para editar nota"
-                                        style="cursor:pointer;">
+                                        title="Doble clic para editar nota">
 
-                                        <!-- Código -->
                                         <td>
                                             <small class="text-muted">
                                                 @(est.Codigo.Length > 0 ? est.Codigo : $"#{est.Id}")
                                             </small>
                                         </td>
 
-                                        <!-- Nombre + correo -->
                                         <td>
                                             <strong>@est.NombreCompleto</strong>
                                             <br><small class="text-muted">@est.Correo</small>
                                         </td>
 
-                                        <!-- Sección -->
                                         <td><small>@(est.Seccion ?? "—")</small></td>
 
-                                        <!-- Nota del parcial -->
                                         <td class="celda-nota">
                                             <span class="nota-display">
                                                 @if (notaActual.HasValue)
                                                 {
-                                                    <span class="badge @(notaActual >= 60 ? "bg-success" : "bg-danger")"
-                                                          style="font-size:13px;">
+                                                    <span class="badge @(notaActual >= 60 ? "bg-success" : "bg-danger") badge-nota-value">
                                                         @notaActual.Value.ToString("F1")
                                                     </span>
                                                 }
                                                 else
                                                 {
-                                                    <span class="text-muted" style="font-size:12px;">Sin nota</span>
+                                                    <span class="text-muted text-sin-nota">Sin nota</span>
                                                 }
                                             </span>
                                             <span class="nota-edit d-none">
-                                                <input type="number" class="form-control form-control-sm input-nota"
+                                                <input type="number" class="form-control form-control-sm input-nota input-nota-inline"
                                                        min="0" max="100" step="0.01"
                                                        value="@(notaActual?.ToString("F2") ?? "")"
-                                                       placeholder="0–100"
-                                                       style="width:80px;display:inline-block;" />
+                                                       placeholder="0–100" />
                                             </span>
                                         </td>
 
-                                        <!-- Fecha de subida -->
                                         <td class="celda-fecha">
                                             <small class="text-muted fecha-display">
                                                 @(fechaActual.HasValue
@@ -180,7 +165,6 @@
                                             </small>
                                         </td>
 
-                                        <!-- Promedio -->
                                         <td class="celda-promedio">
                                             @if (est.Promedio.HasValue)
                                             {
@@ -191,34 +175,30 @@
                                             else { <span class="text-muted">—</span> }
                                         </td>
 
-                                        <!-- Estado -->
                                         <td class="celda-estado">
                                             <span class="badges @est.EstadoBadge estado-display">
                                                 @(est.Estado ?? "Sin Notas")
                                             </span>
                                         </td>
 
-                                        <!-- Botones de acción (visibles solo en modo edición) -->
                                         <td>
                                             <span class="btns-accion d-none">
                                                 <button type="button"
-                                                        class="btn btn-sm btn-success btn-guardar-nota"
-                                                        style="border-radius:8px;font-size:11px;"
+                                                        class="btn btn-sm btn-success btn-guardar-nota btn-action-row-sm"
                                                         title="Guardar nota">
-                                                    <i data-feather="save" style="width:12px;"></i> Guardar
+                                                    <i data-feather="save" class="icon-12"></i> Guardar
                                                 </button>
                                                 <button type="button"
-                                                        class="btn btn-sm btn-light btn-cancelar-nota ms-1"
-                                                        style="border-radius:8px;font-size:11px;"
+                                                        class="btn btn-sm btn-light btn-cancelar-nota ms-1 btn-action-row-sm"
                                                         title="Cancelar">
-                                                    <i data-feather="x" style="width:12px;"></i>
+                                                    <i data-feather="x" class="icon-12"></i>
                                                 </button>
                                             </span>
                                             <span class="btns-normal">
                                                 @if (notaActual.HasValue)
                                                 {
-                                                    <small class="text-muted" style="font-size:10px;">
-                                                        <i data-feather="edit-2" style="width:11px;"></i> Modificar
+                                                    <small class="text-muted text-xs">
+                                                        <i data-feather="edit-2" class="icon-11"></i> Modificar
                                                     </small>
                                                 }
                                             </span>
@@ -237,7 +217,6 @@
 
 @section Scripts {
 <script>
-    // Token anti-forgery (extraído del form oculto al cargar) 
     let afToken = '';
     document.addEventListener('DOMContentLoaded', function () {
         const tokenInput = document.querySelector('#formToken input[name="__RequestVerificationToken"]');
@@ -298,12 +277,10 @@
             const data = await resp.json();
 
             if (data.ok) {
-                // Actualizar badge de nota
                 const badgeClass = nota >= 60 ? 'bg-success' : 'bg-danger';
                 fila.querySelector('.nota-display').innerHTML =
-                    `<span class="badge ${badgeClass}" style="font-size:13px;">${nota.toFixed(1)}</span>`;
+                    `<span class="badge ${badgeClass} badge-nota-value">${nota.toFixed(1)}</span>`;
                 fila.querySelector('.fecha-display').textContent = data.fecha;
-
 
                 const colorProm = parseFloat(data.promedio) >= 60 ? '#00b894' : '#e17055';
                 fila.querySelector('.celda-promedio').innerHTML =
@@ -316,7 +293,7 @@
                 estadoSpan.textContent = data.estado;
 
                 fila.querySelector('.btns-normal').innerHTML =
-                    `<small class="text-muted" style="font-size:10px;">
+                    `<small class="text-muted text-xs">
                         <i data-feather="edit-2" style="width:11px;"></i> Modificar
                      </small>`;
 
@@ -333,7 +310,6 @@
 
     function inicializarTabla() {
         document.querySelectorAll('.fila-estudiante').forEach(fila => {
-            // Doble clic → activar edición
             fila.addEventListener('dblclick', function () {
                 document.querySelectorAll('.fila-estudiante').forEach(f => {
                     if (f !== fila) cancelarEdicion(f);

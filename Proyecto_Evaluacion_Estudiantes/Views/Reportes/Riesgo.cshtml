@@ -10,7 +10,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="alert-triangle" style="color:#e17055;" class="me-2"></i>
+                    <i data-feather="alert-triangle" class="text-danger me-2"></i>
                     Estudiantes en Riesgo
                 </h4>
                 <h6>EduPath AI — Promedio menor a 65 o marcados por IA</h6>
@@ -30,8 +30,8 @@
 
         @if (!Model.Estudiantes.Any())
         {
-            <div class="alert alert-success d-flex align-items-center" style="border-radius:12px;">
-                <i data-feather="check-circle" class="me-3" style="color:#00b894;width:24px;height:24px;flex-shrink:0;"></i>
+            <div class="alert alert-success d-flex align-items-center alert-rounded">
+                <i data-feather="check-circle" class="icon-24-success me-3"></i>
                 <div>
                     <strong>¡Sin estudiantes en riesgo!</strong><br>
                     <small>Todos tus estudiantes tienen un promedio mayor a 65.</small>
@@ -40,9 +40,9 @@
         }
         else
         {
-            <div class="alert alert-warning d-flex align-items-center mb-4" style="background:#fff8e1;border:1px solid #fdcb6e;border-radius:12px;">
-                <i data-feather="alert-triangle" class="me-3" style="color:#e17055;width:20px;flex-shrink:0;"></i>
-                <small style="color:#1a2b4a;">
+            <div class="alert alert-warning d-flex align-items-center mb-4 alert-warning-edupath">
+                <i data-feather="alert-triangle" class="icon-20-danger me-3"></i>
+                <small class="text-dark-navy">
                     Se encontraron <strong>@Model.Estudiantes.Count estudiante(s)</strong> en riesgo.
                     Se recomienda intervención académica a la brevedad.
                 </small>
@@ -52,18 +52,18 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover" id="tablaRiesgo">
-                            <thead style="background:#fff3f3;">
+                            <thead class="thead-light-rose">
                                 <tr>
                                     <th>Código</th>
                                     <th>Estudiante</th>
-                                    <th style="width:80px;">Sección</th>
-                                    <th style="width:80px;">P1</th>
-                                    <th style="width:80px;">P2</th>
-                                    <th style="width:80px;">P3</th>
-                                    <th style="width:80px;">P4</th>
-                                    <th style="width:90px;">Promedio</th>
-                                    <th style="width:110px;">Situación</th>
-                                    <th style="width:90px;">Acción</th>
+                                    <th class="w-col-80">Sección</th>
+                                    <th class="w-col-80">P1</th>
+                                    <th class="w-col-80">P2</th>
+                                    <th class="w-col-80">P3</th>
+                                    <th class="w-col-80">P4</th>
+                                    <th class="w-col-90">Promedio</th>
+                                    <th class="w-col-110">Situación</th>
+                                    <th class="w-col-90">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,51 +79,50 @@
                                         <td><small>@(est.Seccion ?? "—")</small></td>
                                         <td>
                                             @if (est.Nota1.HasValue)
-                                            { <span class="badge @(est.Nota1 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota1.Value.ToString("F1")</span> }
+                                            { <span class="badge @(est.Nota1 >= 60 ? "bg-success" : "bg-danger") badge-nota">@est.Nota1.Value.ToString("F1")</span> }
                                             else { <span class="text-muted">—</span> }
                                         </td>
                                         <td>
                                             @if (est.Nota2.HasValue)
-                                            { <span class="badge @(est.Nota2 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota2.Value.ToString("F1")</span> }
+                                            { <span class="badge @(est.Nota2 >= 60 ? "bg-success" : "bg-danger") badge-nota">@est.Nota2.Value.ToString("F1")</span> }
                                             else { <span class="text-muted">—</span> }
                                         </td>
                                         <td>
                                             @if (est.Nota3.HasValue)
-                                            { <span class="badge @(est.Nota3 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota3.Value.ToString("F1")</span> }
+                                            { <span class="badge @(est.Nota3 >= 60 ? "bg-success" : "bg-danger") badge-nota">@est.Nota3.Value.ToString("F1")</span> }
                                             else { <span class="text-muted">—</span> }
                                         </td>
                                         <td>
                                             @if (est.Nota4.HasValue)
-                                            { <span class="badge @(est.Nota4 >= 60 ? "bg-success" : "bg-danger")" style="font-size:12px;">@est.Nota4.Value.ToString("F1")</span> }
+                                            { <span class="badge @(est.Nota4 >= 60 ? "bg-success" : "bg-danger") badge-nota">@est.Nota4.Value.ToString("F1")</span> }
                                             else { <span class="text-muted">—</span> }
                                         </td>
                                         <td>
                                             @if (est.Promedio.HasValue)
                                             {
-                                                <strong style="color:#e17055;font-size:15px;">@est.Promedio.Value.ToString("F2")</strong>
+                                                <strong class="promedio-riesgo">@est.Promedio.Value.ToString("F2")</strong>
                                             }
                                             else { <span class="text-muted">Sin datos</span> }
                                         </td>
                                         <td>
                                             @if (critico)
                                             {
-                                                <span class="badge" style="background:#e17055;color:#fff;font-size:11px;">
-                                                    <i data-feather="alert-circle" style="width:11px;"></i> Crítico
+                                                <span class="badge badge-critico">
+                                                    <i data-feather="alert-circle" class="icon-11"></i> Crítico
                                                 </span>
                                             }
                                             else
                                             {
-                                                <span class="badge" style="background:#fdcb6e;color:#1a2b4a;font-size:11px;">
-                                                    <i data-feather="alert-triangle" style="width:11px;"></i> En riesgo
+                                                <span class="badge badge-riesgo">
+                                                    <i data-feather="alert-triangle" class="icon-11"></i> En riesgo
                                                 </span>
                                             }
                                         </td>
                                         <td>
                                             <a asp-controller="Estudiantes" asp-action="Editar"
                                                asp-route-id="@est.Id"
-                                               class="btn btn-sm"
-                                               style="background:#0096c7;color:#fff;border-radius:7px;font-size:11px;">
-                                                <i data-feather="edit-2" style="width:11px;"></i> Editar
+                                               class="btn btn-sm btn-action-mini">
+                                                <i data-feather="edit-2" class="icon-11"></i> Editar
                                             </a>
                                         </td>
                                     </tr>

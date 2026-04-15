@@ -81,7 +81,7 @@ namespace Proyecto_Evaluacion_Estudiantes.ML
                 // Tendencia descendente pero no medio
                 new() { Nota1=80,  Nota2=60,  Nota3=45,  Nota4=30,  PromedioActual=53.75f, NotasRegistradas=4, Label=0.85f },
                 new() { Nota1=70,  Nota2=55,  Nota3=42,  Nota4=35,  PromedioActual=50.5f,  NotasRegistradas=4, Label=0.88f },
-                new() { Nota1=75,  Nota2=60,  Nota3=50,  Nota4=SN,  PromedioActual=61.67fss, NotasRegistradas=3, Label=0.75f },
+                new() { Nota1=75,  Nota2=60,  Nota3=50,  Nota4=SN,  PromedioActual=61.67f, NotasRegistradas=3, Label=0.75f },
                 new() { Nota1=65,  Nota2=55,  Nota3=45,  Nota4=SN,  PromedioActual=55.0f,  NotasRegistradas=3, Label=0.82f },
                 new() { Nota1=60,  Nota2=55,  Nota3=48,  Nota4=42,  PromedioActual=51.25f, NotasRegistradas=4, Label=0.87f },
                 new() { Nota1=90,  Nota2=75,  Nota3=55,  Nota4=40,  PromedioActual=65.0f,  NotasRegistradas=4, Label=0.68f },

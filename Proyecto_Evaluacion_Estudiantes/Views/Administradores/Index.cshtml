@@ -10,7 +10,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="shield" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="shield" class="icon-page-header me-2"></i>
                     Panel de Administrador
                 </h4>
                 <h6>EduPath AI — Centro de Control del Sistema</h6>
@@ -18,13 +18,13 @@
         </div>
 
 
-        <div class="card mb-4" style="border-left:4px solid #0096c7;">
+        <div class="card mb-4 card-border-primary">
             <div class="card-body d-flex align-items-center gap-3 py-3">
-                <div class="admin-stat-icon" style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 14px rgba(0,150,199,.3);">
-                    <i data-feather="user-check" style="color:#fff;width:24px;height:24px;"></i>
+                <div class="admin-stat-icon stat-icon-blue-lg">
+                    <i data-feather="user-check" class="icon-stat-24w"></i>
                 </div>
                 <div>
-                    <h5 style="margin:0;color:#0077b6;font-weight:700;">
+                    <h5 class="text-admin-welcome mb-0">
                         Bienvenido, @Model.NombreAdmin
                     </h5>
                     <small class="text-muted">
@@ -38,56 +38,56 @@
         <div class="row g-3 mb-4">
 
             <div class="col-md-6 col-xl-3">
-                <div class="admin-stat-card" style="border-left:4px solid #0096c7;">
+                <div class="admin-stat-card admin-stat-card-blue">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <p class="admin-stat-label">Administradores Activos</p>
                             <h3 class="admin-stat-value">@Model.TotalAdmins</h3>
                         </div>
-                        <div class="admin-stat-icon" style="background:linear-gradient(135deg,#0096c7,#48cae4);">
-                            <i data-feather="shield" style="color:#fff;width:22px;height:22px;"></i>
+                        <div class="admin-stat-icon stat-icon-blue">
+                            <i data-feather="shield" class="icon-stat-22w"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 col-xl-3">
-                <div class="admin-stat-card" style="border-left:4px solid #48cae4;">
+                <div class="admin-stat-card admin-stat-card-lblue">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <p class="admin-stat-label">Docentes Registrados</p>
                             <h3 class="admin-stat-value">@Model.TotalDocentes</h3>
                         </div>
-                        <div class="admin-stat-icon" style="background:linear-gradient(135deg,#48cae4,#90e0ef);">
-                            <i data-feather="users" style="color:#fff;width:22px;height:22px;"></i>
+                        <div class="admin-stat-icon stat-icon-lblue">
+                            <i data-feather="users" class="icon-stat-22w"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 col-xl-3">
-                <div class="admin-stat-card" style="border-left:4px solid #00b894;">
+                <div class="admin-stat-card admin-stat-card-green">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <p class="admin-stat-label">Módulo Predicción IA</p>
-                            <h3 class="admin-stat-value-sm" style="color:#00b894;">Activo</h3>
+                            <h3 class="admin-stat-value-sm stat-value-green">Activo</h3>
                         </div>
-                        <div class="admin-stat-icon" style="background:linear-gradient(135deg,#00b894,#55efc4);">
-                            <i data-feather="cpu" style="color:#fff;width:22px;height:22px;"></i>
+                        <div class="admin-stat-icon stat-icon-green">
+                            <i data-feather="cpu" class="icon-stat-22w"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 col-xl-3">
-                <div class="admin-stat-card" style="border-left:4px solid #fdcb6e;">
+                <div class="admin-stat-card admin-stat-card-yellow">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <p class="admin-stat-label">Periodo Actual</p>
-                            <h3 class="admin-stat-value-sm" style="color:#e17055;">@Model.Periodo</h3>
+                            <h3 class="admin-stat-value-sm stat-value-period">@Model.Periodo</h3>
                         </div>
-                        <div class="admin-stat-icon" style="background:linear-gradient(135deg,#fdcb6e,#ffeaa7);">
-                            <i data-feather="calendar" style="color:#e17055;width:22px;height:22px;"></i>
+                        <div class="admin-stat-icon stat-icon-yellow">
+                            <i data-feather="calendar" class="icon-stat-period"></i>
                         </div>
                     </div>
                 </div>
@@ -100,11 +100,11 @@
             <div class="col-md-6">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 style="color:#1a2b4a;font-weight:700;margin-bottom:16px;">
-                            <i data-feather="user-check" class="me-2" style="color:#00b4d8;"></i>
+                        <h5 class="card-section-title mb-3">
+                            <i data-feather="user-check" class="me-2 icon-primary"></i>
                             Gestión de Usuarios
                         </h5>
-                        <p class="text-muted" style="font-size:13px;">
+                        <p class="text-muted admin-card-desc">
                             Registra y administra los perfiles de los catedráticos del sistema, asignando
                             título académico, credenciales de acceso y datos de identidad.
                         </p>
@@ -114,11 +114,11 @@
             <div class="col-md-6">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 style="color:#1a2b4a;font-weight:700;margin-bottom:16px;">
-                            <i data-feather="shield" class="me-2" style="color:#00b4d8;"></i>
+                        <h5 class="card-section-title mb-3">
+                            <i data-feather="shield" class="me-2 icon-primary"></i>
                             Gestión de Administradores
                         </h5>
-                        <p class="text-muted" style="font-size:13px;">
+                        <p class="text-muted admin-card-desc">
                             Crea nuevas cuentas de administrador para el sistema. El nombre de usuario
                             se genera automáticamente con al menos 2 dígitos incluidos.
                         </p>

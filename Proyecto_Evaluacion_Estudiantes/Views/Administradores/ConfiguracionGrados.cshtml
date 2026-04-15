@@ -11,7 +11,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="layers" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="layers" class="icon-page-header me-2"></i>
                     Configuracion de Grados
                 </h4>
                 <h6>EduPath AI - Gestion de Grados Academicos (1 al 9)</h6>
@@ -27,7 +27,7 @@
         @if (TempData["MensajeExito"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show alert-edupath-success" role="alert">
-                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                <i data-feather="check-circle" class="me-2 icon-primary"></i>
                 @TempData["MensajeExito"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -35,7 +35,7 @@
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i data-feather="alert-circle" class="me-2" style="color:#e17055;"></i>
+                <i data-feather="alert-circle" class="me-2 icon-danger"></i>
                 @TempData["ErrorMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -43,10 +43,9 @@
 
         @if (!editando)
         {
-            <div class="alert d-flex align-items-center mb-4"
-                 style="background:#f0f9ff;border:1px solid #48cae4;border-radius:12px;">
-                <i data-feather="info" class="me-3 flex-shrink-0" style="color:#0096c7;width:18px;"></i>
-                <small style="color:#1a2b4a;">
+            <div class="alert d-flex align-items-center mb-4 alert-info-light">
+                <i data-feather="info" class="me-3 flex-shrink-0 icon-info-18"></i>
+                <small class="text-dark-navy">
                     Los grados <strong>1 al 9</strong> estan precargados. Solo puedes editar nombre, codigo,
                     nivel y estado. <strong>No se pueden crear ni eliminar</strong>.
                 </small>
@@ -58,21 +57,19 @@
             <div class="card mb-4">
                 <div class="card-body">
 
-                    <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom:2px solid #e2e8f0;">
-                        <div class="admin-stat-icon me-3"
-                             style="background:linear-gradient(135deg,#0096c7,#48cae4);
-                                    box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                            <i data-feather="edit-2" style="color:#fff;width:20px;height:20px;"></i>
+                    <div class="d-flex align-items-center mb-4 pb-3 card-section-divider">
+                        <div class="admin-stat-icon me-3 stat-icon-blue">
+                            <i data-feather="edit-2" class="icon-stat-20w"></i>
                         </div>
                         <div>
-                            <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Editar Grado</h5>
+                            <h5 class="card-section-title">Editar Grado</h5>
                             <small class="text-muted">
                                 Modificando: <strong>@Model.FormNombre</strong>
                             </small>
                         </div>
                         <a asp-controller="Administradores" asp-action="ConfiguracionGrados"
                            class="btn-cancelar-form ms-auto">
-                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar edicion
+                            <i data-feather="x" class="icon-14sq"></i> Cancelar edicion
                         </a>
                     </div>
 
@@ -84,38 +81,38 @@
 
                             <!-- Nombre -->
                             <div class="col-md-5">
-                                <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                    <i data-feather="layers" class="me-1" style="color:#00b4d8;"></i>
+                                <label class="form-label fw-semibold label-form">
+                                    <i data-feather="layers" class="me-1 icon-primary"></i>
                                     Nombre del Grado
                                 </label>
                                 <input name="FormNombre" value="@Model.FormNombre"
                                        class="form-control"
                                        placeholder="Ej: Primer Grado"
                                        maxlength="100" required />
-                                <span class="text-danger" style="font-size:12px;">
+                                <span class="text-danger validation-msg">
                                     @Html.ValidationMessage("FormNombre")
                                 </span>
                             </div>
 
                             <!-- Codigo -->
                             <div class="col-md-2">
-                                <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                    <i data-feather="hash" class="me-1" style="color:#00b4d8;"></i>
+                                <label class="form-label fw-semibold label-form">
+                                    <i data-feather="hash" class="me-1 icon-primary"></i>
                                     Codigo
                                 </label>
                                 <input name="FormCodigo" value="@Model.FormCodigo"
                                        class="form-control"
                                        placeholder="Ej: 1"
                                        maxlength="10" required />
-                                <span class="text-danger" style="font-size:12px;">
+                                <span class="text-danger validation-msg">
                                     @Html.ValidationMessage("FormCodigo")
                                 </span>
                             </div>
 
                             <!-- Nivel — select sin asp-for para evitar conflicto con tag helper -->
                             <div class="col-md-3">
-                                <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                    <i data-feather="tag" class="me-1" style="color:#00b4d8;"></i>
+                                <label class="form-label fw-semibold label-form">
+                                    <i data-feather="tag" class="me-1 icon-primary"></i>
                                     Nivel
                                 </label>
                                 <select name="FormNivel" class="form-select" required>
@@ -128,7 +125,7 @@
                                         Tercer Ciclo
                                     </option>
                                 </select>
-                                <span class="text-danger" style="font-size:12px;">
+                                <span class="text-danger validation-msg">
                                     @Html.ValidationMessage("FormNivel")
                                 </span>
                             </div>
@@ -141,8 +138,8 @@
                                            id="chkGradoActivo"
                                            @(Model.FormActivo ? "checked" : "") />
                                     <input type="hidden" name="FormActivo" value="false" />
-                                    <label class="form-check-label fw-semibold"
-                                           for="chkGradoActivo" style="color:#1a2b4a;">
+                                    <label class="form-check-label fw-semibold label-form"
+                                           for="chkGradoActivo">
                                         Activo
                                     </label>
                                 </div>
@@ -151,8 +148,8 @@
 
                         <!-- Descripcion -->
                         <div class="mb-4">
-                            <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="align-left" class="me-1" style="color:#00b4d8;"></i>
+                            <label class="form-label fw-semibold label-form">
+                                <i data-feather="align-left" class="me-1 icon-primary"></i>
                                 Descripcion <small class="text-muted fw-normal">(opcional)</small>
                             </label>
                             <input name="FormDescripcion" value="@Model.FormDescripcion"
@@ -165,10 +162,10 @@
                         <div class="d-flex gap-2 justify-content-end">
                             <a asp-controller="Administradores" asp-action="ConfiguracionGrados"
                                class="btn-cancelar-form">
-                                <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar
+                                <i data-feather="x" class="icon-14sq"></i> Cancelar
                             </a>
                             <button type="submit" class="btn-cfg-guardar">
-                                <i data-feather="save" style="width:16px;height:16px;"></i>
+                                <i data-feather="save" class="icon-16sq"></i>
                                 Actualizar Grado
                             </button>
                         </div>
@@ -182,14 +179,12 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="d-flex align-items-center mb-3 pb-2" style="border-bottom:2px solid #e2e8f0;">
-                    <div class="admin-stat-icon me-3"
-                         style="background:linear-gradient(135deg,#0096c7,#48cae4);
-                                box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                        <i data-feather="list" style="color:#fff;width:20px;height:20px;"></i>
+                <div class="d-flex align-items-center mb-3 pb-2 card-section-divider">
+                    <div class="admin-stat-icon me-3 stat-icon-blue">
+                        <i data-feather="list" class="icon-stat-20w"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Grados del Sistema</h5>
+                        <h5 class="card-section-title">Grados del Sistema</h5>
                         <small class="text-muted">Total: @Model.Grados.Count grado(s)</small>
                     </div>
                 </div>
@@ -198,13 +193,13 @@
                     <table class="table table-hover" id="tbl-grados">
                         <thead>
                             <tr>
-                                <th style="width:40px;">#</th>
+                                <th class="w-col-40">#</th>
                                 <th>Nombre</th>
-                                <th style="width:80px;">Codigo</th>
-                                <th style="width:140px;">Nivel</th>
+                                <th class="w-col-80">Codigo</th>
+                                <th class="w-col-140">Nivel</th>
                                 <th>Descripcion</th>
-                                <th class="text-center" style="width:90px;">Estado</th>
-                                <th class="text-center" style="width:80px;">Editar</th>
+                                <th class="text-center w-col-90">Estado</th>
+                                <th class="text-center w-col-80">Editar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -212,34 +207,26 @@
                             {
                                 <tr class="@(g.Id == Model.EditandoId ? "table-info" : "")">
                                     <td>
-                                        <span style="font-size:13px;font-weight:700;color:#0096c7;">
-                                            @g.Orden
-                                        </span>
+                                        <span class="orden-grado">@g.Orden</span>
                                     </td>
                                     <td>
-                                        <strong style="color:#1a2b4a;">@g.Nombre</strong>
+                                        <strong class="text-dark-navy">@g.Nombre</strong>
                                     </td>
                                     <td>
-                                        <span class="badge"
-                                              style="background:linear-gradient(135deg,#0096c7,#48cae4);
-                                                     color:#fff;font-size:12px;padding:4px 10px;border-radius:6px;">
+                                        <span class="badge badge-gradient-blue-lg">
                                             @g.Codigo
                                         </span>
                                     </td>
                                     <td>
                                         @if (g.Nivel == "TercerCiclo" || g.Nivel == "Tercer Ciclo")
                                         {
-                                            <span class="badge"
-                                                  style="background:#6c5ce7;color:#fff;
-                                                         font-size:11px;border-radius:6px;">
+                                            <span class="badge badge-purple">
                                                 Tercer Ciclo
                                             </span>
                                         }
                                         else
                                         {
-                                            <span class="badge"
-                                                  style="background:#00b894;color:#fff;
-                                                         font-size:11px;border-radius:6px;">
+                                            <span class="badge badge-green">
                                                 Primaria
                                             </span>
                                         }
@@ -250,13 +237,13 @@
                                     <td class="text-center">
                                         @if (g.Activo)
                                         {
-                                            <span class="badge text-bg-success" style="font-size:11px;">
+                                            <span class="badge badge-green">
                                                 Activo
                                             </span>
                                         }
                                         else
                                         {
-                                            <span class="badge text-bg-secondary" style="font-size:11px;">
+                                            <span class="badge badge-inactive">
                                                 Inactivo
                                             </span>
                                         }
@@ -265,11 +252,9 @@
                                         <a asp-controller="Administradores"
                                            asp-action="ConfiguracionGrados"
                                            asp-route-editarId="@g.Id"
-                                           class="btn btn-sm"
-                                           style="background:linear-gradient(135deg,#0096c7,#48cae4);
-                                                  color:#fff;border:none;border-radius:6px;padding:4px 10px;"
+                                           class="btn btn-sm btn-action-edit-sm"
                                            title="Editar grado">
-                                            <i data-feather="edit-2" style="width:14px;height:14px;"></i>
+                                            <i data-feather="edit-2" class="icon-14sq"></i>
                                         </a>
                                     </td>
                                 </tr>

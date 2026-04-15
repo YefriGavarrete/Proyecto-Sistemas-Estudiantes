@@ -5,14 +5,18 @@
     int idx = 0;  // índice global para el binding de la lista de entradas
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/SubirNotasGrilla.css" />
+}
+
 <div class="page-wrapper">
     <div class="content">
 
-        <!-- ── Cabecera ── -->
+
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="grid" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="grid" class="grilla-icon-header me-2"></i>
                     Calificaciones — @Model.ParcialNombre
                 </h4>
                 <h6>@Model.CursoNombre</h6>
@@ -45,14 +49,14 @@
         }
 
         <!-- ── Tarjeta de estado ── -->
-        <div class="card mb-3" style="border-left:4px solid #0096c7;">
+        <div class="card mb-3 card-estado-parcial">
             <div class="card-body py-3">
                 <div class="d-flex align-items-center flex-wrap gap-4">
 
-                    <!-- Selector de parcial (GET links) -->
+
                     <div class="d-flex align-items-center gap-2">
-                        <i data-feather="bookmark" style="color:#0096c7;width:16px;"></i>
-                        <strong style="color:#1a2b4a;">Parcial:</strong>
+                        <i data-feather="bookmark" class="icon-16-primary"></i>
+                        <strong class="text-dark-navy">Parcial:</strong>
                     </div>
                     <div class="d-flex gap-2 flex-wrap">
                         @for (int p = 1; p <= 4; p++)
@@ -62,30 +66,30 @@
                                asp-route-cursoId="@Model.CursoId"
                                asp-route-parcial="@p"
                                class="btn-parcial @(activo ? "btn-parcial-activo" : "")">
-                                <i data-feather="edit-3" style="width:13px;"></i>
+                                <i data-feather="edit-3" class="icon-13"></i>
                                 Parcial @p
                             </a>
                         }
                     </div>
 
                     <!-- Estadísticas -->
-                    <div class="ms-auto d-flex gap-4" style="font-size:13px;">
+                    <div class="ms-auto d-flex gap-4 stats-grilla">
                         <span>
-                            <i data-feather="users" style="width:14px;color:#0096c7;"></i>
+                            <i data-feather="users" class="icon-14-primary"></i>
                             <strong>@Model.Filas.Count</strong>
                             <span class="text-muted">estudiantes</span>
                         </span>
                         <span>
-                            <i data-feather="book" style="width:14px;color:#6c757d;"></i>
+                            <i data-feather="book" class="icon-14-muted"></i>
                             <strong>@Model.Asignaturas.Count</strong>
                             <span class="text-muted">asignaturas</span>
                         </span>
-                        <span style="color:#00b894;font-weight:600;">
-                            <i data-feather="check-circle" style="width:14px;"></i>
+                        <span class="stats-aprobado">
+                            <i data-feather="check-circle" class="icon-14"></i>
                             @Model.CeldasConNota subidas
                         </span>
-                        <span style="color:#e17055;font-weight:600;">
-                            <i data-feather="clock" style="width:14px;"></i>
+                        <span class="stats-pendiente">
+                            <i data-feather="clock" class="icon-14"></i>
                             @Model.CeldasSinNota pendientes
                         </span>
                     </div>
@@ -93,23 +97,23 @@
             </div>
         </div>
 
-        <!-- ── Instrucción ── -->
-        <div class="alert alert-info d-flex align-items-center py-2 mb-3"
-             style="background:#e3f6fc;border:1px solid #48cae4;border-radius:10px;">
-            <i data-feather="info" class="me-2" style="color:#0096c7;width:16px;"></i>
-            <small style="color:#1a2b4a;">
-                Ingresa las notas (0–100) en las celdas. Deja vacías las que no correspondan.
-                Presiona <strong>Guardar Todas las Notas</strong> al terminar — el sistema
-                calculará el promedio del parcial y actualizará el estado de cada estudiante.
+
+        <div class="alert alert-info d-flex align-items-center py-2 mb-3 alert-instruccion-grilla">
+            <i data-feather="info" class="icon-16-primary me-2"></i>
+            <small class="text-dark-navy">
+                Solo los estudiantes <strong>sin nota</strong> tienen celdas editables.
+                Para modificar una nota ya ingresada, usa el botón
+                <i data-feather="edit-2" style="width:12px;height:12px;"></i>
+                <strong>Editar</strong> en la columna de acciones de ese estudiante.
             </small>
         </div>
 
-        <!-- ── Grilla de calificaciones ── -->
+
         @if (!Model.Filas.Any())
         {
             <div class="card">
                 <div class="card-body text-center py-5">
-                    <i data-feather="inbox" style="width:40px;height:40px;color:#dee2e6;" class="mb-3"></i>
+                    <i data-feather="inbox" class="icon-empty-state mb-3"></i>
                     <p class="text-muted mb-1">No hay estudiantes activos en este curso.</p>
                     <a asp-controller="Estudiantes" asp-action="Registro" class="btn btn-sm btn-outline-primary">
                         Registrar estudiante
@@ -131,49 +135,48 @@
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover mb-0" id="tablaGrilla"
-                                   style="min-width:@(200 + Model.Asignaturas.Count * 130)px;">
-                                <thead style="background:#f0f9ff;position:sticky;top:0;z-index:10;">
+                                   style="min-width:@(200 + Model.Asignaturas.Count * 130 + 100)px;">
+                                <thead class="thead-grilla">
                                     <tr>
-                                        <!-- Columna fija: estudiante -->
-                                        <th style="min-width:200px;background:#f0f9ff;
-                                                   border-right:2px solid #dee2e6;">
-                                            <i data-feather="user" style="width:14px;color:#0096c7;"></i>
+                                        <th class="th-col-estudiante">
+                                            <i data-feather="user" class="icon-14-primary"></i>
                                             Estudiante
                                         </th>
 
                                         <!-- Una columna por asignatura -->
                                         @foreach (var asig in Model.Asignaturas)
                                         {
-                                            <th class="text-center"
-                                                style="min-width:130px;font-size:12px;"
-                                                title="@asig.Nombre">
-                                                <div style="color:#0096c7;font-weight:700;">
-                                                    @asig.Codigo
-                                                </div>
-                                                <div style="color:#495057;font-weight:500;
-                                                            white-space:nowrap;overflow:hidden;
-                                                            text-overflow:ellipsis;max-width:120px;">
-                                                    @asig.Nombre
-                                                </div>
+                                            <th class="text-center th-col-asignatura" title="@asig.Nombre">
+                                                <div class="asig-codigo">@asig.Codigo</div>
+                                                <div class="asig-nombre">@asig.Nombre</div>
                                             </th>
                                         }
+
+ 
+                                        <th class="text-center" style="width:90px;min-width:90px;">
+                                            <i data-feather="settings" class="icon-14-primary"></i>
+                                            Acciones
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var fila in Model.Filas)
                                     {
-                                        <tr class="fila-grilla">
-                                            <!-- Nombre del estudiante -->
-                                            <td style="border-right:2px solid #dee2e6;">
-                                                <div style="font-weight:600;color:#1a2b4a;font-size:13px;">
-                                                    @fila.NombreCompleto
-                                                </div>
-                                                <small class="text-muted" style="font-size:11px;">
+                                        // Determinar si el estudiante ya tiene ALGUNA nota en este parcial
+                                        bool filaConNota = fila.NotasPorAsignatura.Values.Any(n => n.HasValue);
+                                        string filaId = $"fila-{fila.EstudianteId}";
+
+                                        <tr class="fila-grilla" id="@filaId"
+                                            data-tiene-nota="@(filaConNota ? "true" : "false")">
+
+        
+                                            <td class="td-col-estudiante">
+                                                <div class="estudiante-nombre">@fila.NombreCompleto</div>
+                                                <small class="text-muted estudiante-codigo">
                                                     @(string.IsNullOrEmpty(fila.Codigo) ? $"#{fila.EstudianteId}" : fila.Codigo)
                                                 </small>
                                             </td>
 
-                                            <!-- Una celda por asignatura -->
                                             @foreach (var asig in Model.Asignaturas)
                                             {
                                                 decimal? notaActual = fila.NotasPorAsignatura.TryGetValue(asig.Id, out var n) ? n : null;
@@ -184,10 +187,14 @@
                                                 string colorFondo = tieneNota
                                                     ? (notaActual >= 60 ? "#f6fffe" : "#fff8f7")
                                                     : "transparent";
+                                                string colorTexto = tieneNota
+                                                    ? (notaActual >= 60 ? "#00b894" : "#e17055")
+                                                    : "#495057";
 
                                                 <td class="celda-nota text-center p-1"
                                                     style="border:@colorBorde;background:@colorFondo;">
-                                                    <!-- Hidden fields para model binding -->
+
+
                                                     <input type="hidden"
                                                            name="entradas[@idx].EstudianteId"
                                                            value="@fila.EstudianteId" />
@@ -195,19 +202,59 @@
                                                            name="entradas[@idx].AsignaturaId"
                                                            value="@asig.Id" />
 
-                                                    <!-- Input de nota -->
-                                                    <input type="number"
-                                                           name="entradas[@idx].Nota"
-                                                           class="form-control form-control-sm input-nota-grilla text-center"
-                                                           min="0" max="100" step="0.01"
-                                                           value="@(tieneNota ? notaActual!.Value.ToString("F2") : "")"
-                                                           placeholder="—"
-                                                           style="border-radius:6px;font-size:13px;
-                                                                  font-weight:@(tieneNota ? "600" : "400");
-                                                                  color:@(tieneNota ? (notaActual >= 60 ? "#00b894" : "#e17055") : "#495057");" />
+                                                    @if (filaConNota)
+                                                    {
+                                                        // ESTUDIANTE CON NOTAS: mostrar valor como texto, input readonly oculto
+                                                        <span class="nota-display fw-semibold"
+                                                              style="color:@colorTexto;font-size:13px;">
+                                                            @(tieneNota ? notaActual!.Value.ToString("F2") : "—")
+                                                        </span>
+                                                        <input type="number"
+                                                               name="entradas[@idx].Nota"
+                                                               class="form-control form-control-sm input-nota-grilla text-center input-nota-bloqueada"
+                                                               min="0" max="100" step="0.01"
+                                                               value="@(tieneNota ? notaActual!.Value.ToString("F2") : "")"
+                                                               readonly
+                                                               style="display:none;font-weight:600;color:@colorTexto;" />
+                                                    }
+                                                    else
+                                                    {
+                                                        // ESTUDIANTE SIN NOTAS: input editable directamente
+                                                        <input type="number"
+                                                               name="entradas[@idx].Nota"
+                                                               class="form-control form-control-sm input-nota-grilla text-center"
+                                                               min="0" max="100" step="0.01"
+                                                               value=""
+                                                               placeholder="—"
+                                                               style="font-weight:400;color:#495057;" />
+                                                    }
                                                 </td>
                                                 idx++;
                                             }
+
+
+                                            <td class="text-center align-middle">
+                                                @if (filaConNota)
+                                                {
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-action-edit-sm btn-editar-fila"
+                                                            data-fila="@filaId"
+                                                            title="Editar notas de este estudiante">
+                                                        <i data-feather="edit-2" class="icon-14sq"></i>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-cancelar-form btn-cancelar-fila"
+                                                            data-fila="@filaId"
+                                                            title="Cancelar edición"
+                                                            style="display:none;">
+                                                        <i data-feather="x" class="icon-14sq"></i>
+                                                    </button>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted" style="font-size:11px;">Sin notas</span>
+                                                }
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -216,28 +263,23 @@
                     </div>
                 </div>
 
-                <!-- ── Botonera de guardado ── -->
+
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
                     <div>
                         <small class="text-muted">
-                            <i data-feather="alert-circle" style="width:13px;"></i>
-                            Las celdas vacías no se modificarán. Las notas existentes se actualizarán
-                            con el nuevo valor.
+                            <i data-feather="alert-circle" class="icon-13"></i>
+                            Las celdas vacías no se modificarán. Solo se guardan los campos habilitados.
                         </small>
                     </div>
                     <div class="d-flex gap-2">
                         <a asp-controller="Estudiantes" asp-action="SubirNotas"
-                           class="btn btn-outline-secondary"
-                           style="border-radius:10px;">
-                            <i data-feather="x" class="me-1" style="width:14px;"></i>
+                           class="btn btn-outline-secondary btn-cancelar-grilla">
+                            <i data-feather="x" class="icon-14 me-1"></i>
                             Cancelar
                         </a>
-                        <button type="submit"
-                                class="btn btn-primary btn-guardar-grilla"
-                                style="background:#0096c7;border:none;border-radius:10px;
-                                       padding:10px 28px;font-weight:600;">
-                            <i data-feather="save" class="me-1" style="width:14px;"></i>
-                            Guardar Todas las Notas
+                        <button type="submit" class="btn btn-primary btn-guardar-grilla">
+                            <i data-feather="save" class="icon-14 me-1"></i>
+                            Guardar Notas
                         </button>
                     </div>
                 </div>
@@ -253,61 +295,103 @@
 document.addEventListener('DOMContentLoaded', function () {
     if (window.feather) feather.replace();
 
-    const inputs = document.querySelectorAll('.input-nota-grilla');
+    // ── Botón Editar fila ──
+    document.querySelectorAll('.btn-editar-fila').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var filaId  = this.dataset.fila;
+            var fila    = document.getElementById(filaId);
 
-    // Navegación con Tab y flechas dentro de la grilla
-    inputs.forEach(function (input, idx) {
+            // Mostrar inputs y ocultar spans de esa fila
+            fila.querySelectorAll('.nota-display').forEach(function (span) {
+                span.style.display = 'none';
+            });
+            fila.querySelectorAll('.input-nota-bloqueada').forEach(function (input) {
+                input.style.display = '';
+                input.removeAttribute('readonly');
+                input.classList.remove('input-nota-bloqueada');
+                input.classList.add('input-nota-grilla-editando');
+                actualizarColorInput(input);
+            });
 
-        input.addEventListener('input', function () {
-            actualizarColorInput(this);
+
+            btn.style.display = 'none';
+            var cancelBtn = fila.querySelector('.btn-cancelar-fila');
+            if (cancelBtn) cancelBtn.style.display = '';
+
+            feather.replace();
         });
+    });
 
-        // Enter avanza al siguiente campo de la misma columna
-        input.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const total   = inputs.length;
-                const cols    = @Model.Asignaturas.Count;
-                const nextIdx = idx + cols < total ? idx + cols : idx + 1;
-                if (nextIdx < total) inputs[nextIdx].focus();
-            }
+    // ── Botón Cancelar edición fila 
+    document.querySelectorAll('.btn-cancelar-fila').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var filaId = this.dataset.fila;
+            var fila   = document.getElementById(filaId);
+
+            // Restaurar spans y ocultar inputs
+            fila.querySelectorAll('.input-nota-grilla-editando').forEach(function (input) {
+                input.setAttribute('readonly', '');
+                input.classList.add('input-nota-bloqueada');
+                input.classList.remove('input-nota-grilla-editando');
+                input.style.display = 'none';
+            });
+            fila.querySelectorAll('.nota-display').forEach(function (span) {
+                span.style.display = '';
+            });
+
+
+            btn.style.display = 'none';
+            var editBtn = fila.querySelector('.btn-editar-fila');
+            if (editBtn) editBtn.style.display = '';
+
+            feather.replace();
         });
+    });
 
-
+    // ── Colores dinámicos al escribir ──
+    document.querySelectorAll('.input-nota-grilla').forEach(function (input) {
+        input.addEventListener('input', function () { actualizarColorInput(this); });
         input.addEventListener('focus', function () {
             this.select();
             this.style.outline = '2px solid #0096c7';
         });
-
         input.addEventListener('blur', function () {
             this.style.outline = '';
             actualizarColorInput(this);
         });
     });
 
+
+    document.getElementById('tablaGrilla')?.addEventListener('input', function (e) {
+        if (e.target.classList.contains('input-nota-grilla-editando')) {
+            actualizarColorInput(e.target);
+        }
+    });
+
     function actualizarColorInput(input) {
-        const val = parseFloat(input.value);
+        var td  = input.closest('td');
+        var val = parseFloat(input.value);
         if (isNaN(val) || input.value.trim() === '') {
             input.style.color      = '#495057';
             input.style.fontWeight = '400';
-            input.closest('td').style.background = 'transparent';
-            input.closest('td').style.border     = '1px solid #dee2e6';
+            td.style.background    = 'transparent';
+            td.style.border        = '1px solid #dee2e6';
         } else if (val >= 60) {
             input.style.color      = '#00b894';
             input.style.fontWeight = '600';
-            input.closest('td').style.background = '#f6fffe';
-            input.closest('td').style.border     = '2px solid #c3f5e4';
+            td.style.background    = '#f6fffe';
+            td.style.border        = '2px solid #c3f5e4';
         } else {
             input.style.color      = '#e17055';
             input.style.fontWeight = '600';
-            input.closest('td').style.background = '#fff8f7';
-            input.closest('td').style.border     = '2px solid #fde8e6';
+            td.style.background    = '#fff8f7';
+            td.style.border        = '2px solid #fde8e6';
         }
     }
 
-    // Confirmación antes de guardar si hay muchas notas
+
     document.querySelector('.btn-guardar-grilla')?.addEventListener('click', function (e) {
-        const totalCeldas = @Model.TotalCeldas;
+        var totalCeldas = @Model.TotalCeldas;
         if (totalCeldas > 30) {
             if (!confirm('¿Confirmas guardar las calificaciones del @Model.ParcialNombre para @Model.Filas.Count estudiantes?')) {
                 e.preventDefault();
@@ -316,29 +400,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
-<style>
-.input-nota-grilla {
-    width: 90px;
-    text-align: center;
-    border: 1px solid #dee2e6;
-    transition: border-color .15s, background .15s;
-}
-.input-nota-grilla:focus {
-    border-color: #0096c7;
-    box-shadow: 0 0 0 2px rgba(0,150,199,.2);
-}
-
-#tablaGrilla tbody td:first-child,
-#tablaGrilla thead th:first-child {
-    position: sticky;
-    left: 0;
-    background: #fff;
-    z-index: 5;
-}
-#tablaGrilla thead th:first-child {
-    background: #f0f9ff;
-    z-index: 11;
-}
-</style>
 }

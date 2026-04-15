@@ -3,9 +3,12 @@ wwwroot\css\bootstrap-datetimepicker.min.css
 wwwroot\css\bootstrap.min.css
 wwwroot\css\dataTables.bootstrap4.min.css
 wwwroot\css\edupath-admin.css
+wwwroot\css\edupath-vistas.css
 wwwroot\css\login.css
 wwwroot\css\site.css
 wwwroot\css\style.css
+wwwroot\css\SubirNotas.css
+wwwroot\css\SubirNotasGrilla.css
 wwwroot\favicon.ico
 wwwroot\img\barcode1.png
 wwwroot\img\login.jpg

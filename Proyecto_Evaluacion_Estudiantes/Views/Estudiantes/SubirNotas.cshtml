@@ -4,13 +4,17 @@
     ViewData["ActiveMenu"] = "Notas";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/SubirNotas.css" />
+}
+
 <div class="page-wrapper">
     <div class="content">
 
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="upload" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="upload" class="subirnotas-icon-header me-2"></i>
                     Subir Notas
                 </h4>
                 <h6>EduPath AI — Selecciona el curso y el parcial para ingresar calificaciones</h6>
@@ -34,21 +38,17 @@
             </div>
         }
 
-
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8 col-md-10">
-                <div class="card" style="border-top:4px solid #0096c7;">
+                <div class="card card-subirnotas">
                     <div class="card-body p-4">
 
-                        <div class="d-flex align-items-center mb-4 pb-3"
-                             style="border-bottom:2px solid #e2e8f0;">
-                            <div class="admin-stat-icon me-3"
-                                 style="background:linear-gradient(135deg,#0096c7,#48cae4);
-                                        box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                                <i data-feather="layers" style="color:#fff;width:20px;height:20px;"></i>
+                        <div class="d-flex align-items-center mb-4 pb-3 subirnotas-card-header">
+                            <div class="admin-stat-icon subirnotas-stat-icon me-3">
+                                <i data-feather="layers" class="subirnotas-icon-layers"></i>
                             </div>
                             <div>
-                                <h5 class="mb-0" style="color:#1a2b4a;font-weight:700;">
+                                <h5 class="mb-0 subirnotas-titulo">
                                     Seleccionar Curso y Parcial
                                 </h5>
                                 <small class="text-muted">
@@ -61,11 +61,9 @@
                               method="post" novalidate>
                             @Html.AntiForgeryToken()
 
-          
                             <div class="mb-4">
-                                <label asp-for="CursoId" class="form-label fw-semibold"
-                                       style="color:#1a2b4a;">
-                                    <i data-feather="book-open" style="width:15px;color:#0096c7;"></i>
+                                <label asp-for="CursoId" class="form-label fw-semibold label-dark-navy">
+                                    <i data-feather="book-open" class="icon-15-primary"></i>
                                     Curso
                                 </label>
                                 <select asp-for="CursoId"
@@ -84,11 +82,9 @@
                                       class="text-danger small"></span>
                             </div>
 
-     
                             <div class="mb-4">
-                                <label asp-for="Parcial" class="form-label fw-semibold"
-                                       style="color:#1a2b4a;">
-                                    <i data-feather="bookmark" style="width:15px;color:#0096c7;"></i>
+                                <label asp-for="Parcial" class="form-label fw-semibold label-dark-navy">
+                                    <i data-feather="bookmark" class="icon-15-primary"></i>
                                     Parcial
                                 </label>
 
@@ -106,7 +102,7 @@
                                                    value="@item.Value"
                                                    class="d-none parcial-radio"
                                                    @(seleccionado ? "checked" : "") />
-                                            <i data-feather="edit-3" style="width:14px;"></i>
+                                            <i data-feather="edit-3" class="icon-14"></i>
                                             @item.Text
                                         </label>
                                     }
@@ -115,14 +111,9 @@
                                       class="text-danger small d-block mt-1"></span>
                             </div>
 
-           
                             <div class="d-grid">
-                                <button type="submit"
-                                        class="btn btn-primary"
-                                        style="background:#0096c7;border:none;border-radius:10px;
-                                               padding:12px;font-size:15px;font-weight:600;">
-                                    <i data-feather="arrow-right" class="me-2"
-                                       style="width:16px;"></i>
+                                <button type="submit" class="btn btn-primary btn-subirnotas-submit">
+                                    <i data-feather="arrow-right" class="icon-16 me-2"></i>
                                     Ver Grilla de Calificaciones
                                 </button>
                             </div>
@@ -130,12 +121,9 @@
                     </div>
                 </div>
 
-
-                <div class="alert alert-info d-flex align-items-start py-3 mt-2"
-                     style="background:#e3f6fc;border:1px solid #48cae4;border-radius:10px;">
-                    <i data-feather="info" class="me-3 mt-1 flex-shrink-0"
-                       style="color:#0096c7;width:16px;"></i>
-                    <div style="font-size:13px;color:#1a2b4a;">
+                <div class="alert alert-info d-flex align-items-start py-3 mt-2 alert-info-subirnotas">
+                    <i data-feather="info" class="icon-16-primary me-3 mt-1 flex-shrink-0"></i>
+                    <div class="alert-info-texto">
                         <strong>¿Cómo funciona Subir Notas?</strong><br>
                         Al seleccionar el curso y parcial verás una grilla con una fila por
                         estudiante y una columna por cada asignatura que tienes asignada en ese curso.
@@ -168,32 +156,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
-<style>
-.parcial-card {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 18px;
-    border: 2px solid #dee2e6;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    color: #6c757d;
-    background: #fff;
-    transition: all .2s;
-    user-select: none;
-}
-.parcial-card:hover {
-    border-color: #0096c7;
-    color: #0096c7;
-    background: #f0f9ff;
-}
-.parcial-card-activa {
-    border-color: #0096c7 !important;
-    background: #e3f6fc !important;
-    color: #0096c7 !important;
-}
-</style>
 }

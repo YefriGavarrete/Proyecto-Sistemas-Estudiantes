@@ -9,7 +9,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>
-                    <i data-feather="shield" style="color:#00b4d8;" class="me-2"></i>
+                    <i data-feather="shield" class="icon-page-header me-2"></i>
                     Configuración de Administradores
                 </h4>
                 <h6>EduPath AI — Gestión de Cuentas de Administrador</h6>
@@ -19,7 +19,7 @@
         @if (TempData["MensajeExito"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show alert-edupath-success" role="alert">
-                <i data-feather="check-circle" class="me-2" style="color:#00b4d8;"></i>
+                <i data-feather="check-circle" class="me-2 icon-primary"></i>
                 @TempData["MensajeExito"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -28,7 +28,7 @@
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i data-feather="alert-circle" class="me-2" style="color:#e17055;"></i>
+                <i data-feather="alert-circle" class="me-2 icon-danger"></i>
                 @TempData["ErrorMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -37,13 +37,12 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom:2px solid #e2e8f0;">
-                    <div class="admin-stat-icon me-3"
-                         style="background:linear-gradient(135deg,#0096c7,#48cae4);box-shadow:0 4px 12px rgba(0,150,199,.3);">
-                        <i data-feather="shield" style="color:#fff;width:20px;height:20px;"></i>
+                <div class="d-flex align-items-center mb-4 pb-3 card-section-divider">
+                    <div class="admin-stat-icon me-3 stat-icon-blue">
+                        <i data-feather="shield" class="icon-stat-20w"></i>
                     </div>
                     <div>
-                        <h5 style="margin:0;color:#1a2b4a;font-weight:700;">Nuevo Administrador</h5>
+                        <h5 class="card-section-title">Nuevo Administrador</h5>
                         <small class="text-muted">
                             El nombre de usuario se genera automáticamente. Mínimo 8 caracteres con al menos 2 dígitos.
                         </small>
@@ -56,33 +55,33 @@
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label asp-for="Nombre" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="Nombre" class="form-label fw-semibold label-form">
+                                <i data-feather="user" class="me-1 icon-primary"></i>
                                 @Html.DisplayNameFor(m => m.Nombre)
                             </label>
                             <input asp-for="Nombre" id="adm-Nombre"
                                    class="form-control form-control-edupath"
                                    placeholder="Ej: María" maxlength="200"
                                    oninput="generarUsuario()" />
-                            <span asp-validation-for="Nombre" class="text-danger" style="font-size:12px;"></span>
+                            <span asp-validation-for="Nombre" class="text-danger validation-msg"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Apellido" class="form-label fw-semibold" style="color:#1a2b4a;">
-                                <i data-feather="user" class="me-1" style="color:#00b4d8;"></i>
+                            <label asp-for="Apellido" class="form-label fw-semibold label-form">
+                                <i data-feather="user" class="me-1 icon-primary"></i>
                                 @Html.DisplayNameFor(m => m.Apellido)
                             </label>
                             <input asp-for="Apellido" id="adm-Apellido"
                                    class="form-control form-control-edupath"
                                    placeholder="Ej: González" maxlength="200"
                                    oninput="generarUsuario()" />
-                            <span asp-validation-for="Apellido" class="text-danger" style="font-size:12px;"></span>
+                            <span asp-validation-for="Apellido" class="text-danger validation-msg"></span>
                         </div>
                     </div>
 
 
                     <div class="mb-3">
-                        <label asp-for="NombreUsuario" class="form-label fw-semibold" style="color:#1a2b4a;">
-                            <i data-feather="at-sign" class="me-1" style="color:#00b4d8;"></i>
+                        <label asp-for="NombreUsuario" class="form-label fw-semibold label-form">
+                            <i data-feather="at-sign" class="me-1 icon-primary"></i>
                             @Html.DisplayNameFor(m => m.NombreUsuario)
                             <span class="badge-gen ms-2">Generado automáticamente</span>
                         </label>
@@ -93,24 +92,24 @@
                                    maxlength="200" autocomplete="off" />
                             <button type="button" class="btn-regenerar" onclick="regenerarUsuario()"
                                     title="Generar nuevo usuario">
-                                <i data-feather="refresh-cw" style="width:15px;height:15px;"></i>
+                                <i data-feather="refresh-cw" class="icon-15sq"></i>
                             </button>
                         </div>
-                        <small id="adm-usuario-info" class="text-muted" style="font-size:11px;"></small>
-                        <span asp-validation-for="NombreUsuario" class="text-danger d-block" style="font-size:12px;"></span>
+                        <small id="adm-usuario-info" class="text-muted user-info-label"></small>
+                        <span asp-validation-for="NombreUsuario" class="text-danger d-block validation-msg"></span>
                     </div>
 
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold" style="color:#1a2b4a;">
-                            <i data-feather="lock" class="me-1" style="color:#00b4d8;"></i>
+                        <label class="form-label fw-semibold label-form">
+                            <i data-feather="lock" class="me-1 icon-primary"></i>
                             Contraseña
                         </label>
                         <input type="password" name="ContrasenaInput"
                                class="form-control"
                                placeholder="Mínimo 8 caracteres"
                                autocomplete="new-password" />
-                        <span class="text-danger" style="font-size:12px;">
+                        <span class="text-danger validation-msg">
                             @Html.ValidationMessage("ContrasenaInput")
                         </span>
                     </div>
@@ -119,7 +118,7 @@
                     <div class="mb-4">
                         <div class="form-check form-switch">
                             <input asp-for="Activo" class="form-check-input" type="checkbox" role="switch" />
-                            <label asp-for="Activo" class="form-check-label fw-semibold" style="color:#1a2b4a;">
+                            <label asp-for="Activo" class="form-check-label fw-semibold label-form">
                                 Administrador activo en el sistema
                             </label>
                         </div>
@@ -129,10 +128,10 @@
                     <div class="d-flex gap-2 justify-content-end">
                         <a asp-controller="Administradores" asp-action="Index"
                            class="btn-cancelar-form">
-                            <i data-feather="x" style="width:14px;height:14px;"></i> Cancelar
+                            <i data-feather="x" class="icon-14sq"></i> Cancelar
                         </a>
                         <button type="submit" class="btn-cfg-guardar">
-                            <i data-feather="save" style="width:16px;height:16px;"></i>
+                            <i data-feather="save" class="icon-16sq"></i>
                             Guardar Administrador
                         </button>
                     </div>
@@ -189,7 +188,7 @@
         } else {
             info.textContent = '';
         }
-    } 
+    }
 
     function regenerarUsuario() {
         sufijo = generarSufijo();
