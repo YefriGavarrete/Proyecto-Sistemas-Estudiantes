@@ -1,8 +1,3 @@
-/* =====================================================
-   edupath-vistas.css
-   Clases compartidas entre todas las vistas del sistema.
-   Se carga globalmente desde _Layout.cshtml.
-   ===================================================== */
 
 /* ── Íconos de cabecera de página ── */
 .icon-page-header { color: #00b4d8; }
@@ -123,7 +118,7 @@
 .badge-nota-sm { font-size: 11px; }
 .badge-status-sm { font-size: 11px; }
 
-/* ── Botones de acción en tablas ── */
+
 .btn-action-edit {
     background: linear-gradient(135deg, #0096c7, #48cae4);
     color: #fff; border: none; border-radius: 6px; padding: 4px 10px;
@@ -249,7 +244,7 @@
 .icon-danger          { color: #e17055; }
 .icon-info-18         { color: #0096c7; width: 18px; }
 
-/* ── Badge con texto oscuro (override Bootstrap text-bg-success) ── */
+
 .badge-dark-text { color: #1a2b4a !important; font-size: 11px; }
 
 /* ── Estadísticas de notas (RegistroNotas / SubirNotasGrilla) ── */

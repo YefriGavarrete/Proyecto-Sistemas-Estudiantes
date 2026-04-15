@@ -162,7 +162,9 @@
                                 <tbody>
                                     @foreach (var fila in Model.Filas)
                                     {
-                                        // Determinar si el estudiante ya tiene ALGUNA nota en este parcial
+                                        // Determinar si el estudiante tiene alguna nota en el parcial
+
+
                                         bool filaConNota = fila.NotasPorAsignatura.Values.Any(n => n.HasValue);
                                         string filaId = $"fila-{fila.EstudianteId}";
 
@@ -204,7 +206,7 @@
 
                                                     @if (filaConNota)
                                                     {
-                                                        // ESTUDIANTE CON NOTAS: mostrar valor como texto, input readonly oculto
+
                                                         <span class="nota-display fw-semibold"
                                                               style="color:@colorTexto;font-size:13px;">
                                                             @(tieneNota ? notaActual!.Value.ToString("F2") : "—")
@@ -295,7 +297,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     if (window.feather) feather.replace();
 
-    // ── Botón Editar fila ──
+    // Editar fila
     document.querySelectorAll('.btn-editar-fila').forEach(function (btn) {
         btn.addEventListener('click', function () {
             var filaId  = this.dataset.fila;
@@ -322,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ── Botón Cancelar edición fila 
+
     document.querySelectorAll('.btn-cancelar-fila').forEach(function (btn) {
         btn.addEventListener('click', function () {
             var filaId = this.dataset.fila;

@@ -19,14 +19,6 @@
                 </h4>
                 <h6>EduPath AI — Selecciona el curso y el parcial para ingresar calificaciones</h6>
             </div>
-            <div class="page-btn d-flex gap-2 flex-wrap">
-                <a asp-controller="Estudiantes" asp-action="Index" class="btn-nav-est">
-                    <i data-feather="list"></i> Lista de Estudiantes
-                </a>
-                <a asp-controller="Estudiantes" asp-action="Registro" class="btn-nav-est">
-                    <i data-feather="user-plus"></i> Registrar Estudiante
-                </a>
-            </div>
         </div>
 
         @if (TempData["ErrorMessage"] != null)
