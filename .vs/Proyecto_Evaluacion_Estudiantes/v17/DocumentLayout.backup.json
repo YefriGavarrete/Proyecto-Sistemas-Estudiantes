@@ -3,28 +3,52 @@
   "WorkspaceRootPath": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\prediccion\\buscar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\views\\prediccion\\buscar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\edupath-vistas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\edupath-vistas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\layout\\layout.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\layout\\layout.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\edupath-admin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\edupath-admin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\edupath-vistas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\edupath-vistas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\subirnotasgrilla.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\subirnotasgrilla.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\estudiantes\\subirnotas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\views\\estudiantes\\subirnotas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\subirnotas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\subirnotas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\bootstrap.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\bootstrap.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\prediccion\\buscar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\views\\prediccion\\buscar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\estudiantes\\subirnotas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\views\\estudiantes\\subirnotas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\reportes\\riesgo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -45,10 +69,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\subirnotas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\subirnotas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\animate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -81,10 +101,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\administradores\\configuracionasignaturas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\views\\administradores\\configuracionasignaturas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\ml\\prediccionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -123,24 +139,12 @@
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\datatables.bootstrap4.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\datatables.bootstrap4.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\bootstrap-datetimepicker.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\bootstrap-datetimepicker.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\wwwroot\\css\\bootstrap.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\wwwroot\\css\\bootstrap.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -283,16 +287,16 @@
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\instrucciones_bd.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\instrucciones_bd.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|c:\\users\\admin\\onedrive\\escritorio\\ucenm\\x period\\programming for internet ii\\proyecto_evaluacion_estudiantes\\proyecto_evaluacion_estudiantes\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{58CE3A28-3527-484A-9F5C-0D736994ADEA}|Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes.csproj|solutionrelative:proyecto_evaluacion_estudiantes\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\INSTRUCCIONES_BD.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto_Evaluacion_Estudiantes\\INSTRUCCIONES_BD.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     }
   ],
   "DocumentGroupContainers": [
@@ -302,7 +306,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -318,285 +322,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "edupath-vistas.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-vistas.css",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-vistas.css",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-vistas.css",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-vistas.css",
-              "ViewState": "AgIAAOQAAAAAAAAAAAAAAO4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-04-15T15:42:56.847Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Buscar.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Buscar.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Buscar.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Buscar.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Buscar.cshtml",
-              "ViewState": "AgIAADgAAAAAAAAAAAAAAEgAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-13T18:06:11.91Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SubirNotasGrilla.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotasGrilla.css",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotasGrilla.css",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotasGrilla.css",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotasGrilla.css",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-04-13T19:44:50.849Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "edupath-admin.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-admin.css",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-admin.css",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-admin.css",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-admin.css",
-              "ViewState": "AgIAACMAAAAAAAAAAAAkwDMAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-04-02T03:27:53.655Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SubirNotas.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotas.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotas.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotas.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotas.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-13T18:01:25.054Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Riesgo.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\Riesgo.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\Riesgo.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\Riesgo.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\Riesgo.cshtml",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAAABwAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-13T18:07:46.351Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAAAHcAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-17T00:13:23.23Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Perfil.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Perfil.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Perfil.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Perfil.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Perfil.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-13T18:05:59.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Registro.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Registro.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Registro.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Registro.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Registro.cshtml",
-              "ViewState": "AgIAADYAAAAAAAAAAAAAADsAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-25T03:19:27.584Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "General.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\General.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\General.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\General.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\General.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAMcAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-27T04:19:04.498Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "_ValidationScriptsPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-20T01:43:39.297Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "SubirNotasGrilla.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotasGrilla.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotasGrilla.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotasGrilla.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotasGrilla.cshtml",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAANAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-07T03:13:37.194Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "animate.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\animate.css",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\animate.css",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\animate.css",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\animate.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-04-01T02:57:07.538Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "SubirNotas.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotas.css",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotas.css",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotas.css",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotas.css",
-              "ViewState": "AgIAACIAAAAAAAAAAAAAAA0AAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-04-13T20:02:58.159Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "EstudiantesController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\EstudiantesController.cs",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Controllers\\EstudiantesController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\EstudiantesController.cs",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Controllers\\EstudiantesController.cs",
-              "ViewState": "AgIAACICAAAAAAAAAAAqwDICAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T02:45:09.813Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "SubirNotasViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\SubirNotasViewModel.cs",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\SubirNotasViewModel.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\SubirNotasViewModel.cs",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Models\\SubirNotasViewModel.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAjwEgAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T17:03:20.57Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "IniciarSesion.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\IniciarSesion.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\IniciarSesion.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\IniciarSesion.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\IniciarSesion.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFMAAABLAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-17T03:23:31.926Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "GestionCursos.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\GestionCursos.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\GestionCursos.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\GestionCursos.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\GestionCursos.cshtml",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAmwFoAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-05T18:59:55.105Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ConfiguracionGrados.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionGrados.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionGrados.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionGrados.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionGrados.cshtml",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAmwMcAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-04T02:15:54.659Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ConfiguracionAsignaturas.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAsignaturas.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAsignaturas.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAsignaturas.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAsignaturas.cshtml",
-              "ViewState": "AgIAAAQBAAAAAAAAAAAAAAkBAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-04T02:14:41.226Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "AdminIndexViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\AdminIndexViewModel.cs",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\AdminIndexViewModel.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\AdminIndexViewModel.cs",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Models\\AdminIndexViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-22T17:33:32.516Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "PrediccionService.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\ML\\PrediccionService.cs",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\ML\\PrediccionService.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\ML\\PrediccionService.cs",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\ML\\PrediccionService.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAowFUAAAB1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T17:23:17.564Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
               "Title": "style.css",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\style.css",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\style.css",
@@ -608,91 +334,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAPYAAAAAAAAAAAAAANsAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-17T00:15:32.398Z"
+              "DocumentIndex": 6,
+              "Title": "SubirNotasGrilla.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotasGrilla.css",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotasGrilla.css",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotasGrilla.css",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotasGrilla.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-13T19:44:50.849Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "ConfiguracionGradosViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionGradosViewModel.cs",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionGradosViewModel.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionGradosViewModel.cs",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionGradosViewModel.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBQAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T02:21:12.914Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "AdministradoresController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\AdministradoresController.cs",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Controllers\\AdministradoresController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\AdministradoresController.cs",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Controllers\\AdministradoresController.cs",
-              "ViewState": "AgIAABEEAAAAAAAAAAAcwAQEAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T01:42:03.904Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Index.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Index.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Index.cshtml",
-              "ViewState": "AgIAAJ0AAAAAAAAAAAAAwKUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-25T03:19:30.912Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "Editar.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Editar.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Editar.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Editar.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Editar.cshtml",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAAAG0AAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-25T03:19:23.866Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "Resultado.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Resultado.cshtml",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Resultado.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Resultado.cshtml",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Resultado.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-13T18:06:38.785Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAuwBcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T02:37:27.102Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 4,
               "Title": "site.css",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\site.css",
@@ -704,31 +358,68 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 3,
               "Title": "login.css",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\login.css",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\login.css",
               "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\login.css",
               "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\login.css",
-              "ViewState": "AgIAAPwAAAAAAAAAAAAAACIAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAM8AAAAAAAAAAAAAAAYAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2026-03-17T03:43:21.784Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "dataTables.bootstrap4.min.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\dataTables.bootstrap4.min.css",
-              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\dataTables.bootstrap4.min.css",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\dataTables.bootstrap4.min.css",
-              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\dataTables.bootstrap4.min.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "edupath-vistas.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-vistas.css",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-vistas.css",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-vistas.css",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-vistas.css",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-04-13T19:44:09.17Z"
+              "WhenOpened": "2026-04-15T15:42:56.847Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 1,
+              "Title": "edupath-admin.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-admin.css",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-admin.css",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-admin.css",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\edupath-admin.css",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAAADIDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-02T03:27:53.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "layout.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\layout\\layout.css",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\layout\\layout.css",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\layout\\layout.css",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\layout\\layout.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-16T15:54:12.758Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SubirNotas.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotas.css",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotas.css",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotas.css",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\SubirNotas.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-13T20:02:58.159Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "bootstrap.min.css",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\bootstrap.min.css",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\bootstrap.min.css",
@@ -740,7 +431,319 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 9,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAALkBAAAAAAAAAAAiwMYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-17T00:13:23.23Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Buscar.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Buscar.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Buscar.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Buscar.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Buscar.cshtml",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAAHAAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-13T18:06:11.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SubirNotas.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotas.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotas.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotas.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotas.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-13T18:01:25.054Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Riesgo.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\Riesgo.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\Riesgo.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\Riesgo.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\Riesgo.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAABwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-13T18:07:46.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Perfil.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Perfil.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Perfil.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Perfil.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Perfil.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-13T18:05:59.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Registro.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Registro.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Registro.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Registro.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Registro.cshtml",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAADsAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T03:19:27.584Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "General.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\General.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\General.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\General.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Reportes\\General.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAMcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-27T04:19:04.498Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-20T01:43:39.297Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "SubirNotasGrilla.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotasGrilla.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotasGrilla.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotasGrilla.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\SubirNotasGrilla.cshtml",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAANAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-07T03:13:37.194Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "animate.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\animate.css",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\animate.css",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\animate.css",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\animate.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-01T02:57:07.538Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "EstudiantesController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\EstudiantesController.cs",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Controllers\\EstudiantesController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\EstudiantesController.cs",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Controllers\\EstudiantesController.cs",
+              "ViewState": "AgIAACICAAAAAAAAAAAqwDICAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T02:45:09.813Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "SubirNotasViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\SubirNotasViewModel.cs",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\SubirNotasViewModel.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\SubirNotasViewModel.cs",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Models\\SubirNotasViewModel.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAjwEgAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T17:03:20.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "IniciarSesion.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\IniciarSesion.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\IniciarSesion.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\IniciarSesion.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\IniciarSesion.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFMAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-17T03:23:31.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "GestionCursos.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\GestionCursos.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\GestionCursos.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\GestionCursos.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\GestionCursos.cshtml",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAmwFoAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-05T18:59:55.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ConfiguracionGrados.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionGrados.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionGrados.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionGrados.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionGrados.cshtml",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAmwMcAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-04T02:15:54.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ConfiguracionAsignaturas.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAsignaturas.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAsignaturas.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAsignaturas.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAsignaturas.cshtml",
+              "ViewState": "AgIAAAQBAAAAAAAAAAAAAAkBAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-04T02:14:41.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "AdminIndexViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\AdminIndexViewModel.cs",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\AdminIndexViewModel.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\AdminIndexViewModel.cs",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Models\\AdminIndexViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-22T17:33:32.516Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "PrediccionService.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\ML\\PrediccionService.cs",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\ML\\PrediccionService.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\ML\\PrediccionService.cs",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\ML\\PrediccionService.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAowFUAAAB1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T17:23:17.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAPYAAAAAAAAAAAAAANsAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-17T00:15:32.398Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ConfiguracionGradosViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionGradosViewModel.cs",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionGradosViewModel.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionGradosViewModel.cs",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionGradosViewModel.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-04T02:21:12.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AdministradoresController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\AdministradoresController.cs",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Controllers\\AdministradoresController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\AdministradoresController.cs",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Controllers\\AdministradoresController.cs",
+              "ViewState": "AgIAABEEAAAAAAAAAAAcwAQEAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T01:42:03.904Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Index.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Index.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Index.cshtml",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAAwKUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T03:19:30.912Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Editar.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Editar.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Editar.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Editar.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Editar.cshtml",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAG0AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T03:19:23.866Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Resultado.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Resultado.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Resultado.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Resultado.cshtml",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Views\\Prediccion\\Resultado.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-13T18:06:38.785Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAuwBcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T02:37:27.102Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "dataTables.bootstrap4.min.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\dataTables.bootstrap4.min.css",
+              "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\dataTables.bootstrap4.min.css",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\dataTables.bootstrap4.min.css",
+              "RelativeToolTip": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\dataTables.bootstrap4.min.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-13T19:44:09.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
               "Title": "Error.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\Error.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Shared\\Error.cshtml",
@@ -752,7 +755,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 35,
               "Title": "bootstrap-datetimepicker.min.css",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\bootstrap-datetimepicker.min.css",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\wwwroot\\css\\bootstrap-datetimepicker.min.css",
@@ -764,7 +767,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Home\\Privacy.cshtml",
@@ -776,7 +779,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "Prediccion.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Prediccion.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\Prediccion.cshtml",
@@ -788,7 +791,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "RegistroNotas.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\RegistroNotas.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Estudiantes\\RegistroNotas.cshtml",
@@ -800,7 +803,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\Index.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\Index.cshtml",
@@ -812,7 +815,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "ConfiguracionUsuarios.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionUsuarios.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionUsuarios.cshtml",
@@ -824,7 +827,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "ConfiguracionCursos.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionCursos.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionCursos.cshtml",
@@ -836,7 +839,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "ConfiguracionAdministradores.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAdministradores.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\ConfiguracionAdministradores.cshtml",
@@ -848,7 +851,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 44,
               "Title": "AsignacionDocentes.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\AsignacionDocentes.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\Administradores\\AsignacionDocentes.cshtml",
@@ -860,7 +863,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 45,
               "Title": "RiesgoModelInput.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\RiesgoModelInput.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\RiesgoModelInput.cs",
@@ -872,7 +875,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 47,
               "Title": "RegistroEstudianteViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\RegistroEstudianteViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\RegistroEstudianteViewModel.cs",
@@ -884,7 +887,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 48,
               "Title": "PrediccionViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\PrediccionViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\PrediccionViewModel.cs",
@@ -896,7 +899,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 49,
               "Title": "Estudiante.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\Estudiante.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\Estudiante.cs",
@@ -908,7 +911,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 50,
               "Title": "PerfilViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\PerfilViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\PerfilViewModel.cs",
@@ -920,7 +923,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 53,
               "Title": "Grado.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\Grado.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\Grado.cs",
@@ -932,7 +935,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 46,
               "Title": "ReporteGeneralViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\ReporteGeneralViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\ReporteGeneralViewModel.cs",
@@ -944,7 +947,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 54,
               "Title": "GestionCursosViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\GestionCursosViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\GestionCursosViewModel.cs",
@@ -956,7 +959,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 55,
               "Title": "EstudianteNotasViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\EstudianteNotasViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\EstudianteNotasViewModel.cs",
@@ -968,7 +971,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 52,
               "Title": "LayoutViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\LayoutViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\LayoutViewModel.cs",
@@ -980,7 +983,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 51,
               "Title": "NotaParcial.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\NotaParcial.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\NotaParcial.cs",
@@ -992,7 +995,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 56,
               "Title": "EstudianteIndexViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\EstudianteIndexViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\EstudianteIndexViewModel.cs",
@@ -1004,7 +1007,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 57,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\ErrorViewModel.cs",
@@ -1016,7 +1019,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 58,
               "Title": "DocenteDashboardViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\DocenteDashboardViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\DocenteDashboardViewModel.cs",
@@ -1028,7 +1031,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 59,
               "Title": "Docente.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\Docente.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\Docente.cs",
@@ -1040,7 +1043,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 60,
               "Title": "Curso.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\Curso.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\Curso.cs",
@@ -1052,7 +1055,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 61,
               "Title": "ConfiguracionCursosViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionCursosViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionCursosViewModel.cs",
@@ -1064,7 +1067,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 62,
               "Title": "ConfiguracionAsignaturasViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionAsignaturasViewModel.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\ConfiguracionAsignaturasViewModel.cs",
@@ -1076,7 +1079,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 63,
               "Title": "Asignatura.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\Asignatura.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\Asignatura.cs",
@@ -1088,7 +1091,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 64,
               "Title": "Administrador.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Models\\Administrador.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Models\\Administrador.cs",
@@ -1100,7 +1103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 65,
               "Title": "ReportesController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\ReportesController.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Controllers\\ReportesController.cs",
@@ -1112,7 +1115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 66,
               "Title": "PrediccionController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\PrediccionController.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Controllers\\PrediccionController.cs",
@@ -1124,7 +1127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 67,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Controllers\\HomeController.cs",
@@ -1136,7 +1139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 68,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Program.cs",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Program.cs",
@@ -1148,7 +1151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 69,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\_ViewImports.cshtml",
@@ -1160,7 +1163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 70,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\Views\\_ViewStart.cshtml",
@@ -1172,7 +1175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 73,
               "Title": "INSTRUCCIONES_BD.md",
               "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\UCENM\\X Period\\Programming for Internet II\\Proyecto_Evaluacion_Estudiantes\\Proyecto_Evaluacion_Estudiantes\\INSTRUCCIONES_BD.md",
               "RelativeDocumentMoniker": "Proyecto_Evaluacion_Estudiantes\\INSTRUCCIONES_BD.md",

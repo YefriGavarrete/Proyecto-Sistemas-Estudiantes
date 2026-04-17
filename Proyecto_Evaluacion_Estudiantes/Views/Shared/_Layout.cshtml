@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/edupath-admin.css" />
     <link rel="stylesheet" href="~/css/edupath-vistas.css" />
+    <link rel="stylesheet" href="~/css/layout/layout.css" />
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
@@ -21,8 +22,6 @@
     // los datos del perfil se leen desde el modelo
 
 
-    // Cuando la vista usa un modelo de entidad (Docente, Administrador),
-    // el layout recae en el ViewData que el controlador ya establece.
     var perfil     = Model as Proyecto_Evaluacion_Estudiantes.Models.LayoutViewModel;
     bool esAdmin   = perfil?.EsAdmin   ?? (ViewData["EsAdmin"] is bool b && b);
     string nombre  = perfil?.NombreUsuario ?? ViewData["NombreDocente"]?.ToString() ?? "Usuario";
@@ -31,7 +30,6 @@
     string sistema = perfil?.Sistema       ?? ViewData["CursoActual"]?.ToString()   ?? "EduPath AI";
     string periodo = perfil?.Periodo       ?? ViewData["Periodo"]?.ToString()       ?? Proyecto_Evaluacion_Estudiantes.Helpers.PeriodoAcademico.ObtenerPeriodoDescriptivo();
     string menu    = perfil?.ActiveMenu    ?? ViewData["ActiveMenu"]?.ToString()    ?? "";
-
 
     var partes     = nombre.Split(' ', StringSplitOptions.RemoveEmptyEntries);
     string iniciales = partes.Length >= 2
@@ -59,7 +57,7 @@
             <ul class="nav user-menu">
                 <li class="nav-item dropdown" id="noti-dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown" id="noti-toggle">
-                        <i class="fa fa-bell" style="font-size:20px;color:#0d6efd;"></i>
+                        <i class="fa fa-bell layout-bell-icon"></i>
                         <span class="badge rounded-pill bg-primary" id="noti-badge" style="display:none;">1</span>
                     </a>
                     <div class="dropdown-menu notifications">
@@ -72,10 +70,8 @@
                                 <li class="notification-message" id="noti-welcome">
                                     <a href="javascript:void(0);">
                                         <div class="media d-flex">
-                                            <span class="avatar flex-shrink-0"
-                                                  style="width:40px;height:40px;border-radius:50%;background:#0d6efd;
-                                                         display:flex;align-items:center;justify-content:center;">
-                                                <i class="fa fa-user" style="color:#fff;font-size:18px;"></i>
+                                            <span class="avatar flex-shrink-0 layout-noti-avatar">
+                                                <i class="fa fa-user"></i>
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details">
@@ -95,20 +91,10 @@
                     </div>
                 </li>
 
-
-
-
-
-
-
-
                 <li class="nav-item dropdown has-arrow main-drop">
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                         <span class="user-img">
-                            <span style="display:inline-flex;align-items:center;justify-content:center;
-                                         width:36px;height:36px;border-radius:50%;
-                                         background:@avatarColor;color:#fff;
-                                         font-size:13px;font-weight:700;letter-spacing:.5px;">
+                            <span class="layout-avatar layout-avatar--nav" style="--avatar-bg:@avatarColor">
                                 @iniciales
                             </span>
                             <span class="status online"></span>
@@ -118,10 +104,7 @@
                         <div class="profilename">
                             <div class="profileset">
                                 <span class="user-img">
-                                    <span style="display:inline-flex;align-items:center;justify-content:center;
-                                                 width:36px;height:36px;border-radius:50%;
-                                                 background:@avatarColor;color:#fff;
-                                                 font-size:13px;font-weight:700;letter-spacing:.5px;">
+                                    <span class="layout-avatar layout-avatar--nav" style="--avatar-bg:@avatarColor">
                                         @iniciales
                                     </span>
                                     <span class="status online"></span>
@@ -138,14 +121,13 @@
                         </div>
                     </div>
                 </li>
-            </ul>   
-
+            </ul>
 
             <div class="dropdown mobile-user-menu">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="perfil.cshtml">Mi Perfil</a>
-                    <a class="dropdown-item" href="IniciarSesion.cshtml">Cerrar Sesión</a>
+                    <a class="dropdown-item" asp-controller="Home" asp-action="Perfil"><i class="me-2" data-feather="user"></i> Mi Perfil</a>
+                    <a class="dropdown-item" asp-controller="Home" asp-action="CerrarSesion"><img src="~/img/icons/log-out.svg" class="me-2" alt="img">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
@@ -154,62 +136,44 @@
 
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
-                <div class="sidebar-profile" style="padding:18px 16px 14px;border-bottom:2px solid rgba(0,180,216,0.25);background:linear-gradient(135deg,#0d1b2a 0%,#1a3a5c 100%);">
+                <div class="sidebar-profile">
                     <div class="d-flex align-items-center mb-2">
-                        <span class="user-img me-2" style="position:relative;">
-                            <span style="display:inline-flex;align-items:center;justify-content:center;
-                                         width:44px;height:44px;border-radius:50%;
-                                         border:2px solid #00b4d8;
-                                         background:@avatarColor;color:#fff;
-                                         font-size:15px;font-weight:700;letter-spacing:.5px;">
+                        <span class="user-img me-2 layout-sidebar-img">
+                            <span class="layout-avatar layout-avatar--sidebar" style="--avatar-bg:@avatarColor">
                                 @iniciales
                             </span>
-                            <span style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;
-                                         background:#00b894;border-radius:50%;border:2px solid #0d1b2a;"></span>
+                            <span class="layout-sidebar-online-dot"></span>
                         </span>
-                        <div style="overflow:hidden;min-width:0;flex:1;">
-                            <h6 style="color:#fff;font-size:13px;font-weight:700;margin:0;
-                                       line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                                @nombre
-                            </h6>
-                            <span style="color:#48cae4;font-size:11px;font-weight:600;letter-spacing:.3px;
-                                         white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;">
-                                @titulo
-                            </span>
+                        <div class="layout-profile-text">
+                            <h6 class="layout-profile-name">@nombre</h6>
+                            <span class="layout-profile-role">@titulo</span>
                         </div>
                     </div>
-                    <div style="font-size:11px;color:rgba(255,255,255,0.65);line-height:2;margin-top:4px;">
+                    <div class="layout-profile-info">
                         <div>
-                            <i class="fa fa-id-badge" style="color:#48cae4;width:14px;text-align:center;"></i>
-                            <strong style="color:rgba(255,255,255,0.9);"> Cód:</strong>
-                            <span style="color:#fff;">@codigo</span>
+                            <i class="fa fa-id-badge layout-info-icon"></i>
+                            <strong class="layout-info-label"> Cód:</strong>
+                            <span class="layout-info-value">@codigo</span>
                         </div>
                         <div>
-                            <i class="fa fa-graduation-cap" style="color:#48cae4;width:14px;text-align:center;"></i>
-                            <strong style="color:rgba(255,255,255,0.9);"> Sistema:</strong>
-                            <span style="color:#fff;">@sistema</span>
+                            <i class="fa fa-graduation-cap layout-info-icon"></i>
+                            <strong class="layout-info-label"> Sistema:</strong>
+                            <span class="layout-info-value">@sistema</span>
                         </div>
                         <div>
-                            <i class="fa fa-calendar" style="color:#48cae4;width:14px;text-align:center;"></i>
-                            <strong style="color:rgba(255,255,255,0.9);"> Periodo:</strong>
-                            <span style="color:#fff;">@periodo</span>
+                            <i class="fa fa-calendar layout-info-icon"></i>
+                            <strong class="layout-info-label"> Periodo:</strong>
+                            <span class="layout-info-value">@periodo</span>
                         </div>
                     </div>
                 </div>
 
-
-
-
-
                 <!-- Menú lateral -->
-
-
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
 
                         @if (!esAdmin)
                         {
-
                             <li class="@(menu == "Dashboard" ? "active" : "")">
                                 <a asp-controller="Home" asp-action="Index">
                                     <img src="~/img/icons/dashboard.svg" alt="img">
@@ -234,10 +198,8 @@
                                             <i data-feather="list" class="me-1"></i> Lista de Estudiantes
                                         </a>
                                     </li>
-
                                 </ul>
                             </li>
-
 
                             <li class="submenu @(menu == "Notas" ? "active" : "")">
                                 <a href="javascript:void(0);">
@@ -259,8 +221,8 @@
                                 </ul>
                             </li>
 
-                            <!-- Reportes -->
-                            <li class="submenu @(menu == "Reportes" ? "active" : "")"  >
+                            
+                            <li class="submenu @(menu == "Reportes" ? "active" : "")">
                                 <a href="javascript:void(0);">
                                     <img src="~/img/icons/time.svg" alt="img">
                                     <span> Reportes</span>
@@ -280,12 +242,9 @@
                                 </ul>
                             </li>
 
-
-
-                            <!-- Análisis IA (solo Docentes) -->
                             <li class="submenu @(menu == "Prediccion" ? "active" : "")">
                                 <a href="javascript:void(0);">
-                                    <i class="fa fa-brain" style="width:16px;color:#48cae4;"></i>
+                                    <i class="fa fa-brain layout-menu-icon"></i>
                                     <span> Análisis IA</span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -297,16 +256,10 @@
                                     </li>
                                 </ul>
                             </li>
-
-
-
-
                         }
 
                         @if (esAdmin)
                         {
-
-
                             <!-- Administrador (solo para rol Admin) -->
                             <li class="submenu @(menu == "Administrador" ? "active" : "")">
                                 <a href="javascript:void(0);">
@@ -325,11 +278,8 @@
                                             <i data-feather="shield" class="me-1"></i> Configuración de Administradores
                                         </a>
                                     </li>
-
                                 </ul>
                             </li>
-
-
 
                             <!-- Configuración Académica (solo Admin) -->
                             <li class="submenu @(menu == "Academica" ? "active" : "")"
@@ -352,6 +302,7 @@
                                     </li>
                                 </ul>
                             </li>
+
                             <!-- Gestión de Cursos (solo Admin) -->
                             <li class="submenu @(menu == "Cursos" ? "active" : "")"
                                 data-menu-id="Cursos">
@@ -375,7 +326,7 @@
                             </li>
                         }
 
-                        <!-- Configuración (visible para todos) -->
+            
                         <li class="submenu @(menu == "Configuracion" ? "active" : "")">
                             <a href="javascript:void(0);">
                                 <img src="~/img/icons/settings.svg" alt="img">
@@ -406,9 +357,8 @@
 
         @RenderBody()
 
-
     </div>
-  
+
 
     <script src="~/js/jquery-3.6.0.min.js"></script>
     <script src="~/js/feather.min.js"></script>
@@ -426,7 +376,6 @@
 
     $(document).ready(function () {
 
-
         $('#sidebar-menu a').off('click');
 
         // Toggle: clic en el <a> cabecera de cada li.submenu
@@ -436,14 +385,12 @@
             var $ul = $a.next('ul');
 
             if ($a.hasClass('subdrop')) {
-
                 $a.removeClass('subdrop');
                 $ul.slideUp(250);
             } else {
-                // Cerrar cualquier otro submenú que esté abierto
+         
                 $('#sidebar-menu li.submenu > a.subdrop').not($a).removeClass('subdrop')
                     .next('ul').slideUp(250);
-    
 
                 $a.addClass('subdrop');
                 $ul.slideDown(250);
@@ -456,7 +403,6 @@
             $('#sidebar-menu li[data-menu="' + _menuActivo + '"]').addClass('active');
         }
 
-
         if (window.feather) feather.replace();
 
     });
@@ -465,7 +411,6 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <script>
-
     (function () {
         var SESSION_KEY = 'edupath_noti_cleared_@System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(nombre)';
         var READ_KEY    = 'edupath_noti_read_@System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(nombre)';
@@ -491,7 +436,6 @@
             }
         }
 
-     
         $toggle.on('click', function () {
             if (!isCleared()) {
                 sessionStorage.setItem(READ_KEY, '1');
@@ -499,17 +443,16 @@
             }
         });
 
-        // Elimina la notificación
+        
         $clear.on('click', function () {
             sessionStorage.setItem(SESSION_KEY, '1');
             renderState();
-
             $toggle.dropdown('hide');
         });
-l
+
         renderState();
 
-        // Tiempo relativo simple
+
         if (!isCleared()) {
             var loginTime = sessionStorage.getItem('edupath_login_time');
             if (!loginTime) {

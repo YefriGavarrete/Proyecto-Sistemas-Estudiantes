@@ -1,0 +1,70 @@
+
+.subirnotas-icon-header { color: #00b4d8; }
+
+
+.card-subirnotas { border-top: 4px solid #0096c7; }
+.subirnotas-card-header { border-bottom: 2px solid #e2e8f0; }
+
+.subirnotas-stat-icon {
+    background: linear-gradient(135deg, #0096c7, #48cae4);
+    box-shadow: 0 4px 12px rgba(0, 150, 199, .3);
+}
+.subirnotas-icon-layers { color: #fff; width: 20px; height: 20px; }
+
+/* ── Título de sección ── */
+.subirnotas-titulo { color: #1a2b4a; font-weight: 700; }
+
+
+.label-dark-navy { color: #1a2b4a; }
+
+/* ── Íconos de campos ── */
+.icon-15-primary { width: 15px; color: #0096c7; }
+.icon-16-primary  { color: #0096c7; width: 16px; }
+.icon-14          { width: 14px; }
+.icon-16          { width: 16px; }
+
+/* ── Tarjetas de selección de parcial ── */
+.parcial-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6c757d;
+    background: #fff;
+    transition: all .2s;
+    user-select: none;
+}
+.parcial-card:hover {
+    border-color: #0096c7;
+    color: #0096c7;
+    background: #f0f9ff;
+}
+.parcial-card-activa {
+    border-color: #0096c7 !important;
+    background: #e3f6fc !important;
+    color: #0096c7 !important;
+}
+
+
+.btn-subirnotas-submit {
+    background: #0096c7;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+}
+.btn-subirnotas-submit:hover { background: #0077a3; }
+
+
+.alert-info-subirnotas {
+    background: #e3f6fc;
+    border: 1px solid #48cae4;
+    border-radius: 10px;
+}
+.alert-info-texto { font-size: 13px; color: #1a2b4a; }

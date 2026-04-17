@@ -4,6 +4,7 @@ wwwroot\css\bootstrap.min.css
 wwwroot\css\dataTables.bootstrap4.min.css
 wwwroot\css\edupath-admin.css
 wwwroot\css\edupath-vistas.css
+wwwroot\css\layout\layout.css
 wwwroot\css\login.css
 wwwroot\css\site.css
 wwwroot\css\style.css
@@ -11,6 +12,17 @@ wwwroot\css\SubirNotas.css
 wwwroot\css\SubirNotasGrilla.css
 wwwroot\favicon.ico
 wwwroot\img\barcode1.png
+wwwroot\img\icons\dash1.svg
+wwwroot\img\icons\dash2.svg
+wwwroot\img\icons\dash3.svg
+wwwroot\img\icons\dash4.svg
+wwwroot\img\icons\dashboard.svg
+wwwroot\img\icons\dropdown.svg
+wwwroot\img\icons\log-out.svg
+wwwroot\img\icons\product.svg
+wwwroot\img\icons\settings.svg
+wwwroot\img\icons\time.svg
+wwwroot\img\icons\users1.svg
 wwwroot\img\login.jpg
 wwwroot\img\Logo-EdupathAI.png
 wwwroot\img\logoInstitucional.png

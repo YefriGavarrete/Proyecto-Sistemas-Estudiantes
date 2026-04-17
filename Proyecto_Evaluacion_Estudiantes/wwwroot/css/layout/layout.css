@@ -1,0 +1,132 @@
+
+.layout-bell-icon {
+    font-size: 20px;
+    color: #0d6efd;
+}
+
+/* ── Avatar de notificación */
+.layout-noti-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #0d6efd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.layout-noti-avatar i {
+    color: #fff;
+    font-size: 18px;
+}
+
+
+.layout-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--avatar-bg);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+/* Variante pequeña: header*/
+.layout-avatar--nav {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+}
+
+
+.layout-avatar--sidebar {
+    width: 44px;
+    height: 44px;
+    font-size: 15px;
+    border: 2px solid #00b4d8;
+}
+
+
+.sidebar-profile {
+    padding: 18px 16px 14px;
+    border-bottom: 2px solid rgba(0, 180, 216, 0.25);
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 100%);
+}
+
+/* Wrapper position:relative del avatar en el sidebar */
+.layout-sidebar-img {
+    position: relative;
+}
+
+
+.layout-sidebar-online-dot {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    width: 10px;
+    height: 10px;
+    background: #00b894;
+    border-radius: 50%;
+    border: 2px solid #0d1b2a;
+}
+
+
+.layout-profile-text {
+    overflow: hidden;
+    min-width: 0;
+    flex: 1;
+}
+
+/* Nombre del usuario */
+.layout-profile-name {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.layout-profile-role {
+    color: #48cae4;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* Bloque de información (código, sistema, periodo) */
+.layout-profile-info {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 2;
+    margin-top: 4px;
+}
+
+
+.layout-info-icon {
+    color: #48cae4;
+    width: 14px;
+    text-align: center;
+}
+
+/* Etiquetas "Cód:", "Sistema:", "Periodo:" */
+.layout-info-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+
+.layout-info-value {
+    color: #fff;
+}
+.layout-menu-icon {
+    width: 16px;
+    color: #48cae4;
+}
