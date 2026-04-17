@@ -23,7 +23,7 @@ Aplicacion web desarrollada en ASP.NET Core MVC (.NET 8) con Entity Framework Co
 ## Configuracion
 
 1. Clonar el repositorio.
-2. Crear la base de datos ejecutando los scripts ubicados en la carpeta `Scripts/`: primero `CrearTablas_EduPath.sql`, luego `AlterTablaEstudiantes.sql`.
+2. Crear la base de datos ejecutando los scripts ubicados en la carpeta `Scripts/`: primero `SQLBaseDeDatosEvaluacion.sql`
 3. Configurar la cadena de conexion en `appsettings.json` o mediante la variable de entorno `CONNECTIONSTRINGS__DEFAULTCONNECTION`.
 4. Ejecutar la aplicacion con `dotnet run` o publicarla con `dotnet publish`.
 
