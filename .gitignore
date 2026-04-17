@@ -1,0 +1,30 @@
+## -------------------------------------------------------
+## Archivos con credenciales - NUNCA subir a GitHub
+## -------------------------------------------------------
+appsettings.Production.json
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+
+## -------------------------------------------------------
+## .NET / ASP.NET Core
+## -------------------------------------------------------
+bin/
+obj/
+publish/
+publish_linux/
+*.user
+*.suo
+.vs/
+
+## -------------------------------------------------------
+## Secretos de usuario (dotnet user-secrets)
+## -------------------------------------------------------
+secrets.json
+
+## -------------------------------------------------------
+## Sistema operativo
+## -------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
